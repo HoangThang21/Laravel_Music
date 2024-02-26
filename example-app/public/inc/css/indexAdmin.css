@@ -1,0 +1,129 @@
+:root {
+    --color-admin: #15936b;
+    --color-nhanvien: #2a95bf;
+    --color-user: #e7d13f;
+}
+ul,
+li {
+    list-style: none;
+}
+.tableUser {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 20;
+    grid-template-rows: auto auto;
+}
+.the {
+    width: 270px;
+    height: 250px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 27px;
+    flex-direction: column;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.04);
+}
+
+.imageUser {
+    width: 85px;
+    height: 75px;
+    border-radius: 26px;
+    border: 1px solid #000;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.chucnangUser {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+
+    top: 0;
+    right: -70px;
+}
+.chucnangUser .menu {
+    position: absolute;
+    top: 20px;
+    right: -57px;
+}
+.chucnangUser .dotuser {
+    cursor: pointer;
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.chucnangUser .dotuser:hover {
+    color: #fff;
+    background-color: #a5a5a5;
+}
+.chucnangUser ul {
+    display: none;
+    margin-top: 10px;
+}
+.chucnangUser ul li {
+    cursor: pointer;
+    background-color: #fff;
+    width: 109px;
+    box-shadow: -4px -4px 4px rgba(0, 0, 0, 0.04);
+
+    padding: 8px;
+    border-radius: 2px;
+}
+.chucnangUser ul li i {
+    padding-right: 10px;
+}
+.chucnangUser ul li:hover {
+    background-color: #d8d8d8;
+}
+
+.imageUser img {
+    width: 50px;
+    height: 50px;
+
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+}
+.user_type {
+    position: absolute;
+    bottom: 0;
+    padding: 2px;
+    color: #fff;
+    border-radius: 8px;
+    right: -36px;
+}
+.infoUser {
+    margin-top: 10px;
+}
+.name {
+    text-align: center;
+    color: #202020;
+    font-size: 18px;
+
+    font-weight: 700;
+    word-wrap: break-word;
+}
+.email {
+    text-align: center;
+    color: #a5a5a5;
+}
+.mandates {
+}
+.trangthai,
+.vipUser {
+    color: #202020;
+    font-size: 14px;
+    margin-top: 10px;
+    font-weight: 600;
+    text-align: center;
+    word-wrap: break-word;
+}
+.vipUser {
+    /* color: #8b1717; */
+}
+i {
+    font-size: 16px;
+}

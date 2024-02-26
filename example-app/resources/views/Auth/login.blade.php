@@ -8,7 +8,7 @@
                 <div class="card-header">{{ __('Đăng nhập') }} Admin</div>
 
                 <div class="card-body">
-                    <form method="POST" action="/Administrator">
+                    <form method="POST" action="/Administrator/lg">
                         @csrf
                        
                         <div class="row mb-3">

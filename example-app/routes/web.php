@@ -15,7 +15,11 @@ use Illuminate\Support\Facades\Route;
 */
 //php artisan serve
 Route::get('/{name}', [AdminControllers::class, 'index']);
-Route::get('/Administrator/login', [AdminControllers::class, 'login'])->name('login');
+Route::get('/Administrator/login', [AdminControllers::class, 'login']);
+Route::post('/Administrator/lg', [AdminControllers::class, 'loginuser']);
+Route::get('/Administrator/logoutadmin', [
+    AdminControllers::class, 'logoutadmin'
+]);
 
 Route::get('/', function () {
     return view('welcome');

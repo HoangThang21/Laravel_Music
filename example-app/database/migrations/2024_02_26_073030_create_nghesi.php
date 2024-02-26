@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('nghesi', function (Blueprint $table) {
             $table->increments('id');
             $table->string('tennghesi');
+            $table->int('id_nghesi_user');
             $table->string('nghedanh');
             $table->timestamps();
         });

@@ -6,8 +6,10 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Admin Music</title>
     <link href="../../inc/css/app.css" rel="stylesheet">
+    <link href="../../inc/css/indexAdmin.css" rel="stylesheet">
 	<link rel="shortcut icon" href="../../images/webicon.png" type="image/png">
 	<script src="../../inc/js/app.js"></script>
+	
 	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
 	<script src="https://cdn.ckeditor.com/ckeditor5/40.0.0/classic/ckeditor.js"></script>
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
@@ -19,7 +21,7 @@
 		<nav id="sidebar" class="sidebar js-sidebar">
 			<div class="sidebar-content js-simplebar">
 				<a class="sidebar-brand" href="">
-          <span class="align-middle">Admin Food </span>
+          <span class="align-middle">Admin Music Diablu </span>
         </a>
 
 				<ul class="sidebar-nav">
@@ -227,5 +229,5 @@
 					</ul>
 				</div>
 			</nav>
-            <main class="content">
-				<div class="container-fluid p-0">
+            <main class="content ">
+				<div class="container-fluid p-0 ">

@@ -2,7 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
+use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
 
 class AdminControllers extends Controller
 {
@@ -12,7 +17,17 @@ class AdminControllers extends Controller
     public function index(string $name)
     {
         if ($name === 'Administrator') {
-            return view('Auth.index');
+            if (Auth::guard('api')->check()) {
+                return view(
+                    'Auth.index',
+                    [
+                        'ttnguoidung' =>   Auth::guard('api')->user(),
+                        'user' => User::all(),
+                    ]
+                );
+            } else {
+                return view('Auth.login');
+            }
         }
         return view('welcome');
     }
@@ -24,6 +39,41 @@ class AdminControllers extends Controller
     {
         return view('Auth.login');
     }
+    public function logoutadmin()
+    {
+        Auth::guard('api')->logout();
+
+        return  redirect()->intended('/Administrator');
+    }
+    public function loginuser(Request $request)
+    {
+
+        // dd('a');
+
+        try {
+            $credentials = $request->validate([
+                'email' => ['required', 'email'],
+                'password' => ['required'],
+            ]);
+            $users = User::where("email", $request->input('email'))->first();
+            if ($credentials) {
+                if (Hash::check($request->password, $users->password)) {
+                    Auth::guard('api')->login($users);
+                    if (Auth::guard('api')->check()) {
+
+                        return  redirect()->intended('/Administrator');
+                    }
+                } else {
+                    return view('Auth.login');
+                }
+            } else {
+                return view('Auth.login');
+            }
+        } catch (Exception $e) {
+            return view('Auth.login');
+        }
+    }
+
     public function create()
     {
         //

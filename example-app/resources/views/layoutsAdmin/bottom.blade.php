@@ -21,6 +21,6 @@
 </div>
 
 </div>
-
+<script src="../../inc/js/indexAdmin.js"></script>
 </body>
 </html>
