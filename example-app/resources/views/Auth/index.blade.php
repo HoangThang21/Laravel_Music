@@ -2,7 +2,37 @@
 
 @if (Auth::guard('api')->check())
 				<!-- Nút mở hộp modal chứa form thêm mới -->
-				<div class=""><i class="bi bi-filter-left"></i></div>
+				<div class="infofilter">
+					<div class="iconfilter" onclick="toggleMenuFilter()">
+						<i class="bi bi-filter-left"></i>
+					</div>
+					<div class="menufilter">
+						<select>
+							<option value="">abc</option>
+							<option value="">abc</option>
+							<option value="">abc</option>
+							<option value="">abc</option>
+						</select>
+					</div>
+					<div class="searchbar">
+						<div class="searchbar-wrapper">
+							
+					
+							<div class="searchbar-center">
+								<div class="searchbar-input-spacer"></div>
+					
+								<input type="text" class="searchbar-input" maxlength="2048"  placeholder="Tìm kiếm">
+							</div>
+							<div class="searchbar-left">
+								<div class="delete-icon-wrapper">
+									<i class="bi bi-x-lg"></i>
+								</div>|
+								<div class="search-icon-wrapper">
+									<i class="bi bi-search"></i>
+								</div>
+							</div>
+						</div>
+				</div>
 				<div><a class="btn btn-primary" href="/Administrator/themnguoidung"><span class="glyphicon glyphicon-plus"></span> Thêm người dùng</a></div>
 		  
 				<br>

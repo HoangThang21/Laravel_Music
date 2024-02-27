@@ -11,3 +11,31 @@ dotuser.forEach(function (dotuser1, indexi) {
         }
     });
 });
+function toggleMenuFilter() {
+    var menuFilter = document.querySelector(".menufilter");
+    if (menuFilter) {
+        const isHidden1 =
+            menuFilter.style.display === "none" ||
+            getComputedStyle(menuFilter).display === "none";
+        menuFilter.style.display = isHidden1 ? "block" : "none";
+    }
+}
+var searchBar = document.querySelector(".delete-icon-wrapper");
+searchBar.addEventListener("click", function () {
+    document.querySelector(".searchbar-input").value = "";
+});
+setInterval(function () {
+    var searchBar = document.querySelector(".searchbar-input");
+    searchBar.addEventListener("input", function () {
+        if (searchBar.value.trim() != "") {
+            document.querySelector(".delete-icon-wrapper").style.display =
+                "block";
+        } else {
+            document.querySelector(".delete-icon-wrapper").style.display =
+                "none";
+        }
+    });
+    if (searchBar.value === "") {
+        document.querySelector(".delete-icon-wrapper").style.display = "none";
+    }
+}, 500);

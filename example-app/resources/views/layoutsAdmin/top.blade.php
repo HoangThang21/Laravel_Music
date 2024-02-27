@@ -192,7 +192,7 @@
 							<a class="nav-link dropdown-toggle d-none d-sm-inline-block" href="#" data-bs-toggle="dropdown">
 								
 								@if( Auth::guard('api')->check())
-								<img src="../../img/{{  $ttnguoidung->image}}" class="avatar img-fluid rounded me-1" /> 
+								<img src="../../images/{{  $ttnguoidung->image}}" class="avatar img-fluid rounded me-1" /> 
 								<span class="text-dark">Chào 
 									{ 
 										{{ $ttnguoidung->name }}
@@ -201,7 +201,7 @@
 								</span>
 								@else
 								<img src="" class="avatar img-fluid rounded me-1" /> 
-								<span class="text-dark">Chào 
+								<span class="text-dark">Đăng nhập 
 								@endif
 							</a>
 							
