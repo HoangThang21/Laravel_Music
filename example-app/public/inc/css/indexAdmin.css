@@ -3,6 +3,23 @@
     --color-nhanvien: #2a95bf;
     --color-user: #e7d13f;
 }
+*,
+*:before,
+*:after {
+    box-sizing: border-box;
+}
+* {
+    margin: 0;
+    padding: 0;
+    font: inherit;
+}
+
+body {
+    max-width: 1920px;
+
+    min-height: 100vh;
+}
+
 ul,
 li {
     list-style: none;
@@ -169,6 +186,9 @@ li {
     color: #2fb04b;
     font-size: 18px;
     padding-left: 10px;
+    cursor: pointer;
+}
+.searchButton {
     cursor: pointer;
 }
 .delete-icon-wrapper {

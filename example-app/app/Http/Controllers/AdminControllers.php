@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
+use PhpParser\Node\Stmt\TryCatch;
 
 class AdminControllers extends Controller
 {
@@ -23,6 +24,7 @@ class AdminControllers extends Controller
                     [
                         'ttnguoidung' =>   Auth::guard('api')->user(),
                         'user' => User::all(),
+                        'usersearch' => ''
                     ]
                 );
             } else {
@@ -74,6 +76,26 @@ class AdminControllers extends Controller
         }
     }
 
+    public function searchinfouser(Request $request)
+    {
+        try {
+            $searchUser = User::where('name', 'like', '%' . $request->searchbar_input . '%')
+                ->orWhere('email', 'like', '%' . $request->searchbar_input . '%')
+                ->get();
+            if (Auth::guard('api')->check()) {
+                return view(
+                    'Auth.index',
+                    [
+                        'ttnguoidung' =>   Auth::guard('api')->user(),
+                        'user' => User::all(),
+                        'usersearch' => $searchUser,
+                    ]
+                );
+            }
+        } catch (Exception $e) {
+        }
+    }
+    
     public function create()
     {
         //
