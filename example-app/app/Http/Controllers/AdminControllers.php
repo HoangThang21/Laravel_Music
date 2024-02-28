@@ -24,7 +24,8 @@ class AdminControllers extends Controller
                     [
                         'ttnguoidung' =>   Auth::guard('api')->user(),
                         'user' => User::all(),
-                        'usersearch' => ''
+                        'contentFilter' => '0',
+                        'active'=>'0',
                     ]
                 );
             } else {
@@ -87,15 +88,56 @@ class AdminControllers extends Controller
                     'Auth.index',
                     [
                         'ttnguoidung' =>   Auth::guard('api')->user(),
-                        'user' => User::all(),
-                        'usersearch' => $searchUser,
+                        'user' => $searchUser,
+                        'contentFilter' => '0',
+                        'active'=>'0',
                     ]
                 );
             }
         } catch (Exception $e) {
         }
     }
-    
+    public function fillter(string $cn, string $name)
+    {
+        if ($cn == 'fillter' && $name == 'nv') {
+
+            try {
+                $searchUser = User::where('quyen', 2)
+                    ->get();
+                if (Auth::guard('api')->check()) {
+                    return view(
+                        'Auth.index',
+                        [
+                            'ttnguoidung' =>   Auth::guard('api')->user(),
+                            'user' => $searchUser,
+                            'contentFilter' => '1',
+                            'active'=>'0',
+                        ]
+                    );
+                }
+            } catch (Exception $e) {
+            }
+        }
+        if ($cn == 'fillter' && $name == 'nd') {
+
+            try {
+                $searchUser = User::where('quyen', 3)
+                    ->get();
+                if (Auth::guard('api')->check()) {
+                    return view(
+                        'Auth.index',
+                        [
+                            'ttnguoidung' =>   Auth::guard('api')->user(),
+                            'user' => $searchUser,
+                            'contentFilter' => '2',
+                            'active'=>'0',
+                        ]
+                    );
+                }
+            } catch (Exception $e) {
+            }
+        }
+    }
     public function create()
     {
         //

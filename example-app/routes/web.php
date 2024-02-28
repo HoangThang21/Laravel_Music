@@ -18,7 +18,8 @@ Route::get('/{name}', [AdminControllers::class, 'index']);
 Route::get('/Administrator/login', [AdminControllers::class, 'login']);
 Route::post('/Administrator/lg', [AdminControllers::class, 'loginuser']);
 Route::post('/Administrator/search', [AdminControllers::class, 'searchinfouser']);
-Route::get('/Administrator/search', [AdminControllers::class, 'searchinfouserget']);
+Route::get('/Administrator/{cn}&{name}', [AdminControllers::class, 'fillter']);
+
 Route::get('/Administrator/logoutadmin', [
     AdminControllers::class, 'logoutadmin'
 ]);

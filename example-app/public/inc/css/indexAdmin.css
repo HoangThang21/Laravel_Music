@@ -11,12 +11,17 @@
 * {
     margin: 0;
     padding: 0;
-    font: inherit;
+}
+a {
+    text-decoration: none;
 }
 
 body {
     max-width: 1920px;
-
+    /* -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none; */
     min-height: 100vh;
 }
 
@@ -96,7 +101,7 @@ li {
     padding-right: 10px;
 }
 .chucnangUser ul li:hover {
-    background-color: #d8d8d8;
+    background-color: #f4f0f0;
 }
 
 .imageUser img {
@@ -161,7 +166,7 @@ li {
     border-radius: 24px;
     margin: 0 auto;
     width: auto;
-    max-width: 500px;
+    min-width: 500px;
 }
 .searchbar:hover {
     box-shadow: 0 1px 6px rgb(32 33 36 / 28%);
@@ -230,5 +235,72 @@ li {
     width: 100%;
 }
 /* .searchbar-input:focus ~ .delete-icon-wrapper, */
+.infofilter {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    gap: 50px;
+    position: relative;
+}
+.infofilter .optionFilter {
+    position: absolute;
+    bottom: -85px;
+    z-index: 99;
+    display: none;
+}
+.infofilter .optionFilter ul {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+}
+.infofilter .optionFilter ul li {
+    cursor: pointer;
+    background-color: #ffffff;
+    width: 109px;
+    box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.04);
+    padding: 2px 8px;
+    border-radius: 6px;
+}
 
+.infofilter .optionFilter ul li:hover {
+    background-color: #f1f0f0;
+}
 /* end infouser search */
+.Componentfilter {
+    width: 155px;
+    height: 32px;
+    border-radius: 36px;
+    /* overflow: hidden; */
+    border: 1px rgba(141, 140, 140, 0.5) solid;
+    justify-content: space-evenly;
+    align-items: center;
+    display: inline-flex;
+}
+.Componentfilter:hover {
+    box-shadow: 0 1px 6px rgb(32 33 36 / 28%);
+    border-color: rgba(223, 225, 229, 0);
+}
+.LayerFilter {
+    /* width: 155px; */
+    padding-left: 8px;
+    padding-right: 8px;
+    padding-top: 6px;
+    padding-bottom: 6px;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+}
+.ContenFilter {
+    text-align: center;
+    padding-right: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 20px;
+    letter-spacing: 0.1px;
+    word-wrap: break-word;
+}
+.IconFilter {
+    color: #9a9797;
+    width: 18px;
+    height: 18px;
+}

@@ -3,8 +3,33 @@
 @if (Auth::guard('api')->check())
 				<!-- Nút mở hộp modal chứa form thêm mới -->
 				<div class="infofilter">
-					
-					<form action="/Administrator/search" method="post" id="searchForm">
+					<div class="fillter">
+							<div class="Componentfilter" onclick="toggleMenu('optionFilter')" >
+								<div class="LayerFilter" >
+									<i class="bi bi-funnel"></i>
+								</div>
+								<div class="ContenFilter" ></div>
+								<div class="IconFilter" >
+									<i class="bi bi-caret-up-fill"></i>
+								</div>
+								
+							</div>
+							<div class="optionFilter">
+								<ul>
+									<a href="/Administrator">
+										<li>Tất cả</li>
+									</a>
+									<a href="/Administrator/fillter&nv">
+										<li>Nhân viên</li>
+									</a>
+									<a href="/Administrator/fillter&nd">
+										<li>Người dùng</li>
+									</a>
+									
+								</ul>
+							</div>
+					</div>
+					<form action="/Administrator/search?=" method="post" id="searchForm">
 						@csrf
 						<div class="searchbar">
 							<div class="searchbar-wrapper">
@@ -27,129 +52,12 @@
 							</div>
 					</div>
 					</form>
-					
-				<div><a class="btn btn-primary" href="/Administrator/themnguoidung"><span class="glyphicon glyphicon-plus"></span> Thêm người dùng</a></div>
-		  
-				<br>
-				{{-- search --}}
-				@if ($usersearch!="")
-				<div class="tableUser" id="user-container">
-					@foreach ($usersearch as $us)
-									{{-- quyền nhân viên --}}	
-								@if ($ttnguoidung['quyen']==2)
-									@if ($us['quyen']>2)
-										<div id="infolo">
-											<div class="the" style="background: #fff">
-												<div class="imageUser">
-													<img src="../../images/webicon.png" alt="">
-													<div class="user_type" style="background-color: var(--color-<?php if ($us['quyen']==1) {echo 'admin';} else if ($us['quyen']==2){echo 'nhanvien';}else {echo 'user';}?>);">
-													<?php if ($us['quyen']==1) {
-														echo 'Admin';
-													} else if ($us['quyen']==2){
-														echo 'Nhân Viên';
-													}else {
-														echo 'Người dùng';
-													}
-													?></div>
-													@if($us["quyen"]!=1) 
-														<div class="chucnangUser">
-															<i class="dotuser bi bi-three-dots-vertical" ></i>
-															<div class="menu">
-																<ul >
-																	@if($us["quyen"]!=1) 
-																		@if ($us["trangthai"]==1)
-																			<li><a href=""><i class="bi bi-key-fill"></i>Khóa </a></li>
-																		@else
-																			<li><a href=""><i class="bi bi-key-fill"></i>Mở Khóa</a> </li>
-																		@endif
-																	@endif
-																	<li><a href=""><i class="bi bi-trash-fill"></i> Xóa</a></li>
-																</ul>
-															</div>
-														</div>
-													@endif
-												</div>
-												<div class="infoUser">
-													<div class="name">
-														{{ $us['name'] }}
-													</div>
-													<div class="email">{{ $us['email'] }}</div>
-												</div>
-												@if($us["quyen"]!=1) 
-													<div class="mandates">
-														@if ($us["trangthai"]==1)
-														<div class="trangthai">Trạng Thái: <span style="color:#15936b">Mở</span></div>
-														@else
-														<div class="trangthai">Trạng Thái: <span style="color:#8b1717">Khóa</span></div>
-														@endif
-														<div class="vipUser">Ngày hết hạn gói Prenium: Full</div>
-													</div>
-												@endif
-												
-							
-											</div>
-										</div>
-									@endif
-									
-								@endif
-								{{-- quyền admin --}}
-								@if ($ttnguoidung['quyen']==1)
-								<div id="infolo">
-									<div class="the" style="background: #fff">
-										<div class="imageUser">
-											<img src="../../images/webicon.png" alt="">
-											<div class="user_type" style="background-color: var(--color-<?php if ($us['quyen']==1) {echo 'admin';} else if ($us['quyen']==2){echo 'nhanvien';}else {echo 'user';}?>);">
-											<?php if ($us['quyen']==1) {
-												echo 'Admin';
-											} else if ($us['quyen']==2){
-												echo 'Nhân Viên';
-											}else {
-												echo 'Người dùng';
-											}
-											?></div>
-											@if($us["quyen"]!=1) 
-												<div class="chucnangUser">
-													<i class="dotuser bi bi-three-dots-vertical" ></i>
-													<div class="menu">
-														<ul >
-															@if($us["quyen"]!=1) 
-																@if ($us["trangthai"]==1)
-																	<li><a href=""><i class="bi bi-key-fill"></i>Khóa </a></li>
-																@else
-																	<li><a href=""><i class="bi bi-key-fill"></i>Mở Khóa</a> </li>
-																@endif
-															@endif
-															<li><a href=""><i class="bi bi-trash-fill"></i> Xóa</a></li>
-														</ul>
-													</div>
-												</div>
-											@endif
-										</div>
-										<div class="infoUser">
-											<div class="name">
-												{{ $us['name'] }}
-											</div>
-											<div class="email">{{ $us['email'] }}</div>
-										</div>
-										@if($us["quyen"]!=1) 
-											<div class="mandates">
-												@if ($us["trangthai"]==1)
-												<div class="trangthai">Trạng Thái: <span style="color:#15936b">Mở</span></div>
-												@else
-												<div class="trangthai">Trạng Thái: <span style="color:#8b1717">Khóa</span></div>
-												@endif
-												<div class="vipUser">Ngày hết hạn gói Prenium: Full</div>
-											</div>
-										@endif
-									</div>
-								</div>
-							
-								@endif	
-					
-					@endforeach
+				
+					<div>
+					<a class="btn btn-primary" href="/Administrator/themnguoidung"><span class="glyphicon glyphicon-plus"></span> Thêm người dùng</a></div>
 				</div>
-				{{-- end search--------------------------------------------------------------- --}}
-				@else
+					<br>
+				{{-- search --}}
 					<div class="tableUser" id="user-container">
 						@foreach ($user as $us)
 							@if ($ttnguoidung['quyen']==2)
@@ -175,12 +83,20 @@
 														<ul >
 															@if($us["quyen"]!=1) 
 																@if ($us["trangthai"]==1)
-																	<li><a href=""><i class="bi bi-key-fill"></i>Khóa </a></li>
+																<a href="">
+																	<li><i class="bi bi-key-fill"></i>Khóa </li>
+																</a>
+																
 																@else
-																	<li><a href=""><i class="bi bi-key-fill"></i>Mở Khóa</a> </li>
+																<a href="">
+																	<li><i class="bi bi-key-fill"></i>Mở Khóa </li>
+																</a>
+																
 																@endif
 															@endif
-															<li><a href=""><i class="bi bi-trash-fill"></i> Xóa</a></li>
+															<a href="">
+																<li><i class="bi bi-trash-fill"></i> Xóa</li>
+															</a>
 														</ul>
 													</div>
 												</div>
@@ -230,12 +146,20 @@
 														<ul >
 															@if($us["quyen"]!=1) 
 																@if ($us["trangthai"]==1)
-																	<li><a href=""><i class="bi bi-key-fill"></i>Khóa </a></li>
+																<a href="">
+																	<li><i class="bi bi-key-fill"></i>Khóa </li>
+																</a>
+																
 																@else
-																	<li><a href=""><i class="bi bi-key-fill"></i>Mở Khóa </a></li>
+																<a href="">
+																	<li><i class="bi bi-key-fill"></i>Mở Khóa </li>
+																</a>
 																@endif
 															@endif
-															<li><a href=""><i class="bi bi-trash-fill"></i> Xóa</a></li>
+															<a href="">
+																<li><i class="bi bi-trash-fill"></i> Xóa</li>
+															</a>
+														
 														</ul>
 													</div>
 												</div>
@@ -265,8 +189,7 @@
 							@endif	
 									
 						@endforeach
-					</div>
-				@endif
+				</div>
 				
-		@endif
+@endif
 @include('layoutsAdmin.bottom')
