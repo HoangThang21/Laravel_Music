@@ -266,6 +266,22 @@ li {
     background-color: #f1f0f0;
 }
 /* end infouser search */
+.textloginGoogle {
+    font-size: 24px;
+    font-weight: 600;
+    margin: 10px 0;
+    cursor: pointer;
+}
+.textloginGoogleius {
+    font-size: 24px;
+    font-weight: 600;
+    margin: 10px 0;
+    cursor: pointer;
+}
+
+.khungthu {
+    display: none;
+}
 .Componentfilter {
     width: 155px;
     height: 32px;

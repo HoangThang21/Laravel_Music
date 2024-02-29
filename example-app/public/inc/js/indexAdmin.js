@@ -39,6 +39,38 @@ document.addEventListener("DOMContentLoaded", () => {
         event.preventDefault(); // Ngăn chặn form tự động submit
         $("#searchForm").submit(); // Gửi form tìm kiếm
     });
+    const textloginGoogle = document.querySelector(".textloginGoogle");
+    textloginGoogle.addEventListener("click", function (event) {
+        const textloginGooglei = document.querySelector(".textloginGoogle i");
+        const khungthu = document.querySelector(".khungthu");
+        if (textloginGooglei.classList.contains("bi-caret-up-fill")) {
+            textloginGooglei.classList.remove("bi-caret-up-fill");
+            textloginGooglei.classList.add("bi-caret-down-fill");
+            khungthu.style.display = "none";
+        } else if (textloginGooglei.classList.contains("bi-caret-down-fill")) {
+            textloginGooglei.classList.remove("bi-caret-down-fill");
+            textloginGooglei.classList.add("bi-caret-up-fill");
+            khungthu.style.display = "block";
+        }
+    });
+    const textloginGoogleus = document.querySelector(".textloginGoogleius");
+    textloginGoogleus.addEventListener("click", function (event) {
+        const textloginGoogleius = document.querySelector(
+            ".textloginGoogleius i"
+        );
+        const khungthuus = document.querySelector(".khungthuus");
+        if (textloginGoogleius.classList.contains("bi-caret-up-fill")) {
+            textloginGoogleius.classList.remove("bi-caret-up-fill");
+            textloginGoogleius.classList.add("bi-caret-down-fill");
+            khungthuus.style.display = "none";
+        } else if (
+            textloginGoogleius.classList.contains("bi-caret-down-fill")
+        ) {
+            textloginGoogleius.classList.remove("bi-caret-down-fill");
+            textloginGoogleius.classList.add("bi-caret-up-fill");
+            khungthuus.style.display = "block";
+        }
+    });
     setInterval(function () {
         var searchBar = document.querySelector(".searchbar-input");
         var ContenFilter = document.querySelector(".ContenFilter");
@@ -63,7 +95,6 @@ document.addEventListener("DOMContentLoaded", () => {
             ContenFilter.textContent = "Người dùng";
         }
     }, 200);
-
 });
 function toggleMenu(name) {
     var menuFilter = document.querySelector("." + name);

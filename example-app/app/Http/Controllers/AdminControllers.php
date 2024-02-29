@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\UserAPI;
 use Exception;
+use Illuminate\Support\Collection;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -15,17 +17,20 @@ class AdminControllers extends Controller
     /**
      * Display a listing of the resource.
      */
+
     public function index(string $name)
     {
         if ($name === 'Administrator') {
             if (Auth::guard('api')->check()) {
+
                 return view(
                     'Auth.index',
                     [
                         'ttnguoidung' =>   Auth::guard('api')->user(),
-                        'user' => User::all(),
+                        'user' =>  User::all(),
+                        'userapi' =>  UserAPI::all(),
                         'contentFilter' => '0',
-                        'active'=>'0',
+                        'active' => '0',
                     ]
                 );
             } else {
@@ -47,6 +52,47 @@ class AdminControllers extends Controller
         Auth::guard('api')->logout();
 
         return  redirect()->intended('/Administrator');
+    }
+    public function themnguoidung()
+    {
+        if (Auth::guard('api')->check()) {
+
+            return view(
+                'Auth.qlnguoidung.themnguoidung',
+                [
+                    'ttnguoidung' =>   Auth::guard('api')->user(),
+                    'user' =>  User::all(),
+                    'userapi' =>  UserAPI::all(),
+                    'contentFilter' => '0',
+                    'active' => '0',
+                ]
+            );
+        } else {
+            return view('Auth.login');
+        }
+    }
+    public function themnd(Request $request)
+    {
+
+        // dd($request->all());
+        $request->validate([
+            'txtemail' => ['required', 'email'],
+            'txtmatkhau' => ['required'],
+            'txthinh' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'txthoten' => ['required'],
+            'optloaind' => ['required'],
+        ]);
+        $generatedimage = 'img' . time() . '-' . $request->file('txthinh')->getClientOriginalName();
+        $request->file('txthinh')->move(public_path('img'), $generatedimage);
+        $user = new User();
+        $user->name = $request->input('txthoten');
+        $user->password = Hash::make($request->input('txtmatkhau'));
+        $user->email = $request->input('txtemail');
+        $user->image = $generatedimage;
+        $user->quyen = $request->input('optloaind');
+        $user->trangthai = 1;
+        $user->save();
+        return redirect()->intended('/Administrator');
     }
     public function loginuser(Request $request)
     {
@@ -83,14 +129,19 @@ class AdminControllers extends Controller
             $searchUser = User::where('name', 'like', '%' . $request->searchbar_input . '%')
                 ->orWhere('email', 'like', '%' . $request->searchbar_input . '%')
                 ->get();
+            $searchUser2 = UserAPI::where('name', 'like', '%' . $request->searchbar_input . '%')
+                ->orWhere('email', 'like', '%' . $request->searchbar_input . '%')
+                ->get();
+
             if (Auth::guard('api')->check()) {
                 return view(
                     'Auth.index',
                     [
                         'ttnguoidung' =>   Auth::guard('api')->user(),
-                        'user' => $searchUser,
+                        'user' =>   $searchUser,
+                        'userapi' =>  $searchUser2,
                         'contentFilter' => '0',
-                        'active'=>'0',
+                        'active' => '0',
                     ]
                 );
             }
@@ -111,7 +162,7 @@ class AdminControllers extends Controller
                             'ttnguoidung' =>   Auth::guard('api')->user(),
                             'user' => $searchUser,
                             'contentFilter' => '1',
-                            'active'=>'0',
+                            'active' => '0',
                         ]
                     );
                 }
@@ -123,14 +174,17 @@ class AdminControllers extends Controller
             try {
                 $searchUser = User::where('quyen', 3)
                     ->get();
+                $searchUser2 = UserAPI::where('quyen', 3)
+                    ->get();
                 if (Auth::guard('api')->check()) {
                     return view(
                         'Auth.index',
                         [
                             'ttnguoidung' =>   Auth::guard('api')->user(),
-                            'user' => $searchUser,
+                            'user' =>   $searchUser,
+                            'userapi' =>  $searchUser2,
                             'contentFilter' => '2',
-                            'active'=>'0',
+                            'active' => '0',
                         ]
                     );
                 }
