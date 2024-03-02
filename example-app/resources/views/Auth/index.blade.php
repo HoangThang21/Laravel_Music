@@ -25,6 +25,9 @@
                     <a href="/Administrator/fillter&nd">
                         <li>Người dùng</li>
                     </a>
+                    <a href="/Administrator/fillter&ns">
+                        <li>Nghệ sĩ</li>
+                    </a>
 
                 </ul>
             </div>
@@ -62,7 +65,7 @@
     <br>
     {{-- search --}}
     <div class="thus">
-        <div class="textloginGoogleius"><i class="bi bi-caret-up-fill"></i> User Sytem</div>
+        <div class="textloginGoogleius"><i class="bi bi-caret-up-fill"></i> Người dùng</div>
         <div class="khungthuus">
             <div class="tableUser" id="user-container">
                 @foreach ($user as $us)
@@ -79,6 +82,8 @@
                                                 echo 'admin';
                                             } elseif ($us['quyen'] == 2) {
                                                 echo 'nhanvien';
+                                            } elseif ($us['quyen'] == 4) {
+                                                echo 'ns';
                                             } else {
                                                 echo 'user';
                                             } ?>);">
@@ -86,6 +91,8 @@
                                                 echo 'Admin';
                                             } elseif ($us['quyen'] == 2) {
                                                 echo 'Nhân Viên';
+                                            } elseif ($us['quyen'] == 4) {
+                                                echo 'Nghệ sĩ';
                                             } else {
                                                 echo 'Người dùng';
                                             }
@@ -97,16 +104,16 @@
                                                     <ul>
                                                         @if ($us['quyen'] != 1)
                                                             @if ($us['trangthai'] == 1)
-                                                                <a href="">
+                                                                <a href="/Administrator/{{ $us["id"] }}&0&users">
                                                                     <li><i class="bi bi-key-fill"></i>Khóa </li>
                                                                 </a>
                                                             @else
-                                                                <a href="">
+                                                                <a href="/Administrator/{{ $us["id"] }}&1&users">
                                                                     <li><i class="bi bi-key-fill"></i>Mở Khóa </li>
                                                                 </a>
                                                             @endif
                                                         @endif
-                                                        <a href="">
+                                                        <a href="/Administrator/{{ $us["id"] }}&userde">
                                                             <li><i class="bi bi-trash-fill"></i> Xóa</li>
                                                         </a>
                                                     </ul>
@@ -150,6 +157,8 @@
                                         echo 'admin';
                                     } elseif ($us['quyen'] == 2) {
                                         echo 'nhanvien';
+                                    } elseif ($us['quyen'] == 4) {
+                                        echo 'ns';
                                     } else {
                                         echo 'user';
                                     } ?>);">
@@ -157,6 +166,8 @@
                                             echo 'Admin';
                                         } elseif ($us['quyen'] == 2) {
                                             echo 'Nhân Viên';
+                                        } elseif ($us['quyen'] == 4) {
+                                            echo 'Nghệ sĩ';
                                         } else {
                                             echo 'Người dùng';
                                         }
@@ -168,18 +179,22 @@
                                                 <ul>
                                                     @if ($us['quyen'] != 1)
                                                         @if ($us['trangthai'] == 1)
-                                                            <a href="">
+                                                            <a href="/Administrator/{{ $us["id"] }}&0&users">
                                                                 <li><i class="bi bi-key-fill"></i>Khóa </li>
                                                             </a>
                                                         @else
-                                                            <a href="">
+                                                            <a href="/Administrator/{{ $us["id"] }}&1&users">
                                                                 <li><i class="bi bi-key-fill"></i>Mở Khóa </li>
                                                             </a>
                                                         @endif
                                                     @endif
                                                     <a href="">
+                                                        <li><i class="bi bi-arrow-repeat"></i>Sửa</li>
+                                                    </a>
+                                                    <a href="/Administrator/{{ $us["id"] }}&userde">
                                                         <li><i class="bi bi-trash-fill"></i> Xóa</li>
                                                     </a>
+
 
                                                 </ul>
                                             </div>
@@ -216,7 +231,7 @@
     </div>
     {{-- user api --}}
     <div class="thu">
-        <div class="textloginGoogle"><i class="bi bi-caret-down-fill"></i> User Login With Google</div>
+        <div class="textloginGoogle"><i class="bi bi-caret-down-fill"></i> Người dùng đăng nhập Google</div>
         <div class="khungthu">
             <div class="tableUser" id="user-container">
                 @foreach ($userapi as $us)
@@ -233,6 +248,8 @@
                                                 echo 'admin';
                                             } elseif ($us['quyen'] == 2) {
                                                 echo 'nhanvien';
+                                            } elseif ($us['quyen'] == 4) {
+                                                echo 'ns';
                                             } else {
                                                 echo 'user';
                                             } ?>);">
@@ -240,6 +257,8 @@
                                                 echo 'Admin';
                                             } elseif ($us['quyen'] == 2) {
                                                 echo 'Nhân Viên';
+                                            } elseif ($us['quyen'] == 4) {
+                                                echo 'Nghệ sĩ';
                                             } else {
                                                 echo 'Người dùng';
                                             }
@@ -251,16 +270,16 @@
                                                     <ul>
                                                         @if ($us['quyen'] != 1)
                                                             @if ($us['trangthai'] == 1)
-                                                                <a href="">
+                                                                <a href="/Administrator/{{ $us["id"] }}&0&usersgg">
                                                                     <li><i class="bi bi-key-fill"></i>Khóa </li>
                                                                 </a>
                                                             @else
-                                                                <a href="">
+                                                                <a href="/Administrator/{{ $us["id"] }}&1&usersgg">
                                                                     <li><i class="bi bi-key-fill"></i>Mở Khóa </li>
                                                                 </a>
                                                             @endif
                                                         @endif
-                                                        <a href="">
+                                                        <a href="/Administrator/{{ $us["id"] }}&userdegg">
                                                             <li><i class="bi bi-trash-fill"></i> Xóa</li>
                                                         </a>
                                                     </ul>
@@ -306,6 +325,8 @@
                                             echo 'admin';
                                         } elseif ($us['quyen'] == 2) {
                                             echo 'nhanvien';
+                                        } elseif ($us['quyen'] == 4) {
+                                            echo 'ns';
                                         } else {
                                             echo 'user';
                                         } ?>);">
@@ -313,6 +334,8 @@
                                             echo 'Admin';
                                         } elseif ($us['quyen'] == 2) {
                                             echo 'Nhân Viên';
+                                        } elseif ($us['quyen'] == 4) {
+                                            echo 'Nghệ sĩ';
                                         } else {
                                             echo 'Người dùng';
                                         }
@@ -324,16 +347,19 @@
                                                 <ul>
                                                     @if ($us['quyen'] != 1)
                                                         @if ($us['trangthai'] == 1)
-                                                            <a href="">
+                                                            <a href="/Administrator/{{ $us["id"] }}&0&usersgg">
                                                                 <li><i class="bi bi-key-fill"></i>Khóa </li>
                                                             </a>
                                                         @else
-                                                            <a href="">
+                                                            <a href="/Administrator/{{ $us["id"] }}&1&usersgg">
                                                                 <li><i class="bi bi-key-fill"></i>Mở Khóa </li>
                                                             </a>
                                                         @endif
                                                     @endif
                                                     <a href="">
+                                                        <li><i class="bi bi-arrow-repeat"></i>Sửa</li>
+                                                    </a>
+                                                    <a href="/Administrator/{{ $us["id"] }}&userdegg">
                                                         <li><i class="bi bi-trash-fill"></i> Xóa</li>
                                                     </a>
 

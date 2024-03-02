@@ -93,6 +93,8 @@ document.addEventListener("DOMContentLoaded", () => {
             ContenFilter.textContent = "Nhân viên";
         } else if (contentFilter == 2) {
             ContenFilter.textContent = "Người dùng";
+        } else if (contentFilter == 3) {
+            ContenFilter.textContent = "Nghệ sĩ";
         }
     }, 200);
 });

@@ -2,6 +2,7 @@
     --color-admin: #15936b;
     --color-nhanvien: #2a95bf;
     --color-user: #e7d13f;
+    --color-ns: #e73f6c;
 }
 *,
 *:before,
@@ -244,7 +245,7 @@ li {
 }
 .infofilter .optionFilter {
     position: absolute;
-    bottom: -85px;
+    bottom: -110px;
     z-index: 99;
     display: none;
 }
