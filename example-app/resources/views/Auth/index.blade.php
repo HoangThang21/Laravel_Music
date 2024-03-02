@@ -76,7 +76,7 @@
                             <div id="infolo">
                                 <div class="the" style="background: #fff">
                                     <div class="imageUser">
-                                        <img src="../../images/webicon.png" alt="">
+                                        <img src="../../images/{{ $us['image'] }}" alt="">
                                         <div class="user_type"
                                             style="background-color: var(--color-<?php if ($us['quyen'] == 1) {
                                                 echo 'admin';
@@ -104,16 +104,16 @@
                                                     <ul>
                                                         @if ($us['quyen'] != 1)
                                                             @if ($us['trangthai'] == 1)
-                                                                <a href="/Administrator/{{ $us["id"] }}&0&users">
+                                                                <a href="/Administrator/{{ $us['id'] }}&0&users">
                                                                     <li><i class="bi bi-key-fill"></i>Khóa </li>
                                                                 </a>
                                                             @else
-                                                                <a href="/Administrator/{{ $us["id"] }}&1&users">
+                                                                <a href="/Administrator/{{ $us['id'] }}&1&users">
                                                                     <li><i class="bi bi-key-fill"></i>Mở Khóa </li>
                                                                 </a>
                                                             @endif
                                                         @endif
-                                                        <a href="/Administrator/{{ $us["id"] }}&userde">
+                                                        <a href="/Administrator/{{ $us['id'] }}&userde"class="delete-link">
                                                             <li><i class="bi bi-trash-fill"></i> Xóa</li>
                                                         </a>
                                                     </ul>
@@ -152,7 +152,7 @@
                         <div id="infolo">
                             <div class="the" style="background: #fff">
                                 <div class="imageUser">
-                                    <img src="../../images/webicon.png" alt="">
+                                    <img src="../../images/{{ $us['image'] }}" alt="">
                                     <div class="user_type" style="background-color: var(--color-<?php if ($us['quyen'] == 1) {
                                         echo 'admin';
                                     } elseif ($us['quyen'] == 2) {
@@ -179,19 +179,19 @@
                                                 <ul>
                                                     @if ($us['quyen'] != 1)
                                                         @if ($us['trangthai'] == 1)
-                                                            <a href="/Administrator/{{ $us["id"] }}&0&users">
+                                                            <a href="/Administrator/{{ $us['id'] }}&0&users">
                                                                 <li><i class="bi bi-key-fill"></i>Khóa </li>
                                                             </a>
                                                         @else
-                                                            <a href="/Administrator/{{ $us["id"] }}&1&users">
+                                                            <a href="/Administrator/{{ $us['id'] }}&1&users">
                                                                 <li><i class="bi bi-key-fill"></i>Mở Khóa </li>
                                                             </a>
                                                         @endif
                                                     @endif
-                                                    <a href="">
+                                                    <a href="/Administrator/{{ $us['id'] }}&userfix">
                                                         <li><i class="bi bi-arrow-repeat"></i>Sửa</li>
                                                     </a>
-                                                    <a href="/Administrator/{{ $us["id"] }}&userde">
+                                                    <a href="/Administrator/{{ $us['id'] }}&userde"class="delete-link">
                                                         <li><i class="bi bi-trash-fill"></i> Xóa</li>
                                                     </a>
 
@@ -242,7 +242,7 @@
                             <div id="infolo">
                                 <div class="the" style="background: #fff">
                                     <div class="imageUser">
-                                        <img src="../../images/webicon.png" alt="">
+                                        <img src="../../images/{{ $us['image'] }}" alt="">
                                         <div class="user_type"
                                             style="background-color: var(--color-<?php if ($us['quyen'] == 1) {
                                                 echo 'admin';
@@ -270,16 +270,18 @@
                                                     <ul>
                                                         @if ($us['quyen'] != 1)
                                                             @if ($us['trangthai'] == 1)
-                                                                <a href="/Administrator/{{ $us["id"] }}&0&usersgg">
+                                                                <a
+                                                                    href="/Administrator/{{ $us['id'] }}&0&usersgg">
                                                                     <li><i class="bi bi-key-fill"></i>Khóa </li>
                                                                 </a>
                                                             @else
-                                                                <a href="/Administrator/{{ $us["id"] }}&1&usersgg">
+                                                                <a
+                                                                    href="/Administrator/{{ $us['id'] }}&1&usersgg">
                                                                     <li><i class="bi bi-key-fill"></i>Mở Khóa </li>
                                                                 </a>
                                                             @endif
                                                         @endif
-                                                        <a href="/Administrator/{{ $us["id"] }}&userdegg">
+                                                        <a href="/Administrator/{{ $us['id'] }}&userdegg"class="delete-link">
                                                             <li><i class="bi bi-trash-fill"></i> Xóa</li>
                                                         </a>
                                                     </ul>
@@ -319,7 +321,7 @@
                         <div id="infolo">
                             <div class="the" style="background: #fff">
                                 <div class="imageUser">
-                                    <img src="../../images/webicon.png" alt="">
+                                    <img src="../../images/{{ $us['image'] }}" alt="">
                                     <div class="user_type"
                                         style="background-color: var(--color-<?php if ($us['quyen'] == 1) {
                                             echo 'admin';
@@ -347,19 +349,20 @@
                                                 <ul>
                                                     @if ($us['quyen'] != 1)
                                                         @if ($us['trangthai'] == 1)
-                                                            <a href="/Administrator/{{ $us["id"] }}&0&usersgg">
+                                                            <a href="/Administrator/{{ $us['id'] }}&0&usersgg">
                                                                 <li><i class="bi bi-key-fill"></i>Khóa </li>
                                                             </a>
                                                         @else
-                                                            <a href="/Administrator/{{ $us["id"] }}&1&usersgg">
+                                                            <a href="/Administrator/{{ $us['id'] }}&1&usersgg">
                                                                 <li><i class="bi bi-key-fill"></i>Mở Khóa </li>
                                                             </a>
                                                         @endif
                                                     @endif
-                                                    <a href="">
+                                                    <a href="/Administrator/{{ $us['id'] }}&userfixgg">
                                                         <li><i class="bi bi-arrow-repeat"></i>Sửa</li>
                                                     </a>
-                                                    <a href="/Administrator/{{ $us["id"] }}&userdegg">
+                                                    <a href="/Administrator/{{ $us['id'] }}&userdegg"
+                                                        class="delete-link">
                                                         <li><i class="bi bi-trash-fill"></i> Xóa</li>
                                                     </a>
 

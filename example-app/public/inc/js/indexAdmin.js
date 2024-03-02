@@ -97,6 +97,19 @@ document.addEventListener("DOMContentLoaded", () => {
             ContenFilter.textContent = "Nghệ sĩ";
         }
     }, 200);
+    var deleteLinks = document.querySelectorAll('.delete-link');
+
+        deleteLinks.forEach(function(deleteLink) {
+            deleteLink.addEventListener('click', function(event) {
+                event.preventDefault(); // Ngăn chặn chuyển hướng mặc định
+
+                var confirmation = confirm('Bạn có chắc muốn xóa?');
+
+                if (confirmation) {
+                    window.location.href = deleteLink.getAttribute('href');
+                }
+            });
+        });
 });
 function toggleMenu(name) {
     var menuFilter = document.querySelector("." + name);

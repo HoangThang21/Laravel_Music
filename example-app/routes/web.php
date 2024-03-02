@@ -20,6 +20,7 @@ Route::post('/Administrator/lg', [AdminControllers::class, 'loginuser']);
 Route::post('/Administrator/search', [AdminControllers::class, 'searchinfouser']);
 Route::post('/Administrator/themnd', [AdminControllers::class, 'themnd']);
 Route::post('/Administrator/doimatkhaund', [AdminControllers::class, 'doimatkhaund']);
+Route::post('/Administrator/suanguoidungbt', [AdminControllers::class, 'suanguoidungbt']);
 Route::get('/Administrator/hoso', [AdminControllers::class, 'hoso']);
 Route::get('/Administrator/doimatkhau', [AdminControllers::class, 'doimatkhau']);
 Route::put('/Administrator/suand', [AdminControllers::class, 'suand']);

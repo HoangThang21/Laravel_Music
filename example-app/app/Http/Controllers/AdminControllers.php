@@ -246,6 +246,60 @@ class AdminControllers extends Controller
         } catch (Exception $e) {
         }
     }
+    public function suanguoidungbt(Request $request)
+    {
+        try {
+            $request->validate([
+                'optloaindvip' => ['required'],
+                'optloaind' => ['required'],
+            ]);
+
+            if ($request->input('txtmatkhau') != null) {
+                if ($request->input('idnguoidungselect') == 'userbt') {
+                    $user = User::where('id', $request->input('idnguoidung'))
+                        ->update([
+                            'password' => Hash::make($request->input('txtmatkhaumoi')),
+                            'vip' => $request->input('optloaindvip'),
+                            'quyen' => $request->input('optloaind')
+                        ]);
+                    return redirect()->intended('/Administrator');
+                }
+                if ($request->input('idnguoidungselect') == 'usergg') {
+                    $user = UserAPI::where('id', $request->input('idnguoidung'))
+                        ->update([
+                            'password' => Hash::make($request->input('txtmatkhaumoi')),
+                            'vip' => $request->input('optloaindvip'),
+                            'quyen' => $request->input('optloaind')
+                        ]);
+                    return redirect()->intended('/Administrator');
+                }
+            } else {
+                if ($request->input('idnguoidungselect') == 'userbt') {
+                    $user = User::where('id', $request->input('idnguoidung'))
+                        ->update([
+
+                            'vip' => $request->input('optloaindvip'),
+                            'quyen' => $request->input('optloaind')
+                        ]);
+                    return redirect()->intended('/Administrator');
+                }
+                if ($request->input('idnguoidungselect') == 'usergg') {
+                    $user = UserAPI::where('id', $request->input('idnguoidung'))
+                        ->update([
+
+                            'vip' => $request->input('optloaindvip'),
+                            'quyen' => $request->input('optloaind')
+                        ]);
+                    return redirect()->intended('/Administrator');
+                }
+            }
+
+
+
+            return redirect()->intended('/Administrator/hoso');
+        } catch (Exception $e) {
+        }
+    }
     public function fillter(string $cn, string $name)
     {
     }
@@ -275,7 +329,7 @@ class AdminControllers extends Controller
      */
     public function edit(string $id)
     {
-
+        
         if (strpos($id, '&') !== false) {
             $parts = explode('&', $id);
 
@@ -299,6 +353,8 @@ class AdminControllers extends Controller
                 }
             }
             if (count($parts) == 2 && is_numeric($parts[0]) && is_string($parts[1])) {
+
+
                 if ($parts[1] == 'userde') {
                     $user = User::where('id', $parts[0])
                         ->delete();
@@ -310,6 +366,35 @@ class AdminControllers extends Controller
                         ->delete();
 
                     return redirect()->intended('/Administrator');
+                }
+                if ($parts[1] == 'userfix') {
+                    $user = User::where('id', $parts[0])
+                        ->first();
+
+                    return view(
+                        'Auth.qlnguoidung.fixnguoidung',
+                        [
+                            'ttnguoidung' =>   Auth::guard('api')->user(),
+                            'user' =>    $user,
+                            'userbt' =>    'userbt',
+                            'contentFilter' => '0',
+                            'active' => '0',
+                        ]
+                    );
+                }
+                if ($parts[1] == 'userfixgg') {
+                    $user = UserAPI::where('id', $parts[0])
+                        ->first();
+
+                    return view(
+                        'Auth.qlnguoidung.fixnguoidung',
+                        [
+                            'ttnguoidung' =>   Auth::guard('api')->user(),
+                            'user' =>    $user,
+                            'contentFilter' => '0', 'usergg' =>    'usergg',
+                            'active' => '0',
+                        ]
+                    );
                 }
             }
             if (count($parts) == 2 && is_string($parts[0]) && is_string($parts[1])) {
