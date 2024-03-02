@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 //php artisan serve
+//$2y$12$NtkJdK.h29/F05ng2LhENene/YJ23pPBRNWZShESdFQ0PvBhHCVyO
 Route::get('/{name}', [AdminControllers::class, 'index']);
 Route::get('/Administrator/login', [AdminControllers::class, 'login']);
 Route::post('/Administrator/lg', [AdminControllers::class, 'loginuser']);

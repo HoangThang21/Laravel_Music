@@ -19,9 +19,11 @@
                     <a href="/Administrator">
                         <li>Tất cả</li>
                     </a>
-                    <a href="/Administrator/fillter&nv">
-                        <li>Nhân viên</li>
-                    </a>
+                    @if ($ttnguoidung->quyen != '2')
+                        <a href="/Administrator/fillter&nv">
+                            <li>Nhân viên</li>
+                        </a>
+                    @endif
                     <a href="/Administrator/fillter&nd">
                         <li>Người dùng</li>
                     </a>
@@ -113,7 +115,8 @@
                                                                 </a>
                                                             @endif
                                                         @endif
-                                                        <a href="/Administrator/{{ $us['id'] }}&userde"class="delete-link">
+                                                        <a
+                                                            href="/Administrator/{{ $us['id'] }}&userde"class="delete-link">
                                                             <li><i class="bi bi-trash-fill"></i> Xóa</li>
                                                         </a>
                                                     </ul>
@@ -191,7 +194,8 @@
                                                     <a href="/Administrator/{{ $us['id'] }}&userfix">
                                                         <li><i class="bi bi-arrow-repeat"></i>Sửa</li>
                                                     </a>
-                                                    <a href="/Administrator/{{ $us['id'] }}&userde"class="delete-link">
+                                                    <a
+                                                        href="/Administrator/{{ $us['id'] }}&userde"class="delete-link">
                                                         <li><i class="bi bi-trash-fill"></i> Xóa</li>
                                                     </a>
 
@@ -281,7 +285,8 @@
                                                                 </a>
                                                             @endif
                                                         @endif
-                                                        <a href="/Administrator/{{ $us['id'] }}&userdegg"class="delete-link">
+                                                        <a
+                                                            href="/Administrator/{{ $us['id'] }}&userdegg"class="delete-link">
                                                             <li><i class="bi bi-trash-fill"></i> Xóa</li>
                                                         </a>
                                                     </ul>

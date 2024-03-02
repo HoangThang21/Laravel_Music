@@ -145,7 +145,7 @@ class AdminControllers extends Controller
             'optloaind' => ['required'],
         ]);
         $generatedimage = 'img' . time() . '-' . $request->file('txthinh')->getClientOriginalName();
-        $request->file('txthinh')->move(public_path('img'), $generatedimage);
+        $request->file('txthinh')->move(public_path('images'), $generatedimage);
         $user = new User();
         $user->name = $request->input('txthoten');
         $user->password = Hash::make($request->input('txtmatkhau'));
@@ -329,7 +329,7 @@ class AdminControllers extends Controller
      */
     public function edit(string $id)
     {
-        
+
         if (strpos($id, '&') !== false) {
             $parts = explode('&', $id);
 
@@ -400,24 +400,30 @@ class AdminControllers extends Controller
             if (count($parts) == 2 && is_string($parts[0]) && is_string($parts[1])) {
                 $cn = $parts[0];
                 $name = $parts[1];
+                $checkquyen = Auth::guard('api')->user();
                 if ($cn == 'fillter' && $name == 'nv') {
 
                     try {
-                        $searchUser = User::where('quyen', 2)
-                            ->get();
-                        if (Auth::guard('api')->check()) {
-                            return view(
-                                'Auth.index',
-                                [
-                                    'ttnguoidung' =>   Auth::guard('api')->user(),
-                                    'user' => $searchUser,
-                                    'userapi' =>  [],
-                                    'contentFilter' => '1',
-                                    'active' => '0',
-                                ]
-                            );
+                        if ($checkquyen != 2) {
+                            $searchUser = User::where('quyen', 2)
+                                ->get();
+                            if (Auth::guard('api')->check()) {
+                                return view(
+                                    'Auth.index',
+                                    [
+                                        'ttnguoidung' =>   Auth::guard('api')->user(),
+                                        'user' => $searchUser,
+                                        'userapi' =>  [],
+                                        'contentFilter' => '1',
+                                        'active' => '0',
+                                    ]
+                                );
+                            }
+                        } else {
+                            return redirect()->intended('/Administrator');
                         }
                     } catch (Exception $e) {
+                        return redirect()->intended('/Administrator');
                     }
                 }
                 if ($cn == 'fillter' && $name == 'nd') {
