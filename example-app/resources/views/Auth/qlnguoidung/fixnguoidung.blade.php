@@ -24,11 +24,11 @@
                 <div class="my-3">
                     <label>Chọn quyền</label>
                     <select class="form-control" name="optloaind">
-                        <option value="3"@if ($user->quyen == '3') {{ 'selected' }} @endif>Khách hàng
+                        <option value="3"@if ($user->quyen == '3') {{ 'selected' }} @endif>Người dùng
                         </option>
                         <option value="4"@if ($user->quyen == '4') {{ 'selected' }} @endif>Nhà sáng tác
                         </option>
-                        <option value="2">Nhân viên
+                        <option value="2" @if ($user->quyen == '2') {{ 'selected' }} @endif>Nhân viên
                         </option>
                     </select>
                 </div>

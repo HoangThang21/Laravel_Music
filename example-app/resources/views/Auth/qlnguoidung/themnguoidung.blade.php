@@ -23,7 +23,7 @@
                     <select class="form-control" name="optloaind">
 
                         <option value="2" selected>Nhân viên</option>
-                        <option value="3">Khách hàng</option>
+                        <option value="3">Người dùng</option>
                         <option value="4">Nhà sáng tác</option>
                     </select>
                 </div>

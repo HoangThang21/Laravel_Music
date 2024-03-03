@@ -30,15 +30,18 @@
                     <li class="sidebar-header text-info">
                         HỆ THỐNG
                     </li>
+                    @if ($ttnguoidung->quyen == 1 || $ttnguoidung->quyen == 2)
+                        <li class="sidebar-item <?php if ($active == '0') {
+                            echo 'active';
+                        } ?>">
+                            <a class="sidebar-link" href="/Administrator">
+                                <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Quản lý
+                                    người
+                                    dùng</span>
+                            </a>
+                        </li>
+                    @endif
 
-                    <li class="sidebar-item <?php if ($active == '0') {
-                        echo 'active';
-                    } ?>">
-                        <a class="sidebar-link" href="/Administrator">
-                            <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Bảng điều
-                                khiển</span>
-                        </a>
-                    </li>
 
 
 
