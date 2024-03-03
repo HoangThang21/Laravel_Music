@@ -29,7 +29,17 @@ Route::get('/Administrator/logoutadmin', [
     AdminControllers::class, 'logoutadmin'
 ]);
 Route::get('/Administrator/themnguoidung', [AdminControllers::class, 'themnguoidung']);
-
+//Form The loai
+Route::get('/Administrator/qltheloai', [
+    AdminControllers::class, 'qltheloai'
+]);
+Route::post('/Administrator/themtl', [AdminControllers::class, 'themtl']);
+Route::put('/Administrator/qltheloai/suatheloai', [AdminControllers::class, 'suatheloai']);
+Route::get('/Administrator/qltheloai/themtheloai', [AdminControllers::class, 'themtheloai']);
+Route::get('/Administrator/qltheloai/suatheloai&{id}', [
+    AdminControllers::class, 'formchuyensua'
+]);
+//----------------------------------------------------------------
 
 
 

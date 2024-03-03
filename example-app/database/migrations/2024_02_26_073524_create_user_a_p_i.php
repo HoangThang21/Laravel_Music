@@ -20,6 +20,7 @@ return new class extends Migration
             $table->timestamps();
             $table->text('thuvien')->nullable();
             $table->text('vip')->nullable();
+            $table->string('quyenchat')->nullable();
             $table->unsignedInteger('trangthai');
         });
     }

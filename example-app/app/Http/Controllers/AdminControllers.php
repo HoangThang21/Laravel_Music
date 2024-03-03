@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Theloai;
 use App\Models\User;
 use App\Models\UserAPI;
 use Exception;
@@ -323,10 +324,93 @@ class AdminControllers extends Controller
     {
         //
     }
+    public function qltheloai()
+    {
+        return view(
+            'Auth.qltheloai.home',
+            [
+                'ttnguoidung' =>   Auth::guard('api')->user(),
+                'user' =>  User::all(),
+                'theloai' =>  Theloai::all(),
+                'userapi' =>  UserAPI::all(),
+                'contentFilter' => '0',
+                'active' => '',
+            ]
+        );
+    }
+    public function themtheloai()
+    {
+        return view('Auth.qltheloai.themtheloai',  [
+            'ttnguoidung' =>   Auth::guard('api')->user(),
+           
+            'contentFilter' => '0',
+            'active' => '',
+        ]);
+    }
+    public function formchuyensua(string $id)
+    {
+        if (strpos($id, '-') !== false) {
+            list($number, $text) = array_map('trim', explode('-', $id));
 
+            switch ($text) {
+                case 'tl':
+                    $theloai = Theloai::where('id', $number)->first();
+
+                    return view('Auth.qltheloai.suatheloai', [
+                        'ttnguoidung' =>   Auth::guard('api')->user(),
+                       'theloai'=>$theloai,
+                        'contentFilter' => '0',
+                        'active' => '',
+                    ]);
+                // case 'ns':
+                //     $nghesi = Nghesi::where('id', $number)->first();
+
+                //     return view('Auth.qlnghesi.suanghesi', ['ttnguoidung' =>  Auth::guard('web')->user(), 'nghesi' => $nghesi]);
+                // case 'alb':
+
+                //     $album = Album::where('id', $number)->first();
+                //     $nghesi = Nghesi::all();
+                //     $theloai = Theloai::all();
+                //     return view('Auth.qlalbum.suaalbum', [
+                //         'ttnguoidung' =>  Auth::guard('web')->user(), 'album' => $album,
+                //         'nghesi' => $nghesi, 'theloai' => $theloai,
+                //     ]);
+                // case 'music':
+                //     $music = Nhac::where('id', $number)->first();
+                //     return view('Auth.qlnhac.suamusic', ['ttnguoidung' =>  Auth::guard('web')->user(), 'album' => Album::all(), 'music' => $music]);
+
+                default:
+                    break;
+            }
+        }
+    }
     /**
      * Show the form for editing the specified resource.
-     */
+     * 
+   
+     */ public function suatheloai(Request $request)
+    {
+
+        $request->validate([
+            'txttentheloai' => ['required'],
+        ]);
+
+        $tl = Theloai::where('id', $request->input('txtidtheloai'))->update([
+            'tentheloai' => $request->input('txttentheloai'),
+        ]);
+
+        return redirect()->intended('/Administrator/qltheloai');
+    }
+    public function themtl(Request $request)
+    {
+        $request->validate([
+            'txttheloai' => ['required'],
+        ]);
+        $tl = new Theloai();
+        $tl->tentheloai = $request->input('txttheloai');
+        $tl->save();
+        return redirect()->intended('/Administrator/qltheloai');
+    }
     public function edit(string $id)
     {
 

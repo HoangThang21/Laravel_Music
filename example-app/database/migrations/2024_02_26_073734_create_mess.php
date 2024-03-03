@@ -13,8 +13,7 @@ return new class extends Migration
     {
         Schema::create('mess', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('imguser');
-            $table->string('nameuser');
+            $table->integer('idmess_user');
             $table->string('noidung');
             $table->timestamps();
         });
