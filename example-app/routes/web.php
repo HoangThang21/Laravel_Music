@@ -39,9 +39,24 @@ Route::get('/Administrator/qltheloai/themtheloai', [AdminControllers::class, 'th
 Route::get('/Administrator/qltheloai/suatheloai&{id}', [
     AdminControllers::class, 'formchuyensua'
 ]);
+Route::get('/Administrator/qltheloai/xoatheloai&{id}', [
+    AdminControllers::class, 'destroy'
+]);
 //----------------------------------------------------------------
-
-
+//FormNghesi
+Route::get('/Administrator/qlnghesi', [
+    AdminControllers::class, 'qlnghesi'
+]);
+Route::get('/Administrator/qlnghesi/themnghesi', [
+    AdminControllers::class, 'themnghesi'
+]);
+Route::get('/Administrator/qlnghesi/suggest-data', [
+    AdminControllers::class, 'suggestData'
+]);
+Route::post('/Administrator/qlnghesi/themns', [
+    AdminControllers::class, 'themns'
+]);
+//----------------------------------------------------------------
 
 Route::get('/Administrator/{id}', [AdminControllers::class, 'edit']);
 

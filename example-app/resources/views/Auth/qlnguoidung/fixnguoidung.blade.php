@@ -7,7 +7,7 @@
                 @csrf
                 {{-- @method('POST') --}}
                 <input type="hidden" name="idnguoidung" value="{{ $user->id }}" readonly>
-                <input type="hidden" name="idnguoidungselect" value="{{ $userbt ? $userbt : $usergg }}" readonly>
+                <input type="hidden" name="idnguoidungselect" value="{{ $userbt ? 'userbt' : 'usergg' }}" readonly>
                 <div class="my-3"><input class="form-control" type="text" name="txtmatkhau" placeholder="Mật khẩu">
                 </div>
                 <div class="my-3">

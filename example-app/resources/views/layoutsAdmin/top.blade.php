@@ -48,7 +48,14 @@
                     <li class="sidebar-header text-info">
                         DANH MỤC
                     </li>
-
+                    <li class="sidebar-item <?php if (strpos($_SERVER['REQUEST_URI'], 'qlthanhtoan') != false) {
+                        echo 'active';
+                    } ?>">
+                        <a class="sidebar-link" href="/Administrator/qlthanhtoan">
+                            <i class="align-middle" data-feather="grid"></i> <span class="align-middle">Quản lý
+                                nhạc</span>
+                        </a>
+                    </li>
                     <li class="sidebar-item <?php if (strpos($_SERVER['REQUEST_URI'], 'qldanhmuc') != false) {
                         echo 'active';
                     } ?>">
@@ -57,21 +64,12 @@
                                 Album</span>
                         </a>
                     </li>
-
-                    <li class="sidebar-item <?php if (strpos($_SERVER['REQUEST_URI'], 'qlsanpham') != false) {
+                    <li class="sidebar-item <?php if (strpos($_SERVER['REQUEST_URI'], 'qlnghesi') != false) {
                         echo 'active';
                     } ?>">
-                        <a class="sidebar-link" href="/Administrator/qlsanpham">
+                        <a class="sidebar-link" href="/Administrator/qlnghesi">
                             <i class="align-middle" data-feather="grid"></i> <span class="align-middle">Quản lý ngệ
                                 sĩ</span>
-                        </a>
-                    </li>
-                    <li class="sidebar-item <?php if (strpos($_SERVER['REQUEST_URI'], 'qlthanhtoan') != false) {
-                        echo 'active';
-                    } ?>">
-                        <a class="sidebar-link" href="/Administrator/qlthanhtoan">
-                            <i class="align-middle" data-feather="grid"></i> <span class="align-middle">Quản lý
-                                nhạc</span>
                         </a>
                     </li>
                     <li class="sidebar-item <?php if (strpos($_SERVER['REQUEST_URI'], 'qltheloai') != false) {
@@ -82,34 +80,6 @@
                                 loại</span>
                         </a>
                     </li>
-
-                    {{-- <li class="sidebar-header text-info">
-						KINH DOANH
-					</li>
-					
-					<li class="sidebar-item">
-						<a class="sidebar-link" href="">
-						<i class="align-middle" data-feather="users"></i> <span class="align-middle">Quản lý khách hàng</span>
-						</a>
-					</li>
-
-					<li class="sidebar-item">
-						<a class="sidebar-link" href="">
-						<i class="align-middle" data-feather="truck"></i> <span class="align-middle">Quản lý đơn hàng</span>
-						</a>
-					</li>
-
-					<li class="sidebar-item">
-						<a class="sidebar-link" href="">
-						<i class="align-middle" data-feather="bar-chart-2"></i> <span class="align-middle">Quản lý doanh thu</span>
-						</a>
-					</li>
-
-					<li class="sidebar-item">
-						<a class="sidebar-link" href="">
-						<i class="align-middle" data-feather="shopping-bag"></i> <span class="align-middle">Chương trình khuyến mãi</span>
-						</a>
-					</li> --}}
 
 
 

@@ -7,6 +7,11 @@
                 @csrf
                 {{-- @method('POST') --}}
                 <div class="my-3">
+                    @if ($loi != '')
+                        <div class="text-danger p-2">{{ $loi }}</div>
+                    @endif
+                </div>
+                <div class="my-3">
                     <input class="form-control" type="text" name="txthoten" placeholder="Họ tên" required>
                 </div>
                 <div class="my-3">

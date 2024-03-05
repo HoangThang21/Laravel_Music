@@ -67,7 +67,7 @@
     <br>
     {{-- search --}}
     <div class="thus">
-        <div class="textloginGoogleius"><i class="bi bi-caret-up-fill"></i> Người dùng</div>
+        <div class="textloginGoogleius"><i class="bi bi-caret-up-fill"></i> Người dùng ({{ $usercount }})</div>
         <div class="khungthuus">
             <div class="tableUser" id="user-container">
                 @foreach ($user as $us)
@@ -235,7 +235,8 @@
     </div>
     {{-- user api --}}
     <div class="thu">
-        <div class="textloginGoogle"><i class="bi bi-caret-down-fill"></i> Người dùng đăng nhập Google</div>
+        <div class="textloginGoogle"><i class="bi bi-caret-down-fill"></i> Người dùng đăng nhập Google
+            ({{ $userapicount }})</div>
         <div class="khungthu">
             <div class="tableUser" id="user-container">
                 @foreach ($userapi as $us)

@@ -21,95 +21,146 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     var searchBar = document.querySelector(".delete-icon-wrapper");
-    searchBar.addEventListener("click", function () {
-        document.querySelector(".searchbar-input").value = "";
-    });
+    if (searchBar) {
+        searchBar.addEventListener("click", function () {
+            document.querySelector(".searchbar-input").value = "";
+        });
+    }
 
     const search = document.querySelector(".searchbar-input");
-    search.addEventListener("keypress", function (event) {
-        if (event.keyCode === 13) {
+    if (search) {
+        search.addEventListener("keypress", function (event) {
+            if (event.keyCode === 13) {
+                // Kiểm tra nút Enter
+                event.preventDefault(); // Ngăn chặn form tự động submit
+                $("#searchForm").submit(); // Gửi form tìm kiếm
+            }
+        });
+    }
+
+    const search_icon_wrapper = document.querySelector(".search-icon-wrapper");
+    if (search_icon_wrapper) {
+        search_icon_wrapper.addEventListener("click", function (event) {
             // Kiểm tra nút Enter
             event.preventDefault(); // Ngăn chặn form tự động submit
             $("#searchForm").submit(); // Gửi form tìm kiếm
-        }
-    });
-    const search_icon_wrapper = document.querySelector(".search-icon-wrapper");
-    search_icon_wrapper.addEventListener("click", function (event) {
-        // Kiểm tra nút Enter
-        event.preventDefault(); // Ngăn chặn form tự động submit
-        $("#searchForm").submit(); // Gửi form tìm kiếm
-    });
+        });
+    }
+
     const textloginGoogle = document.querySelector(".textloginGoogle");
-    textloginGoogle.addEventListener("click", function (event) {
-        const textloginGooglei = document.querySelector(".textloginGoogle i");
-        const khungthu = document.querySelector(".khungthu");
-        if (textloginGooglei.classList.contains("bi-caret-up-fill")) {
-            textloginGooglei.classList.remove("bi-caret-up-fill");
-            textloginGooglei.classList.add("bi-caret-down-fill");
-            khungthu.style.display = "none";
-        } else if (textloginGooglei.classList.contains("bi-caret-down-fill")) {
-            textloginGooglei.classList.remove("bi-caret-down-fill");
-            textloginGooglei.classList.add("bi-caret-up-fill");
-            khungthu.style.display = "block";
-        }
-    });
+    if (textloginGoogle) {
+        textloginGoogle.addEventListener("click", function (event) {
+            const textloginGooglei =
+                document.querySelector(".textloginGoogle i");
+            const khungthu = document.querySelector(".khungthu");
+            if (textloginGooglei.classList.contains("bi-caret-up-fill")) {
+                textloginGooglei.classList.remove("bi-caret-up-fill");
+                textloginGooglei.classList.add("bi-caret-down-fill");
+                khungthu.style.display = "none";
+            } else if (
+                textloginGooglei.classList.contains("bi-caret-down-fill")
+            ) {
+                textloginGooglei.classList.remove("bi-caret-down-fill");
+                textloginGooglei.classList.add("bi-caret-up-fill");
+                khungthu.style.display = "block";
+            }
+        });
+    }
     const textloginGoogleus = document.querySelector(".textloginGoogleius");
-    textloginGoogleus.addEventListener("click", function (event) {
-        const textloginGoogleius = document.querySelector(
-            ".textloginGoogleius i"
-        );
-        const khungthuus = document.querySelector(".khungthuus");
-        if (textloginGoogleius.classList.contains("bi-caret-up-fill")) {
-            textloginGoogleius.classList.remove("bi-caret-up-fill");
-            textloginGoogleius.classList.add("bi-caret-down-fill");
-            khungthuus.style.display = "none";
-        } else if (
-            textloginGoogleius.classList.contains("bi-caret-down-fill")
-        ) {
-            textloginGoogleius.classList.remove("bi-caret-down-fill");
-            textloginGoogleius.classList.add("bi-caret-up-fill");
-            khungthuus.style.display = "block";
-        }
-    });
+    if (textloginGoogleus) {
+        textloginGoogleus.addEventListener("click", function (event) {
+            const textloginGoogleius = document.querySelector(
+                ".textloginGoogleius i"
+            );
+            const khungthuus = document.querySelector(".khungthuus");
+            if (textloginGoogleius.classList.contains("bi-caret-up-fill")) {
+                textloginGoogleius.classList.remove("bi-caret-up-fill");
+                textloginGoogleius.classList.add("bi-caret-down-fill");
+                khungthuus.style.display = "none";
+            } else if (
+                textloginGoogleius.classList.contains("bi-caret-down-fill")
+            ) {
+                textloginGoogleius.classList.remove("bi-caret-down-fill");
+                textloginGoogleius.classList.add("bi-caret-up-fill");
+                khungthuus.style.display = "block";
+            }
+        });
+    }
+
     setInterval(function () {
         var searchBar = document.querySelector(".searchbar-input");
         var ContenFilter = document.querySelector(".ContenFilter");
-        searchBar.addEventListener("input", function () {
-            if (searchBar.value.trim() != "") {
-                document.querySelector(".delete-icon-wrapper").style.display =
-                    "block";
-            } else {
+        if (searchBar) {
+            searchBar.addEventListener("input", function () {
+                if (searchBar.value.trim() != "") {
+                    document.querySelector(
+                        ".delete-icon-wrapper"
+                    ).style.display = "block";
+                } else {
+                    document.querySelector(
+                        ".delete-icon-wrapper"
+                    ).style.display = "none";
+                }
+            });
+            if (searchBar.value == "") {
                 document.querySelector(".delete-icon-wrapper").style.display =
                     "none";
             }
-        });
-        if (searchBar.value == "") {
-            document.querySelector(".delete-icon-wrapper").style.display =
-                "none";
+            if (contentFilter == 0) {
+                ContenFilter.textContent = "Tất cả";
+            } else if (contentFilter == 1) {
+                ContenFilter.textContent = "Nhân viên";
+            } else if (contentFilter == 2) {
+                ContenFilter.textContent = "Người dùng";
+            } else if (contentFilter == 3) {
+                ContenFilter.textContent = "Nghệ sĩ";
+            }
         }
-        if (contentFilter == 0) {
-            ContenFilter.textContent = "Tất cả";
-        } else if (contentFilter == 1) {
-            ContenFilter.textContent = "Nhân viên";
-        } else if (contentFilter == 2) {
-            ContenFilter.textContent = "Người dùng";
-        } else if (contentFilter == 3) {
-            ContenFilter.textContent = "Nghệ sĩ";
-        }
-    }, 200);
-    var deleteLinks = document.querySelectorAll('.delete-link');
+    }, 1000);
+    $("#your-input").on("input", function () {
+        var query = $(this).val();
+        if (query.trim() != "") {
+            $.ajax({
+                type: "GET",
+                url: "/Administrator/qlnghesi/suggest-data",
+                data: {
+                    query: query,
+                },
+                success: function (response) {
+                    $("#suggestions").empty();
 
-        deleteLinks.forEach(function(deleteLink) {
-            deleteLink.addEventListener('click', function(event) {
-                event.preventDefault(); // Ngăn chặn chuyển hướng mặc định
-
-                var confirmation = confirm('Bạn có chắc muốn xóa?');
-
-                if (confirmation) {
-                    window.location.href = deleteLink.getAttribute('href');
-                }
+                    response.forEach(function (email) {
+                        $("#suggestions").append(
+                            $("<option>", {
+                                value: email,
+                                text: email,
+                            })
+                        );
+                    });
+                    
+                },
+                error: function (xhr, status, error) {
+                    console.error("Lỗi khi gợi ý dữ liệu: " + error);
+                },
             });
+        } else {
+            $("#suggestions").empty();
+        }
+    });
+
+    var deleteLinks = document.querySelectorAll(".delete-link");
+
+    deleteLinks.forEach(function (deleteLink) {
+        deleteLink.addEventListener("click", function (event) {
+            event.preventDefault(); // Ngăn chặn chuyển hướng mặc định
+
+            var confirmation = confirm("Bạn có chắc muốn xóa?");
+
+            if (confirmation) {
+                window.location.href = deleteLink.getAttribute("href");
+            }
         });
+    });
 });
 function toggleMenu(name) {
     var menuFilter = document.querySelector("." + name);
