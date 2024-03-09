@@ -128,16 +128,18 @@ document.addEventListener("DOMContentLoaded", () => {
                 },
                 success: function (response) {
                     $("#suggestions").empty();
-
-                    response.forEach(function (email) {
-                        $("#suggestions").append(
-                            $("<option>", {
-                                value: email,
-                                text: email,
-                            })
-                        );
+                    response.forEach(function (arr) {
+                        if (Array.isArray(arr) && arr.length > 0) {
+                            arr.forEach(function (email) {
+                                $("#suggestions").append(
+                                    $("<option>", {
+                                        value: email,
+                                        text: email,
+                                    })
+                                );
+                            });
+                        }
                     });
-                    
                 },
                 error: function (xhr, status, error) {
                     console.error("Lỗi khi gợi ý dữ liệu: " + error);

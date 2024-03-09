@@ -20,28 +20,26 @@ class AdminControllers extends Controller
      * Display a listing of the resource.
      */
 
-    public function index(string $name)
+    public function index()
     {
-        if ($name === 'Administrator') {
-            if (Auth::guard('api')->check()) {
 
-                return view(
-                    'Auth.index',
-                    [
-                        'ttnguoidung' =>   Auth::guard('api')->user(),
-                        'user' =>  User::all(),
-                        'userapi' =>  UserAPI::all(),
-                        'usercount' =>  User::all()->count(),
-                        'userapicount' =>  UserAPI::all()->count(),
-                        'contentFilter' => '0',
-                        'active' => '0',
-                    ]
-                );
-            } else {
-                return view('Auth.login', ['loi' => '']);
-            }
+        if (Auth::guard('api')->check()) {
+
+            return view(
+                'Auth.index',
+                [
+                    'ttnguoidung' =>   Auth::guard('api')->user(),
+                    'user' =>  User::all(),
+                    'userapi' =>  UserAPI::all(),
+                    'usercount' =>  User::all()->count(),
+                    'userapicount' =>  UserAPI::all()->count(),
+                    'contentFilter' => '0',
+                    'active' => '0',
+                ]
+            );
+        } else {
+            return view('Auth.login', ['loi' => '']);
         }
-        return view('welcome');
     }
 
     /**
@@ -238,6 +236,59 @@ class AdminControllers extends Controller
         } catch (Exception $e) {
         }
     }
+    public function searchns(Request $request)
+    {
+
+        try {
+
+            if ($request->searchbar_input == '') {
+                $searchns = Nghesi::where('tennghesi', 'like', '%' . $request->searchbar_input . '%')
+                    ->get();
+                $searchnsapi = [];
+            } else {
+                $user = User::where('email', 'like', '%' . $request->searchbar_input . '%')->where('quyen', 4)->pluck('id')->first();
+                $userapi = UserAPI::where('email', 'like', '%' . $request->searchbar_input . '%')->where('quyen', 4)->pluck('id')->first();
+                if ($userapi && $user) {
+                    $searchns = Nghesi::Where('id_nghesi_user', $user)
+                        ->get();
+                    $searchnsapi = Nghesi::Where('idnghesi_userapi', $userapi)
+                        ->get();
+                }
+                elseif ($user) {
+                    $searchns = Nghesi::Where('id_nghesi_user', $user)
+                        ->get();
+                        $searchnsapi = [];
+                }
+
+                elseif ($userapi) {
+                    $searchnsapi = Nghesi::Where('idnghesi_userapi', $userapi)
+                        ->get();
+                        $searchns = [];
+                }
+                elseif (!$userapi && !$user) {
+                    $searchns = Nghesi::where('tennghesi', 'like', '%' . $request->searchbar_input . '%')
+                        ->get();
+                    $searchnsapi = [];
+                }
+            }
+
+            return view(
+                'Auth.qlnghesi.home',
+                [
+                    'ttnguoidung' =>   Auth::guard('api')->user(),
+                    'user' =>  User::all(),
+                    'theloai' =>  Theloai::all(),
+                    'userapi' =>  UserAPI::all(),
+                    'nghesi' =>  $searchns,
+                    'nghesiapi' =>  $searchnsapi,
+                    'contentFilter' => '0',
+                    'active' => '',
+                ]
+            );
+        } catch (Exception $e) {
+            dd('loi', $e);
+        }
+    }
     public function suand(Request $request)
     {
         try {
@@ -372,6 +423,7 @@ class AdminControllers extends Controller
                 'theloai' =>  Theloai::all(),
                 'userapi' =>  UserAPI::all(),
                 'nghesi' =>  Nghesi::all(),
+                'nghesiapi' =>  [],
                 'contentFilter' => '0',
                 'active' => '',
             ]
@@ -482,12 +534,14 @@ class AdminControllers extends Controller
         $request->validate([
             'txtnghesi' => ['required'],
             'optloains' => ['required'],
+            'txtmota' => ['required'],
         ]);
         $idnghesibt = User::where('email', $request->input('optloains'))->first();
         $idnghesiapi = UserAPI::where('email', $request->input('optloains'))->first();
         // dd($idnghesiapi->id, $idnghesibt);
         if ($idnghesibt) {
-            $ktNghesia = Nghesi::where('id_nghesi_user', $idnghesibt);
+            $ktNghesia = Nghesi::where('id_nghesi_user', $idnghesibt)->first();
+
             if ($ktNghesia) {
                 return view(
                     'Auth.qlnghesi.themnghesi',
@@ -506,12 +560,13 @@ class AdminControllers extends Controller
                 $ns = new Nghesi();
                 $ns->tennghesi = $request->input('txtnghesi');
                 $ns->id_nghesi_user = $idnghesibt->id;
+                $ns->mota = $request->input('txtmota');
                 $ns->save();
                 return redirect()->intended('/Administrator/qlnghesi');
             }
         }
         if ($idnghesiapi) {
-            $ktNghesi = Nghesi::where('idnghesi_userapi', $idnghesiapi);
+            $ktNghesi = Nghesi::where('idnghesi_userapi', $idnghesiapi)->first();
             if ($ktNghesi) {
                 return view(
                     'Auth.qlnghesi.themnghesi',
@@ -530,6 +585,7 @@ class AdminControllers extends Controller
                 $ns = new Nghesi();
                 $ns->tennghesi = $request->input('txtnghesi');
                 $ns->idnghesi_userapi = $idnghesiapi->id;
+                $ns->mota = $request->input('txtmota');
                 $ns->save();
                 return redirect()->intended('/Administrator/qlnghesi');
             }
@@ -700,6 +756,65 @@ class AdminControllers extends Controller
     public function update(Request $request, string $id)
     {
         //
+    }
+    public function qlns(string $name, string $number, string $type)
+    {
+        // dd('abc');
+        if ($name = 'suanghesi') {
+            return view(
+                'Auth.qlnghesi.suanghesi',
+                [
+                    'ttnguoidung' =>   Auth::guard('api')->user(),
+                    'user' =>  User::all(),
+                    'theloai' =>  Theloai::all(),
+                    'userapi' =>  UserAPI::all(),
+                    'nghesi' =>  Nghesi::where('id', $number)->first(),
+                    'contentFilter' => '0',
+                    'active' => '',
+                    'loi' => '',
+                ]
+            );
+        }
+    }
+    public function suanghesi(Request $request)
+    {
+        $request->validate([
+            'txttennghesi' => ['required'],
+            'txtidnghesi' => ['required'],
+            'txttype' => ['required'],
+            'txtmota' => ['required'],
+        ]);
+
+        if ($request->input('txttype') == 'user') {
+            $nghesi = Nghesi::where('id', $request->input('txtidnghesi'))->update([
+                'tennghesi' => $request->input('txttennghesi'),
+
+                'mota' => $request->input('txtmota'),
+            ]);
+            return redirect()->intended('/Administrator/qlnghesi');
+        }
+        if ($request->input('txttype') == 'userapi') {
+            $nghesi = Nghesi::where('id', $request->input('txtidnghesi'))->update([
+                'tennghesi' => $request->input('txttennghesi'),
+
+                'mota' => $request->input('txtmota'),
+            ]);
+            return redirect()->intended('/Administrator/qlnghesi');
+        } else {
+            return view(
+                'Auth.qlnghesi.suanghesi',
+                [
+                    'ttnguoidung' =>   Auth::guard('api')->user(),
+                    'user' =>  User::all(),
+                    'theloai' =>  Theloai::all(),
+                    'userapi' =>  UserAPI::all(),
+                    'nghesi' =>  Nghesi::where('id',  $request->input('txtidnghesi'))->first(),
+                    'contentFilter' => '0',
+                    'active' => '',
+                    'loi' => 'Lỗi',
+                ]
+            );
+        }
     }
 
     /**

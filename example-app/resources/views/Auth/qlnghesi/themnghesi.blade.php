@@ -15,11 +15,15 @@
                     <input class="form-control" type="text" name="txtnghesi" placeholder="Tên nghệ sĩ" required>
                 </div>
                 <div class="my-3">
-                    <input type="text" id="your-input" placeholder="Nhập Email">
+                    <label class="form-label">Mô tả</label>
+                    <textarea name="txtmota" id="" cols="30" rows="10" class="w-100"></textarea>
                 </div>
+
+
                 <div class="my-3">
                     <label>Chọn Email để xác nhận làm nghệ sĩ</label>
-                    <select class="form-control" name="optloains" id="suggestions">
+                    <input class="m-3" type="text" id="your-input" placeholder="Nhập Email">
+                    <select class="form-control mt-3 " name="optloains" id="suggestions">
                     </select>
                 </div>
                 <div class="my-3">

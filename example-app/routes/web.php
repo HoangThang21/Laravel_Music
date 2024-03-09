@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 */
 //php artisan serve
 //$2y$12$NtkJdK.h29/F05ng2LhENene/YJ23pPBRNWZShESdFQ0PvBhHCVyO
-Route::get('/{name}', [AdminControllers::class, 'index']);
+Route::get('/Administrator', [AdminControllers::class, 'index']);
 Route::get('/Administrator/login', [AdminControllers::class, 'login']);
 Route::post('/Administrator/lg', [AdminControllers::class, 'loginuser']);
 Route::post('/Administrator/search', [AdminControllers::class, 'searchinfouser']);
@@ -29,6 +29,7 @@ Route::get('/Administrator/logoutadmin', [
     AdminControllers::class, 'logoutadmin'
 ]);
 Route::get('/Administrator/themnguoidung', [AdminControllers::class, 'themnguoidung']);
+//----------------------------------------------------------------
 //Form The loai
 Route::get('/Administrator/qltheloai', [
     AdminControllers::class, 'qltheloai'
@@ -56,12 +57,18 @@ Route::get('/Administrator/qlnghesi/suggest-data', [
 Route::post('/Administrator/qlnghesi/themns', [
     AdminControllers::class, 'themns'
 ]);
+Route::put('/Administrator/qlnghesi/suanghesi', [
+    AdminControllers::class, 'suanghesi'
+]);
+Route::get('/Administrator/qlnghesi/{name}&{number}-{type}', [
+    AdminControllers::class, 'qlns'
+]);
+Route::post('/Administrator/searchns', [AdminControllers::class, 'searchns']);
 //----------------------------------------------------------------
-
-Route::get('/Administrator/{id}', [AdminControllers::class, 'edit']);
-
 
 
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/Administrator/{id}', [AdminControllers::class, 'edit']);

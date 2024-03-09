@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('tennghesi');
             $table->integer('id_nghesi_user')->nullable();
             $table->integer('idnghesi_userapi')->nullable();
+            $table->text('mota')->nullable();
             $table->timestamps();
         });
     }
