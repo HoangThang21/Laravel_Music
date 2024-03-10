@@ -12,7 +12,7 @@
                 <ul class="list-inline">
                     <li class="list-inline-item">
                         <a class="text-muted" href="">Hỗ trợ</a>
-                    </li>								
+                    </li>
                 </ul>
             </div>
         </div>
@@ -22,13 +22,16 @@
 
 </div>
 <script src="../../inc/js/indexAdmin.js"></script>
+<script src="https://cdn.ckeditor.com/ckeditor5/40.0.0/classic/ckeditor.js"></script>
+<script src="../../inc/js/app.js"></script>
 </script>
-@if (Auth::guard('api')->check()) 
+@if (Auth::guard('api')->check())
     <script>
-     var csrfToken =` {{ csrf_token() }}`;
-     var contentFilter={{ $contentFilter }}
+        var csrfToken = ` {{ csrf_token() }}`;
+        var contentFilter = {{ $contentFilter }}
     </script>
 @endif
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 </body>
+
 </html>

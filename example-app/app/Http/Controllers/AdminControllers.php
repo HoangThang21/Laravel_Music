@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Album;
 use App\Models\Nghesi;
+use App\Models\Nhac;
 use App\Models\Theloai;
 use App\Models\User;
 use App\Models\UserAPI;
@@ -240,6 +241,7 @@ class AdminControllers extends Controller
         } catch (Exception $e) {
         }
     }
+
     public function searchns(Request $request)
     {
 
@@ -855,6 +857,22 @@ class AdminControllers extends Controller
 
                     'theloai' =>  Theloai::all(),
 
+                    'nghesi' =>  Nghesi::all(),
+                    'album' =>  Album::where('id', $number)->first(),
+                    'contentFilter' => '0',
+                    'active' => '',
+                    'loi' => '',
+                ]
+            );
+        }
+        if ($name == 'xemalbum') {
+            return view(
+                'Auth.qlalbum.xemalbum',
+                [
+                    'ttnguoidung' =>   Auth::guard('api')->user(),
+
+                    'theloai' =>  Theloai::all(),
+                    'nhac' => Nhac::all(),
                     'nghesi' =>  Nghesi::all(),
                     'album' =>  Album::where('id', $number)->first(),
                     'contentFilter' => '0',

@@ -1,5 +1,15 @@
 document.addEventListener("DOMContentLoaded", () => {
     let dotuser = document.querySelectorAll(".chucnangUser");
+    var inputrangemusic = document.getElementById("inputrangemusic"); // Sử dụng getElementById thay vì querySelector vì chúng ta đã cung cấp id
+    var msa = document.getElementById("msa"); // Sử dụng getElementById thay vì querySelector vì chúng ta đã cung cấp id
+    if (inputrangemusic) {
+        inputrangemusic.addEventListener("input", () => {
+            var value = inputrangemusic.value;
+            // Đặt value là inputrangemusic.value thay vì rangeInput.value
+            msa.currentTime = parseInt(value);
+            console.log(typeof parseInt(value), typeof msa.currentTime);
+        });
+    }
 
     dotuser.forEach(function (dotuser1, indexi1) {
         dotuser1.addEventListener("click", () => {
@@ -164,12 +174,3 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 });
-function toggleMenu(name) {
-    var menuFilter = document.querySelector("." + name);
-    if (menuFilter) {
-        const isHidden1 =
-            menuFilter.style.display === "none" ||
-            getComputedStyle(menuFilter).display === "none";
-        menuFilter.style.display = isHidden1 ? "block" : "none";
-    }
-}

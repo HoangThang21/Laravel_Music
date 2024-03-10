@@ -90,7 +90,7 @@ Route::get('/Administrator/qlalbum/{name}&{number}-{type}', [
 ]);
 
 //----------------------------------------------------------------
-
+Route::post('/Administrator/music', [AdminControllers::class, 'music']);
 Route::get('/', function () {
     return view('welcome');
 });
