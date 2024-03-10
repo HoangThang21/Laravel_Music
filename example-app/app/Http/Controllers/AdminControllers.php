@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Album;
 use App\Models\Nghesi;
 use App\Models\Theloai;
 use App\Models\User;
@@ -175,6 +176,7 @@ class AdminControllers extends Controller
         $user->image = $generatedimage;
         $user->quyen = $request->input('optloaind');
         $user->trangthai = 1;
+        $user->quyenchat = 1;
         $user->save();
         return redirect()->intended('/Administrator');
     }
@@ -228,6 +230,8 @@ class AdminControllers extends Controller
                         'ttnguoidung' =>   Auth::guard('api')->user(),
                         'user' =>   $searchUser,
                         'userapi' =>  $searchUser2,
+                        'usercount' =>   $searchUser->count(),
+                        'userapicount' =>  $searchUser2->count(),
                         'contentFilter' => '0',
                         'active' => '0',
                     ]
@@ -253,19 +257,15 @@ class AdminControllers extends Controller
                         ->get();
                     $searchnsapi = Nghesi::Where('idnghesi_userapi', $userapi)
                         ->get();
-                }
-                elseif ($user) {
+                } elseif ($user) {
                     $searchns = Nghesi::Where('id_nghesi_user', $user)
                         ->get();
-                        $searchnsapi = [];
-                }
-
-                elseif ($userapi) {
+                    $searchnsapi = [];
+                } elseif ($userapi) {
                     $searchnsapi = Nghesi::Where('idnghesi_userapi', $userapi)
                         ->get();
-                        $searchns = [];
-                }
-                elseif (!$userapi && !$user) {
+                    $searchns = [];
+                } elseif (!$userapi && !$user) {
                     $searchns = Nghesi::where('tennghesi', 'like', '%' . $request->searchbar_input . '%')
                         ->get();
                     $searchnsapi = [];
@@ -286,7 +286,6 @@ class AdminControllers extends Controller
                 ]
             );
         } catch (Exception $e) {
-            dd('loi', $e);
         }
     }
     public function suand(Request $request)
@@ -429,6 +428,23 @@ class AdminControllers extends Controller
             ]
         );
     }
+    public function qlalbum()
+    {
+        return view(
+            'Auth.qlalbum.home',
+            [
+                'ttnguoidung' =>   Auth::guard('api')->user(),
+                'user' =>  User::all(),
+                'theloai' =>  Theloai::all(),
+                'userapi' =>  UserAPI::all(),
+                'nghesi' =>  Nghesi::all(),
+                'album' =>  Album::all(),
+                'nghesiapi' =>  [],
+                'contentFilter' => '0',
+                'active' => '',
+            ]
+        );
+    }
     public function themnghesi()
     {
         return view(
@@ -451,7 +467,20 @@ class AdminControllers extends Controller
             'ttnguoidung' =>   Auth::guard('api')->user(),
             'loi' => '',
             'contentFilter' => '0',
+
             'active' => '',
+        ]);
+    }
+    public function themalbum()
+    {
+        return view('Auth.qlalbum.themalbum',  [
+            'ttnguoidung' =>   Auth::guard('api')->user(),
+            'loi' => '',
+            'theloai' =>  Theloai::all(),
+            'nghesi' =>  Nghesi::all(),
+            'contentFilter' => '0',
+            'active' => '',
+
         ]);
     }
     public function formchuyensua(string $id)
@@ -529,6 +558,49 @@ class AdminControllers extends Controller
             return redirect()->intended('/Administrator/qltheloai');
         }
     }
+    public function themalb(Request $request)
+    {
+        $request->validate([
+            'txttenalbum' => ['required'],
+            'txtnamphathanh' => ['required'],
+            'optloains' => ['required'],
+            'optloaitl' => ['required'],
+        ]);
+        if ($request->input('txtnamphathanh') > 0) {
+            $al = new Album();
+            $al->tenalbum = $request->input('txttenalbum');
+            $al->namphathanh = $request->input('txtnamphathanh');
+            $al->nghesi_idalbum = $request->input('optloains');
+            $al->theloai_idalbum  = $request->input('optloaitl');
+            $al->save();
+            return redirect()->intended('/Administrator/qlalbum');
+        } else {
+            return view('Auth.qlalbum.themalbum',  [
+                'ttnguoidung' =>   Auth::guard('api')->user(),
+                'loi' => 'Năm phát hành > 0',
+                'theloai' =>  Theloai::all(),
+                'nghesi' =>  Nghesi::all(),
+                'contentFilter' => '0',
+                'active' => '',
+
+            ]);
+        }
+        // $theloaitim = Theloai::where('tentheloai', $request->input('txttheloai'))->count();
+
+        // if ($theloaitim != 0) {
+        //     return view('Auth.qltheloai.themtheloai',  [
+        //         'ttnguoidung' =>   Auth::guard('api')->user(),
+        //         'loi' => 'Tên thể loại đã tồn tại vui lòng nhập tên khác.',
+        //         'contentFilter' => '0',
+        //         'active' => '',
+        //     ]);
+        // } else {
+        //     $tl = new Theloai();
+        //     $tl->tentheloai = $request->input('txttheloai');
+        //     $tl->save();
+        //     return redirect()->intended('/Administrator/qltheloai');
+        // }
+    }
     public function themns(Request $request)
     {
         $request->validate([
@@ -536,8 +608,8 @@ class AdminControllers extends Controller
             'optloains' => ['required'],
             'txtmota' => ['required'],
         ]);
-        $idnghesibt = User::where('email', $request->input('optloains'))->first();
-        $idnghesiapi = UserAPI::where('email', $request->input('optloains'))->first();
+        $idnghesibt = User::where('email', $request->input('optloains'))->pluck('id')->first();
+        $idnghesiapi = UserAPI::where('email', $request->input('optloains'))->pluck('id')->first();
         // dd($idnghesiapi->id, $idnghesibt);
         if ($idnghesibt) {
             $ktNghesia = Nghesi::where('id_nghesi_user', $idnghesibt)->first();
@@ -757,10 +829,10 @@ class AdminControllers extends Controller
     {
         //
     }
-    public function qlns(string $name, string $number, string $type)
+    public function qlupdate(string $name, string $number, string $type)
     {
         // dd('abc');
-        if ($name = 'suanghesi') {
+        if ($name == 'suanghesi') {
             return view(
                 'Auth.qlnghesi.suanghesi',
                 [
@@ -769,6 +841,22 @@ class AdminControllers extends Controller
                     'theloai' =>  Theloai::all(),
                     'userapi' =>  UserAPI::all(),
                     'nghesi' =>  Nghesi::where('id', $number)->first(),
+                    'contentFilter' => '0',
+                    'active' => '',
+                    'loi' => '',
+                ]
+            );
+        }
+        if ($name == 'suaalbum') {
+            return view(
+                'Auth.qlalbum.suaalbum',
+                [
+                    'ttnguoidung' =>   Auth::guard('api')->user(),
+
+                    'theloai' =>  Theloai::all(),
+
+                    'nghesi' =>  Nghesi::all(),
+                    'album' =>  Album::where('id', $number)->first(),
                     'contentFilter' => '0',
                     'active' => '',
                     'loi' => '',
@@ -816,6 +904,38 @@ class AdminControllers extends Controller
             );
         }
     }
+    public function suaalbum(Request $request)
+    {
+        $request->validate([
+            'txtidalbum' => ['required'],
+            'txttenalbum' => ['required'],
+            'txtnamphathanh' => ['required'],
+            'optloains' => ['required'],
+            'optloaitl' => ['required'],
+        ]);
+        if ($request->input('txtnamphathanh') > 0) {
+
+            $al = Album::where('id', $request->input('txtidalbum'))->update([
+                'tenalbum' => $request->input('txttenalbum'),
+                'namphathanh' => $request->input('txtnamphathanh'),
+                'nghesi_idalbum' => $request->input('optloains'),
+                'theloai_idalbum'  => $request->input('optloaitl'),
+            ]);
+
+
+            return redirect()->intended('/Administrator/qlalbum');
+        } else {
+            return view('Auth.qlalbum.suaalbum',  [
+                'ttnguoidung' =>   Auth::guard('api')->user(),
+                'loi' => 'Năm phát hành > 0',
+                'theloai' =>  Theloai::all(),
+                'nghesi' =>  Nghesi::all(),
+                'contentFilter' => '0',
+                'active' => '',
+
+            ]);
+        }
+    }
 
     /**
      * Remove the specified resource from storage.
@@ -826,13 +946,22 @@ class AdminControllers extends Controller
         if (strpos($id, '-') !== false) {
             $parts = explode('-', $id);
             if (count($parts) == 2 && is_numeric($parts[0]) && is_string($parts[1])) {
-                if (is_string($parts[1]) == 'tl') {
+                if ($parts[1] == 'tl') {
+
                     $theloai = Theloai::where('id', $parts[0])
                         ->delete();
+                    return redirect()->intended('/Administrator/qltheloai');
                 }
-
-
-                return redirect()->intended('/Administrator/qltheloai');
+                if ($parts[1] == 'ns') {
+                    $nghesi = Nghesi::where('id', $parts[0])
+                        ->delete();
+                    return redirect()->intended('/Administrator/qlnghesi');
+                }
+                if ($parts[1] == 'alb') {
+                    $nghesi = Album::where('id', $parts[0])
+                        ->delete();
+                    return redirect()->intended('/Administrator/qlalbum');
+                }
             }
         } else {
             return redirect()->intended('/Administrator');

@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('nghesi', function (Blueprint $table) {
             $table->increments('id');
             $table->string('tennghesi');
-            $table->integer('id_nghesi_user')->nullable();
-            $table->integer('idnghesi_userapi')->nullable();
+            $table->unsignedInteger('id_nghesi_user')->nullable();
+            $table->unsignedInteger('idnghesi_userapi')->nullable();
             $table->text('mota')->nullable();
             $table->timestamps();
         });

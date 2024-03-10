@@ -18,7 +18,7 @@
 
                     </h4>
                 </div>
-                <div >
+                <div>
                     @if ($loi != '')
                         <div class="text-danger p-2">{{ $loi }}</div>
                     @endif
@@ -26,7 +26,7 @@
                 <div class="card-body">
                     <form method="post" action="/Administrator/qlnghesi/suanghesi">
                         @csrf
-                        @method('put')
+                        
                         @foreach ($user as $us)
                             @if ($nghesi['id_nghesi_user'] == $us['id'])
                                 <input type="hidden" name="txttype" value="user" readonly>
@@ -49,7 +49,7 @@
                         </div>
                         <div class="my-3 text-center">
                             <input class="btn btn-primary" type="submit" value="Cập nhật">
-                            <a href="/Administrator/qltheloai" class="btn btn-warning">Không</a>
+                            <a href="/Administrator/qlnghesi" class="btn btn-warning">Không</a>
                             {{-- <input class="btn btn-warning"  type="reset" value="Không"> --}}
                         </div>
                     </form>

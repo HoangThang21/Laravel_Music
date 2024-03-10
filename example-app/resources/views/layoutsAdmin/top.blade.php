@@ -56,10 +56,10 @@
                                 nhạc</span>
                         </a>
                     </li>
-                    <li class="sidebar-item <?php if (strpos($_SERVER['REQUEST_URI'], 'qldanhmuc') != false) {
+                    <li class="sidebar-item <?php if (strpos($_SERVER['REQUEST_URI'], 'qlalbum') != false) {
                         echo 'active';
                     } ?>">
-                        <a class="sidebar-link " href="/Administrator/qldanhmuc">
+                        <a class="sidebar-link " href="/Administrator/qlalbum">
                             <i class="align-middle" data-feather="grid"></i> <span class="align-middle">Quản lý
                                 Album</span>
                         </a>

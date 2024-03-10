@@ -60,12 +60,36 @@ Route::post('/Administrator/qlnghesi/themns', [
 Route::put('/Administrator/qlnghesi/suanghesi', [
     AdminControllers::class, 'suanghesi'
 ]);
+Route::get('/Administrator/qlnghesi/xoanghesi&{id}', [
+    AdminControllers::class, 'destroy'
+]);
 Route::get('/Administrator/qlnghesi/{name}&{number}-{type}', [
-    AdminControllers::class, 'qlns'
+    AdminControllers::class, 'qlupdate'
 ]);
 Route::post('/Administrator/searchns', [AdminControllers::class, 'searchns']);
-//----------------------------------------------------------------
 
+//----------------------------------------------------------------
+//FormAlbum
+Route::get('/Administrator/qlalbum', [
+    AdminControllers::class, 'qlalbum'
+]);
+Route::get('/Administrator/qlalbum/themalbum', [
+    AdminControllers::class, 'themalbum'
+]);
+Route::post('/Administrator/qlalbum/themalb', [
+    AdminControllers::class, 'themalb'
+]);
+Route::put('/Administrator/qlalbum/suaalbum', [
+    AdminControllers::class, 'suaalbum'
+]);
+Route::get('/Administrator/qlalbum/xoaalbum&{id}', [
+    AdminControllers::class, 'destroy'
+]);
+Route::get('/Administrator/qlalbum/{name}&{number}-{type}', [
+    AdminControllers::class, 'qlupdate'
+]);
+
+//----------------------------------------------------------------
 
 Route::get('/', function () {
     return view('welcome');

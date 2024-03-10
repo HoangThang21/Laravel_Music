@@ -30,6 +30,7 @@
                     {{-- <input type="hidden" name="action" value="xlthem" > --}}
                     <input class="btn btn-primary" type="submit" value="Thêm">
                     <input class="btn btn-warning" type="reset" value="Hủy">
+                    <a href="/Administrator/qlnghesi" class="btn btn-warning">Không thêm</a>
                 </div>
             </form>
         </div>
