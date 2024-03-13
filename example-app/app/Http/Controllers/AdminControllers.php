@@ -612,9 +612,11 @@ class AdminControllers extends Controller
         ]);
         $idnghesibt = User::where('email', $request->input('optloains'))->pluck('id')->first();
         $idnghesiapi = UserAPI::where('email', $request->input('optloains'))->pluck('id')->first();
-        // dd($idnghesiapi->id, $idnghesibt);
+        // dd($idnghesiapi, $idnghesibt);
         if ($idnghesibt) {
-            $ktNghesia = Nghesi::where('id_nghesi_user', $idnghesibt)->first();
+            $ktNghesia = Nghesi::where('id_nghesi_user', $idnghesibt)
+
+                ->first();
 
             if ($ktNghesia) {
                 return view(
@@ -631,12 +633,30 @@ class AdminControllers extends Controller
                     ]
                 );
             } else {
-                $ns = new Nghesi();
-                $ns->tennghesi = $request->input('txtnghesi');
-                $ns->id_nghesi_user = $idnghesibt->id;
-                $ns->mota = $request->input('txtmota');
-                $ns->save();
-                return redirect()->intended('/Administrator/qlnghesi');
+                $ktNghesia = Nghesi::where('tennghesi', $request->input('txtnghesi'))
+                    ->first();
+                if ($ktNghesia) {
+                    return view(
+                        'Auth.qlnghesi.themnghesi',
+                        [
+                            'ttnguoidung' =>   Auth::guard('api')->user(),
+                            'user' =>  User::where('quyen', 4)->get(),
+                            'theloai' =>  Theloai::all(),
+                            'userapi' =>  UserAPI::where('quyen', 4)->get(),
+                            'nghesi' =>  Nghesi::all(),
+                            'contentFilter' => '0',
+                            'active' => '',
+                            'loi' => 'Tên: ' . $request->input('txtnghesi') . ' đã có, vui lòng chọn tên khác',
+                        ]
+                    );
+                } else {
+                    $ns = new Nghesi();
+                    $ns->tennghesi = $request->input('txtnghesi');
+                    $ns->id_nghesi_user = $idnghesibt;
+                    $ns->mota = $request->input('txtmota');
+                    $ns->save();
+                    return redirect()->intended('/Administrator/qlnghesi');
+                }
             }
         }
         if ($idnghesiapi) {
@@ -652,16 +672,34 @@ class AdminControllers extends Controller
                         'nghesi' =>  Nghesi::all(),
                         'contentFilter' => '0',
                         'active' => '',
-                        'loi' => 'Emai: ' . $request->input('optloains') . '. Đã là nghệ sĩ, vui lòng chọn Eamil khác.',
+                        'loi' => 'Tên: ' . $request->input('optloains') . '. Đã là nghệ sĩ, vui lòng chọn Eamil khác. ',
                     ]
                 );
             } else {
-                $ns = new Nghesi();
-                $ns->tennghesi = $request->input('txtnghesi');
-                $ns->idnghesi_userapi = $idnghesiapi->id;
-                $ns->mota = $request->input('txtmota');
-                $ns->save();
-                return redirect()->intended('/Administrator/qlnghesi');
+                $ktNghesia = Nghesi::where('tennghesi', $request->input('txtnghesi'))
+                    ->first();
+                if ($ktNghesia) {
+                    return view(
+                        'Auth.qlnghesi.themnghesi',
+                        [
+                            'ttnguoidung' =>   Auth::guard('api')->user(),
+                            'user' =>  User::where('quyen', 4)->get(),
+                            'theloai' =>  Theloai::all(),
+                            'userapi' =>  UserAPI::where('quyen', 4)->get(),
+                            'nghesi' =>  Nghesi::all(),
+                            'contentFilter' => '0',
+                            'active' => '',
+                            'loi' => 'Tên: ' . $request->input('txtnghesi') . ' đã có, vui lòng chọn tên khác',
+                        ]
+                    );
+                } else {
+                    $ns = new Nghesi();
+                    $ns->tennghesi = $request->input('txtnghesi');
+                    $ns->idnghesi_userapi = $idnghesiapi;
+                    $ns->mota = $request->input('txtmota');
+                    $ns->save();
+                    return redirect()->intended('/Administrator/qlnghesi');
+                }
             }
         }
     }
@@ -743,7 +781,7 @@ class AdminControllers extends Controller
                 if ($cn == 'fillter' && $name == 'nv') {
 
                     try {
-                        if ($checkquyen != 2) {
+                        if ($checkquyen->quyen == 1) {
                             $searchUser = User::where('quyen', 2)
                                 ->get();
                             if (Auth::guard('api')->check()) {
@@ -753,6 +791,8 @@ class AdminControllers extends Controller
                                         'ttnguoidung' =>   Auth::guard('api')->user(),
                                         'user' => $searchUser,
                                         'userapi' =>  [],
+                                        'usercount' =>  $searchUser->count(),
+                                        'userapicount' =>  0,
                                         'contentFilter' => '1',
                                         'active' => '0',
                                     ]
@@ -779,6 +819,8 @@ class AdminControllers extends Controller
                                     'ttnguoidung' =>   Auth::guard('api')->user(),
                                     'user' =>   $searchUser,
                                     'userapi' =>  $searchUser2,
+                                    'usercount' =>  $searchUser->count(),
+                                    'userapicount' =>  $searchUser2->count(),
                                     'contentFilter' => '2',
                                     'active' => '0',
                                 ]
@@ -801,6 +843,8 @@ class AdminControllers extends Controller
                                     'ttnguoidung' =>   Auth::guard('api')->user(),
                                     'user' =>   $searchUser,
                                     'userapi' =>  $searchUser2,
+                                    'usercount' =>  $searchUser->count(),
+                                    'userapicount' =>  $searchUser2->count(),
                                     'contentFilter' => '3',
                                     'active' => '0',
                                 ]
@@ -866,15 +910,27 @@ class AdminControllers extends Controller
             );
         }
         if ($name == 'xemalbum') {
+            $xemalbum = Album::where('id', $number)->first();
+            $nsxemalbum = Nghesi::where('id', $xemalbum->nghesi_idalbum)->first();
+            $tlxemalbum=Theloai::where('id',$xemalbum->theloai_idalbum )->first();
+            $nhacxemalbum= Nhac::where('album_idnhac',$number)->get();
+          
+            if($nsxemalbum->id_nghesi_user>0){
+                $usxemalbum=User::where('id',$nsxemalbum->id_nghesi_user)->first();
+            }
+            if($nsxemalbum->idnghesi_userapi>0){
+                $usxemalbum=UserAPI::where('id',$nsxemalbum->idnghesi_userapi)->first();
+            }
+            // dd($nsxemalbum->id_nghesi_user,$nsxemalbum->idnghesi_userapi,$usxemalbum);
             return view(
                 'Auth.qlalbum.xemalbum',
                 [
                     'ttnguoidung' =>   Auth::guard('api')->user(),
-
-                    'theloai' =>  Theloai::all(),
-                    'nhac' => Nhac::all(),
-                    'nghesi' =>  Nghesi::all(),
-                    'album' =>  Album::where('id', $number)->first(),
+                    'user'=>$usxemalbum,
+                    'theloai' =>   $tlxemalbum,
+                    'nhac' =>  $nhacxemalbum,
+                    'nghesi' =>  $nsxemalbum,
+                    'album' =>   $xemalbum,
                     'contentFilter' => '0',
                     'active' => '',
                     'loi' => '',

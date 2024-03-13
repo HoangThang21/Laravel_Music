@@ -245,25 +245,33 @@ li {
 }
 .infofilter .optionFilter {
     position: absolute;
-    bottom: -110px;
+
+    bottom: -124px;
     z-index: 99;
     display: none;
 }
 .infofilter .optionFilter ul {
-    margin-top: 10px;
+    margin: 10px 0;
+    width: 155px;
+    padding: 4px 0;
     display: flex;
     flex-direction: column;
 }
-.infofilter .optionFilter ul li {
+.infofilter .optionFilter ul a {
+    list-style-type: none;
+    text-decoration: none;
+    padding: 4px 10px;
     cursor: pointer;
     background-color: #ffffff;
-    width: 109px;
+
+    /* width: 109px; */
     box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.04);
-    padding: 2px 8px;
-    border-radius: 6px;
+    /* padding: 2px 8px; */
+    border-radius: 8px;
 }
 
-.infofilter .optionFilter ul li:hover {
+
+.infofilter .optionFilter ul a:hover {
     background-color: #f1f0f0;
 }
 /* end infouser search */
@@ -321,3 +329,36 @@ li {
     width: 18px;
     height: 18px;
 }
+/* xem album */
+.infoxemalbum{
+    display: flex;
+    gap: 30px;
+    align-items: center;
+}
+.imgxemalbum{
+    /* width: 200px;
+    height: 200px; */
+}
+.imgxemalbum img{
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    padding: 2px;
+    border: 1px solid #000;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+}
+.infotext{
+    display: flex;
+    flex-direction: column;
+}
+.namexemalbum{
+    font-size: 24px;
+    font-weight: 600;
+
+}
+.emailnsxemalbum{
+    color: #a5a5a5;
+
+}
+/* --------------------------- */

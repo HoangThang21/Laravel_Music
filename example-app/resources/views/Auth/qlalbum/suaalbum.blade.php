@@ -62,7 +62,7 @@
 
                         <div class="my-3 text-center">
                             <input class="btn btn-primary" type="submit" value="Cập nhật">
-                            <a href="/Administrator/qltheloai" class="btn btn-warning">Không</a>
+                            <a href="/Administrator/qlalbum" class="btn btn-warning">Không</a>
                             {{-- <input class="btn btn-warning"  type="reset" value="Không"> --}}
                         </div>
                     </form>
