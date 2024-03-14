@@ -1,5 +1,5 @@
-@include('layouts.top')
-		@if (Auth::guard('web')->check())
+@include('layoutsAdmin.top')
+		@if (Auth::guard('api')->check())
         <div>
             <h3>Sửa nhạc</h3>
             <div>
@@ -50,4 +50,4 @@
           
           </div>
 		@endif
-@include('layouts.bottom')
+@include('layoutsAdmin.bottom')

@@ -447,6 +447,23 @@ class AdminControllers extends Controller
             ]
         );
     }
+    public function qlnhac()
+    {
+        return view(
+            'Auth.qlnhac.home',
+            [
+                'ttnguoidung' =>   Auth::guard('api')->user(),
+                'user' =>  User::all(),
+                'theloai' =>  Theloai::all(),
+                'userapi' =>  UserAPI::all(),
+                'nghesi' =>  Nghesi::all(),
+                'album' =>  Album::all(),
+                'nhac'=>Nhac::all(),
+                'contentFilter' => '0',
+                'active' => '',
+            ]
+        );
+    }
     public function themnghesi()
     {
         return view(
@@ -912,25 +929,28 @@ class AdminControllers extends Controller
         if ($name == 'xemalbum') {
             $xemalbum = Album::where('id', $number)->first();
             $nsxemalbum = Nghesi::where('id', $xemalbum->nghesi_idalbum)->first();
-            $tlxemalbum=Theloai::where('id',$xemalbum->theloai_idalbum )->first();
-            $nhacxemalbum= Nhac::where('album_idnhac',$number)->get();
-          
-            if($nsxemalbum->id_nghesi_user>0){
-                $usxemalbum=User::where('id',$nsxemalbum->id_nghesi_user)->first();
+            $tlxemalbum = Theloai::where('id', $xemalbum->theloai_idalbum)->first();
+            $nhacxemalbum = Nhac::where('album_idnhac', $number)->get();
+
+            if ($nsxemalbum->id_nghesi_user > 0) {
+                $usxemalbum = User::where('id', $nsxemalbum->id_nghesi_user)->first();
             }
-            if($nsxemalbum->idnghesi_userapi>0){
-                $usxemalbum=UserAPI::where('id',$nsxemalbum->idnghesi_userapi)->first();
+            if ($nsxemalbum->idnghesi_userapi > 0) {
+                $usxemalbum = UserAPI::where('id', $nsxemalbum->idnghesi_userapi)->first();
             }
-            // dd($nsxemalbum->id_nghesi_user,$nsxemalbum->idnghesi_userapi,$usxemalbum);
+            $albumgoiy = Album::where('nghesi_idalbum', '=', $xemalbum->nghesi_idalbum)
+                ->where('id', '!=', Album::where('id', '=', $number)->pluck('id'))->get();
+            // dd($albumgoiy);
             return view(
                 'Auth.qlalbum.xemalbum',
                 [
                     'ttnguoidung' =>   Auth::guard('api')->user(),
-                    'user'=>$usxemalbum,
+                    'user' => $usxemalbum,
                     'theloai' =>   $tlxemalbum,
                     'nhac' =>  $nhacxemalbum,
                     'nghesi' =>  $nsxemalbum,
                     'album' =>   $xemalbum,
+                    'albumgoiy' =>   $albumgoiy,
                     'contentFilter' => '0',
                     'active' => '',
                     'loi' => '',

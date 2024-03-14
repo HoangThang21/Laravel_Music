@@ -48,10 +48,10 @@
                     <li class="sidebar-header text-info">
                         DANH MỤC
                     </li>
-                    <li class="sidebar-item <?php if (strpos($_SERVER['REQUEST_URI'], 'qlthanhtoan') != false) {
+                    <li class="sidebar-item <?php if (strpos($_SERVER['REQUEST_URI'], 'qlnhac') != false) {
                         echo 'active';
                     } ?>">
-                        <a class="sidebar-link" href="/Administrator/qlthanhtoan">
+                        <a class="sidebar-link" href="/Administrator/qlnhac">
                             <i class="align-middle" data-feather="grid"></i> <span class="align-middle">Quản lý
                                 nhạc</span>
                         </a>

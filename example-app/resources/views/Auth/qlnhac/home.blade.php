@@ -1,5 +1,5 @@
-@include('layouts.top')
-		@if (Auth::guard('web')->check())
+@include('layoutsAdmin.top')
+		@if (Auth::guard('api')->check())
         <div>
             <h3>Nhạc</h3>
             <div><a class="btn btn-primary" href="/Administrator/qlnhac/themnhac"><span class="glyphicon glyphicon-plus"></span> Thêm nhạc</a></div>
@@ -44,4 +44,4 @@
           
           </div>
 		@endif
-@include('layouts.bottom')
+@include('layoutsAdmin.bottom')

@@ -90,9 +90,10 @@ Route::get('/Administrator/qlalbum/{name}&{number}-{type}', [
 ]);
 
 //----------------------------------------------------------------
-Route::post('/Administrator/music', [AdminControllers::class, 'music']);
+//Form nhac
+Route::get('/Administrator/qlnhac', [AdminControllers::class, 'qlnhac']);
+//----------------------------------------------------------------
+Route::get('/Administrator/{id}', [AdminControllers::class, 'edit']);
 Route::get('/', function () {
     return view('welcome');
 });
-
-Route::get('/Administrator/{id}', [AdminControllers::class, 'edit']);
