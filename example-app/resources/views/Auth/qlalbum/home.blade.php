@@ -2,9 +2,37 @@
 @if (Auth::guard('api')->check())
     <div>
         <h3>Album</h3>
-        <div><a class="btn btn-primary" href="/Administrator/qlalbum/themalbum"><span
-                    class="glyphicon glyphicon-plus"></span> Thêm album</a></div>
+        <div class="infofilter">
+            <div><a class="btn btn-primary" href="/Administrator/qlalbum/themalbum"><span
+                        class="glyphicon glyphicon-plus"></span> Thêm album</a></div>
+            <form action="/Administrator/searchal?=" method="post" id="searchForm">
+                @csrf
+                <div class="searchbar">
+                    <div class="searchbar-wrapper">
 
+
+                        <div class="searchbar-center">
+                            <div class="searchbar-input-spacer"></div>
+
+                            <input type="text"name='searchbar_input' class="searchbar-input" maxlength="2048"
+                                @if ($searchbarinput) value="{{ $searchbarinput }}"
+                                    @else
+                                    placeholder="Tìm kiếm tên nghệ sĩ hoặc email" @endif>
+
+                        </div>
+                        <div class="searchbar-left">
+                            <div class="delete-icon-wrapper">
+                                <i class="bi bi-x-lg"></i>
+                            </div>|
+                            <div class="search-icon-wrapper">
+
+                                <div class="searchicon" id="searchButton"><i class="bi bi-search"></i></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
         <br>
 
         <!-- Danh sách người dùng -->

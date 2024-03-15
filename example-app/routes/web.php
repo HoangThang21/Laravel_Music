@@ -88,6 +88,7 @@ Route::get('/Administrator/qlalbum/xoaalbum&{id}', [
 Route::get('/Administrator/qlalbum/{name}&{number}-{type}', [
     AdminControllers::class, 'qlupdate'
 ]);
+Route::post('/Administrator/searchal', [AdminControllers::class, 'searchal']);
 
 //----------------------------------------------------------------
 //Form nhac

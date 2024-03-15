@@ -35,6 +35,7 @@ class AdminControllers extends Controller
                     'userapi' =>  UserAPI::all(),
                     'usercount' =>  User::all()->count(),
                     'userapicount' =>  UserAPI::all()->count(),
+                    'searchbarinput'=>'',
                     'contentFilter' => '0',
                     'active' => '0',
                 ]
@@ -233,6 +234,8 @@ class AdminControllers extends Controller
                         'userapi' =>  $searchUser2,
                         'usercount' =>   $searchUser->count(),
                         'userapicount' =>  $searchUser2->count(),
+                        'searchbarinput' => $request->searchbar_input,
+
                         'contentFilter' => '0',
                         'active' => '0',
                     ]
@@ -283,12 +286,74 @@ class AdminControllers extends Controller
                     'userapi' =>  UserAPI::all(),
                     'nghesi' =>  $searchns,
                     'nghesiapi' =>  $searchnsapi,
+                    'searchbarinput' => $request->searchbar_input,
                     'contentFilter' => '0',
                     'active' => '',
                 ]
             );
         } catch (Exception $e) {
         }
+    }
+    public function searchal(Request $request)
+    {
+
+        // try {
+
+            if ($request->searchbar_input == '') {
+               return redirect()->intended('/Administrator/qlalbum');
+            } else {
+                $nghesisr=Nghesi::where('tennghesi', 'like', '%' . $request->searchbar_input . '%')->first() ;
+                $theloaisr=Theloai::where('tentheloai', 'like', '%' . $request->searchbar_input . '%')->first() ;
+                if( $nghesisr&&$theloaisr){
+                    $albumsearch=Album::where('tenalbum', 'like', '%' . $request->searchbar_input . '%')
+                    ->orWhere('namphathanh', 'like', '%' . $request->searchbar_input . '%')
+                    ->orWhere('nghesi_idalbum', 'like', '%' . $nghesisr->id. '%')
+                    ->orWhere('theloai_idalbum', 'like', '%' . $theloaisr->id  . '%')
+                ->get();
+                }
+                elseif($nghesisr){
+                    $albumsearch=Album::where('tenalbum', 'like', '%' . $request->searchbar_input . '%')
+                    ->orWhere('namphathanh', 'like', '%' . $request->searchbar_input . '%')
+                    ->orWhere('nghesi_idalbum', 'like', '%' . $nghesisr->id. '%')
+                    
+                ->get();
+                }
+                elseif($theloaisr){
+                    $albumsearch=Album::where('tenalbum', 'like', '%' . $request->searchbar_input . '%')
+                    ->orWhere('namphathanh', 'like', '%' . $request->searchbar_input . '%')
+                   
+                    ->orWhere('theloai_idalbum', 'like', '%' . $theloaisr->id  . '%')
+                ->get();
+                }
+                else{
+                    $albumsearch=Album::where('tenalbum', 'like', '%' . $request->searchbar_input . '%')
+                    ->orWhere('namphathanh', 'like', '%' . $request->searchbar_input . '%')
+                  
+                   
+                ->get();
+                }
+                // dd($nghesisr,"-",$theloaisr);
+               
+               
+                return view( 'Auth.qlalbum.home',
+            [
+                'ttnguoidung' =>   Auth::guard('api')->user(),
+                'user' =>  User::all(),
+                'theloai' =>  Theloai::all(),
+                'userapi' =>  UserAPI::all(),
+                'nghesi' =>  Nghesi::all(),
+                'album' =>  $albumsearch,
+                'nghesiapi' =>  [],
+                'searchbarinput'=>'',
+                'contentFilter' => '0',
+                'active' => '',
+            ]);
+       
+            }
+
+           
+        // } catch (Exception $e) {
+        // }
     }
     public function suand(Request $request)
     {
@@ -425,6 +490,7 @@ class AdminControllers extends Controller
                 'userapi' =>  UserAPI::all(),
                 'nghesi' =>  Nghesi::all(),
                 'nghesiapi' =>  [],
+                'searchbarinput'=>'',
                 'contentFilter' => '0',
                 'active' => '',
             ]
@@ -442,6 +508,7 @@ class AdminControllers extends Controller
                 'nghesi' =>  Nghesi::all(),
                 'album' =>  Album::all(),
                 'nghesiapi' =>  [],
+                'searchbarinput'=>'',
                 'contentFilter' => '0',
                 'active' => '',
             ]
@@ -458,7 +525,8 @@ class AdminControllers extends Controller
                 'userapi' =>  UserAPI::all(),
                 'nghesi' =>  Nghesi::all(),
                 'album' =>  Album::all(),
-                'nhac'=>Nhac::all(),
+                'nhac' => Nhac::all(),
+                'searchbarinput'=>'',
                 'contentFilter' => '0',
                 'active' => '',
             ]
@@ -810,6 +878,7 @@ class AdminControllers extends Controller
                                         'userapi' =>  [],
                                         'usercount' =>  $searchUser->count(),
                                         'userapicount' =>  0,
+                                        'searchbarinput'=>'',
                                         'contentFilter' => '1',
                                         'active' => '0',
                                     ]
@@ -838,6 +907,7 @@ class AdminControllers extends Controller
                                     'userapi' =>  $searchUser2,
                                     'usercount' =>  $searchUser->count(),
                                     'userapicount' =>  $searchUser2->count(),
+                                    'searchbarinput'=>'',
                                     'contentFilter' => '2',
                                     'active' => '0',
                                 ]
@@ -862,6 +932,7 @@ class AdminControllers extends Controller
                                     'userapi' =>  $searchUser2,
                                     'usercount' =>  $searchUser->count(),
                                     'userapicount' =>  $searchUser2->count(),
+                                    'searchbarinput'=>'',
                                     'contentFilter' => '3',
                                     'active' => '0',
                                 ]

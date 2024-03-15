@@ -44,7 +44,9 @@
                         <div class="searchbar-input-spacer"></div>
 
                         <input type="text"name='searchbar_input' class="searchbar-input" maxlength="2048"
-                            placeholder="Tìm kiếm tên người dùng hoặc email">
+                            @if ($searchbarinput) value="{{ $searchbarinput }}"
+                        @else
+                        placeholder="Tìm kiếm tên người dùng hoặc email" @endif>
                     </div>
                     <div class="searchbar-left">
                         <div class="delete-icon-wrapper">

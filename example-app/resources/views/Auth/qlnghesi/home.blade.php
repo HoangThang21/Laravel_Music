@@ -19,7 +19,10 @@
                                 <div class="searchbar-input-spacer"></div>
 
                                 <input type="text"name='searchbar_input' class="searchbar-input" maxlength="2048"
-                                    placeholder="Tìm kiếm tên nghệ sĩ hoặc email">
+                                    @if ($searchbarinput) value="{{ $searchbarinput }}"
+                                @else
+                                placeholder="Tìm kiếm tên nghệ sĩ hoặc email" @endif>
+                                
                             </div>
                             <div class="searchbar-left">
                                 <div class="delete-icon-wrapper">
@@ -53,7 +56,7 @@
                 @if ($us['quyen'] == 4)
                     @if ($nd['id_nghesi_user'] == $us['id'])
                         <tr>
-                            
+
                             <td><img width="50" height="50" src="../../images/{{ $us['image'] }}"
                                     alt="">
                             </td>
@@ -76,7 +79,7 @@
                 @if ($us['quyen'] == 4)
                     @if ($nd['idnghesi_userapi'] == $us['id'])
                         <tr>
-                           
+
                             <td><img width="50" height="50" src="../../images/{{ $us['image'] }}"
                                     alt="">
                             </td>

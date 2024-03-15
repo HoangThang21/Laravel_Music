@@ -20,6 +20,7 @@ return new class extends Migration
             $table->integer('luotdownload')->default(0);
             $table->timestamps();
             $table->unsignedInteger('album_idnhac');
+            $table->integer('xetduyet')->default(0);
         });
     }
 
