@@ -23,26 +23,58 @@ class AdminControllers extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function sendmail(Request $request){ 
-        $email=$request->input('txtemail');
-        $body=$request->input('txtmota');
+    public function sendmail(Request $request)
+    {
+        $request->validate([
+            'txtemail' => ['required'],
+            'txtmota' => ['required'],
+
+        ]);
+        $ktemail = User::where('email', $request->input('txtemail'))->first();
+        $ktemailgg = UserAPI::where('email', $request->input('txtemail'))->first();
+        $email = $request->input('txtemail');
+        $body = $request->input('txtmota');
+        // dd($body);
+        $url = 'Mail.contactEmail';
+        if ($ktemail) {
+            Mail::to($email)->send(new ContactEmail($email, $body, $url));
+            return view(
+                'Auth.index',
+                [
+                    'ttnguoidung' =>   Auth::guard('api')->user(),
+                    'user' =>  User::all(),
+                    'userapi' =>  UserAPI::all(),
+                    'usercount' =>  User::all()->count(),
+                    'userapicount' =>  UserAPI::all()->count(),
+                    'searchbarinput' => '',
+                    'contentFilter' => '0',
+                    'active' => '0',
+                    'suc' => "Đã gửi email thành công",
+                ]
+            );
+        }
+        if ($ktemailgg) {
+            Mail::to($email)->send(new ContactEmail($email, $body, $url));
+            return view(
+                'Auth.index',
+                [
+                    'ttnguoidung' =>   Auth::guard('api')->user(),
+                    'user' =>  User::all(),
+                    'userapi' =>  UserAPI::all(),
+                    'usercount' =>  User::all()->count(),
+                    'userapicount' =>  UserAPI::all()->count(),
+                    'searchbarinput' => '',
+                    'contentFilter' => '0',
+                    'active' => '0',
+                    'suc' => "Đã gửi email thành công",
+                ]
+            );
+        }
+
+
         // dd($email,$body);
-        Mail::to($email)->send(new ContactEmail( $email,$body));
-        return view(
-            'Auth.index',
-            [
-                'ttnguoidung' =>   Auth::guard('api')->user(),
-                'user' =>  User::all(),
-                'userapi' =>  UserAPI::all(),
-                'usercount' =>  User::all()->count(),
-                'userapicount' =>  UserAPI::all()->count(),
-                'searchbarinput' => '',
-                'contentFilter' => '0',
-                'active' => '0',
-                'suc'=>"Đã gửi email thành công",
-            ]
-        );
-     
+
+
     }
     public function index()
     {
@@ -60,7 +92,7 @@ class AdminControllers extends Controller
                     'searchbarinput' => '',
                     'contentFilter' => '0',
                     'active' => '0',
-                    'suc'=>"",
+                    'suc' => "",
                 ]
             );
         } else {
@@ -258,7 +290,7 @@ class AdminControllers extends Controller
                         'usercount' =>   $searchUser->count(),
                         'userapicount' =>  $searchUser2->count(),
                         'searchbarinput' => $request->searchbar_input,
-                        'suc'=>"",
+                        'suc' => "",
                         'contentFilter' => '0',
                         'active' => '0',
                     ]
@@ -923,7 +955,7 @@ class AdminControllers extends Controller
                             'user' =>    $user,
                             'userbt' =>    '',
                             'contentFilter' => '0',
-                            'suc'=>"",
+                            'loi' => "",
                             'active' => '0',
                         ]
                     );
@@ -939,7 +971,7 @@ class AdminControllers extends Controller
                             'user' =>    $user,
                             'userbt' =>    '',
                             'contentFilter' => '0',
-                            'suc'=>"",
+                            'loi' => "",
                             'active' => '0',
                         ]
                     );
@@ -966,7 +998,7 @@ class AdminControllers extends Controller
                                         'userapicount' =>  0,
                                         'searchbarinput' => '',
                                         'contentFilter' => '1',
-                                        'active' => '0','suc'=>"",
+                                        'active' => '0', 'suc' => "",
                                     ]
                                 );
                             }
@@ -1020,7 +1052,7 @@ class AdminControllers extends Controller
                                     'userapicount' =>  $searchUser2->count(),
                                     'searchbarinput' => '',
                                     'contentFilter' => '3',
-                                    'active' => '0','suc'=>"",
+                                    'active' => '0', 'suc' => "",
                                 ]
                             );
                         }
@@ -1116,26 +1148,26 @@ class AdminControllers extends Controller
         }
         if ($name == 'suanhac') {
             $music = Nhac::where('id', $number)->first();
-            $ns=Nghesi::all();
+            $ns = Nghesi::all();
             return view('Auth.qlnhac.suamusic', [
-            'ttnguoidung' =>  Auth::guard('api')->user(), 
-            'album' => Album::all(), 
-            'music' => $music,
-            'nghesi' =>  $ns,
-            'active' => '',
-            'loi' => '',
-            'contentFilter' => '0',
+                'ttnguoidung' =>  Auth::guard('api')->user(),
+                'album' => Album::all(),
+                'music' => $music,
+                'nghesi' =>  $ns,
+                'active' => '',
+                'loi' => '',
+                'contentFilter' => '0',
             ]);
         }
         if ($name == 'duyetmusic') {
-            if($type=='albc'){
-                $nhac= Nhac::where('id',$number)->update([
-                    'xetduyet'=>1
+            if ($type == 'albc') {
+                $nhac = Nhac::where('id', $number)->update([
+                    'xetduyet' => 1
                 ]);
             }
-            if($type=='albd'){
-                $nhac= Nhac::where('id',$number)->update([
-                    'xetduyet'=>0
+            if ($type == 'albd') {
+                $nhac = Nhac::where('id', $number)->update([
+                    'xetduyet' => 0
                 ]);
             }
             return redirect()->intended('/Administrator/qlnhac');

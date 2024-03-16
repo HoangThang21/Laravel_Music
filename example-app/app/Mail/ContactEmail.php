@@ -14,13 +14,15 @@ class ContactEmail extends Mailable
     use Queueable, SerializesModels;
     public $emailus;
     public $noidung;
+    public $duongdan;
     /**
      * Create a new message instance.
      */
-    public function __construct( $email,$body)
+    public function __construct( $email,$body,$url)
     {
         $this->noidung=$body;
         $this->emailus=$email;
+        $this->duongdan=$url;
     }
 
     /**
@@ -39,7 +41,7 @@ class ContactEmail extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'Mail.contactEmail',
+            view: $this->duongdan,
         );
     }
 

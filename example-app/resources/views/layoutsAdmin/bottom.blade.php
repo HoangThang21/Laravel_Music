@@ -24,7 +24,7 @@
 <script src="../../inc/js/indexAdmin.js"></script>
 <script src="https://cdn.ckeditor.com/ckeditor5/40.0.0/classic/ckeditor.js"></script>
 <script src="../../inc/js/app.js"></script>
-</script>
+
 @if (Auth::guard('api')->check())
     <script>
         var csrfToken = ` {{ csrf_token() }}`;
@@ -32,6 +32,31 @@
     </script>
 @endif
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script src="../../editor/tinymce/tinymce.min.js"></script>
+
+<script>
+    tinymce.init({
+        selector: 'textarea#default',
+        width: 1000,
+        height: 300,
+        plugins: [
+            'advlist', 'autolink', 'link', 'image', 'lists', 'charmap', 'preview', 'anchor', 'pagebreak',
+            'searchreplace', 'wordcount', 'visualblocks', 'code', 'fullscreen', 'insertdatetime', 'media',
+            'table', 'emoticons', 'template', 'codesample'
+        ],
+        toolbar: 'undo redo | styles | bold italic underline | alignleft aligncenter alignright alignjustify |' +
+            'bullist numlist outdent indent | link image | print preview media fullscreen | ' +
+            'forecolor backcolor emoticons',
+        menu: {
+            favs: {
+                title: 'menu',
+                items: 'code visualaid | searchreplace | emoticons'
+            }
+        },
+        menubar: 'favs file edit view insert format tools table',
+        content_style: 'body{font-family:Helvetica,Arial,sans-serif; font-size:16px}'
+    });
+</script>
 </body>
 
 </html>

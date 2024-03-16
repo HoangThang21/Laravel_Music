@@ -8,12 +8,16 @@
     <title>Admin Music</title>
     <link href="../../inc/css/app.css" rel="stylesheet">
     <link href="../../inc/css/indexAdmin.css" rel="stylesheet">
+    <link href="../../inc/bs5/summernote-bs5.css" rel="stylesheet">
     <link rel="shortcut icon" href="../../images/webicon.png" type="image/png">
 
 
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
+    {{--  --}}
+ 
+    
 
 </head>
 
