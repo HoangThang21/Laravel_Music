@@ -1,7 +1,7 @@
 @include('layoutsAdmin.top')
 @if (Auth::guard('api')->check())
     <div>
-        <h3>Thêm nghệ sĩ</h3>
+        <h3>Gửi email</h3>
         <div>
             <form method="post" action="/Administrator/sendmail" enctype="multipart/form-data">
                 @csrf
@@ -15,7 +15,7 @@
                     <textarea name="txtmota" id="" cols="30" rows="10" class="w-100">
                         Mật khẩu của bạn là :
                     </textarea> --}}
-                    <textarea id="default" name="txtmota" class="editor">
+                    <textarea id="default" name="txtmota" class="editor" cols="30" rows="10">
                         
                     </textarea>
                 </div>
