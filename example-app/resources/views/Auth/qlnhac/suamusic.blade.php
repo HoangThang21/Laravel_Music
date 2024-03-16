@@ -22,6 +22,7 @@
                 <div class="my-3">
                     <label>Chọn tên album</label>
                     <select class="form-control" name="optloains">
+                      
                         @foreach ($album as $ns)
                         @if ($ns->id==$music->album_idnhac)
                           <option value="{{ $ns->id }}">{{ $ns->tenalbum }}</option>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\ContactEmail;
 use App\Models\Album;
 use App\Models\Nghesi;
 use App\Models\Nhac;
@@ -14,6 +15,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Mail;
 use PhpParser\Node\Stmt\TryCatch;
 
 class AdminControllers extends Controller
@@ -21,7 +23,27 @@ class AdminControllers extends Controller
     /**
      * Display a listing of the resource.
      */
-
+    public function sendmail(Request $request){ 
+        $email=$request->input('txtemail');
+        $body=$request->input('txtmota');
+        // dd($email,$body);
+        Mail::to($email)->send(new ContactEmail( $email,$body));
+        return view(
+            'Auth.index',
+            [
+                'ttnguoidung' =>   Auth::guard('api')->user(),
+                'user' =>  User::all(),
+                'userapi' =>  UserAPI::all(),
+                'usercount' =>  User::all()->count(),
+                'userapicount' =>  UserAPI::all()->count(),
+                'searchbarinput' => '',
+                'contentFilter' => '0',
+                'active' => '0',
+                'suc'=>"Đã gửi email thành công",
+            ]
+        );
+     
+    }
     public function index()
     {
 
@@ -35,9 +57,10 @@ class AdminControllers extends Controller
                     'userapi' =>  UserAPI::all(),
                     'usercount' =>  User::all()->count(),
                     'userapicount' =>  UserAPI::all()->count(),
-                    'searchbarinput'=>'',
+                    'searchbarinput' => '',
                     'contentFilter' => '0',
                     'active' => '0',
+                    'suc'=>"",
                 ]
             );
         } else {
@@ -235,7 +258,7 @@ class AdminControllers extends Controller
                         'usercount' =>   $searchUser->count(),
                         'userapicount' =>  $searchUser2->count(),
                         'searchbarinput' => $request->searchbar_input,
-
+                        'suc'=>"",
                         'contentFilter' => '0',
                         'active' => '0',
                     ]
@@ -299,59 +322,57 @@ class AdminControllers extends Controller
 
         // try {
 
-            if ($request->searchbar_input == '') {
-               return redirect()->intended('/Administrator/qlalbum');
-            } else {
-                $nghesisr=Nghesi::where('tennghesi', 'like', '%' . $request->searchbar_input . '%')->first() ;
-                $theloaisr=Theloai::where('tentheloai', 'like', '%' . $request->searchbar_input . '%')->first() ;
-                if( $nghesisr&&$theloaisr){
-                    $albumsearch=Album::where('tenalbum', 'like', '%' . $request->searchbar_input . '%')
+        if ($request->searchbar_input == '') {
+            return redirect()->intended('/Administrator/qlalbum');
+        } else {
+            $nghesisr = Nghesi::where('tennghesi', 'like', '%' . $request->searchbar_input . '%')->first();
+            $theloaisr = Theloai::where('tentheloai', 'like', '%' . $request->searchbar_input . '%')->first();
+            if ($nghesisr && $theloaisr) {
+                $albumsearch = Album::where('tenalbum', 'like', '%' . $request->searchbar_input . '%')
                     ->orWhere('namphathanh', 'like', '%' . $request->searchbar_input . '%')
-                    ->orWhere('nghesi_idalbum', 'like', '%' . $nghesisr->id. '%')
+                    ->orWhere('nghesi_idalbum', 'like', '%' . $nghesisr->id . '%')
                     ->orWhere('theloai_idalbum', 'like', '%' . $theloaisr->id  . '%')
-                ->get();
-                }
-                elseif($nghesisr){
-                    $albumsearch=Album::where('tenalbum', 'like', '%' . $request->searchbar_input . '%')
+                    ->get();
+            } elseif ($nghesisr) {
+                $albumsearch = Album::where('tenalbum', 'like', '%' . $request->searchbar_input . '%')
                     ->orWhere('namphathanh', 'like', '%' . $request->searchbar_input . '%')
-                    ->orWhere('nghesi_idalbum', 'like', '%' . $nghesisr->id. '%')
-                    
-                ->get();
-                }
-                elseif($theloaisr){
-                    $albumsearch=Album::where('tenalbum', 'like', '%' . $request->searchbar_input . '%')
-                    ->orWhere('namphathanh', 'like', '%' . $request->searchbar_input . '%')
-                   
-                    ->orWhere('theloai_idalbum', 'like', '%' . $theloaisr->id  . '%')
-                ->get();
-                }
-                else{
-                    $albumsearch=Album::where('tenalbum', 'like', '%' . $request->searchbar_input . '%')
-                    ->orWhere('namphathanh', 'like', '%' . $request->searchbar_input . '%')
-                  
-                   
-                ->get();
-                }
-                // dd($nghesisr,"-",$theloaisr);
-               
-               
-                return view( 'Auth.qlalbum.home',
-            [
-                'ttnguoidung' =>   Auth::guard('api')->user(),
-                'user' =>  User::all(),
-                'theloai' =>  Theloai::all(),
-                'userapi' =>  UserAPI::all(),
-                'nghesi' =>  Nghesi::all(),
-                'album' =>  $albumsearch,
-                'nghesiapi' =>  [],
-                'searchbarinput'=>'',
-                'contentFilter' => '0',
-                'active' => '',
-            ]);
-       
-            }
+                    ->orWhere('nghesi_idalbum', 'like', '%' . $nghesisr->id . '%')
 
-           
+                    ->get();
+            } elseif ($theloaisr) {
+                $albumsearch = Album::where('tenalbum', 'like', '%' . $request->searchbar_input . '%')
+                    ->orWhere('namphathanh', 'like', '%' . $request->searchbar_input . '%')
+
+                    ->orWhere('theloai_idalbum', 'like', '%' . $theloaisr->id  . '%')
+                    ->get();
+            } else {
+                $albumsearch = Album::where('tenalbum', 'like', '%' . $request->searchbar_input . '%')
+                    ->orWhere('namphathanh', 'like', '%' . $request->searchbar_input . '%')
+
+
+                    ->get();
+            }
+            // dd($nghesisr,"-",$theloaisr);
+
+
+            return view(
+                'Auth.qlalbum.home',
+                [
+                    'ttnguoidung' =>   Auth::guard('api')->user(),
+                    'user' =>  User::all(),
+                    'theloai' =>  Theloai::all(),
+                    'userapi' =>  UserAPI::all(),
+                    'nghesi' =>  Nghesi::all(),
+                    'album' =>  $albumsearch,
+                    'nghesiapi' =>  [],
+                    'searchbarinput' => '',
+                    'contentFilter' => '0',
+                    'active' => '',
+                ]
+            );
+        }
+
+
         // } catch (Exception $e) {
         // }
     }
@@ -490,7 +511,7 @@ class AdminControllers extends Controller
                 'userapi' =>  UserAPI::all(),
                 'nghesi' =>  Nghesi::all(),
                 'nghesiapi' =>  [],
-                'searchbarinput'=>'',
+                'searchbarinput' => '',
                 'contentFilter' => '0',
                 'active' => '',
             ]
@@ -508,7 +529,7 @@ class AdminControllers extends Controller
                 'nghesi' =>  Nghesi::all(),
                 'album' =>  Album::all(),
                 'nghesiapi' =>  [],
-                'searchbarinput'=>'',
+                'searchbarinput' => '',
                 'contentFilter' => '0',
                 'active' => '',
             ]
@@ -526,7 +547,7 @@ class AdminControllers extends Controller
                 'nghesi' =>  Nghesi::all(),
                 'album' =>  Album::all(),
                 'nhac' => Nhac::all(),
-                'searchbarinput'=>'',
+                'searchbarinput' => '',
                 'contentFilter' => '0',
                 'active' => '',
             ]
@@ -569,6 +590,39 @@ class AdminControllers extends Controller
             'active' => '',
 
         ]);
+    }
+    public function themnhac()
+    {
+        return view('Auth.qlnhac.themnhac',  [
+            'ttnguoidung' =>   Auth::guard('api')->user(),
+            'loi' => '',
+            'album' =>  Album::all(),
+            'nghesi' =>  Nghesi::all(),
+            'contentFilter' => '0',
+            'active' => '',
+
+        ]);
+    }
+    public function themmusic(Request $request)
+    {
+        $request->validate([
+            'txttennhac' => ['required'],
+            'fnhac' => 'required|mimes:mp3',
+            'fhinh' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'optloains' => ['required'],
+
+        ]);
+        $generatedmusic = 'music' . time() . '-' . $request->file('fnhac')->getClientOriginalName();
+        $request->file('fnhac')->move(public_path('music'), $generatedmusic);
+        $generatedimage = 'image' . time() . '-' . $request->file('fhinh')->getClientOriginalName();
+        $request->file('fhinh')->move(public_path('images'), $generatedimage);
+        $ns = new Nhac();
+        $ns->tennhac = $request->input('txttennhac');
+        $ns->nhaclink = $generatedmusic;
+        $ns->imagemusic  = $generatedimage;
+        $ns->album_idnhac   = $request->input('optloains');
+        $ns->save();
+        return redirect()->intended('/Administrator/qlnhac');
     }
     public function formchuyensua(string $id)
     {
@@ -858,6 +912,38 @@ class AdminControllers extends Controller
                         ]
                     );
                 }
+                if ($parts[1] == 'sendmail') {
+                    $user = User::where('id', $parts[0])
+                        ->first();
+
+                    return view(
+                        'Auth.qlnguoidung.sendmail',
+                        [
+                            'ttnguoidung' =>   Auth::guard('api')->user(),
+                            'user' =>    $user,
+                            'userbt' =>    '',
+                            'contentFilter' => '0',
+                            'suc'=>"",
+                            'active' => '0',
+                        ]
+                    );
+                }
+                if ($parts[1] == 'sendmailgg') {
+                    $user = UserAPI::where('id', $parts[0])
+                        ->first();
+
+                    return view(
+                        'Auth.qlnguoidung.sendmail',
+                        [
+                            'ttnguoidung' =>   Auth::guard('api')->user(),
+                            'user' =>    $user,
+                            'userbt' =>    '',
+                            'contentFilter' => '0',
+                            'suc'=>"",
+                            'active' => '0',
+                        ]
+                    );
+                }
             }
             if (count($parts) == 2 && is_string($parts[0]) && is_string($parts[1])) {
                 $cn = $parts[0];
@@ -878,9 +964,9 @@ class AdminControllers extends Controller
                                         'userapi' =>  [],
                                         'usercount' =>  $searchUser->count(),
                                         'userapicount' =>  0,
-                                        'searchbarinput'=>'',
+                                        'searchbarinput' => '',
                                         'contentFilter' => '1',
-                                        'active' => '0',
+                                        'active' => '0','suc'=>"",
                                     ]
                                 );
                             }
@@ -907,7 +993,7 @@ class AdminControllers extends Controller
                                     'userapi' =>  $searchUser2,
                                     'usercount' =>  $searchUser->count(),
                                     'userapicount' =>  $searchUser2->count(),
-                                    'searchbarinput'=>'',
+                                    'searchbarinput' => '',
                                     'contentFilter' => '2',
                                     'active' => '0',
                                 ]
@@ -932,9 +1018,9 @@ class AdminControllers extends Controller
                                     'userapi' =>  $searchUser2,
                                     'usercount' =>  $searchUser->count(),
                                     'userapicount' =>  $searchUser2->count(),
-                                    'searchbarinput'=>'',
+                                    'searchbarinput' => '',
                                     'contentFilter' => '3',
-                                    'active' => '0',
+                                    'active' => '0','suc'=>"",
                                 ]
                             );
                         }
@@ -1028,6 +1114,32 @@ class AdminControllers extends Controller
                 ]
             );
         }
+        if ($name == 'suanhac') {
+            $music = Nhac::where('id', $number)->first();
+            $ns=Nghesi::all();
+            return view('Auth.qlnhac.suamusic', [
+            'ttnguoidung' =>  Auth::guard('api')->user(), 
+            'album' => Album::all(), 
+            'music' => $music,
+            'nghesi' =>  $ns,
+            'active' => '',
+            'loi' => '',
+            'contentFilter' => '0',
+            ]);
+        }
+        if ($name == 'duyetmusic') {
+            if($type=='albc'){
+                $nhac= Nhac::where('id',$number)->update([
+                    'xetduyet'=>1
+                ]);
+            }
+            if($type=='albd'){
+                $nhac= Nhac::where('id',$number)->update([
+                    'xetduyet'=>0
+                ]);
+            }
+            return redirect()->intended('/Administrator/qlnhac');
+        }
     }
     public function suanghesi(Request $request)
     {
@@ -1101,6 +1213,67 @@ class AdminControllers extends Controller
             ]);
         }
     }
+    public function suanhac(Request $request)
+    {
+        $request->validate([
+            'txttennhac' => ['required'],
+            'fnhac' => 'mimes:mp3',
+            'fhinh' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'optloains' => ['required'],
+
+        ]);
+        if ($request->file('fnhac') != null) {
+            $generatedmusic = 'music' . time() . '-' . $request->file('fnhac')->getClientOriginalName();
+            $request->file('fnhac')->move(public_path('music'), $generatedmusic);
+            if ($request->file('fhinh') != null) {
+                $generatedimage = 'image' . time() . '-' . $request->file('fhinh')->getClientOriginalName();
+                $request->file('fhinh')->move(public_path('images'), $generatedimage);
+                $nhac = Nhac::where('id', $request->input('txtidnhac'))
+                    ->update([
+                        'tennhac' => $request->input('txttennhac'),
+                        'nhaclink' => $generatedmusic,
+                        'imagemusic' => $generatedimage,
+                        'album_idnhac'   => $request->input('optloains'),
+
+                    ]);
+            } else {
+                $nhac = Nhac::where('id', $request->input('txtidnhac'))
+                    ->update([
+                        'tennhac' => $request->input('txttennhac'),
+                        'nhaclink' => $generatedmusic,
+
+                        'album_idnhac'   => $request->input('optloains'),
+
+                    ]);
+            }
+        } else {
+            if ($request->file('fhinh') != null) {
+                $generatedimage = 'image' . time() . '-' . $request->file('fhinh')->getClientOriginalName();
+                $request->file('fhinh')->move(public_path('images'), $generatedimage);
+                $nhac = Nhac::where('id', $request->input('txtidnhac'))
+                    ->update([
+                        'tennhac' => $request->input('txttennhac'),
+                        'imagemusic' => $generatedimage,
+                        'album_idnhac'   => $request->input('optloains'),
+                    ]);
+            } else {
+                $nhac = Nhac::where('id', $request->input('txtidnhac'))
+                    ->update([
+                        'tennhac' => $request->input('txttennhac'),
+                        'album_idnhac'   => $request->input('optloains'),
+                    ]);
+            }
+        }
+
+
+
+
+        return redirect()->intended('/Administrator/qlnhac');
+        // dd('', $request->input());
+
+
+
+    }
 
     /**
      * Remove the specified resource from storage.
@@ -1126,6 +1299,11 @@ class AdminControllers extends Controller
                     $nghesi = Album::where('id', $parts[0])
                         ->delete();
                     return redirect()->intended('/Administrator/qlalbum');
+                }
+                if ($parts[1] == 'music') {
+                    $nghesi = Nhac::where('id', $parts[0])
+                        ->delete();
+                    return redirect()->intended('/Administrator/qlnhac');
                 }
             }
         } else {

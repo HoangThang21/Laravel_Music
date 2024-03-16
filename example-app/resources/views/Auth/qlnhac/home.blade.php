@@ -36,6 +36,14 @@
                              <span> | </span>
                           <a href="/Administrator/qlnhac/suanhac&{{ $nd['id'] }}-music" class="text-warning">Sửa</a>
                      </td>
+                     <td>
+                      @if ($nd->xetduyet==0)
+                      <a href="/Administrator/qlalbum/duyetmusic&{{ $nd['id'] }}-albc" class="text-danger">Chưa duyệt</a>
+                      @else
+                      <a href="/Administrator/qlalbum/duyetmusic&{{ $nd['id'] }}-albd" class="text-success">Đã duyệt</a>
+                      @endif
+                     
+                  </td>
                   </tr>    
                     
                 

@@ -5,7 +5,7 @@
         <div class="infofilter">
             <div><a class="btn btn-primary" href="/Administrator/qlalbum/themalbum"><span
                         class="glyphicon glyphicon-plus"></span> Thêm album</a></div>
-            <form action="/Administrator/searchal?=" method="post" id="searchForm">
+            <form action="/Administrator/qlalbum/searchal?=" method="post" id="searchForm">
                 @csrf
                 <div class="searchbar">
                     <div class="searchbar-wrapper">
@@ -17,7 +17,7 @@
                             <input type="text"name='searchbar_input' class="searchbar-input" maxlength="2048"
                                 @if ($searchbarinput) value="{{ $searchbarinput }}"
                                     @else
-                                    placeholder="Tìm kiếm tên nghệ sĩ hoặc email" @endif>
+                                    placeholder="Tìm kiếm tên album, năm phát hành, nghệ sĩ, thể loại" @endif>
 
                         </div>
                         <div class="searchbar-left">
@@ -43,6 +43,7 @@
                 <th>Nghệ sĩ </th>
                 <th>Thể loại</th>
                 <th>Chức năng</th>
+               
             </tr>
             <?php foreach ($album as $nd): ?>
             <tr>
@@ -65,6 +66,7 @@
                     <span> | </span>
                     <a href="/Administrator/qlalbum/xemalbum&{{ $nd['id'] }}-alb" class="text-info">Xem</a>
                 </td>
+                
             </tr>
 
 

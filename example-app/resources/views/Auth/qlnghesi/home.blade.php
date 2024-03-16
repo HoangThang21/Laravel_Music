@@ -9,7 +9,7 @@
             <div class="fillter">
 
 
-                <form action="/Administrator/searchns?=" method="post" id="searchForm">
+                <form action="/Administrator/qlnghesi/searchns?=" method="post" id="searchForm">
                     @csrf
                     <div class="searchbar">
                         <div class="searchbar-wrapper">

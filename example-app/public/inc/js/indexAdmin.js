@@ -56,6 +56,13 @@ document.addEventListener("DOMContentLoaded", () => {
             $("#searchForm").submit(); // Gửi form tìm kiếm
         });
     }
+    const iconsucess = document.querySelector(".iconsucess");
+    const card_success = document.querySelector(".card_success");
+    if (iconsucess) {
+        iconsucess.addEventListener("click", function (event) {
+            card_success.style.display = "none";
+        });
+    }
 
     const textloginGoogle = document.querySelector(".textloginGoogle");
     if (textloginGoogle) {

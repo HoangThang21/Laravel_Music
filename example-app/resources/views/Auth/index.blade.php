@@ -2,6 +2,16 @@
 
 @if (Auth::guard('api')->check())
     <!-- Nút mở hộp modal chứa form thêm mới -->
+    <div class="card_success">
+        <div class="my-3 bg-success rounded-2 d-flex justify-content-between ">
+            @if ($suc != '')
+                {{-- <div class="fw-bold fs-2 text-light ms-5 pt-2">Thông báo</div> --}}
+                <div class="text-light ps-4 pt-2 pb-2 ">{{ $suc }}</div>
+                <div class="pe-2 pt-2  iconsucess text-light"><i class="bi bi-x-lg"></i></div>
+            @endif
+        </div>
+    </div>
+
     <div class="infofilter">
         <div class="fillter">
             <div class="Componentfilter" onclick="toggleMenu('optionFilter')">
@@ -121,6 +131,9 @@
                                                             href="/Administrator/{{ $us['id'] }}&userde"class="delete-link">
                                                             <li><i class="bi bi-trash-fill"></i> Xóa</li>
                                                         </a>
+                                                        <a href="/Administrator/{{ $us['id'] }}&sendmail">
+                                                            <li><i class="bi bi-envelope-at"></i> Gửi Mail</li>
+                                                        </a>
                                                     </ul>
                                                 </div>
                                             </div>
@@ -199,6 +212,9 @@
                                                     <a
                                                         href="/Administrator/{{ $us['id'] }}&userde"class="delete-link">
                                                         <li><i class="bi bi-trash-fill"></i> Xóa</li>
+                                                    </a>
+                                                    <a href="/Administrator/{{ $us['id'] }}&sendmail">
+                                                        <li><i class="bi bi-envelope-at"></i> Gửi Mail</li>
                                                     </a>
 
 
@@ -292,6 +308,9 @@
                                                             href="/Administrator/{{ $us['id'] }}&userdegg"class="delete-link">
                                                             <li><i class="bi bi-trash-fill"></i> Xóa</li>
                                                         </a>
+                                                        <a href="/Administrator/{{ $us['id'] }}&sendmailgg">
+                                                            <li><i class="bi bi-envelope-at"></i> Gửi Mail</li>
+                                                        </a>
                                                     </ul>
                                                 </div>
                                             </div>
@@ -373,7 +392,9 @@
                                                         class="delete-link">
                                                         <li><i class="bi bi-trash-fill"></i> Xóa</li>
                                                     </a>
-
+                                                    <a href="/Administrator/{{ $us['id'] }}&sendmailgg">
+                                                        <li><i class="bi bi-envelope-at"></i> Gửi Mail</li>
+                                                    </a>
                                                 </ul>
                                             </div>
                                         </div>

@@ -1,6 +1,8 @@
 <?php
 
+
 use Illuminate\Support\Facades\Facade;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\ServiceProvider;
 
 return [
@@ -70,7 +72,7 @@ return [
     |
     */
 
-    'timezone' => 'UTC',
+    'timezone' => 'Asia/Ho_Chi_Minh',
 
     /*
     |--------------------------------------------------------------------------
@@ -181,8 +183,10 @@ return [
     |
     */
 
+
     'aliases' => Facade::defaultAliases()->merge([
-        // 'Example' => App\Facades\Example::class,
+        // // 'Example' => App\Facades\Example::class,
+        // 'Mail'=>Illuminate/Support/Facade/Mail::class,
     ])->toArray(),
 
 ];

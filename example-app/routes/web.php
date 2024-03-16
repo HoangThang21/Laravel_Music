@@ -29,6 +29,7 @@ Route::get('/Administrator/logoutadmin', [
     AdminControllers::class, 'logoutadmin'
 ]);
 Route::get('/Administrator/themnguoidung', [AdminControllers::class, 'themnguoidung']);
+Route::post('/Administrator/sendmail', [AdminControllers::class, 'sendmail']);
 //----------------------------------------------------------------
 //Form The loai
 Route::get('/Administrator/qltheloai', [
@@ -66,7 +67,7 @@ Route::get('/Administrator/qlnghesi/xoanghesi&{id}', [
 Route::get('/Administrator/qlnghesi/{name}&{number}-{type}', [
     AdminControllers::class, 'qlupdate'
 ]);
-Route::post('/Administrator/searchns', [AdminControllers::class, 'searchns']);
+Route::post('/Administrator/qlnghesi/searchns', [AdminControllers::class, 'searchns']);
 
 //----------------------------------------------------------------
 //FormAlbum
@@ -88,13 +89,23 @@ Route::get('/Administrator/qlalbum/xoaalbum&{id}', [
 Route::get('/Administrator/qlalbum/{name}&{number}-{type}', [
     AdminControllers::class, 'qlupdate'
 ]);
-Route::post('/Administrator/searchal', [AdminControllers::class, 'searchal']);
+Route::post('/Administrator/qlalbum/searchal', [AdminControllers::class, 'searchal']);
 
 //----------------------------------------------------------------
 //Form nhac
 Route::get('/Administrator/qlnhac', [AdminControllers::class, 'qlnhac']);
+Route::get('/Administrator/qlnhac/themnhac', [AdminControllers::class, 'themnhac']);
+Route::post('/Administrator/qlnhac/themmusic', [AdminControllers::class, 'themmusic']);
+Route::put('/Administrator/qlnhac/suanhac', [AdminControllers::class, 'suanhac']);
+Route::get('/Administrator/qlnhac/xoanhac&{id}', [
+    AdminControllers::class, 'destroy'
+]);
+Route::get('/Administrator/qlnhac/{name}&{number}-{type}', [
+    AdminControllers::class, 'qlupdate'
+]);
 //----------------------------------------------------------------
 Route::get('/Administrator/{id}', [AdminControllers::class, 'edit']);
+
 Route::get('/', function () {
     return view('welcome');
 });
