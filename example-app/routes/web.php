@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminControllers;
+use App\Http\Controllers\ClientControllers;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -105,7 +106,4 @@ Route::get('/Administrator/qlnhac/{name}&{number}-{type}', [
 ]);
 //----------------------------------------------------------------
 Route::get('/Administrator/{id}', [AdminControllers::class, 'edit']);
-
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [ClientControllers::class, 'index']);
