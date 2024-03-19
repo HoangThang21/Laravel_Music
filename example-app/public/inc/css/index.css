@@ -1,7 +1,7 @@
 * {
     margin: 0;
     padding: 0;
-    font-family: 'inter';
+    font-family: "inter";
 }
 body {
     height: 100vh;
@@ -40,7 +40,7 @@ header .menu_side,
     /* border: 1px solid #fff; */
     background-color: rgba(255, 255, 255, 0.943);
     box-shadow: 25px 0 10px 20px #7185c5;
-    color: #fff;
+    /* color: #fff; */
 }
 header .song_side {
     width: 80%;
@@ -58,19 +58,81 @@ header .master_play {
     box-shadow: 0 3px 8px #090f1f;
 }
 
-header .menu_side .home_rec{
+header .menu_side .home_rec {
     padding: 20px 20px;
     display: flex;
     gap: 10px;
     align-items: center;
 }
-header .menu_side .home_rec img{
+header .menu_side .home_rec img {
     width: 52px;
     height: 52px;
     border-radius: 5px;
     background-repeat: no-repeat;
 }
-header .menu_side .home_rec p{
-font-size: 26px;
-font-weight: 600;
+header .menu_side .home_rec p {
+    font-size: 26px;
+    font-weight: 600;
 }
+
+header .menu_side .playlist {
+    /* padding:  0 20px; */
+    height: 215px;
+    overflow-x: hidden;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    border-bottom: 1px solid #131312;
+    border-top: 1px solid #131312;
+}
+header .menu_side .playlist::-webkit-scrollbar {
+    display: none;
+}
+header .menu_side .playlist a {
+    display: flex;
+    align-items: center;
+    position: relative;
+    padding: 20px;
+    gap: 10px;
+    /* size: 24px; */
+    font-size: 18px;
+}
+header .menu_side .playlist a:hover {
+    background-color: #7185c5;
+}
+header .menu_side .playlist a.active span {
+    position: absolute;
+    width: 5px;
+    height: 50px;
+    right: 0;
+    background-color: aqua;
+    border-radius: 20px 6px 6px 20px;
+}
+header .menu_side .playlist a .imgchat {
+    position: absolute;
+    display: flex;
+
+    left: 60%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+header .menu_side .playlist a .imgchat img {
+    width: 24px;
+    height: 24px;
+    background-repeat: no-repeat;
+    border-radius: 50%;
+    border: 1px solid #d3d4d5;
+}
+header .menu_side .playlist a .imgchat img:nth-child(2) {
+    z-index: 2;
+    margin-left: -10px;
+}
+header .menu_side .playlist a .imgchat img:nth-child(3) {
+    z-index: 3;
+    margin-left: -10px;
+}
+/* header .menu_side .playlist h4 a .nthimg2 {
+    left: 140px;
+}
+header .menu_side .playlist h4 a .nthimg3 {
+    left: 152px;
+} */

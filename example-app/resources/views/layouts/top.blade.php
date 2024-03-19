@@ -16,44 +16,48 @@
         <div class="menu_side">
             <a href="/trangchu" class="home_rec">
                 <img src="../../images/webicon.png" alt="" sizes="28">
-                <p>Music Diablu</p>
+                <p><span style="color: rgb(37, 82, 231)">Mobi</span><span style="color: rgb(204, 51, 51)">Song</span>
+                </p>
             </a>
+
             <div class="playlist">
-                <h4 class="<?php if (strpos($_SERVER['REQUEST_URI'], 'trangchu') != false) {
+                <a href="/trangchu" class="x<?php if (strpos($_SERVER['REQUEST_URI'], 'trangchu') != false) {
                     echo 'active';
                 } ?>">
-                    <a href="/trangchu"><span></span><i class="bi bi-music-note-beamed"></i>Trang chủ</a>
-                </h4>
-                <h4 class="<?php if (strpos($_SERVER['REQUEST_URI'], 'thuvien') != false) {
+                    <span></span><i class="bi bi-music-note-beamed"></i>Trang chủ
+                </a>
+                <a href="/trangchu" class="active <?php if (strpos($_SERVER['REQUEST_URI'], 'thuvien') != false) {
                     echo 'active';
                 } ?>">
-                    <a href="/thuvien"><span></span><i class="bi bi-music-note-beamed"></i>Yêu thích</a>
-                </h4>
-                <h4 class="<?php if (strpos($_SERVER['REQUEST_URI'], 'thuvien') != false) {
+                    <span></span><i class="bi bi-music-note-beamed"></i>Yêu thích
+                </a>
+                <a href="/trangchu" class="<?php if (strpos($_SERVER['REQUEST_URI'], 'thuvien') != false) {
                     echo 'active';
                 } ?>">
-                    <a href="/thuvien"><span></span><i class="bi bi-music-note-beamed"></i>Live chat 
-                        <img src="" alt="">
-                        <img src="" alt="">
-                        <img src="" alt="">
-                    </a>
-                </h4>
-                <h4 class="<?php if (strpos($_SERVER['REQUEST_URI'], 'thuvien') != false) {
+                    <span></span><i class="bi bi-music-note-beamed"></i>Live chat
+                    <div class="imgchat">
+                        <img src="../../images/webicon.png" alt="">
+                        <img src="../../images/img1710036980-6.png" alt="" class="nthimg2">
+                        <img src="../../images/img1709375679-100.png" alt="" class="nthimg3">
+                    </div>
+
+                </a>
+                <a href="/trangchu" class="<?php if (strpos($_SERVER['REQUEST_URI'], 'thuvien') != false) {
                     echo 'active';
                 } ?>">
-                    <a href="/thuvien"><span></span><i class="bi bi-music-note-beamed"></i>Mchart</a>
-                </h4>
-                <h4 class="<?php if (strpos($_SERVER['REQUEST_URI'], 'thuvien') != false) {
+                    <span></span><i class="bi bi-music-note-beamed"></i>Mchart
+                </a>
+                <a href="/trangchu"class="<?php if (strpos($_SERVER['REQUEST_URI'], 'thuvien') != false) {
                     echo 'active';
                 } ?>">
-                    <a href="/thuvien"><span></span><i class="bi bi-music-note-beamed"></i>Bảng xếp hạng</a>
-                </h4>
-                <h4 class="<?php if (strpos($_SERVER['REQUEST_URI'], 'thuvien') != false) {
+                    <span></span><i class="bi bi-music-note-beamed"></i>Bảng xếp hạng
+                </a>
+                <a href="/trangchu"class="<?php if (strpos($_SERVER['REQUEST_URI'], 'thuvien') != false) {
                     echo 'active';
                 } ?>">
-                    <a href="/thuvien"><span></span><i class="bi bi-music-note-beamed"></i>Chủ đề & thể loại</a>
-                </h4>
-                
+                    <span></span><i class="bi bi-music-note-beamed"></i>Chủ đề & thể loại
+                </a>
+
             </div>
             <div class="menu_song">
                 nhac
@@ -115,14 +119,14 @@
 
             <div class="content">
                 {{-- content --}}
-a
+                a
 
             </div>
 
         </div>
         {{-- botom --}}
         <div class="master_play">
-           
+
         </div>
     </header>
     <script type="text/javascript" src="../../inc/js/index.js"></script>
