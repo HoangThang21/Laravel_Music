@@ -107,3 +107,9 @@ Route::get('/Administrator/qlnhac/{name}&{number}-{type}', [
 //----------------------------------------------------------------
 Route::get('/Administrator/{id}', [AdminControllers::class, 'edit']);
 Route::get('/', [ClientControllers::class, 'index']);
+Route::get('/trangchu', [ClientControllers::class, 'loadtrangchu'])->name('load.trangchu');
+Route::get('/yeuthich', [ClientControllers::class, 'loadyeuthich'])->name('load.yeuthich');
+Route::get('/livechat', [ClientControllers::class, 'loadlivechat'])->name('load.livechat');
+Route::get('/Mchart', [ClientControllers::class, 'loadMchart'])->name('load.Mchart');
+Route::get('/ranksong', [ClientControllers::class, 'loadranksong'])->name('load.ranksong');
+Route::get('/topic', [ClientControllers::class, 'loadtopic'])->name('load.topic');

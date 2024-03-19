@@ -54,7 +54,7 @@ header .master_play {
     left: 0;
     width: 100%;
     height: 9%;
-    background-color: #999da9;
+    background: linear-gradient(94deg, #5483c9 -13.04%, #d05561 124.22%);
     box-shadow: 0 3px 8px #090f1f;
 }
 
@@ -136,3 +136,189 @@ header .menu_side .playlist a .imgchat img:nth-child(3) {
 header .menu_side .playlist h4 a .nthimg3 {
     left: 152px;
 } */
+header .master_play {
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
+}
+header .master_play .wave,
+.active2 {
+    width: 30px;
+    height: 30px;
+    /* border: 1px solid #fff; */
+    padding-bottom: 5px;
+    display: flex;
+    align-items: flex-end;
+    /* margin-right: 10px; */
+}
+header .master_play .wave .wave1 {
+    width: 3px;
+    height: 10px;
+    margin-right: 3px;
+    border-radius: 10px 10px 0 0;
+    background-color: #36e2ec;
+    /* animation: wave 1.5s linear infinite; */
+    animation: unset;
+}
+header .master_play .wave .wave1:nth-child(2) {
+    height: 13px;
+    /* animation-delay: 1.4s; */
+}
+header .master_play .wave .wave1:nth-child(3) {
+    height: 8px;
+    /* animation-delay: 1.8s; */
+}
+header .master_play .active2 .wave1 {
+    animation: wave 1.5s linear infinite;
+}
+header .master_play .active2 .wave1:nth-child(2) {
+    animation-delay: 1.4s;
+}
+header .master_play .active2 .wave1:nth-child(3) {
+    animation-delay: 1.8s;
+}
+@keyframes wave {
+    0% {
+        height: 10px;
+    }
+    50% {
+        height: 15px;
+    }
+    100% {
+        height: 10px;
+    }
+}
+header .master_play img {
+    width: 35px;
+    height: 35px;
+    background-repeat: no-repeat;
+}
+header .master_play .info_ns {
+    /* margin-left: 10px; */
+    display: flex;
+    flex-direction: column;
+}
+header .master_play h5 {
+    width: 130px;
+    font-size: 13px;
+    margin-left: 15px;
+    color: #fff;
+    line-height: 15px;
+    height: 30px;
+    white-space: normal; /* Cho phép xuống dòng */
+    overflow: hidden; /* Ẩn nội dung dư thừa */
+    text-overflow: ellipsis; /* Hiển thị dấu chấm khi văn bản bị cắt ngắn */
+    display: -webkit-box;
+    -webkit-line-clamp: 1; /* Số dòng tối đa */
+}
+header .master_play .subtitle {
+    font-size: 11px;
+    margin-left: 15px;
+    color: #c7c7c7;
+    /* line-height: 15px; */
+}
+header .master_play .icon {
+    font-size: 20px;
+    /* margin-left: 15px; */
+    color: #fff;
+    /* line-height: 15px; */
+    margin: 0 20px 0 40px;
+}
+header .master_play .icon .bi {
+    cursor: pointer;
+    outline: none;
+}
+header .master_play .icon .bi:nth-child(2) {
+    border: 1px solid rgb(105, 105, 170, 0.1);
+    border-radius: 50%;
+    padding: 1px 3px 0 6px;
+    margin: 0 5px;
+    transition: 0.3s linear;
+}
+header .master_play span {
+    color: #fff;
+    width: 32px;
+    font-size: 11px;
+    font-weight: 400;
+}
+header .master_play span #currentStart {
+    margin: 0 0 0 20px;
+}
+header .master_play .bar {
+    position: relative;
+    width: 35%;
+    height: 2px;
+    background-color: rgba(255, 255, 255, 0.511);
+    margin: 0 15px 0 10px;
+}
+header .master_play .bar .bar2 {
+    position: absolute;
+    background: #36e2ec;
+    width: 0%;
+    height: 100%;
+    top: 0;
+    transition: 1s linear;
+}
+header .master_play .bar .dot {
+    position: absolute;
+    width: 5px;
+    height: 5px;
+    background: #36e2ec;
+    border-radius: 50%;
+    left: 0;
+    top: -1px;
+    transition: 1s linear;
+}
+header .master_play .bar .dot::before {
+    content: "";
+    position: absolute;
+    width: 15px;
+    height: 15px;
+    border: 1px solid #36e2ec;
+    border-radius: 50%;
+    left: -6px;
+    top: -6px;
+    box-shadow: inset 0 0 3px #36e2ec;
+    transition: 1s linear;
+}
+header .master_play .bar input {
+    position: absolute;
+    width: 100%;
+    top: -6px;
+    left: 0;
+    cursor: pointer;
+
+    z-index: 99;
+    transition: 3s linear;
+    opacity: 0;
+}
+.thongbao {
+    position: absolute;
+    display: none;
+    top: 9%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 9;
+    background-color: #1cd912;
+    /* width: 300px; */
+    padding: 10px;
+    border-radius: 4px;
+}
+.headerthongbao {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.headerthongbao i {
+    cursor: pointer;
+    color: #000;
+}
+.headerthongbao i:hover {
+    color: #fff;
+}
+.tieude {
+    color: #000000;
+    font-size: 16px;
+    font-weight: 600;
+    padding-right: 20px;
+}

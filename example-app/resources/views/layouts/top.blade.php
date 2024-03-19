@@ -8,30 +8,31 @@
     <title>Music - Nghe nhạc mới HOT nhất, tải nhạc MP3 chất lượng cao</title>
     <link rel="shortcut icon" href="../../images/webicon.png" type="image/png">
     <link href="../../inc/css/index.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
 </head>
 
 <body>
     <header>
         <div class="menu_side">
-            <a href="/trangchu" class="home_rec">
+            <a href="/trangchu" class="home_rec" id="home_rec">
                 <img src="../../images/webicon.png" alt="" sizes="28">
                 <p><span style="color: rgb(37, 82, 231)">Mobi</span><span style="color: rgb(204, 51, 51)">Song</span>
                 </p>
             </a>
 
             <div class="playlist">
-                <a href="/trangchu" class="x<?php if (strpos($_SERVER['REQUEST_URI'], 'trangchu') != false) {
+                <a href="#" id="trangchu" class=" active<?php if (strpos($_SERVER['REQUEST_URI'], 'trangchu') != false) {
                     echo 'active';
                 } ?>">
                     <span></span><i class="bi bi-music-note-beamed"></i>Trang chủ
                 </a>
-                <a href="/trangchu" class="active <?php if (strpos($_SERVER['REQUEST_URI'], 'thuvien') != false) {
+                <a href="#" id="yeuthich" class=" <?php if (strpos($_SERVER['REQUEST_URI'], 'yeuthich') != false) {
                     echo 'active';
                 } ?>">
                     <span></span><i class="bi bi-music-note-beamed"></i>Yêu thích
                 </a>
-                <a href="/trangchu" class="<?php if (strpos($_SERVER['REQUEST_URI'], 'thuvien') != false) {
+                <a href="#" id="livechat" class=" <?php if (strpos($_SERVER['REQUEST_URI'], 'livechat') != false) {
                     echo 'active';
                 } ?>">
                     <span></span><i class="bi bi-music-note-beamed"></i>Live chat
@@ -42,17 +43,17 @@
                     </div>
 
                 </a>
-                <a href="/trangchu" class="<?php if (strpos($_SERVER['REQUEST_URI'], 'thuvien') != false) {
+                <a href="#" id="Mchart" class=" <?php if (strpos($_SERVER['REQUEST_URI'], 'Mchart') != false) {
                     echo 'active';
                 } ?>">
                     <span></span><i class="bi bi-music-note-beamed"></i>Mchart
                 </a>
-                <a href="/trangchu"class="<?php if (strpos($_SERVER['REQUEST_URI'], 'thuvien') != false) {
+                <a href="#" id="ranksong" class="ranksong <?php if (strpos($_SERVER['REQUEST_URI'], 'rank') != false) {
                     echo 'active';
                 } ?>">
                     <span></span><i class="bi bi-music-note-beamed"></i>Bảng xếp hạng
                 </a>
-                <a href="/trangchu"class="<?php if (strpos($_SERVER['REQUEST_URI'], 'thuvien') != false) {
+                <a href="#" id="topic" class=" <?php if (strpos($_SERVER['REQUEST_URI'], 'topic') != false) {
                     echo 'active';
                 } ?>">
                     <span></span><i class="bi bi-music-note-beamed"></i>Chủ đề & thể loại
@@ -82,54 +83,49 @@
             </div>
         </div>
 
-        <div class="song_side">
-            {{-- <nav>
-                <form id="searchForm" class="searchForm" action="/trangchu/search" method="get">
-                    <div class="search">
-                        <i class="bi bi-search "></i>
-                        <input type="text" name="searchvv"placeholder="Nhập nhạc cần tìm" class="searchInput" />
-                    </div>
-                </form>
-
-
-                <div class="user">
-                    @if (Auth::guard('web')->check())
-                        <img class="img_user" src="../../images/{{ $infouser->image }}" alt="">
-
-                        <div class="dropdow">
-                            <div class="info_user">
-                                <img src="../../images/{{ $infouser->image }}" alt="">
-                                <p>{{ $infouser->name }}</p>
-                            </div>
-                            <li><a href="/trangchu/profile">Thông tin tài khoản</a></li>
-                            <li><a href="/trangchu/doimatkhau">Đổi mật khẩu</a></li>
-                            <li><a href="/logout">Thoát</a></li>
-                        </div>
-                    @else
-                        <img class="img_user" src="../../images/userlogout.png" alt="">
-                        <div class="dropdo_login">
-                            <li><a href="/login"><i class="align-middle me-1" data-feather="log-in"></i>Đăng nhập</a>
-                            </li>
-                        </div>
-                    @endif
-
-
-                </div>
-            </nav> --}}
-
-            <div class="content">
-                {{-- content --}}
-                a
-
-            </div>
+        <div class="song_side" id="song_side">
+            @if ($content)
+                {!! $content !!}
+            @endif
 
         </div>
         {{-- botom --}}
-        <div class="master_play">
+        <div class="master_play ">
+            <div class="wave active2">
+                <div class="wave1"></div>
+                <div class="wave1"></div>
+                <div class="wave1"></div>
+            </div>
+            <img src="../../images/img1710036980-6.png" alt="" class="IgMuSc" />
+            <div class="info_ns">
+                <h5 class="NameBai">a<br />
 
+                </h5>
+                <div class="subtitle NameNS">b</div>
+            </div>
+            <div class="icon">
+                <i class="bi bi-skip-start-fill" id="back"></i>
+
+                <i class="bi bi-play-fill" id="masterPlay"></i>
+                <i class="bi bi-skip-end-fill" id="next"></i>
+            </div>
+            <span id="currentStart">0:00</span>
+            <div class="bar">
+                <input type="range" name="range" id="seek" class="range" />
+                <div class="bar2" id="bar2"></div>
+                <div class="dot" id="dot_music"></div>
+            </div>
+            <span id="currentEnd">0:00</span>
+        </div>
+        <div class="thongbao">
+            <div class="headerthongbao">
+                <div class="tieude"></div>
+                <i class="bi bi-x-lg"></i>
+            </div>
         </div>
     </header>
     <script type="text/javascript" src="../../inc/js/index.js"></script>
+    <script type="text/javascript" src="../../inc/js/redict.js"></script>
     {{-- @if (Auth::guard('api')->check())
         <script>
             const user = '{{ $infouser->id }}';
@@ -141,6 +137,7 @@
         var idbaidau = '{{ $baidau->id }}';
     </script> --}}
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="https://cdn.ckeditor.com/ckeditor5/40.0.0/classic/ckeditor.js"></script>
 
 </body>
 
