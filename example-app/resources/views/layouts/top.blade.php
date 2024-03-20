@@ -22,17 +22,17 @@
             </a>
 
             <div class="playlist">
-                <a href="#" id="trangchu" class=" active<?php if (strpos($_SERVER['REQUEST_URI'], 'trangchu') != false) {
+                <div id="trangchu" class=" active<?php if (strpos($_SERVER['REQUEST_URI'], 'trangchu') != false) {
                     echo 'active';
                 } ?>">
                     <span></span><i class="bi bi-music-note-beamed"></i>Trang chủ
-                </a>
-                <a href="#" id="yeuthich" class=" <?php if (strpos($_SERVER['REQUEST_URI'], 'yeuthich') != false) {
+                </div>
+                <div id="yeuthich" class=" <?php if (strpos($_SERVER['REQUEST_URI'], 'yeuthich') != false) {
                     echo 'active';
                 } ?>">
                     <span></span><i class="bi bi-music-note-beamed"></i>Yêu thích
-                </a>
-                <a href="#" id="livechat" class=" <?php if (strpos($_SERVER['REQUEST_URI'], 'livechat') != false) {
+                </div>
+                <div id="livechat" class=" <?php if (strpos($_SERVER['REQUEST_URI'], 'livechat') != false) {
                     echo 'active';
                 } ?>">
                     <span></span><i class="bi bi-music-note-beamed"></i>Live chat
@@ -42,22 +42,22 @@
                         <img src="../../images/img1709375679-100.png" alt="" class="nthimg3">
                     </div>
 
-                </a>
-                <a href="#" id="Mchart" class=" <?php if (strpos($_SERVER['REQUEST_URI'], 'Mchart') != false) {
+                </div>
+                <div id="Mchart" class=" <?php if (strpos($_SERVER['REQUEST_URI'], 'Mchart') != false) {
                     echo 'active';
                 } ?>">
                     <span></span><i class="bi bi-music-note-beamed"></i>Mchart
-                </a>
-                <a href="#" id="ranksong" class="ranksong <?php if (strpos($_SERVER['REQUEST_URI'], 'rank') != false) {
+                </div>
+                <div id="ranksong" class="ranksong <?php if (strpos($_SERVER['REQUEST_URI'], 'rank') != false) {
                     echo 'active';
                 } ?>">
                     <span></span><i class="bi bi-music-note-beamed"></i>Bảng xếp hạng
-                </a>
-                <a href="#" id="topic" class=" <?php if (strpos($_SERVER['REQUEST_URI'], 'topic') != false) {
+                </div>
+                <div id="topic" class=" <?php if (strpos($_SERVER['REQUEST_URI'], 'topic') != false) {
                     echo 'active';
                 } ?>">
                     <span></span><i class="bi bi-music-note-beamed"></i>Chủ đề & thể loại
-                </a>
+                </div>
 
             </div>
             <div class="menu_song">
@@ -81,64 +81,39 @@
                     @endforeach
                 @endforeach --}}
             </div>
-        </div>
-
-        <div class="song_side" id="song_side">
-            @if ($content)
-                {!! $content !!}
-            @endif
-
-        </div>
-        {{-- botom --}}
-        <div class="master_play ">
-            <div class="wave active2">
-                <div class="wave1"></div>
-                <div class="wave1"></div>
-                <div class="wave1"></div>
-            </div>
-            <img src="../../images/img1710036980-6.png" alt="" class="IgMuSc" />
-            <div class="info_ns">
-                <h5 class="NameBai">a<br />
-
-                </h5>
-                <div class="subtitle NameNS">b</div>
-            </div>
-            <div class="icon">
-                <i class="bi bi-skip-start-fill" id="back"></i>
-
-                <i class="bi bi-play-fill" id="masterPlay"></i>
-                <i class="bi bi-skip-end-fill" id="next"></i>
-            </div>
-            <span id="currentStart">0:00</span>
-            <div class="bar">
-                <input type="range" name="range" id="seek" class="range" />
-                <div class="bar2" id="bar2"></div>
-                <div class="dot" id="dot_music"></div>
-            </div>
-            <span id="currentEnd">0:00</span>
-        </div>
-        <div class="thongbao">
-            <div class="headerthongbao">
-                <div class="tieude"></div>
-                <i class="bi bi-x-lg"></i>
+            <div class="">
+                <a href="/trangchu" target="_blank"> <i class="bi bi-exclamation-circle"></i>Giới thiệu</a>
             </div>
         </div>
-    </header>
-    <script type="text/javascript" src="../../inc/js/index.js"></script>
-    <script type="text/javascript" src="../../inc/js/redict.js"></script>
-    {{-- @if (Auth::guard('api')->check())
-        <script>
-            const user = '{{ $infouser->id }}';
-        </script>
-    @endif
-    <script>
-        var csrfToken = ` {{ csrf_token() }}`;
-        var baidau = '{{ $baidau->nhaclink }}';
-        var idbaidau = '{{ $baidau->id }}';
-    </script> --}}
-    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-    <script src="https://cdn.ckeditor.com/ckeditor5/40.0.0/classic/ckeditor.js"></script>
 
-</body>
+        <div class="song_side">
+            <nav>
+                
+                <form action="/search?=" method="post" id="searchForm">
+                    @csrf
+                    <div class="searchbar">
+                        <div class="searchbar-wrapper">
+                            <div class="searchbar-center">
+                                <div class="searchbar-input-spacer"></div>
+                                <input type="text"name='searchbar_input' class="searchbar-input" maxlength="2048">
+                            </div>
+                            <div class="searchbar-left">
+                                <div class="delete-icon-wrapper">
+                                    <i class="bi bi-x-lg"></i>
+                                </div>|
+                                <div class="search-icon-wrapper">
+                                    <div class="searchicon" id="searchButton"><i class="bi bi-search"></i></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </nav>
+            <div id="song_side">
+                @if ($content)
+                    {!! $content !!}
+                @endif
+            </div>
 
-</html>
+
+        </div>

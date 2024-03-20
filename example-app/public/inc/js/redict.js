@@ -13,12 +13,14 @@ $("#trangchu").click(function (e) {
             $("#ranksong").removeClass("active");
             $("#topic").removeClass("active");
             $("#trangchu").addClass("active");
+            $("#searchForm").show();
         },
     });
 });
 
 $("#home_rec").click(function (e) {
     e.preventDefault();
+
     $("#song_side").empty();
     $.ajax({
         url: "/trangchu",
@@ -26,6 +28,7 @@ $("#home_rec").click(function (e) {
         success: function (data) {
             $("#song_side").append(data.content);
             $("#trangchu").addClass("active");
+            $("#searchForm").show();
         },
     });
 });
@@ -43,6 +46,7 @@ $("#yeuthich").click(function (e) {
             $("#topic").removeClass("active");
             $("#trangchu").removeClass("active");
             $("#yeuthich").addClass("active");
+            $("#searchForm").show();
         },
     });
 });
@@ -60,6 +64,7 @@ $("#livechat").click(function (e) {
             $("#trangchu").removeClass("active");
             $("#yeuthich").removeClass("active");
             $("#livechat").addClass("active");
+            $("#searchForm").hide();
         },
     });
 });
@@ -77,6 +82,7 @@ $("#Mchart").click(function (e) {
             $("#yeuthich").removeClass("active");
             $("#livechat").removeClass("active");
             $("#Mchart").addClass("active");
+            $("#searchForm").show();
         },
     });
 });
@@ -94,6 +100,7 @@ $("#ranksong").click(function (e) {
             $("#yeuthich").removeClass("active");
             $("#livechat").removeClass("active");
             $("#ranksong").addClass("active");
+            $("#searchForm").show();
         },
     });
 });
@@ -111,6 +118,7 @@ $("#topic").click(function (e) {
             $("#yeuthich").removeClass("active");
             $("#livechat").removeClass("active");
             $("#topic").addClass("active");
+            $("#searchForm").show();
         },
     });
 });

@@ -87,7 +87,7 @@ header .menu_side .playlist {
 header .menu_side .playlist::-webkit-scrollbar {
     display: none;
 }
-header .menu_side .playlist a {
+header .menu_side .playlist div {
     display: flex;
     align-items: center;
     position: relative;
@@ -95,11 +95,12 @@ header .menu_side .playlist a {
     gap: 10px;
     /* size: 24px; */
     font-size: 18px;
+    color: #191e65;
 }
-header .menu_side .playlist a:hover {
+header .menu_side .playlist div:hover {
     background-color: #7185c5;
 }
-header .menu_side .playlist a.active span {
+header .menu_side .playlist div.active span {
     position: absolute;
     width: 5px;
     height: 50px;
@@ -107,28 +108,34 @@ header .menu_side .playlist a.active span {
     background-color: aqua;
     border-radius: 20px 6px 6px 20px;
 }
-header .menu_side .playlist a .imgchat {
-    position: absolute;
+header .menu_side .playlist div.active {
+    color: #fff;
+    background-color: rgba(39, 92, 237, 0.779);
+}
+header .menu_side .playlist div .imgchat {
+    /* position: absolute; */
     display: flex;
-
+    margin: 0;
+    padding: 0;
+    /* height: 28px;
     left: 60%;
     top: 50%;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%); */
 }
-header .menu_side .playlist a .imgchat img {
+header .menu_side .playlist div .imgchat img {
     width: 24px;
     height: 24px;
     background-repeat: no-repeat;
     border-radius: 50%;
     border: 1px solid #d3d4d5;
 }
-header .menu_side .playlist a .imgchat img:nth-child(2) {
+header .menu_side .playlist div .imgchat img:nth-child(2) {
     z-index: 2;
-    margin-left: -10px;
+    margin-left: -20px;
 }
-header .menu_side .playlist a .imgchat img:nth-child(3) {
+header .menu_side .playlist div .imgchat img:nth-child(3) {
     z-index: 3;
-    margin-left: -10px;
+    margin-left: -20px;
 }
 /* header .menu_side .playlist h4 a .nthimg2 {
     left: 140px;
@@ -322,3 +329,86 @@ header .master_play .bar input {
     font-weight: 600;
     padding-right: 20px;
 }
+/* input search */
+.searchbar {
+    font-size: 14px;
+
+    color: #202124;
+    display: flex;
+    z-index: 3;
+    height: 44px;
+    background: linear-gradient(94deg, #a5bbdaa0 -13.04%, #a7aad595 124.22%);
+    border: 1px solid #dfe1e5;
+    box-shadow: none;
+    border-radius: 24px;
+    /* margin: 0 auto; */
+    width: 500px;
+    min-width: 500px;
+}
+.searchbar:hover {
+    box-shadow: 0 1px 6px rgb(32 33 36 / 28%);
+    border-color: rgba(223, 225, 229, 0);
+}
+.searchbar-wrapper {
+    flex: 1;
+    display: flex;
+    padding: 5px 8px 0 14px;
+}
+.searchbar-left {
+    font-size: 14px;
+    font-family: arial, sans-serif;
+    color: #c5c5c5;
+    display: flex;
+    align-items: center;
+    padding-right: 13px;
+    margin-top: -5px;
+}
+.search-icon-wrapper {
+    margin: auto;
+    color: #000000;
+    font-size: 18px;
+    padding-left: 10px;
+    cursor: pointer;
+}
+.searchButton {
+    cursor: pointer;
+}
+.delete-icon-wrapper {
+    cursor: pointer;
+    display: none;
+    margin: auto;
+    color: #202124;
+    font-size: 18px;
+    padding-right: 10px;
+    font-weight: 800;
+}
+
+.searchbar-center {
+    display: flex;
+    flex: 1;
+    flex-wrap: wrap;
+}
+.searchbar-input-spacer {
+    color: transparent;
+    flex: 100%;
+    white-space: pre;
+    height: 34px;
+    font-size: 16px;
+}
+.searchbar-input {
+    background-color: transparent;
+    border: none;
+    margin: 0;
+    padding: 0 4px 0 10px;
+    color: rgba(0, 0, 0, 0.87);
+    word-wrap: break-word;
+    outline: none;
+    display: flex;
+    flex: 100%;
+    margin-top: -37px;
+    height: 34px;
+    font-size: 16px;
+    max-width: 100%;
+    width: 100%;
+}
+/* --------------------------- */
