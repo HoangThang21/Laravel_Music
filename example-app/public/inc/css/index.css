@@ -412,3 +412,68 @@ header .master_play .bar input {
     width: 100%;
 }
 /* --------------------------- */
+.song_side nav {
+    height: 45px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    margin: 0 20px;
+}
+.song_side nav .infouser {
+    position: absolute;
+
+    right: 0;
+}
+.song_side nav .infouser .end {
+    display: flex;
+}
+.song_side nav .infouser .end .matshead img {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: 1px solid #f1f1f1;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    position: relative;
+}
+.song_side nav .infouser .end .toggle_infouser {
+    position: absolute;
+    top: 0;
+    left: -260px;
+    background-color: #36e2ec;
+    border-radius: 10px;
+    width: 250px;
+}
+.song_side nav .infouser .end .toggle_infouser img {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: 1px solid #f1f1f1;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+}
+.song_side nav .infouser .end .toggle_infouser .infouser-header {
+    display: flex;
+    gap: 20px;
+    border-bottom: 1px solid #b0b2b7;
+}
+.song_side
+    nav
+    .infouser
+    .end
+    .toggle_infouser
+    .infouser-header
+    .nametext
+    .name {
+    font-size: 1.6rem;
+    line-height: 2.2rem;
+    font-weight: 400;
+}
+.song_side nav .infouser .end .toggle_infouser .infouser-header .nametext .bd {
+    color: #f1f1f1;
+    font-size: 1.6rem;
+    line-height: 2.2rem;
+    font-weight: 400;
+}

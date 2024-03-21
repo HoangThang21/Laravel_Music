@@ -104,6 +104,7 @@ Route::get('/Administrator/qlnhac/xoanhac&{id}', [
 Route::get('/Administrator/qlnhac/{name}&{number}-{type}', [
     AdminControllers::class, 'qlupdate'
 ]);
+Route::post('/Administrator/qlnhac/searchs', [AdminControllers::class, 'searchs']);
 //----------------------------------------------------------------
 Route::get('/Administrator/{id}', [AdminControllers::class, 'edit']);
 Route::get('/', [ClientControllers::class, 'index']);

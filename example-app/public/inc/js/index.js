@@ -16,18 +16,12 @@ document.addEventListener("DOMContentLoaded", () => {
     if (search) {
         search.addEventListener("keypress", function (event) {
             if (event.keyCode === 13) {
-                // Kiểm tra nút Enter
+                
                 event.preventDefault(); // Ngăn chặn form tự động submit
                 $("#searchForm").submit(); // Gửi form tìm kiếm
             }
         });
     }
-    function goBack() {
-        window.history.back();
-      }
-      function goForward() {
-        window.history.forward();
-      }
     setInterval(function () {
         var searchBar = document.querySelector(".searchbar-input");
         if (searchBar) {

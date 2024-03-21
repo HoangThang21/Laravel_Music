@@ -408,6 +408,29 @@ class AdminControllers extends Controller
         // } catch (Exception $e) {
         // }
     }
+    public function searchs(Request $request)
+    {
+        if ($request->searchbar_input == '') {
+            return redirect()->intended('/Administrator/qlnhac');
+        } else {
+            $song = Nhac::where('tennhac', 'like', '%' . $request->searchbar_input . '%')->get();
+            return view(
+                'Auth.qlnhac.home',
+                [
+                    'ttnguoidung' =>   Auth::guard('api')->user(),
+                    'user' =>  User::all(),
+                    'theloai' =>  Theloai::all(),
+                    'userapi' =>  UserAPI::all(),
+                    'nghesi' =>  Nghesi::all(),
+                    'album' =>  Album::all(),
+                    'nhac' =>  $song,
+                    'searchbarinput' => '',
+                    'contentFilter' => '0',
+                    'active' => '',
+                ]
+            );
+        }
+    }
     public function suand(Request $request)
     {
         try {

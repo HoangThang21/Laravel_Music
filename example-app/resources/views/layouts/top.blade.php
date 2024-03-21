@@ -88,7 +88,7 @@
 
         <div class="song_side">
             <nav>
-                
+
                 <form action="/search?=" method="post" id="searchForm">
                     @csrf
                     <div class="searchbar">
@@ -108,6 +108,26 @@
                         </div>
                     </div>
                 </form>
+                <div class="infouser">
+                    <div class="end">
+                        <div class="matshead">
+                            <img src="../../images/webicon.png" alt="">
+                        </div>
+                        <div class="toggle_infouser">
+                            <div class="infouser-header">
+                                <img src="../../images/webicon.png" alt="">
+                                <div class="nametext">
+                                    <div class="name">
+                                        abc
+                                    </div>
+                                    <div class="bd">
+                                        song
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </nav>
             <div id="song_side">
                 @if ($content)

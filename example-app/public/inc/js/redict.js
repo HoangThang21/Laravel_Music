@@ -27,7 +27,13 @@ $("#home_rec").click(function (e) {
         type: "GET",
         success: function (data) {
             $("#song_side").append(data.content);
+            $("#yeuthich").removeClass("active");
+            $("#livechat").removeClass("active");
+            $("#Mchart").removeClass("active");
+            $("#ranksong").removeClass("active");
+            $("#topic").removeClass("active");
             $("#trangchu").addClass("active");
+
             $("#searchForm").show();
         },
     });
