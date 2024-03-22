@@ -103,7 +103,13 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         });
     }
-
+    const submitchat = document.querySelector(".submitchat");
+    if (submitchat) {
+        submitchat.addEventListener("click", function (event) {
+            setloadchat = true;
+        });
+    }
+    var setloadchat = false;
     setInterval(function () {
         var searchBar = document.querySelector(".searchbar-input");
         var ContenFilter = document.querySelector(".ContenFilter");
@@ -123,6 +129,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 document.querySelector(".delete-icon-wrapper").style.display =
                     "none";
             }
+
             if (contentFilter == 0) {
                 ContenFilter.textContent = "Tất cả";
             } else if (contentFilter == 1) {
@@ -132,6 +139,106 @@ document.addEventListener("DOMContentLoaded", () => {
             } else if (contentFilter == 3) {
                 ContenFilter.textContent = "Nghệ sĩ";
             }
+        }
+        if (setloadchat) {
+            $.ajax({
+                type: "GET",
+                url: "/Administrator/loadchat",
+                success: function (response) {
+                    $(".messages").empty();
+                    setloadchat = false;
+                    var theload = ``;
+                    response.chat.forEach(function (chat) {
+                        if (chat.iduser == response.ttnguoidung.id) {
+                            theload += `
+                            <div class="right message">
+                            <div class="listdot">
+                                <div class="menudot">
+                                    <i class="bi bi-three-dots-vertical"></i>
+                                </div>
+                                <div class="item-list-dot">
+                                    <a href="/Administrator/xoachat/${chat.id}"><i
+                                            class="bi bi-trash-fill"></i>Xóa</a>
+                                </div>
+                            </div>
+                            <div class="bodymessage">
+                                <div class="topmessage">
+                                    <div class="timeup">${chat.time}</div>
+                                    <div class="namemessage">${chat.tenuser}</div>
+                                </div>
+                                <div class="middlemessage">
+                                    <div class="noidung">${chat.noidung}</div>
+                                </div>
+                                `;
+                            if (chat.idnhac) {
+                                response.nhac.forEach(function (nhac) {
+                                    if (chat.idnhac == nhac.id) {
+                                        theload += `
+                                                    <div class="bottomessage">
+                                                        <div class="nhac"><a target="_black"
+                                                                href="../../music/${nhac.nhaclink}">${nhac.tennhac}</a></div>
+                                                        <i class="bi bi-music-note-beamed"></i>
+                                                    </div>
+                                        `;
+                                    }
+                                });
+                            }
+                            theload += `
+                            </div>
+                                <div class="img">
+                                    <img src="../../images/${chat.hinhuser}" alt="">
+                                </div>    </div>
+                            `;
+                        } else {
+                            theload += `
+                            <div class="left message">
+                                <div class="img">
+                                    <img src="../../images/${chat.hinhuser}" alt="">
+                                </div>
+                          
+                            <div class="bodymessage">
+                                <div class="topmessage">
+                                    <div class="namemessage">${chat.tenuser}</div>
+                                    <div class="timeup">${chat.time}</div>
+                                   
+                                </div>
+                                <div class="middlemessage">
+                                    <div class="noidung">${chat.noidung}</div>
+                                </div>
+                                `;
+                            if (chat.idnhac) {
+                                response.nhac.forEach(function (nhac) {
+                                    if (chat.idnhac == nhac.id) {
+                                        theload += `
+                                                    <div class="bottomessage">
+                                                        <div class="nhac"><a target="_black"
+                                                                href="../../music/${nhac.nhaclink}">${nhac.tennhac}</a></div>
+                                                        <i class="bi bi-music-note-beamed"></i>
+                                                    </div>
+                                        `;
+                                    }
+                                });
+                            }
+                            theload += `
+                            </div>
+                            <div class="listdot">
+                                <div class="menudot">
+                                    <i class="bi bi-three-dots-vertical"></i>
+                                </div>
+                                <div class="item-list-dot">
+                                    <a href="/Administrator/xoachat/${chat.id}"><i
+                                            class="bi bi-trash-fill"></i>Xóa</a>
+                                </div>
+                            </div> </div>
+                            `;
+                        }
+                    });
+                    $(".messages").append(theload);
+                },
+                error: function (xhr, status, error) {
+                    console.error("Lỗi khi gợi ý dữ liệu: " + error);
+                },
+            });
         }
     }, 1000);
     $("#your-input").on("input", function () {
@@ -180,8 +287,28 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         });
     });
-
-    
+    $("#message-input").on("input", function () {
+        this.style.height = "auto";
+        this.style.height = this.scrollHeight + "px";
+    });
+    let menudot = document.querySelectorAll(".menudot");
+    var itemlistdot = document.querySelectorAll(".item-list-dot");
+    menudot.forEach(function (menudot1, indexi1) {
+        menudot1.addEventListener("click", () => {
+            itemlistdot.forEach(function (itemlistdot1, indexi2) {
+                if (indexi1 == indexi2) {
+                    const isHidden1 =
+                        itemlistdot1.style.display === "none" ||
+                        getComputedStyle(itemlistdot1).display === "none";
+                    itemlistdot1.style.display = isHidden1 ? "block" : "none";
+                } else {
+                    itemlistdot1.style.display = "none";
+                }
+            });
+        });
+    });
+    var contentDiv = $(".messages");
+    contentDiv.scrollTop(contentDiv.prop("scrollHeight"));
 });
 function toggleMenu(name) {
     var menuFilter = document.querySelector("." + name);

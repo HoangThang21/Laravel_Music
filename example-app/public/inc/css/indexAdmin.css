@@ -3,6 +3,27 @@
     --color-nhanvien: #2a95bf;
     --color-user: #e7d13f;
     --color-ns: #e73f6c;
+    --backgroundmain: #111111;
+    --backgroundmain_right: rgba(17, 17, 17, 0.3);
+    --text_music_gradient-1: linear-gradient(
+        94deg,
+        #1756b5 -13.04%,
+        #7209b7 124.22%
+    );
+    --text_music_gradient-2: linear-gradient(
+        94deg,
+        #b5179e -13.04%,
+        #7209b7 124.22%
+    );
+    --text_music_gradient-3: linear-gradient(
+        94deg,
+        rgba(23, 86, 181, 0.61) -13.04%,
+        rgba(183, 9, 82, 0.74) 124.22%
+    );
+
+    --text-color-light: #fff;
+    --text-color-B: #b8b8b8;
+    --color-tim: #b5179e;
 }
 *,
 *:before,
@@ -413,6 +434,256 @@ li {
 .iconsucess:hover i {
     color: #eaff00;
 }
-.card_success{
+.card_success {
     display: block;
 }
+.chat-content {
+    background-color: #eeeeee;
+    box-shadow: 1px 2px 2px 2px #f7f5f5;
+    width: 100%;
+    height: 400px;
+}
+.chat-content .messages {
+    height: 86%;
+    /* display: flex;
+    flex-direction: column; */
+    overflow-x: hidden;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+.chat-content .messages::-webkit-scrollbar {
+    display: none;
+}
+.chat-content #formchat {
+    display: flex;
+    width: 100%;
+    bottom: 0px;
+
+    position: relative;
+    justify-content: end;
+    align-items: center;
+}
+
+.chat-content #formchat button {
+    width: 80px;
+    height: 44px;
+    padding: 2px 4px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 6px;
+    margin: 0 50px 0 0;
+    gap: 8px;
+}
+.chat-content #formchat button:hover {
+    background-color: #3c92d3;
+    color: #fff;
+    border: none;
+    outline: none;
+}
+.chat-content #formchat textarea {
+    position: absolute;
+    bottom: 0;
+    margin: 0 0 0 20px;
+    resize: none;
+    left: 10px;
+    width: 80%;
+    height: 48px;
+    border: none;
+    outline: none;
+    padding: 10px 20px 0 20px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+}
+.chat-content #formchat textarea:focus {
+    border: none;
+    outline: none;
+}
+.messages {
+    padding: 10px 10px 0 10px;
+}
+.left {
+    display: flex;
+    justify-content: start;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+.right {
+    display: flex;
+    justify-content: end;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+.left .img img {
+    width: 42px;
+    height: 42px;
+    background-repeat: no-repeat;
+    border-radius: 50%;
+}
+
+.left .topmessage {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    justify-content: start;
+}
+.left .namemessage {
+    font-size: 16px;
+    font-weight: 500;
+}
+.left .timeup {
+    color: #a5a5a5;
+    font-size: 12px;
+}
+.left .middlemessage {
+    padding: 10px;
+    color: #000000;
+    border-radius: 10px;
+
+    height: auto;
+    background-color: #c0e8f9;
+}
+p {
+    margin: 0 !important;
+    padding: 0;
+}
+.left .middlemessage .noidung {
+    max-width: 300px;
+    word-wrap: break-word;
+    height: auto;
+}
+
+.left .bottomessage {
+    display: flex;
+    gap: 15px;
+    margin-top: 6px;
+    align-items: center;
+}
+.left .nhac {
+    width: auto;
+    padding: 6px;
+    color: #000000;
+    border-radius: 10px;
+    height: auto;
+    background-color: #c0e8f9;
+
+    max-width: 300px;
+    word-wrap: break-word;
+    height: auto;
+}
+.left .bottomessage i {
+    border-radius: 50%;
+    color: transparent;
+    background: var(--text_music_gradient-1);
+    background-clip: text;
+}
+.left .listdot {
+    top: 10px;
+    position: relative;
+    cursor: pointer;
+}
+.menudot {
+}
+.left .item-list-dot {
+    display: none;
+    position: absolute;
+    background-color: #fff;
+    color: #000;
+    top: 0;
+    right: -60px;
+    border-radius: 6px;
+}
+.left .item-list-dot a {
+    color: #ff0000;
+    display: flex;
+    width: 100%;
+    height: 100%;
+    gap: 6px;
+    padding: 6px;
+}
+/* right chat ----------------------------------------------------------------------------*/
+.right .img img {
+    width: 42px;
+    height: 42px;
+    background-repeat: no-repeat;
+    border-radius: 50%;
+}
+
+.right .topmessage {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    justify-content: end;
+}
+.right .namemessage {
+    font-size: 16px;
+    font-weight: 500;
+}
+.right .timeup {
+    color: #a5a5a5;
+    font-size: 12px;
+}
+.right .middlemessage {
+    padding: 10px;
+    color: #000000;
+    border-radius: 10px;
+    height: auto;
+    background-color: #c0e8f9;
+}
+.right .middlemessage .noidung {
+    max-width: 300px;
+    word-wrap: break-word;
+    height: auto;
+}
+
+.right .bottomessage {
+    display: flex;
+    gap: 15px;
+    margin-top: 6px;
+    align-items: center;
+}
+.right .nhac {
+    width: auto;
+    padding: 6px;
+    color: #000000;
+    border-radius: 10px;
+    height: auto;
+    background-color: #c0e8f9;
+
+    max-width: 300px;
+    word-wrap: break-word;
+    height: auto;
+}
+.right .bottomessage i {
+    border-radius: 50%;
+    color: transparent;
+    background: var(--text_music_gradient-1);
+    background-clip: text;
+}
+.right .listdot {
+    top: 10px;
+    position: relative;
+    cursor: pointer;
+}
+.menudot {
+}
+.right .item-list-dot {
+    display: none;
+    position: absolute;
+    background-color: #fff;
+    color: #000;
+    top: 0;
+    right: 14px;
+    border-radius: 6px;
+}
+.right .item-list-dot a {
+    color: #ff0000;
+    display: flex;
+    width: 100%;
+    height: 100%;
+    gap: 6px;
+    padding: 6px;
+}
+
+/* -------------------------------------------------------------------------------------- */

@@ -25,19 +25,13 @@
             </div>
 
             <div class="playlist">
-                <div id="trangchu" class=" active<?php if (strpos($_SERVER['REQUEST_URI'], 'trangchu') != false) {
-                    echo 'active';
-                } ?>">
+                <a class="itemmenu" href="/trangchu" id="trangchu">
                     <span></span><i class="bi bi-music-note-beamed"></i>Trang chủ
-                </div>
-                <div id="yeuthich" class=" <?php if (strpos($_SERVER['REQUEST_URI'], 'yeuthich') != false) {
-                    echo 'active';
-                } ?>">
+                </a>
+                <a class="itemmenu" href="/yeuthich" id="yeuthich">
                     <span></span><i class="bi bi-music-note-beamed"></i>Yêu thích
-                </div>
-                <div id="livechat" class=" <?php if (strpos($_SERVER['REQUEST_URI'], 'livechat') != false) {
-                    echo 'active';
-                } ?>">
+                </a>
+                <a class="itemmenu" href="/livechat" id="livechat">
                     <span></span><i class="bi bi-music-note-beamed"></i>Live chat
                     <div class="imgchat">
                         <img src="../../images/webicon.png" alt="">
@@ -45,48 +39,28 @@
                         <img src="../../images/img1709375679-100.png" alt="" class="nthimg3">
                     </div>
 
-                </div>
-                <div id="Mchart" class=" <?php if (strpos($_SERVER['REQUEST_URI'], 'Mchart') != false) {
-                    echo 'active';
-                } ?>">
+                </a>
+                <a class="itemmenu" href="/Mchart" id="Mchart">
                     <span></span><i class="bi bi-music-note-beamed"></i>Mchart
-                </div>
-                <div id="ranksong" class="ranksong <?php if (strpos($_SERVER['REQUEST_URI'], 'rank') != false) {
-                    echo 'active';
-                } ?>">
+                </a>
+                <a class="itemmenu" href="/ranksong" id="ranksong">
                     <span></span><i class="bi bi-music-note-beamed"></i>Bảng xếp hạng
-                </div>
-                <div id="topic" class=" <?php if (strpos($_SERVER['REQUEST_URI'], 'topic') != false) {
-                    echo 'active';
-                } ?>">
+                </a>
+                <a class="itemmenu" href="/topic" id="topic">
                     <span></span><i class="bi bi-music-note-beamed"></i>Chủ đề & thể loại
-                </div>
+                </a>
 
             </div>
             <div class="menu_song">
                 nhac
-                {{-- @foreach ($nhac as $index => $n)
-                    @foreach ($album as $alb)
-                        @foreach ($nghesi as $ns)
-                            @if ($n->album_idnhac == $alb->id && $alb->nghesi_idalbum == $ns->id)
-                                <li class="songItem">
-                                    <span>{{ str_pad($index + 1, 2, '0', STR_PAD_LEFT) }}</span>
-                                    <img src="../../images/{{ $n->imagemusic }}" alt="" />
-                                    <h5>
-                                        {{ $n->tennhac }}
-                                        <div class="subtitle">{{ $ns->tennghesi }}</div>
-                                    </h5>
-                                    <i class="bi playListPlay bi-play-circle-fill" id="{{ $n->nhaclink }}"
-                                        title="{{ $n->id }}"></i>
-                                </li>
-                            @endif
-                        @endforeach
-                    @endforeach
-                @endforeach --}}
+
             </div>
-            <div class="">
+            <div class="giothieu">
                 <a href="/trangchu" target="_blank"> <i class="bi bi-exclamation-circle"></i>Giới thiệu</a>
             </div>
+            {{-- <div class="version">
+                version 1.0.0
+            </div> --}}
         </div>
 
         <div class="song_side">
@@ -96,17 +70,19 @@
                     @csrf
                     <div class="searchbar">
                         <div class="searchbar-wrapper">
+                            <div class="search-icon-wrapper">
+                                <div class="searchicon" id="searchButton"><i class="bi bi-search"></i></div>
+                            </div>
                             <div class="searchbar-center">
                                 <div class="searchbar-input-spacer"></div>
-                                <input type="text"name='searchbar_input' class="searchbar-input" maxlength="2048">
+                                <input type="text"name='searchbar_input' class="searchbar-input" maxlength="2048"
+                                    placeholder="Tìm kiếm nhạc, nghệ sĩ">
                             </div>
                             <div class="searchbar-left">
                                 <div class="delete-icon-wrapper">
                                     <i class="bi bi-x-lg"></i>
-                                </div>|
-                                <div class="search-icon-wrapper">
-                                    <div class="searchicon" id="searchButton"><i class="bi bi-search"></i></div>
                                 </div>
+
                             </div>
                         </div>
                     </div>
@@ -133,10 +109,3 @@
                 </div>
             </nav>
             <div id="song_side">
-                @if ($content)
-                    {!! $content !!}
-                @endif
-            </div>
-
-
-        </div>

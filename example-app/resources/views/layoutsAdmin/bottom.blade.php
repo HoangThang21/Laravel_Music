@@ -22,13 +22,14 @@
 
 </div>
 <script src="../../inc/js/indexAdmin.js"></script>
-<script src="https://cdn.ckeditor.com/ckeditor5/40.0.0/classic/ckeditor.js"></script>
-<script src="../../inc/js/app.js"></script>
 
+<script src="https://cdn.ckeditor.com/ckeditor5/40.0.0/classic/ckeditor.js"></script>
+
+<script src="../../inc/js/app.js"></script>
 @if (Auth::guard('api')->check())
     <script>
         var csrfToken = ` {{ csrf_token() }}`;
-        var contentFilter = {{ $contentFilter }}
+        var contentFilter = {{ $contentFilter }};
     </script>
 @endif
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
@@ -37,7 +38,7 @@
 <script>
     tinymce.init({
         selector: 'textarea#default',
-        width: 1000,
+        width: 900,
         height: 300,
         plugins: [
             'advlist', 'autolink', 'link', 'image', 'lists', 'charmap', 'preview', 'anchor', 'pagebreak',
@@ -56,6 +57,7 @@
         menubar: 'favs file edit view insert format tools table',
         content_style: 'body{font-family:Helvetica,Arial,sans-serif; font-size:16px}'
     });
+    
 </script>
 </body>
 

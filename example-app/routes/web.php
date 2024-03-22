@@ -17,7 +17,10 @@ use Illuminate\Support\Facades\Route;
 //php artisan serve
 //$2y$12$NtkJdK.h29/F05ng2LhENene/YJ23pPBRNWZShESdFQ0PvBhHCVyO
 Route::get('/Administrator', [AdminControllers::class, 'index']);
+Route::post('/Administrator/broadcast', [AdminControllers::class, 'broadcast']);
 Route::get('/Administrator/login', [AdminControllers::class, 'login']);
+Route::get('/Administrator/loadchat', [AdminControllers::class, 'loadchat']);
+Route::get('/Administrator/chat', [AdminControllers::class, 'chat']);
 Route::post('/Administrator/lg', [AdminControllers::class, 'loginuser']);
 Route::post('/Administrator/search', [AdminControllers::class, 'searchinfouser']);
 Route::post('/Administrator/themnd', [AdminControllers::class, 'themnd']);
@@ -59,7 +62,7 @@ Route::get('/Administrator/qlnghesi/suggest-data', [
 Route::post('/Administrator/qlnghesi/themns', [
     AdminControllers::class, 'themns'
 ]);
-Route::put('/Administrator/qlnghesi/suanghesi', [
+Route::post('/Administrator/qlnghesi/suanghesi', [
     AdminControllers::class, 'suanghesi'
 ]);
 Route::get('/Administrator/qlnghesi/xoanghesi&{id}', [

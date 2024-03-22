@@ -13,8 +13,12 @@ return new class extends Migration
     {
         Schema::create('mess', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInteger('idmess_user');
-            $table->string('noidung');
+            $table->Integer('iduser')->nullable();
+            $table->Integer('idusergg')->nullable();
+            $table->string('tenuser');
+            $table->text('hinhuser');
+            $table->integer('idnhac')->nullable();
+            $table->text('noidung');
             $table->timestamps();
         });
     }

@@ -10,19 +10,44 @@ use App\Models\Theloai;
 use App\Models\User;
 use App\Models\UserAPI;
 use Exception;
+
 use Illuminate\Support\Collection;
+use App\Events\PusherBroadcast;
+use App\Models\Mess;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\View\View;
 use PhpParser\Node\Stmt\TryCatch;
-
+use Pusher\Pusher;
+use Carbon\Carbon;
 class AdminControllers extends Controller
 {
+
     /**
      * Display a listing of the resource.
      */
+    public function broadcast(Request $request)
+    {
+        $arr='';
+        // dd( explode("\r\n",$request->input('message-input')));
+        foreach(explode("\r\n", $request->input('message-input')) as $message){
+            $arr=$arr."<p>$message</p>";
+        };
+        // dd($arr);
+        $mess = new Mess();
+        $mess->tenuser = 'Admin';
+        $mess->iduser = Auth::guard('api')->user()->id;
+        $mess->hinhuser = 'logomobifone.png';
+        $mess->noidung = $arr;
+        $mess->time = Carbon::now();;
+        $mess->save();
+        return  redirect()->intended('/Administrator/chat');
+    }
+
+
     public function sendmail(Request $request)
     {
         $request->validate([
@@ -75,6 +100,31 @@ class AdminControllers extends Controller
         // dd($email,$body);
 
 
+    }
+    public function chat()
+    {
+        if (Auth::guard('api')->check()) {
+
+            return view(
+                'Auth.qlchat.chat',
+                [
+                    'ttnguoidung' =>   Auth::guard('api')->user(),
+                    'user' =>  User::all(),
+                    'userapi' =>  UserAPI::all(),
+                    'chat' => Mess::all(),
+                    'nhac' => Nhac::all(),
+                    'contentFilter' => '0',
+                    'active' => '',
+                    'suc' => "",
+                ]
+            );
+        } else {
+            return view('Auth.login', ['loi' => '']);
+        }
+    }
+    public function loadchat(){
+        return response()->json([ 'chat' => Mess::all(),
+        'nhac' => Nhac::all(),'ttnguoidung' =>   Auth::guard('api')->user(),]);
     }
     public function index()
     {
@@ -1068,6 +1118,8 @@ class AdminControllers extends Controller
                                     'searchbarinput' => '',
                                     'contentFilter' => '2',
                                     'active' => '0',
+                                    'suc' => "",
+
                                 ]
                             );
                         }

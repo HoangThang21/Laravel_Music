@@ -8,16 +8,15 @@
     <title>Admin Music</title>
     <link href="../../inc/css/app.css" rel="stylesheet">
     <link href="../../inc/css/indexAdmin.css" rel="stylesheet">
-
+    
     <link rel="shortcut icon" href="../../images/logomobifone.png" type="image/png">
-
 
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
     {{--  --}}
- 
-    
+
+
 
 </head>
 
@@ -88,12 +87,14 @@
 
 
                     <li class="sidebar-header text-info">
-                        CẤU HÌNH WEBSITE
+                        WEBSITE
                     </li>
 
-                    <li class="sidebar-item">
-                        <a class="sidebar-link" href="">
-                            <i class="align-middle" data-feather="book"></i> <span class="align-middle">Thông tin</span>
+                    <li class="sidebar-item <?php if (strpos($_SERVER['REQUEST_URI'], 'chat') != false) {
+                        echo 'active';
+                    } ?>">
+                        <a class="sidebar-link" href="/Administrator/chat">
+                            <i class="align-middle" data-feather="book"></i> <span class="align-middle">Chat</span>
                         </a>
                     </li>
 

@@ -12,51 +12,38 @@ class ClientControllers extends Controller
      */
     public function index()
     {
-        $content = View::make('frontend.menu.trangchu', ['name' => 'helo đã chuyền'])->render();
-        return view('frontend.home', ['content' => $content, 'user' => []]);
+      
+        return view('frontend.home', ['activerity' => 0, 'content' => '']);
     }
 
-    public function loadtrangchu(Request $request)
+    public function loadtrangchu()
     {
-
-        $content = View::make('frontend.menu.trangchu', ['name' => 'helo đã chuyển hướng'])->render();
-
-        return response()->json(['content' => $content]);
+        return redirect()->intended('/');
+       
     }
-    public function loadyeuthich(Request $request)
+    public function loadyeuthich()
     {
 
-        $content = View::make('frontend.menu.yeuthich', ['name' => 'helo đã chuyển hướng'])->render();
-
-        return response()->json(['content' => $content]);
+        return view('frontend.menu.yeuthich', ['activerity' => 1, 'content' => '']);
     }
 
-    public function loadlivechat(Request $request)
+    public function loadlivechat()
     {
-
-        $content = View::make('frontend.menu.livechat', ['name' => 'helo đã chuyển hướng'])->render();
-
-        return response()->json(['content' => $content]);
+        return view('frontend.menu.livechat', ['activerity' => 2, 'content' => '']);
     }
-    public function loadMchart(Request $request)
+    public function loadMchart()
     {
 
-        $content = View::make('frontend.menu.Mchart', ['name' => 'helo đã chuyển hướng'])->render();
-
-        return response()->json(['content' => $content]);
+        return view('frontend.menu.Mchart', ['activerity' => 3, 'content' => '']);
     }
-    public function loadranksong(Request $request)
+    public function loadranksong()
     {
 
-        $content = View::make('frontend.menu.ranksong', ['name' => 'helo đã chuyển hướng'])->render();
-
-        return response()->json(['content' => $content]);
+        return view('frontend.menu.ranksong', ['activerity' => 4, 'content' => '']);
     }
-    public function loadtopic(Request $request)
+    public function loadtopic()
     {
 
-        $content = View::make('frontend.menu.topic', ['name' => 'helo đã chuyển hướng'])->render();
-
-        return response()->json(['content' => $content]);
+        return view('frontend.menu.topic', ['activerity' => 5, 'content' => '']);
     }
 }
