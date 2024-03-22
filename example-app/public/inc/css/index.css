@@ -74,7 +74,7 @@ header .song_side {
 header .master_play {
     z-index: 99;
     position: absolute;
-  
+
     bottom: 0;
     left: 0;
     width: 100%;
@@ -83,7 +83,7 @@ header .master_play {
     box-shadow: 0 3px 8px #090f1f;
 }
 header .master_play {
-    display: none;
+    display: flex;
     align-items: center;
     padding: 0 20px;
 }
@@ -373,12 +373,11 @@ header .master_play .bar input {
 /* input search */
 .searchbar {
     font-size: 14px;
-
-    color: #202124;
     display: flex;
     z-index: 3;
-    height: 44px;
-    background: linear-gradient(94deg, #a5bbdaa0 -13.04%, #a7aad595 124.22%);
+    height: 36px;
+    background: rgba(65, 65, 65, 0.65);
+    backdrop-filter: blur(88px);
     border: 1px solid #dfe1e5;
     box-shadow: none;
     border-radius: 24px;
@@ -398,7 +397,7 @@ header .master_play .bar input {
 .searchbar-left {
     font-size: 14px;
     font-family: arial, sans-serif;
-    color: #c5c5c5;
+    color: #b8b8b8;
     display: flex;
     align-items: center;
     padding-right: 13px;
@@ -406,7 +405,7 @@ header .master_play .bar input {
 }
 .search-icon-wrapper {
     margin: auto;
-    color: #000000;
+    color: #b8b8b8;
     font-size: 18px;
     padding-left: 10px;
     cursor: pointer;
@@ -418,7 +417,7 @@ header .master_play .bar input {
     cursor: pointer;
     display: none;
     margin: auto;
-    color: #202124;
+    color: #b8b8b8;
     font-size: 18px;
     padding-right: 10px;
     font-weight: 800;
@@ -441,7 +440,7 @@ header .master_play .bar input {
     border: none;
     margin: 0;
     padding: 0 4px 0 10px;
-    color: rgba(0, 0, 0, 0.87);
+    color: #b8b8b8;
     word-wrap: break-word;
     outline: none;
     display: flex;
