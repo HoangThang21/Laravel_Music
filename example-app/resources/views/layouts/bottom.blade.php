@@ -26,10 +26,10 @@
             </div>
             <span id="currentEnd">0:00</span>
         </div>
-        <div class="thongbao">
+        <div class="thongbao" style="background-color: #1cd912;">
             <div class="headerthongbao">
                 <div class="tieude"></div>
-                <i class="bi bi-x-lg"></i>
+                <i class="bi bi-x-lg" onclick="toggleMenu('thongbao')"></i>
             </div>
         </div>
         </header>

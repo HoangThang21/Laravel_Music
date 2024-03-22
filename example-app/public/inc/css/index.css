@@ -1,3 +1,26 @@
+:root {
+    --backgroundmain: #111111;
+    --backgroundmain_right: rgba(17, 17, 17, 0.3);
+    --text_music_gradient-1: linear-gradient(
+        94deg,
+        #1756b5 -13.04%,
+        #7209b7 124.22%
+    );
+    --text_music_gradient-2: linear-gradient(
+        94deg,
+        #b5179e -13.04%,
+        #7209b7 124.22%
+    );
+    --text_music_gradient-3: linear-gradient(
+        94deg,
+        rgba(23, 86, 181, 0.61) -13.04%,
+        rgba(183, 9, 82, 0.74) 124.22%
+    );
+
+    --text-color-light: #fff;
+    --text-color-B: #b8b8b8;
+    --color-tim: #b5179e;
+}
 * {
     margin: 0;
     padding: 0;
@@ -6,7 +29,7 @@
 body {
     height: 100vh;
 
-    background-color: #131312;
+    /* background-color: #131312; */
     /* font-family: "roboto"; */
     display: flex;
     align-items: center;
@@ -27,6 +50,7 @@ header {
     height: 100%;
     max-width: 1920px;
     width: 100%;
+    background-color: var(--backgroundmain);
     /* border: 1px solid #fff; */
     display: flex;
     flex-wrap: wrap;
@@ -36,33 +60,52 @@ header .menu_side,
 .song_side {
     position: relative;
     width: 20%;
-    height: 91%;
+    height: 100%;
     /* border: 1px solid #fff; */
-    background-color: rgba(255, 255, 255, 0.943);
+    background-color: var(--backgroundmain);
     box-shadow: 25px 0 10px 20px #7185c5;
     /* color: #fff; */
 }
+
 header .song_side {
     width: 80%;
-    background-color: #ffffff;
 }
 
 header .master_play {
     z-index: 99;
     position: absolute;
+  
     bottom: 0;
     left: 0;
     width: 100%;
-    height: 9%;
-    background: linear-gradient(94deg, #5483c9 -13.04%, #d05561 124.22%);
+    height: 90px;
+    background-color: var(--backgroundmain);
     box-shadow: 0 3px 8px #090f1f;
 }
+header .master_play {
+    display: none;
+    align-items: center;
+    padding: 0 20px;
+}
 
+header .menu_side .menu {
+    color: var(--text-color-B);
+    font-size: 19px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    letter-spacing: 0.38px;
+    text-transform: capitalize;
+    border-bottom: 1px solid var(--color-tim);
+    padding: 0 20px 10px;
+    margin: 10px 20px 20px;
+}
 header .menu_side .home_rec {
-    padding: 20px 20px;
+    padding: 20px 20px 0 20px;
     display: flex;
     gap: 10px;
     align-items: center;
+    justify-content: center;
 }
 header .menu_side .home_rec img {
     width: 52px;
@@ -77,12 +120,10 @@ header .menu_side .home_rec p {
 
 header .menu_side .playlist {
     /* padding:  0 20px; */
-    height: 215px;
+    height: 255px;
     overflow-x: hidden;
     -ms-overflow-style: none;
     scrollbar-width: none;
-    border-bottom: 1px solid #131312;
-    border-top: 1px solid #131312;
 }
 header .menu_side .playlist::-webkit-scrollbar {
     display: none;
@@ -91,26 +132,30 @@ header .menu_side .playlist div {
     display: flex;
     align-items: center;
     position: relative;
-    padding: 20px;
+    height: 28px;
+    padding: 10px;
+    margin: 0 30px 10px 30px;
+    border-radius: 6px;
     gap: 10px;
     /* size: 24px; */
-    font-size: 18px;
-    color: #191e65;
+    font-size: 14px;
+    color: var(--text-color-B);
+    /* background: var(--text_music_gradient-3); */
 }
 header .menu_side .playlist div:hover {
-    background-color: #7185c5;
+    background: var(--text_music_gradient-1);
 }
 header .menu_side .playlist div.active span {
     position: absolute;
     width: 5px;
-    height: 50px;
+    height: 30px;
     right: 0;
     background-color: aqua;
     border-radius: 20px 6px 6px 20px;
 }
 header .menu_side .playlist div.active {
     color: #fff;
-    background-color: rgba(39, 92, 237, 0.779);
+    background: var(--text_music_gradient-3);
 }
 header .menu_side .playlist div .imgchat {
     /* position: absolute; */
@@ -143,11 +188,7 @@ header .menu_side .playlist div .imgchat img:nth-child(3) {
 header .menu_side .playlist h4 a .nthimg3 {
     left: 152px;
 } */
-header .master_play {
-    display: flex;
-    align-items: center;
-    padding: 0 20px;
-}
+
 header .master_play .wave,
 .active2 {
     width: 30px;
@@ -306,7 +347,7 @@ header .master_play .bar input {
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: 9;
-    background-color: #1cd912;
+
     /* width: 300px; */
     padding: 10px;
     border-radius: 4px;
@@ -412,6 +453,9 @@ header .master_play .bar input {
     width: 100%;
 }
 /* --------------------------- */
+.song_side #song_side {
+    color: var(--text-color-light);
+}
 .song_side nav {
     height: 45px;
 

@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Music - Nghe nhạc mới HOT nhất, tải nhạc MP3 chất lượng cao</title>
-    <link rel="shortcut icon" href="../../images/webicon.png" type="image/png">
+    <link rel="shortcut icon" href="../../images/logomobifone.png" type="image/png">
     <link href="../../inc/css/index.css" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
@@ -16,10 +16,13 @@
     <header>
         <div class="menu_side">
             <a href="/trangchu" class="home_rec" id="home_rec">
-                <img src="../../images/webicon.png" alt="" sizes="28">
+                <img src="../../images/logomobifone.png" alt="" sizes="28">
                 <p><span style="color: rgb(37, 82, 231)">Mobi</span><span style="color: rgb(204, 51, 51)">Song</span>
                 </p>
             </a>
+            <div class="menu">
+                <p>Menu</p>
+            </div>
 
             <div class="playlist">
                 <div id="trangchu" class=" active<?php if (strpos($_SERVER['REQUEST_URI'], 'trangchu') != false) {

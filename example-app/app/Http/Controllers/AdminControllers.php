@@ -662,11 +662,25 @@ class AdminControllers extends Controller
     {
         $request->validate([
             'txttennhac' => ['required'],
+            'txtmanhac' => ['required'],
+            'txtgia' => ['required'],
+            'txtmotalyric' => ['required'],
             'fnhac' => 'required|mimes:mp3',
             'fhinh' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'optloains' => ['required'],
 
         ]);
+        if ($request->input('txtgia') <= 0) {
+            return view('Auth.qlnhac.themnhac',  [
+                'ttnguoidung' =>   Auth::guard('api')->user(),
+                'loi' => 'Giá không được < 0',
+                'album' =>  Album::all(),
+                'nghesi' =>  Nghesi::all(),
+                'contentFilter' => '0',
+                'active' => '',
+
+            ]);
+        }
         $generatedmusic = 'music' . time() . '-' . $request->file('fnhac')->getClientOriginalName();
         $request->file('fnhac')->move(public_path('music'), $generatedmusic);
         $generatedimage = 'image' . time() . '-' . $request->file('fhinh')->getClientOriginalName();
@@ -676,6 +690,9 @@ class AdminControllers extends Controller
         $ns->nhaclink = $generatedmusic;
         $ns->imagemusic  = $generatedimage;
         $ns->album_idnhac   = $request->input('optloains');
+        $ns->maNhac = $request->input('txtmanhac');
+        $ns->gia = $request->input('txtgia');
+        $ns->lyric = $request->input('txtmotalyric');
         $ns->save();
         return redirect()->intended('/Administrator/qlnhac');
     }
@@ -1273,10 +1290,26 @@ class AdminControllers extends Controller
         $request->validate([
             'txttennhac' => ['required'],
             'fnhac' => 'mimes:mp3',
+            'txtmanhac' => ['required'],
+            'txtgia' => ['required'],
+            'txtmotalyric' => ['required'],
             'fhinh' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'optloains' => ['required'],
 
         ]);
+        if ($request->input('txtgia') <= 0) {
+            $music = Nhac::where('id', $request->input('txtidnhac'))->first();
+            $ns = Nghesi::all();
+            return view('Auth.qlnhac.suamusic', [
+                'ttnguoidung' =>  Auth::guard('api')->user(),
+                'album' => Album::all(),
+                'music' => $music,
+                'nghesi' =>  $ns,
+                'active' => '',
+                'loi' => 'Giá không được < 0',
+                'contentFilter' => '0',
+            ]);
+        }
         if ($request->file('fnhac') != null) {
             $generatedmusic = 'music' . time() . '-' . $request->file('fnhac')->getClientOriginalName();
             $request->file('fnhac')->move(public_path('music'), $generatedmusic);
@@ -1289,6 +1322,9 @@ class AdminControllers extends Controller
                         'nhaclink' => $generatedmusic,
                         'imagemusic' => $generatedimage,
                         'album_idnhac'   => $request->input('optloains'),
+                        'maNhac' => $request->input('txtmanhac'),
+                        'gia' => $request->input('txtgia'),
+                        'lyric' => $request->input('txtmotalyric'),
 
                     ]);
             } else {
@@ -1298,7 +1334,9 @@ class AdminControllers extends Controller
                         'nhaclink' => $generatedmusic,
 
                         'album_idnhac'   => $request->input('optloains'),
-
+                        'maNhac' => $request->input('txtmanhac'),
+                        'gia' => $request->input('txtgia'),
+                        'lyric' => $request->input('txtmotalyric'),
                     ]);
             }
         } else {
@@ -1310,12 +1348,18 @@ class AdminControllers extends Controller
                         'tennhac' => $request->input('txttennhac'),
                         'imagemusic' => $generatedimage,
                         'album_idnhac'   => $request->input('optloains'),
+                        'maNhac' => $request->input('txtmanhac'),
+                        'gia' => $request->input('txtgia'),
+                        'lyric' => $request->input('txtmotalyric'),
                     ]);
             } else {
                 $nhac = Nhac::where('id', $request->input('txtidnhac'))
                     ->update([
                         'tennhac' => $request->input('txttennhac'),
                         'album_idnhac'   => $request->input('optloains'),
+                        'maNhac' => $request->input('txtmanhac'),
+                        'gia' => $request->input('txtgia'),
+                        'lyric' => $request->input('txtmotalyric'),
                     ]);
             }
         }

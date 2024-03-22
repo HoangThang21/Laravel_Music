@@ -43,3 +43,12 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }, 1000);
 });
+function toggleMenu(name) {
+    var menuFilter = document.querySelector("." + name);
+    if (menuFilter) {
+        const isHidden1 =
+            menuFilter.style.display === "none" ||
+            getComputedStyle(menuFilter).display === "none";
+        menuFilter.style.display = isHidden1 ? "block" : "none";
+    }
+}
