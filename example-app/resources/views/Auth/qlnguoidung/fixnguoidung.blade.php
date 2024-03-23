@@ -11,6 +11,15 @@
                 <div class="my-3"><input class="form-control" type="text" name="txtmatkhau" placeholder="Mật khẩu">
                 </div>
                 <div class="my-3">
+                    <label>Chọn quyền chat</label>
+                    <select class="form-control" name="txtquyenchat">
+                        <option value="0"@if ($user->quyenchat == '0') {{ 'selected' }} @endif>Ban chat
+                        </option>
+                        <option value="1"@if ($user->quyenchat == '1') {{ 'selected' }} @endif>Chat được
+                        </option>
+                    </select>
+                </div>
+                <div class="my-3">
                     <label>Chọn Vip</label>
                     <select class="form-control" name="optloaindvip">
                         <option value="0"@if ($user->vip == '0') {{ 'selected' }} @endif>Không có Vip

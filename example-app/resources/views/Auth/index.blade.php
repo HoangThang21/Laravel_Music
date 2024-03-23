@@ -127,10 +127,6 @@
                                                                 </a>
                                                             @endif
                                                         @endif
-                                                        <a
-                                                            href="/Administrator/{{ $us['id'] }}&userde"class="delete-link">
-                                                            <li><i class="bi bi-trash-fill"></i> Xóa</li>
-                                                        </a>
                                                         <a href="/Administrator/{{ $us['id'] }}&sendmail">
                                                             <li><i class="bi bi-envelope-at"></i> Gửi Mail</li>
                                                         </a>

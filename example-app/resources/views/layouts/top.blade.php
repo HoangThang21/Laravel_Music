@@ -8,6 +8,7 @@
     <title>Music - Nghe nhạc chờ mới HOT nhất, tải nhạc MP3 chất lượng cao</title>
     <link rel="shortcut icon" href="../../images/logomobifone.png" type="image/png">
     <link href="../../inc/css/index.css" rel="stylesheet">
+    <link href="../../inc/css/home.css" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
 </head>
@@ -90,7 +91,20 @@
                 <div class="infouser">
                     <div class="end">
                         <div class="matshead">
-                            <img src="../../images/webicon.png" alt="">
+                            <div class="infotopuser">
+                                <img src="../../images/user-profile.png" alt="">
+                                <div class="nametexttop">
+                                    <div class="nametop">
+                                       nguyễn hoàng thắng
+                                    </div>
+                                    <div class="online">
+                                        online
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="thongbaotop">
+                                <i class="bi bi-bell"></i>
+                            </div>
                         </div>
                         <div class="toggle_infouser">
                             <div class="infouser-header">
@@ -108,4 +122,6 @@
                     </div>
                 </div>
             </nav>
-            <div id="song_side">
+            <div class="contentsong">
+
+                <div id="song_side">

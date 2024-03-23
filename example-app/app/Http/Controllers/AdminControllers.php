@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\CallLoad;
 use App\Mail\ContactEmail;
 use App\Models\Album;
 use App\Models\Nghesi;
@@ -23,6 +24,7 @@ use Illuminate\View\View;
 use PhpParser\Node\Stmt\TryCatch;
 use Pusher\Pusher;
 use Carbon\Carbon;
+
 class AdminControllers extends Controller
 {
 
@@ -31,69 +33,84 @@ class AdminControllers extends Controller
      */
     public function broadcast(Request $request)
     {
-        $arr='';
-        // dd( explode("\r\n",$request->input('message-input')));
-        foreach(explode("\r\n", $request->input('message-input')) as $message){
-            $arr=$arr."<p>$message</p>";
-        };
-        // dd($arr);
-        $mess = new Mess();
-        $mess->tenuser = 'Admin';
-        $mess->iduser = Auth::guard('api')->user()->id;
-        $mess->hinhuser = 'logomobifone.png';
-        $mess->noidung = $arr;
-        $mess->time = Carbon::now();;
-        $mess->save();
-        return  redirect()->intended('/Administrator/chat');
+        if (Auth::guard('api')->check()) {
+
+            $arr = '';
+
+            // dd( explode("\r\n",$request->input('message-input')));
+            foreach (explode("\r\n", $request->input('message-input')) as $message) {
+                $arr = $arr . "<p>$message</p>";
+            };
+            // dd($arr);
+            $mess = new Mess();
+            $mess->tenuser = 'Admin';
+            $mess->iduser = Auth::guard('api')->user()->id;
+            $mess->hinhuser = 'logomobifone.png';
+            if ($request->input('linknhac')) {
+                $mess->idnhac = $request->input('linknhac');
+            }
+            $mess->noidung = $arr;
+            $mess->time = Carbon::now();;
+            $mess->save();
+            event(new CallLoad('Success'));
+            return  redirect()->intended('/Administrator/chat');
+        } else {
+            return view('Auth.login', ['loi' => '']);
+        }
     }
 
 
     public function sendmail(Request $request)
     {
-        $request->validate([
-            'txtemail' => ['required'],
-            'txtmota' => ['required'],
+        if (Auth::guard('api')->check()) {
 
-        ]);
-        $ktemail = User::where('email', $request->input('txtemail'))->first();
-        $ktemailgg = UserAPI::where('email', $request->input('txtemail'))->first();
-        $email = $request->input('txtemail');
-        $body = $request->input('txtmota');
-        // dd($body);
-        $url = 'Mail.contactEmail';
-        if ($ktemail) {
-            Mail::to($email)->send(new ContactEmail($email, $body, $url));
-            return view(
-                'Auth.index',
-                [
-                    'ttnguoidung' =>   Auth::guard('api')->user(),
-                    'user' =>  User::all(),
-                    'userapi' =>  UserAPI::all(),
-                    'usercount' =>  User::all()->count(),
-                    'userapicount' =>  UserAPI::all()->count(),
-                    'searchbarinput' => '',
-                    'contentFilter' => '0',
-                    'active' => '0',
-                    'suc' => "Đã gửi email thành công",
-                ]
-            );
-        }
-        if ($ktemailgg) {
-            Mail::to($email)->send(new ContactEmail($email, $body, $url));
-            return view(
-                'Auth.index',
-                [
-                    'ttnguoidung' =>   Auth::guard('api')->user(),
-                    'user' =>  User::all(),
-                    'userapi' =>  UserAPI::all(),
-                    'usercount' =>  User::all()->count(),
-                    'userapicount' =>  UserAPI::all()->count(),
-                    'searchbarinput' => '',
-                    'contentFilter' => '0',
-                    'active' => '0',
-                    'suc' => "Đã gửi email thành công",
-                ]
-            );
+            $request->validate([
+                'txtemail' => ['required'],
+                'txtmota' => ['required'],
+
+            ]);
+            $ktemail = User::where('email', $request->input('txtemail'))->first();
+            $ktemailgg = UserAPI::where('email', $request->input('txtemail'))->first();
+            $email = $request->input('txtemail');
+            $body = $request->input('txtmota');
+            // dd($body);
+            $url = 'Mail.contactEmail';
+            if ($ktemail) {
+                Mail::to($email)->send(new ContactEmail($email, $body, $url));
+                return view(
+                    'Auth.index',
+                    [
+                        'ttnguoidung' =>   Auth::guard('api')->user(),
+                        'user' =>  User::all(),
+                        'userapi' =>  UserAPI::all(),
+                        'usercount' =>  User::all()->count(),
+                        'userapicount' =>  UserAPI::all()->count(),
+                        'searchbarinput' => '',
+                        'contentFilter' => '0',
+                        'active' => '0',
+                        'suc' => "Đã gửi email thành công",
+                    ]
+                );
+            }
+            if ($ktemailgg) {
+                Mail::to($email)->send(new ContactEmail($email, $body, $url));
+                return view(
+                    'Auth.index',
+                    [
+                        'ttnguoidung' =>   Auth::guard('api')->user(),
+                        'user' =>  User::all(),
+                        'userapi' =>  UserAPI::all(),
+                        'usercount' =>  User::all()->count(),
+                        'userapicount' =>  UserAPI::all()->count(),
+                        'searchbarinput' => '',
+                        'contentFilter' => '0',
+                        'active' => '0',
+                        'suc' => "Đã gửi email thành công",
+                    ]
+                );
+            }
+        } else {
+            return view('Auth.login', ['loi' => '']);
         }
 
 
@@ -113,7 +130,8 @@ class AdminControllers extends Controller
                     'userapi' =>  UserAPI::all(),
                     'chat' => Mess::all(),
                     'nhac' => Nhac::all(),
-                    'contentFilter' => '0',
+                    'contentFilter' => '-1',
+                    'namemusic' => '',
                     'active' => '',
                     'suc' => "",
                 ]
@@ -122,9 +140,46 @@ class AdminControllers extends Controller
             return view('Auth.login', ['loi' => '']);
         }
     }
-    public function loadchat(){
-        return response()->json([ 'chat' => Mess::all(),
-        'nhac' => Nhac::all(),'ttnguoidung' =>   Auth::guard('api')->user(),]);
+    public function xoachat(string $id)
+    {
+        if (Auth::guard('api')->check()) {
+
+            Mess::where('id', $id)->delete();
+            event(new CallLoad('Success'));
+            return  redirect()->intended('/Administrator/chat');
+        } else {
+            return view('Auth.login', ['loi' => '']);
+        }
+    }
+    public function loadchat()
+    {
+        return response()->json([
+            'chat' => Mess::all(),
+            'nhac' => Nhac::all(), 'ttnguoidung' =>   Auth::guard('api')->user(),
+            'namemusic' => ''
+        ]);
+    }
+    public function loadchatsend(string $id, string $name)
+    {
+
+        if ($name == 'albd') {
+            $nhac = Nhac::where('id', $id)->first();
+            // dd($nhac['nhaclink']);
+            return view(
+                'Auth.qlchat.chat',
+                [
+                    'ttnguoidung' =>   Auth::guard('api')->user(),
+                    'user' =>  User::all(),
+                    'userapi' =>  UserAPI::all(),
+                    'chat' => Mess::all(),
+                    'nhac' => Nhac::all(),
+                    'namemusic' => $nhac,
+                    'contentFilter' => '-1',
+                    'active' => '',
+                    'suc' => "",
+                ]
+            );
+        }
     }
     public function index()
     {
@@ -159,8 +214,8 @@ class AdminControllers extends Controller
     }
     public function logoutadmin()
     {
+        User::where('id', Auth::guard('api')->user()->id)->update(['online' => 0]);
         Auth::guard('api')->logout();
-
         return  redirect()->intended('/Administrator');
     }
     public function themnguoidung()
@@ -289,9 +344,6 @@ class AdminControllers extends Controller
     }
     public function loginuser(Request $request)
     {
-
-        // dd('a');
-
         try {
             $credentials = $request->validate([
                 'email' => ['required', 'email'],
@@ -303,7 +355,7 @@ class AdminControllers extends Controller
                     if (Hash::check($request->password, $users->password)) {
                         Auth::guard('api')->login($users);
                         if (Auth::guard('api')->check()) {
-
+                            User::where('id', Auth::guard('api')->user()->id)->update(['online' => 1]);
                             return  redirect()->intended('/Administrator');
                         }
                     } else {
@@ -392,7 +444,7 @@ class AdminControllers extends Controller
                     'nghesi' =>  $searchns,
                     'nghesiapi' =>  $searchnsapi,
                     'searchbarinput' => $request->searchbar_input,
-                    'contentFilter' => '0',
+                    'contentFilter' => '-1',
                     'active' => '',
                 ]
             );
@@ -448,7 +500,7 @@ class AdminControllers extends Controller
                     'album' =>  $albumsearch,
                     'nghesiapi' =>  [],
                     'searchbarinput' => '',
-                    'contentFilter' => '0',
+                    'contentFilter' => '-1',
                     'active' => '',
                 ]
             );
@@ -475,7 +527,7 @@ class AdminControllers extends Controller
                     'album' =>  Album::all(),
                     'nhac' =>  $song,
                     'searchbarinput' => '',
-                    'contentFilter' => '0',
+                    'contentFilter' => '-1',
                     'active' => '',
                 ]
             );
@@ -519,6 +571,7 @@ class AdminControllers extends Controller
             $request->validate([
                 'optloaindvip' => ['required'],
                 'optloaind' => ['required'],
+                'txtquyenchat' => ['required'],
             ]);
 
             if ($request->input('txtmatkhau') != null) {
@@ -527,7 +580,8 @@ class AdminControllers extends Controller
                         ->update([
                             'password' => Hash::make($request->input('txtmatkhaumoi')),
                             'vip' => $request->input('optloaindvip'),
-                            'quyen' => $request->input('optloaind')
+                            'quyen' => $request->input('optloaind'),
+                            'quyenchat' => $request->input('txtquyenchat'),
                         ]);
                     return redirect()->intended('/Administrator');
                 }
@@ -536,7 +590,8 @@ class AdminControllers extends Controller
                         ->update([
                             'password' => Hash::make($request->input('txtmatkhaumoi')),
                             'vip' => $request->input('optloaindvip'),
-                            'quyen' => $request->input('optloaind')
+                            'quyen' => $request->input('optloaind'),
+                            'quyenchat' => $request->input('txtquyenchat'),
                         ]);
                     return redirect()->intended('/Administrator');
                 }
@@ -546,7 +601,8 @@ class AdminControllers extends Controller
                         ->update([
 
                             'vip' => $request->input('optloaindvip'),
-                            'quyen' => $request->input('optloaind')
+                            'quyen' => $request->input('optloaind'),
+                            'quyenchat' => $request->input('txtquyenchat'),
                         ]);
                     return redirect()->intended('/Administrator');
                 }
@@ -555,7 +611,8 @@ class AdminControllers extends Controller
                         ->update([
 
                             'vip' => $request->input('optloaindvip'),
-                            'quyen' => $request->input('optloaind')
+                            'quyen' => $request->input('optloaind'),
+                            'quyenchat' => $request->input('txtquyenchat'),
                         ]);
                     return redirect()->intended('/Administrator');
                 }
@@ -599,7 +656,7 @@ class AdminControllers extends Controller
                 'user' =>  User::all(),
                 'theloai' =>  Theloai::all(),
                 'userapi' =>  UserAPI::all(),
-                'contentFilter' => '0',
+                'contentFilter' => '-1',
                 'active' => '',
 
             ]
@@ -617,7 +674,7 @@ class AdminControllers extends Controller
                 'nghesi' =>  Nghesi::all(),
                 'nghesiapi' =>  [],
                 'searchbarinput' => '',
-                'contentFilter' => '0',
+                'contentFilter' => '-1',
                 'active' => '',
             ]
         );
@@ -635,7 +692,7 @@ class AdminControllers extends Controller
                 'album' =>  Album::all(),
                 'nghesiapi' =>  [],
                 'searchbarinput' => '',
-                'contentFilter' => '0',
+                'contentFilter' => '-1',
                 'active' => '',
             ]
         );
@@ -653,7 +710,7 @@ class AdminControllers extends Controller
                 'album' =>  Album::all(),
                 'nhac' => Nhac::all(),
                 'searchbarinput' => '',
-                'contentFilter' => '0',
+                'contentFilter' => '-1',
                 'active' => '',
             ]
         );
@@ -668,7 +725,7 @@ class AdminControllers extends Controller
                 'theloai' =>  Theloai::all(),
                 'userapi' =>  UserAPI::where('quyen', 4)->get(),
                 'nghesi' =>  Nghesi::all(),
-                'contentFilter' => '0',
+                'contentFilter' => '-1',
                 'active' => '',
                 'loi' => '',
             ]
@@ -679,7 +736,7 @@ class AdminControllers extends Controller
         return view('Auth.qltheloai.themtheloai',  [
             'ttnguoidung' =>   Auth::guard('api')->user(),
             'loi' => '',
-            'contentFilter' => '0',
+            'contentFilter' => '-1',
 
             'active' => '',
         ]);
@@ -691,7 +748,7 @@ class AdminControllers extends Controller
             'loi' => '',
             'theloai' =>  Theloai::all(),
             'nghesi' =>  Nghesi::all(),
-            'contentFilter' => '0',
+            'contentFilter' => '-1',
             'active' => '',
 
         ]);
@@ -703,7 +760,7 @@ class AdminControllers extends Controller
             'loi' => '',
             'album' =>  Album::all(),
             'nghesi' =>  Nghesi::all(),
-            'contentFilter' => '0',
+            'contentFilter' => '-1',
             'active' => '',
 
         ]);
@@ -726,7 +783,7 @@ class AdminControllers extends Controller
                 'loi' => 'Giá không được < 0',
                 'album' =>  Album::all(),
                 'nghesi' =>  Nghesi::all(),
-                'contentFilter' => '0',
+                'contentFilter' => '-1',
                 'active' => '',
 
             ]);
@@ -758,7 +815,7 @@ class AdminControllers extends Controller
                     return view('Auth.qltheloai.suatheloai', [
                         'ttnguoidung' =>   Auth::guard('api')->user(),
                         'theloai' => $theloai,
-                        'contentFilter' => '0',
+                        'contentFilter' => '-1',
                         'active' => '',
                     ]);
                     // case 'ns':
@@ -811,7 +868,7 @@ class AdminControllers extends Controller
             return view('Auth.qltheloai.themtheloai',  [
                 'ttnguoidung' =>   Auth::guard('api')->user(),
                 'loi' => 'Tên thể loại đã tồn tại vui lòng nhập tên khác.',
-                'contentFilter' => '0',
+                'contentFilter' => '-1',
                 'active' => '',
             ]);
         } else {
@@ -843,7 +900,7 @@ class AdminControllers extends Controller
                 'loi' => 'Năm phát hành > 0',
                 'theloai' =>  Theloai::all(),
                 'nghesi' =>  Nghesi::all(),
-                'contentFilter' => '0',
+                'contentFilter' => '-1',
                 'active' => '',
 
             ]);
@@ -888,7 +945,7 @@ class AdminControllers extends Controller
                         'theloai' =>  Theloai::all(),
                         'userapi' =>  UserAPI::where('quyen', 4)->get(),
                         'nghesi' =>  Nghesi::all(),
-                        'contentFilter' => '0',
+                        'contentFilter' => '-1',
                         'active' => '',
                         'loi' => 'Emai: ' . $request->input('optloains') . '. Đã là nghệ sĩ, vui lòng chọn Eamil khác.',
                     ]
@@ -905,7 +962,7 @@ class AdminControllers extends Controller
                             'theloai' =>  Theloai::all(),
                             'userapi' =>  UserAPI::where('quyen', 4)->get(),
                             'nghesi' =>  Nghesi::all(),
-                            'contentFilter' => '0',
+                            'contentFilter' => '-1',
                             'active' => '',
                             'loi' => 'Tên: ' . $request->input('txtnghesi') . ' đã có, vui lòng chọn tên khác',
                         ]
@@ -931,7 +988,7 @@ class AdminControllers extends Controller
                         'theloai' =>  Theloai::all(),
                         'userapi' =>  UserAPI::where('quyen', 4)->get(),
                         'nghesi' =>  Nghesi::all(),
-                        'contentFilter' => '0',
+                        'contentFilter' => '-1',
                         'active' => '',
                         'loi' => 'Tên: ' . $request->input('optloains') . '. Đã là nghệ sĩ, vui lòng chọn Eamil khác. ',
                     ]
@@ -948,7 +1005,7 @@ class AdminControllers extends Controller
                             'theloai' =>  Theloai::all(),
                             'userapi' =>  UserAPI::where('quyen', 4)->get(),
                             'nghesi' =>  Nghesi::all(),
-                            'contentFilter' => '0',
+                            'contentFilter' => '-1',
                             'active' => '',
                             'loi' => 'Tên: ' . $request->input('txtnghesi') . ' đã có, vui lòng chọn tên khác',
                         ]
@@ -1185,7 +1242,7 @@ class AdminControllers extends Controller
                     'theloai' =>  Theloai::all(),
                     'userapi' =>  UserAPI::all(),
                     'nghesi' =>  Nghesi::where('id', $number)->first(),
-                    'contentFilter' => '0',
+                    'contentFilter' => '-1',
                     'active' => '',
                     'loi' => '',
                 ]
@@ -1201,7 +1258,7 @@ class AdminControllers extends Controller
 
                     'nghesi' =>  Nghesi::all(),
                     'album' =>  Album::where('id', $number)->first(),
-                    'contentFilter' => '0',
+                    'contentFilter' => '-1',
                     'active' => '',
                     'loi' => '',
                 ]
@@ -1232,7 +1289,7 @@ class AdminControllers extends Controller
                     'nghesi' =>  $nsxemalbum,
                     'album' =>   $xemalbum,
                     'albumgoiy' =>   $albumgoiy,
-                    'contentFilter' => '0',
+                    'contentFilter' => '-1',
                     'active' => '',
                     'loi' => '',
                 ]
@@ -1248,7 +1305,7 @@ class AdminControllers extends Controller
                 'nghesi' =>  $ns,
                 'active' => '',
                 'loi' => '',
-                'contentFilter' => '0',
+                'contentFilter' => '-1',
             ]);
         }
         if ($name == 'duyetmusic') {
@@ -1298,7 +1355,7 @@ class AdminControllers extends Controller
                     'theloai' =>  Theloai::all(),
                     'userapi' =>  UserAPI::all(),
                     'nghesi' =>  Nghesi::where('id',  $request->input('txtidnghesi'))->first(),
-                    'contentFilter' => '0',
+                    'contentFilter' => '-1',
                     'active' => '',
                     'loi' => 'Lỗi',
                 ]
@@ -1331,7 +1388,7 @@ class AdminControllers extends Controller
                 'loi' => 'Năm phát hành > 0',
                 'theloai' =>  Theloai::all(),
                 'nghesi' =>  Nghesi::all(),
-                'contentFilter' => '0',
+                'contentFilter' => '-1',
                 'active' => '',
 
             ]);
@@ -1359,7 +1416,7 @@ class AdminControllers extends Controller
                 'nghesi' =>  $ns,
                 'active' => '',
                 'loi' => 'Giá không được < 0',
-                'contentFilter' => '0',
+                'contentFilter' => '-1',
             ]);
         }
         if ($request->file('fnhac') != null) {

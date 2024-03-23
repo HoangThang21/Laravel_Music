@@ -157,7 +157,7 @@ document.addEventListener("DOMContentLoaded", () => {
                                     <i class="bi bi-three-dots-vertical"></i>
                                 </div>
                                 <div class="item-list-dot">
-                                    <a href="/Administrator/xoachat/${chat.id}"><i
+                                    <a href="/Administrator/xoachat&${chat.id}"><i
                                             class="bi bi-trash-fill"></i>Xóa</a>
                                 </div>
                             </div>
@@ -175,9 +175,10 @@ document.addEventListener("DOMContentLoaded", () => {
                                     if (chat.idnhac == nhac.id) {
                                         theload += `
                                                     <div class="bottomessage">
+                                                        <i class="bi bi-music-note-beamed"></i>
                                                         <div class="nhac"><a target="_black"
                                                                 href="../../music/${nhac.nhaclink}">${nhac.tennhac}</a></div>
-                                                        <i class="bi bi-music-note-beamed"></i>
+                                                        
                                                     </div>
                                         `;
                                     }
@@ -226,7 +227,7 @@ document.addEventListener("DOMContentLoaded", () => {
                                     <i class="bi bi-three-dots-vertical"></i>
                                 </div>
                                 <div class="item-list-dot">
-                                    <a href="/Administrator/xoachat/${chat.id}"><i
+                                    <a href="/Administrator/xoachat&${chat.id}"><i
                                             class="bi bi-trash-fill"></i>Xóa</a>
                                 </div>
                             </div> </div>
@@ -234,6 +235,8 @@ document.addEventListener("DOMContentLoaded", () => {
                         }
                     });
                     $(".messages").append(theload);
+                    var contentDiv1 = $(".messages");
+                    contentDiv1.scrollTop(contentDiv1.prop("scrollHeight"));
                 },
                 error: function (xhr, status, error) {
                     console.error("Lỗi khi gợi ý dữ liệu: " + error);
@@ -287,6 +290,7 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         });
     });
+
     $("#message-input").on("input", function () {
         this.style.height = "auto";
         this.style.height = this.scrollHeight + "px";
@@ -309,6 +313,35 @@ document.addEventListener("DOMContentLoaded", () => {
     });
     var contentDiv = $(".messages");
     contentDiv.scrollTop(contentDiv.prop("scrollHeight"));
+    var pusher = new Pusher("0e5ab1838c755a5b0547", {
+        cluster: "ap1",
+    });
+    var channel = pusher.subscribe("my-channel");
+    channel.bind("my-event", function (data) {
+        if (data.message == "Success") {
+            setloadchat = true;
+        }
+        //   console.log(data);
+    });
+
+    var messagesDiv = $("#messages");
+    var scrollButton = $("#scrollButton");
+
+    messagesDiv.scroll(function () {
+        if (messagesDiv.prop("scrollHeight") - messagesDiv.scrollTop() > 1000) {
+            scrollButton.fadeIn();
+        } else {
+            scrollButton.fadeOut();
+        }
+    });
+
+    scrollButton.click(function () {
+        messagesDiv.animate(
+            { scrollTop: messagesDiv.prop("scrollHeight") },
+            500
+        );
+    });
+    
 });
 function toggleMenu(name) {
     var menuFilter = document.querySelector("." + name);

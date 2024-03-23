@@ -39,6 +39,7 @@
                   <th>Hình</th>
                   <th>Tên album</th>
                   <th>Chức năng</th>
+                 
                   
                  </tr>
                 <?php foreach ($nhac as $nd): ?>
@@ -66,12 +67,13 @@
                       <a href="/Administrator/qlalbum/duyetmusic&{{ $nd['id'] }}-albc" class="text-danger">Chưa duyệt</a>
                       @else
                       <a href="/Administrator/qlalbum/duyetmusic&{{ $nd['id'] }}-albd" class="text-success">Đã duyệt</a>
+                      <a href="/Administrator/loadchat&{{ $nd['id'] }}-albd">Send chat</a>
                       @endif
                      
                   </td>
                   </tr>    
                     
-                
+                  
                   <?php endforeach; ?>
             </table>
           

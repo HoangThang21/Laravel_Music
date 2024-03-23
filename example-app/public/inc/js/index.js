@@ -16,7 +16,6 @@ document.addEventListener("DOMContentLoaded", () => {
     if (search) {
         search.addEventListener("keypress", function (event) {
             if (event.keyCode === 13) {
-                
                 event.preventDefault(); // Ngăn chặn form tự động submit
                 $("#searchForm").submit(); // Gửi form tìm kiếm
             }
@@ -42,6 +41,27 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         }
     }, 1000);
+    // document.addEventListener('contextmenu', function(event) {
+    //     event.preventDefault();
+    // });
+    document.querySelector(".pre").addEventListener("click", function () {
+        var list = document.querySelector(".list-item");
+        var firstItem = list.firstElementChild;
+        list.removeChild(firstItem);
+        list.appendChild(firstItem);
+    });
+    document.querySelector(".next").addEventListener("click", function () {
+        var list = document.querySelector(".list-item");
+        var lastItem = list.lastElementChild;
+        list.removeChild(lastItem);
+        list.insertBefore(lastItem, list.firstElementChild);
+    });
+    // setInterval(function () {
+    //     var list = document.querySelector(".list-item");
+    //     var lastItem = list.lastElementChild;
+    //     list.removeChild(lastItem);
+    //     list.insertBefore(lastItem, list.firstElementChild);
+    // }, 6000);
 });
 function toggleMenu(name) {
     var menuFilter = document.querySelector("." + name);

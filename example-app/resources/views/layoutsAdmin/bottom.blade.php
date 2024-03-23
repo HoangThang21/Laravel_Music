@@ -21,10 +21,10 @@
 </div>
 
 </div>
-<script src="../../inc/js/indexAdmin.js"></script>
+
 
 <script src="https://cdn.ckeditor.com/ckeditor5/40.0.0/classic/ckeditor.js"></script>
-
+<script src="../../inc/js/pusher.js"></script>
 <script src="../../inc/js/app.js"></script>
 @if (Auth::guard('api')->check())
     <script>
@@ -34,6 +34,7 @@
 @endif
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <script src="../../editor/tinymce/tinymce.min.js"></script>
+<script src="../../inc/js/indexAdmin.js"></script>
 
 <script>
     tinymce.init({

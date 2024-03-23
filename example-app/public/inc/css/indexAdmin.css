@@ -503,6 +503,18 @@ li {
 .messages {
     padding: 10px 10px 0 10px;
 }
+.musicform {
+    position: absolute;
+    top: -60px;
+    right: 200px;
+    z-index: 999;
+    display: flex;
+    gap: 20px;
+    background-color: #fbfbfb;
+    padding: 10px;
+    border-radius: 6px;
+}
+/* ------------------------------------------------------------------------------- */
 .left {
     display: flex;
     justify-content: start;
@@ -528,6 +540,13 @@ li {
     align-items: center;
     justify-content: start;
 }
+.left .bodymessage {
+    display: flex;
+    gap: 10px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+}
 .left .namemessage {
     font-size: 16px;
     font-weight: 500;
@@ -540,9 +559,9 @@ li {
     padding: 10px;
     color: #000000;
     border-radius: 10px;
-
     height: auto;
     background-color: #c0e8f9;
+    float: left;
 }
 p {
     margin: 0 !important;
@@ -616,6 +635,13 @@ p {
     align-items: center;
     justify-content: end;
 }
+.right .bodymessage {
+    display: flex;
+    gap: 10px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-end;
+}
 .right .namemessage {
     font-size: 16px;
     font-weight: 500;
@@ -630,6 +656,7 @@ p {
     border-radius: 10px;
     height: auto;
     background-color: #c0e8f9;
+    float: right;
 }
 .right .middlemessage .noidung {
     max-width: 300px;
@@ -642,6 +669,7 @@ p {
     gap: 15px;
     margin-top: 6px;
     align-items: center;
+    justify-content: flex-end;
 }
 .right .nhac {
     width: auto;
@@ -687,3 +715,18 @@ p {
 }
 
 /* -------------------------------------------------------------------------------------- */
+#scrollButton {
+    position: fixed;
+    bottom: 100px;
+    right: 10px;
+    width: 32px;
+    height: 32px;
+    display: none;
+    border-radius: 10px;
+    border: 1px solid var(--backgroundmain);
+    outline: none;
+    line-height: 0;
+    padding-top: 2px;
+    font-size: 24px;
+    animation:  all 1s linear ;
+}
