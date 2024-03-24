@@ -17,6 +17,7 @@ return new class extends Migration
             $table->unsignedInteger('id_nghesi_user')->nullable();
             $table->unsignedInteger('idnghesi_userapi')->nullable();
             $table->text('mota')->nullable();
+            $table->text('quantam')->nullable();
             $table->timestamps();
         });
     }

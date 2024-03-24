@@ -885,10 +885,14 @@ class AdminControllers extends Controller
             'txtnamphathanh' => ['required'],
             'optloains' => ['required'],
             'optloaitl' => ['required'],
+            'txthinh' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
         if ($request->input('txtnamphathanh') > 0) {
+            $generatedimage = 'image' . time() . '-' . $request->file('txthinh')->getClientOriginalName();
+            $request->file('txthinh')->move(public_path('images'), $generatedimage);
             $al = new Album();
             $al->tenalbum = $request->input('txttenalbum');
+            $al->hinhalbum =  $generatedimage;
             $al->namphathanh = $request->input('txtnamphathanh');
             $al->nghesi_idalbum = $request->input('optloains');
             $al->theloai_idalbum  = $request->input('optloaitl');
@@ -1364,34 +1368,65 @@ class AdminControllers extends Controller
     }
     public function suaalbum(Request $request)
     {
-        $request->validate([
+       
+        $a=$request->validate([
             'txtidalbum' => ['required'],
             'txttenalbum' => ['required'],
             'txtnamphathanh' => ['required'],
             'optloains' => ['required'],
             'optloaitl' => ['required'],
+            'txthinha' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
-        if ($request->input('txtnamphathanh') > 0) {
+        
+        if ($request->file('txthinha') != null) {
+            $generatedimage = 'image' . time() . '-' . $request->file('txthinha')->getClientOriginalName();
+            $request->file('txthinha')->move(public_path('images'), $generatedimage);
+            
+            if ($request->input('txtnamphathanh') > 0) {
 
-            $al = Album::where('id', $request->input('txtidalbum'))->update([
-                'tenalbum' => $request->input('txttenalbum'),
-                'namphathanh' => $request->input('txtnamphathanh'),
-                'nghesi_idalbum' => $request->input('optloains'),
-                'theloai_idalbum'  => $request->input('optloaitl'),
-            ]);
+                $al = Album::where('id', $request->input('txtidalbum'))->update([
+                    'hinhalbum' =>  $generatedimage,
+                    'tenalbum' => $request->input('txttenalbum'),
+                    'namphathanh' => $request->input('txtnamphathanh'),
+                    'nghesi_idalbum' => $request->input('optloains'),
+                    'theloai_idalbum'  => $request->input('optloaitl'),
+                ]);
 
 
-            return redirect()->intended('/Administrator/qlalbum');
+                return redirect()->intended('/Administrator/qlalbum');
+            } else {
+                return view('Auth.qlalbum.suaalbum',  [
+                    'ttnguoidung' =>   Auth::guard('api')->user(),
+                    'loi' => 'Năm phát hành > 0',
+                    'theloai' =>  Theloai::all(),
+                    'nghesi' =>  Nghesi::all(),
+                    'contentFilter' => '-1',
+                    'active' => '',
+
+                ]);
+            }
         } else {
-            return view('Auth.qlalbum.suaalbum',  [
-                'ttnguoidung' =>   Auth::guard('api')->user(),
-                'loi' => 'Năm phát hành > 0',
-                'theloai' =>  Theloai::all(),
-                'nghesi' =>  Nghesi::all(),
-                'contentFilter' => '-1',
-                'active' => '',
+            if ($request->input('txtnamphathanh') > 0) {
+                $al = Album::where('id', $request->input('txtidalbum'))->update([
+                    'tenalbum' => $request->input('txttenalbum'),
+                    'namphathanh' => $request->input('txtnamphathanh'),
+                    'nghesi_idalbum' => $request->input('optloains'),
+                    'theloai_idalbum'  => $request->input('optloaitl'),
+                ]);
 
-            ]);
+
+                return redirect()->intended('/Administrator/qlalbum');
+            } else {
+                return view('Auth.qlalbum.suaalbum',  [
+                    'ttnguoidung' =>   Auth::guard('api')->user(),
+                    'loi' => 'Năm phát hành > 0',
+                    'theloai' =>  Theloai::all(),
+                    'nghesi' =>  Nghesi::all(),
+                    'contentFilter' => '-1',
+                    'active' => '',
+
+                ]);
+            }
         }
     }
     public function suanhac(Request $request)

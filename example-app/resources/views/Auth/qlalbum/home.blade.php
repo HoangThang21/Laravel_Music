@@ -38,6 +38,7 @@
         <!-- Danh sách người dùng -->
         <table class="table table-hover">
             <tr>
+                <th>Hình</th>
                 <th>Tên album</th>
                 <th>Năm phát hành</th>
                 <th>Nghệ sĩ </th>
@@ -47,6 +48,7 @@
             </tr>
             <?php foreach ($album as $nd): ?>
             <tr>
+                <td><img src="../../images/{{ $nd['hinhalbum'] }}" width="80" class="img-thumbnail"></td>
                 <td>{{ $nd['tenalbum'] }}</td>
                 <td>{{ $nd['namphathanh'] }}</td>
                 <?php foreach ($nghesi as $ns): 

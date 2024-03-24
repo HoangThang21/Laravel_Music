@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('album', function (Blueprint $table) {
             $table->increments('id');
             $table->string('tenalbum');
+            $table->string('hinhalbum');
             $table->integer('namphathanh');
             $table->timestamps();
             $table->unsignedInteger('nghesi_idalbum');

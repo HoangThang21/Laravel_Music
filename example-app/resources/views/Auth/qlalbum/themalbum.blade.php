@@ -19,6 +19,9 @@
                         required>
                 </div>
                 <div class="my-3">
+                    <input class="form-control" type="file" name="txthinh" required>
+                </div>
+                <div class="my-3">
                     <label>Chọn nghệ sĩ album</label>
                     <select class="form-control" name="optloains">
 

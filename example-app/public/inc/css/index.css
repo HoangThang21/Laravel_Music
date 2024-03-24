@@ -1,5 +1,6 @@
 :root {
     --backgroundmain: #111111;
+    --backgroundmain-music: rgba(35, 35, 35, 0.3);
     --backgroundmain_right: rgba(17, 17, 17, 0.3);
     --text_music_gradient-1: linear-gradient(
         94deg,
@@ -16,15 +17,20 @@
         rgba(23, 86, 181, 0.61) -13.04%,
         rgba(183, 9, 82, 0.74) 124.22%
     );
+    --text_music_gradient-4: linear-gradient(180deg, #b5e0ff 0%, #f475a2 100%);
 
     --text-color-light: #fff;
     --text-color-B: #b8b8b8;
     --color-tim: #b5179e;
+    --background-music: #1d1d1d;
 }
 * {
     margin: 0;
     padding: 0;
     font-family: "inter";
+}
+img {
+    pointer-events: none;
 }
 body {
     height: 100vh;
@@ -81,11 +87,10 @@ header .master_play {
     height: 90px;
     background-color: var(--backgroundmain);
     box-shadow: 0 3px 8px #090f1f;
-}
-header .master_play {
     display: flex;
     align-items: center;
     padding: 0 20px;
+    animation: all 2s linear;
 }
 
 header .menu_side .menu {
@@ -165,7 +170,7 @@ header .menu_side .playlist a {
     border-radius: 6px;
     gap: 10px;
     /* size: 24px; */
-    font-size: 14px;
+    font-size: 16px;
     color: var(--text-color-B);
     /* background: var(--text_music_gradient-3); */
 }
@@ -606,8 +611,7 @@ header .master_play .bar input {
 .song_side .contentsong #song_side {
     width: 75%;
     position: relative;
-    height: 100%;
-  
+    height: 70%;
     overflow-x: hidden;
     -ms-overflow-style: none;
     scrollbar-width: none;
@@ -640,7 +644,7 @@ header .master_play .bar input {
 }
 .albumlist {
     display: flex;
-    margin-top: 10px;
+    margin: 10px 0 30px 0;
     /* background-color: #36e2ec; */
 
     justify-content: center;
@@ -661,17 +665,18 @@ header .master_play .bar input {
     width: 42px;
     height: 42px;
     border-radius: 50%;
-    background-color: #00000076;
+    background-color: #ffffff5f;
+    font-size: 24px;
     display: flex;
     justify-content: center;
     align-items: center;
     z-index: 99;
 }
 .albumlist:hover .pre {
-    left: 30px;
+    left: 26px;
 }
 .albumlist:hover .next {
-    right: 30px;
+    right: 26px;
 }
 .listitemalbum {
     padding: 0 10px 0;
@@ -721,4 +726,289 @@ header .master_play .bar input {
     padding: 4px;
     font-size: 22px;
 }
+.table-music {
+}
+.toptable {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.toptable a {
+    text-decoration: none;
+    color: var(--text-color-lights);
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    letter-spacing: 0.28px;
+    text-transform: capitalize;
+}
 /* ------------------------------------------------------------- */
+/* ------------------------------------------------------------- media music*/
+.menu-media {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+.media {
+    background-color: var(--background-music);
+    padding: 12px 17px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+.media:hover {
+    background-color: rgba(29, 29, 29, 1);
+}
+.media-left {
+    display: flex;
+    gap: 10px;
+}
+.media-left {
+    width: 50%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+.info-media {
+    display: flex;
+    gap: 10px;
+}
+
+.img-media {
+    position: relative;
+    width: 40px;
+    height: 40px;
+}
+.img-media img {
+    border-radius: 4px;
+    width: 40px;
+    height: 40px;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+}
+.load-nghe {
+    background-color: #b8b8b837;
+    border-radius: 4px;
+    position: absolute;
+    top: 0;
+    width: 40px;
+    font-size: 24px;
+    height: 40px;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+.media:hover .load-nghe {
+    display: flex;
+}
+.name-media {
+}
+.name-music {
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    letter-spacing: 0.36px;
+    text-transform: capitalize;
+}
+.name-tacgia {
+    color: var(--text-color-light);
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    letter-spacing: 0.36px;
+    text-transform: capitalize;
+}
+.nametacgia {
+    position: relative;
+}
+.info-name-tacgia {
+    display: none;
+    position: absolute;
+    background: var(--text_music_gradient-4);
+    bottom: 15px;
+    padding: 10px;
+    border-radius: 10px;
+}
+.nametacgia:hover .info-name-tacgia {
+    display: block;
+}
+.top-info-tacgia {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+}
+.topleft-tacgia {
+    display: flex;
+
+    justify-content: space-between;
+    gap: 10px;
+    align-items: center;
+}
+.topleft-tacgia img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.iftacgia {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    width: 140px;
+}
+.nametacgia-info {
+    justify-content: center;
+    align-items: center;
+    overflow: hidden; /* Ẩn nội dung vượt quá kích thước của phần tử */
+    text-overflow: ellipsis; /* Thêm dấu chấm ba (...) cho văn bản bị cắt bớt */
+    white-space: nowrap; /* Ngăn văn bản bị xuống dòng */
+    color: var(--background-music);
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    letter-spacing: 0.36px;
+    text-transform: capitalize;
+}
+.luotquantam-info {
+    color: #1a191980;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    letter-spacing: 0.36px;
+    text-transform: capitalize;
+}
+.topright-tacgia {
+    color: var(--background-music);
+    width: 100%;
+    white-space: nowrap;
+}
+.media-right {
+    width: 50%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+.yeuthich-music {
+    width: 25%;
+    display: flex;
+    justify-content: flex-end;
+    cursor: pointer;
+}
+.time-curent-media {
+    width: 25%;
+}
+.time-curent-media span {
+    display: block;
+}
+.time-curent-media .loadmusic-dot {
+    font-size: 24px;
+    display: none;
+    cursor: pointer;
+}
+.media:hover .time-curent-media .loadmusic-dot {
+    display: block;
+}
+.media:hover .time-curent-media span {
+    display: none;
+}
+.option {
+    width: 50%;
+    display: flex;
+    justify-content: flex-end;
+    position: relative;
+}
+.option .menu-right-media {
+    position: absolute;
+    bottom: 0;
+    left: -4px;
+    display: none;
+    flex-direction: column;
+    /* gap: 20px; */
+    background: var(--text_music_gradient-4);
+    padding: 10px;
+    border-radius: 10px;
+    color: var(--backgroundmain);
+}
+.option .menu-right-media .download {
+    cursor: pointer;
+    display: flex;
+    padding: 10px;
+    border-radius: 6px;
+    gap: 10px;
+}
+.option .menu-right-media .download:hover,
+.option .menu-right-media .nhaccho:hover {
+    background-color: #ffffff7d;
+}
+.option .menu-right-media .nhaccho {
+    cursor: pointer;
+    display: flex;
+    padding: 10px;
+    border-radius: 6px;
+    gap: 10px;
+}
+.dot-3 {
+}
+.dot-3 .bi-three-dots {
+    cursor: pointer;
+}
+
+.bottom-info-tacgia {
+    color: var(--background-music);
+}
+.bottom-menu {
+    display: flex;
+    gap: 10px;
+}
+.bottom-info-tacgia p {
+    padding: 10px 0;
+    font-size: 20px;
+    font-weight: bold;
+    text-transform: capitalize;
+}
+.bottom-info-tacgia img {
+    border-radius: 10px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 80px;
+    height: 100px;
+}
+.list-album-tacgia {
+}
+.item-album-tacgia {
+    display: flex;
+    flex-direction: column;
+}
+.item-album-tacgia a {
+    color: var(--background-music);
+    width: 80px;
+    display: flex;
+    align-items: flex-start;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    letter-spacing: 0.36px;
+    text-transform: capitalize;
+}
+.item-album-tacgia p {
+    color: #1a1919;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    letter-spacing: 0.36px;
+    text-transform: capitalize;
+}
+/* ---------------------------------------------------------------------- */

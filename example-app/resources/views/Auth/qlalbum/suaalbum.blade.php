@@ -12,7 +12,7 @@
                     @endif
                 </div>
                 <div class="card-body">
-                    <form method="post" action="/Administrator/qlalbum/suaalbum">
+                    <form method="post" action="/Administrator/qlalbum/suaalbum" enctype="multipart/form-data">
                         @csrf
                         @method('put')
                         <input type="hidden" name="txtidalbum" value="{{ $album->id }}" readonly>
@@ -26,7 +26,9 @@
                             <input class="form-control" type="text" name="txtnamphathanh" placeholder="Năm phát hành"
                                 value="{{ $album->namphathanh }}" required>
                         </div>
-
+                        <div class="my-3">
+                            <input class="form-control" type="file" name="txthinha" >
+                        </div>
                         <div class="my-3">
                             <label>Chọn nghệ sĩ album</label>
                             <select class="form-control" name="optloains">
