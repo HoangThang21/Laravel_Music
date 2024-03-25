@@ -91,6 +91,7 @@
                 <div class="infouser">
                     <div class="end">
                         <div class="matshead">
+                            <div class="login" onclick="toggleMenuFlex('form_container')"><i class="bi bi-person-circle"></i>Đăng nhập</div>
                             <div class="infotopuser">
                                 <img src="../../images/user-profile.png" alt="">
                                 <div class="nametexttop">
@@ -113,10 +114,10 @@
                                     <div class="name">
                                         abc
                                     </div>
-                                    <div class="bd">
-                                        song
-                                    </div>
                                 </div>
+                            </div>
+                            <div class="menu-toggle_infouser">
+                                <a href=""><i class="bi bi-box-arrow-right"></i>Đăng xuất</a>
                             </div>
                         </div>
                     </div>

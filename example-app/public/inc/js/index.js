@@ -55,13 +55,25 @@ document.addEventListener("DOMContentLoaded", () => {
         var lastItem = list.lastElementChild;
         list.removeChild(lastItem);
         list.insertBefore(lastItem, list.firstElementChild);
-    });
+    }); //chạy slider
     // setInterval(function () {
     //     var list = document.querySelector(".list-item");
     //     var lastItem = list.lastElementChild;
     //     list.removeChild(lastItem);
     //     list.insertBefore(lastItem, list.firstElementChild);
     // }, 6000);
+    var create_account = document.querySelector(".create-account");
+    var form_container_register = document.querySelector(
+        ".form_container_register"
+    );
+    var form_container = document.querySelector(".form_container");
+    create_account.addEventListener("click", function () {
+        form_container_register.classList.add("active");
+        form_container_register.style.display = "flex";
+        form_container.classList.remove("active");
+        form_container.style.display = "none";
+      
+    });
 });
 function toggleMenu(name) {
     var menuFilter = document.querySelector("." + name);

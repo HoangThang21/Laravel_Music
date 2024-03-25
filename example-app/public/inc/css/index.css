@@ -627,10 +627,26 @@ header .master_play .bar input {
     align-items: center;
     justify-content: space-between;
     width: 240px;
+    cursor: pointer;
+}
+.song_side nav .infouser .end .matshead .login{
+    display: flex;
+    color: var(--text-color-light);
+    align-items: center;
+    gap: 10px;
+    width: auto;
+    cursor: pointer;
+    border-radius: 10px;
+    border: 1px solid #ffffff5b;
+    padding: 10px;
+}
+.song_side nav .infouser .end .matshead .login:hover{
+    background: var(--text_music_gradient-3);
+    border: 1px solid #ffffff5b;
 }
 
 .song_side nav .infouser .end .matshead .infotopuser {
-    display: flex;
+    display: none;
     align-items: center;
     justify-content: flex-start;
     gap: 10px;
@@ -673,7 +689,10 @@ header .master_play .bar input {
     background-size: 100% 100%;
     position: relative;
 }
-.song_side nav .infouser .end .matshead .thongbaotop::after {
+.song_side nav .infouser .end .matshead .thongbaotop{
+    position: relative;
+}
+.song_side nav .infouser .end .matshead .thongbaotop.active::after {
     content: "";
     display: inline-block;
     position: absolute;
@@ -687,25 +706,28 @@ header .master_play .bar input {
 .song_side nav .infouser .end .toggle_infouser {
     display: none;
     position: absolute;
-    top: 0;
-    left: -260px;
-    background-color: #36e2ec;
+   top: calc(100% + 4px);
+    left: -10px;
+    background: var(--text_music_gradient-4);
+    color: var(--backgroundmain);
     border-radius: 10px;
     width: 250px;
+    z-index: 3;
+    padding: 10px 0 10px 10px;
 }
 .song_side nav .infouser .end .toggle_infouser img {
     width: 32px;
     height: 32px;
     border-radius: 50%;
-    border: 1px solid #f1f1f1;
+    border: 1.5px solid var(--a, #1756b5);
     background-repeat: no-repeat;
     background-size: 100% 100%;
 }
-.song_side nav .infouser .end .toggle_infouser .infouser-header {
+/* .song_side nav .infouser .end .toggle_infouser .infouser-header {
     display: flex;
     gap: 20px;
     border-bottom: 1px solid var(--text-color-B);
-}
+} */
 .song_side
     nav
     .infouser
@@ -1175,4 +1197,186 @@ header .master_play .bar input {
     letter-spacing: 0.36px;
     text-transform: capitalize;
 }
+/* ---------------------------------------------------------------------- */
+/* ---------------------------------------------------------------------- form login*/
+.form-login-regis{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    z-index: 999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.form-login-regis .form_container,.form_container_register {
+    width: fit-content;
+    height: fit-content;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    padding: 20px 40px 20px 40px;
+    background-color: #ffffff;
+    box-shadow: 0px 106px 42px rgba(0, 0, 0, 0.01),
+      0px 59px 36px rgba(0, 0, 0, 0.05), 0px 26px 26px rgba(0, 0, 0, 0.09),
+      0px 7px 15px rgba(0, 0, 0, 0.1), 0px 0px 0px rgba(0, 0, 0, 0.1);
+    border-radius: 11px;
+    font-family: "Inter", sans-serif;
+    position: relative;
+  }
+.form-login-regis  .form_container.active{
+    display: flex;
+  }
+.form-login-regis  .form_container .x-tat,
+.form-login-regis  .form_container_register .x-tat
+{
+    position: absolute;
+    z-index: 99;
+    top: 20px;
+    right: 20px;
+    font-size: 24px;
+    cursor: pointer;
+  }
+.form-login-regis .form_container_register.active{
+    display: flex;
+  }
+ .form-login-regis .logo_container {
+    box-sizing: border-box;
+    width: 80px;
+    height: 80px;
+    border: 1px solid #F7F7F8;
+    border-radius: 11px;
+  }
+ .form-login-regis .logo_container img{
+    width: 80px;
+    height: 80px;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+  
+ .form-login-regis .title_container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+  }
+  
+ .form-login-regis .title {
+    margin: 0;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #212121;
+  }
+  
+  .form-login-regis .subtitle {
+    font-size: 0.725rem;
+    max-width: 80%;
+    text-align: center;
+    line-height: 1.1rem;
+    color: #8B8E98
+  }
+ .form-login-regis .in_con_ifo{
+    display: flex !important;
+    flex-direction: row !important;
+    justify-content: space-between;
+  }
+ .form-login-regis .in_con_ifo .create-account{
+   cursor: pointer;
+  }
+ .form-login-regis .in_con_ifo .create-account:hover{
+   color: #115bfce6;
+  }
+ .form-login-regis .input_container {
+    width: 100%;
+    height: fit-content;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+ 
+ .form-login-regis .icon {
+    width: 20px;
+    position: absolute;
+    z-index: 99;
+    left: 12px;
+    bottom: 9px;
+  }
+  
+ .form-login-regis .input_label {
+    font-size: 0.75rem;
+    color: #8B8E98;
+    font-weight: 600;
+  }
+  
+ .form-login-regis .input_field {
+    width: auto;
+    height: 40px;
+    padding: 0 0 0 40px;
+    border-radius: 7px;
+    outline: none;
+    border: 1px solid #e5e5e5;
+    filter: drop-shadow(0px 1px 0px #efefef)
+      drop-shadow(0px 1px 0.5px rgba(239, 239, 239, 0.5));
+    transition: all 0.3s cubic-bezier(0.15, 0.83, 0.66, 1);
+  }
+  
+ .form-login-regis .input_field:focus {
+    border: 1px solid transparent;
+    box-shadow: 0px 0px 0px 2px #242424;
+    background-color: transparent;
+  }
+  
+ .form-login-regis .sign-in_btn {
+    width: 100%;
+    height: 40px;
+    border: 0;
+    background: #115DFC;
+    border-radius: 7px;
+    outline: none;
+    color: #ffffff;
+    cursor: pointer;
+  }
+  
+.form-login-regis  .sign-in_ggl {
+    width: 100%;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    background: #ffffff;
+    border-radius: 7px;
+    outline: none;
+    color: #242424;
+    border: 1px solid #e5e5e5;
+    filter: drop-shadow(0px 1px 0px #efefef)
+      drop-shadow(0px 1px 0.5px rgba(239, 239, 239, 0.5));
+    cursor: pointer;
+  }
+  .form-login-regis.separator {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+    color: #8B8E98;
+  }
+  
+ .form-login-regis .separator .line {
+    display: block;
+    width: 100%;
+    height: 1px;
+    border: 0;
+    background-color: #e8e8e8;
+  }
+  
+  /* .note {
+    font-size: 0.75rem;
+    color: #8B8E98;
+    text-decoration: underline;
+  } */
 /* ---------------------------------------------------------------------- */
