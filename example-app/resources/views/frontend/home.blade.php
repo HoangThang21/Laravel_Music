@@ -31,7 +31,7 @@
                     <img src="../../images/1.jpg" alt="">
                     <div class="item-list-info-user">
                         <div class="infoalbum">
-                            <div class="nameAlbum">Hay</div>
+                            <div class="nameAlbum">Hay1</div>
                             <div class="namenghesi">Nguyễn Thắng</div>
                         </div>
                         <i class="bi bi-caret-right-fill"></i>
@@ -43,7 +43,7 @@
                     <img src="../../images/2.jpg" alt="">
                     <div class="item-list-info-user">
                         <div class="infoalbum">
-                            <div class="nameAlbum">Hay</div>
+                            <div class="nameAlbum">Hay2</div>
                             <div class="namenghesi">Nguyễn Thắng</div>
                         </div>
                         <i class="bi bi-caret-right-fill"></i>
@@ -55,7 +55,7 @@
                     <img src="../../images/3.png" alt="">
                     <div class="item-list-info-user">
                         <div class="infoalbum">
-                            <div class="nameAlbum">Hay</div>
+                            <div class="nameAlbum">Hay3</div>
                             <div class="namenghesi">Nguyễn Thắng</div>
                         </div>
                         <i class="bi bi-caret-right-fill"></i>
@@ -160,11 +160,12 @@
                     <div class="option">
                         <div class="dot-3"><i
                                 class="bi bi-three-dots"></i></div>
-                        <div class="menu-right-media">
+                        <div class="menu-right-media ">
                             <div class="download" data-downloadmusic="holo.mp3"><i
                                     class="bi bi-download"></i>Download</div>
                             <div class="nhaccho" data-cho="8217381" data-gia="3000"><i class="bi bi-phone-vibrate"></i>Cài nhạc chờ
                             </div>
+                            <div class="sendchat"><i class="bi bi-chat-dots"></i>Share chat</div>
                         </div>
                     </div>
                 </div>

@@ -71,6 +71,7 @@ header .menu_side,
     background-color: var(--backgroundmain);
     box-shadow: 25px 0 10px 20px #7185c5;
     /* color: #fff; */
+    z-index: 2;
 }
 
 header .song_side {
@@ -80,18 +81,22 @@ header .song_side {
 header .master_play {
     z-index: 99;
     position: absolute;
-
     bottom: 0;
     left: 0;
     width: 100%;
-    height: 90px;
+    /* height: 90px; */
+    /* overflow: hidden; */
     background-color: var(--backgroundmain);
     box-shadow: 0 3px 8px #090f1f;
     display: flex;
     align-items: center;
-    padding: 0 20px;
-    animation: all 2s linear;
+    justify-content: center;
+    padding: 10px 20px;
+    transition: 1s linear;
 }
+/* header .master_play.active {
+    height: 90px;
+} */
 
 header .menu_side .menu {
     color: var(--text-color-B);
@@ -231,6 +236,13 @@ header .master_play .wave,
     align-items: flex-end;
     /* margin-right: 10px; */
 }
+header .master_play .left-master-play,
+header .master_play .mid-master-play,
+header .master_play .right-master-play {
+    display: flex;
+    align-items: center;
+}
+
 header .master_play .wave .wave1 {
     width: 3px;
     height: 10px;
@@ -271,7 +283,10 @@ header .master_play .active2 .wave1:nth-child(3) {
 header .master_play img {
     width: 35px;
     height: 35px;
+    border-radius: 50%;
     background-repeat: no-repeat;
+    border: 1.5px solid var(--a, #1756b5);
+    background: lightgray 50% / cover no-repeat, #d9d9d9;
 }
 header .master_play .info_ns {
     /* margin-left: 10px; */
@@ -284,12 +299,12 @@ header .master_play h5 {
     margin-left: 15px;
     color: var(--text-color-light);
     line-height: 15px;
-    height: 30px;
+    /* height: 30px; */
     white-space: normal; /* Cho phép xuống dòng */
     overflow: hidden; /* Ẩn nội dung dư thừa */
     text-overflow: ellipsis; /* Hiển thị dấu chấm khi văn bản bị cắt ngắn */
-    display: -webkit-box;
-    -webkit-line-clamp: 1; /* Số dòng tối đa */
+    /* display: -webkit-box;
+    -webkit-line-clamp: 1;  */
 }
 header .master_play .subtitle {
     font-size: 11px;
@@ -298,6 +313,9 @@ header .master_play .subtitle {
     /* line-height: 15px; */
 }
 header .master_play .icon {
+    display: flex;
+    align-items: center;
+    gap: 10px;
     font-size: 20px;
     /* margin-left: 15px; */
     color: var(--text-color-light);
@@ -308,13 +326,21 @@ header .master_play .icon .bi {
     cursor: pointer;
     outline: none;
 }
-header .master_play .icon .bi:nth-child(2) {
+header .master_play .icon #masterPlay {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 6px;
+    background: var(--text_music_gradient-2);
+    border-radius: 50%;
+}
+/* header .master_play .icon .bi:nth-child(2) {
     border: 1px solid rgb(105, 105, 170, 0.1);
     border-radius: 50%;
     padding: 1px 3px 0 6px;
     margin: 0 5px;
     transition: 0.3s linear;
-}
+} */
 header .master_play span {
     color: var(--text-color-light);
     width: 32px;
@@ -326,14 +352,14 @@ header .master_play span #currentStart {
 }
 header .master_play .bar {
     position: relative;
-    width: 35%;
+    width: 450px;
     height: 2px;
     background-color: rgba(255, 255, 255, 0.511);
     margin: 0 15px 0 10px;
 }
 header .master_play .bar .bar2 {
     position: absolute;
-    background: #36e2ec;
+    background: var(--text_music_gradient-2);
     width: 0%;
     height: 100%;
     top: 0;
@@ -343,13 +369,14 @@ header .master_play .bar .dot {
     position: absolute;
     width: 5px;
     height: 5px;
-    background: #36e2ec;
+
+    background: var(--text-color-light);
     border-radius: 50%;
     left: 0;
     top: -1px;
     transition: 1s linear;
 }
-header .master_play .bar .dot::before {
+/* header .master_play .bar .dot::before {
     content: "";
     position: absolute;
     width: 15px;
@@ -360,7 +387,7 @@ header .master_play .bar .dot::before {
     top: -6px;
     box-shadow: inset 0 0 3px #36e2ec;
     transition: 1s linear;
-}
+} */
 header .master_play .bar input {
     position: absolute;
     width: 100%;
@@ -372,6 +399,102 @@ header .master_play .bar input {
     transition: 3s linear;
     opacity: 0;
 }
+.right-setup {
+    color: var(--text-color-light);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.le-right-setup {
+    margin-left: 15px;
+    display: flex;
+    align-items: center;
+    width: 100px;
+    gap: 10px;
+}
+.vol {
+    width: 70px;
+    height: 3px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: var(--text-color-B);
+    border-radius: 99px;
+}
+.right-setup #random,
+.right-setup #all,
+.right-setup #list-memu {
+    cursor: pointer;
+    background: var(--text_music_gradient-2);
+    border-radius: 4px;
+    padding: 8px;
+    display: block;
+}
+
+.right-setup {
+    position: relative;
+}
+.right-setup .menu-list-right-setup{
+    position: relative;
+}
+.right-setup .menu-list-right-setup .right-menu-setup {
+    transform: translateX(400px);
+    transition: .5s linear;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    /* height: 100%; */
+    bottom: 45px;
+    background: var(--background-music);
+    padding: 10px;
+    right: 0;
+    z-index: 2;
+}
+.right-setup .menu-list-right-setup .right-menu-setup.active {
+    transform: translateX(19px);
+    transition: .5s linear;
+}
+.right-setup .menu-list-right-setup .right-menu-setup .menu-right-setup-list {
+    display: flex;
+    height: 400px;
+    flex-direction: column;
+    gap: 10px;
+    overflow-x: hidden;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+.right-setup .menu-list-right-setup .right-menu-setup .menu-right-setup-list::-webkit-scrollbar {
+    display: none;
+}
+.vol .bar-vol {
+    position: absolute;
+    background: var(--text_music_gradient-2);
+    width: 0;
+    height: 3px;
+    left: 0;
+    top: 0%;
+    transition: 1s linear;
+}
+.vol .dot {
+    position: absolute;
+    width: 5px;
+    height: 5px;
+    background: rgb(255, 255, 255);
+    border-radius: 50%;
+    left: 0%;
+    top: 30%;
+    transform: translate(-50%, -50%);
+    transition: 1s linear;
+}
+.right-setup .range-vol {
+    opacity: 0;
+    cursor: pointer;
+    width: 70px;
+    z-index: 22;
+}
+
 .thongbao {
     position: absolute;
     display: none;
@@ -603,7 +726,7 @@ header .master_play .bar input {
 }
 
 .contentsong {
-    height: 600px;
+    height: 100%;
     position: relative;
     display: flex;
 }
@@ -611,7 +734,7 @@ header .master_play .bar input {
 .song_side .contentsong #song_side {
     width: 75%;
     position: relative;
-    height: 70%;
+    height: 80%;
     overflow-x: hidden;
     -ms-overflow-style: none;
     scrollbar-width: none;
@@ -775,6 +898,14 @@ header .master_play .bar input {
     display: flex;
     gap: 10px;
 }
+.info-media-bottom {
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 10px;
+    border-radius: 6px;
+}
 
 .img-media {
     position: relative;
@@ -801,8 +932,28 @@ header .master_play .bar input {
     justify-content: center;
     cursor: pointer;
 }
+.load-nghe-bottom {
+    background-color: #b8b8b837;
+    border-radius: 50%;
+    position: absolute;
+    top: 0;
+    width: 40px;
+    font-size: 24px;
+
+    height: 40px;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
 .media:hover .load-nghe {
     display: flex;
+}
+.info-media-bottom:hover .load-nghe-bottom {
+    display: flex;
+}
+.info-media-bottom:hover {
+    background-color: #b8b8b81b;
 }
 .name-media {
 }
@@ -813,6 +964,18 @@ header .master_play .bar input {
     line-height: normal;
     letter-spacing: 0.36px;
     text-transform: capitalize;
+}
+.name-music-bottom {
+    width: 160px;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    letter-spacing: 0.36px;
+    text-transform: capitalize;
+    white-space: nowrap;
+    overflow: hidden; /* Ẩn nội dung dư thừa */
+    text-overflow: ellipsis; /
 }
 .name-tacgia {
     color: var(--text-color-light);
@@ -938,24 +1101,25 @@ header .master_play .bar input {
     border-radius: 10px;
     color: var(--backgroundmain);
 }
-.option .menu-right-media .download {
-    cursor: pointer;
-    display: flex;
-    padding: 10px;
-    border-radius: 6px;
-    gap: 10px;
+.bottom-listmmusic {
+    left: -125px !important;
 }
+
 .option .menu-right-media .download:hover,
-.option .menu-right-media .nhaccho:hover {
+.option .menu-right-media .nhaccho:hover ,
+.option .menu-right-media .sendchat:hover {
     background-color: #ffffff7d;
 }
-.option .menu-right-media .nhaccho {
+.option .menu-right-media .download,
+.option .menu-right-media .nhaccho ,
+.option .menu-right-media .sendchat {
     cursor: pointer;
     display: flex;
     padding: 10px;
     border-radius: 6px;
     gap: 10px;
 }
+
 .dot-3 {
 }
 .dot-3 .bi-three-dots {
