@@ -91,35 +91,59 @@
                 <div class="infouser">
                     <div class="end">
                         <div class="matshead">
-                            <div class="login" onclick="toggleMenuFlex('form_container')"><i class="bi bi-person-circle"></i>Đăng nhập</div>
-                            <div class="infotopuser">
-                                <img src="../../images/user-profile.png" alt="">
-                                <div class="nametexttop">
-                                    <div class="nametop">
-                                       nguyễn hoàng thắng
-                                    </div>
-                                    <div class="online">
-                                        online
+                            @if (Auth::guard('web')->check())
+                                <div class="infotopuser" onclick="toggleMenu('toggle_infouser')">
+                                    <img src="../../images/{{ $ttnguoidung->image }}" alt="">
+                                    <div class="nametexttop">
+                                        <div class="nametop">
+                                            {{ $ttnguoidung->name }}
+                                        </div>
+                                        <div class="online">
+                                            online
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
+                            @else
+                                <div class="login" onclick="toggleMenuFlex('form_container')"><i
+                                        class="bi bi-person-circle"></i>Đăng nhập</div>
+                            @endif
+
                             <div class="thongbaotop">
                                 <i class="bi bi-bell"></i>
                             </div>
                         </div>
-                        <div class="toggle_infouser">
-                            <div class="infouser-header">
-                                <img src="../../images/webicon.png" alt="">
-                                <div class="nametext">
-                                    <div class="name">
-                                        abc
+                        @if (Auth::guard('web')->check())
+                            <div class="toggle_infouser">
+                                <div class="infouser-header">
+                                    <img src="../../images/{{ $ttnguoidung->image }}" alt="">
+                                    <div class="nametext">
+                                        <div class="name">
+                                            {{ $ttnguoidung->name }}
+                                        </div>
                                     </div>
                                 </div>
+                                <div class="menu-qcao">
+                                    <div class="qcao1">
+                                        <div class="name-qcao">MobiSong <span>Vip</span></div>
+                                        <div class="title-qcao">Chỉ với 3.000 đ/tuần</div>
+                                        <div class="subtitle-qcao">Nghe nhạc với chất lượng cao nhất, Toàn bộ đặc quyền
+                                            Vip với kho nhạc</div>
+                                        <a href="">Xem chi tiết</a>
+                                    </div>
+                                    <div class="qcao2">
+                                        <div class="name-qcao">MobiSong <span>Vip</span></div>
+                                        <div class="title-qcao">Chỉ với 10.000 đ/tháng</div>
+                                        <div class="subtitle-qcao">Nghe nhạc với chất lượng cao nhất, Toàn bộ đặc quyền
+                                            Vip với kho nhạc</div>
+                                        <a href="">Xem chi tiết</a>
+                                    </div>
+                                </div>
+                                <div class="menu-toggle_infouser">
+                                    <a href="/logout"><i class="bi bi-box-arrow-right"></i>Đăng xuất</a>
+                                </div>
                             </div>
-                            <div class="menu-toggle_infouser">
-                                <a href=""><i class="bi bi-box-arrow-right"></i>Đăng xuất</a>
-                            </div>
-                        </div>
+                        @endif
+
                     </div>
                 </div>
             </nav>

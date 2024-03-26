@@ -53,6 +53,17 @@
                     <input class="form-control" type="number" name="txtgia"value="{{ $music->gia }}" required>
                 </div>
                 <div class="my-3">
+                    <label>Chọn vip</label>
+                    <select class="form-control" name="optloaiphi">
+                        <option value="0" @if ($music->vip==0)
+                            {{ 'selected' }}
+                        @endif>Miễn phí</option>
+                        <option value="1" @if ($music->vip==1)
+                            {{ 'selected' }}
+                        @endif>Vip</option>
+                    </select>
+                </div>
+                <div class="my-3">
                     <label class="form-label">Lyric</label>
                     <textarea id="default" name="txtmotalyric" class="editor" cols="30" rows="10">
                     {{ $music->lyric }}

@@ -439,7 +439,7 @@ header .master_play .bar input {
     position: relative;
 }
 .right-setup .menu-list-right-setup .right-menu-setup {
-    transform: translateX(400px);
+    transform: translateX(700px);
     transition: .5s linear;
     position: absolute;
     display: flex;
@@ -461,7 +461,7 @@ header .master_play .bar input {
     height: 400px;
     flex-direction: column;
     gap: 10px;
-    overflow-x: hidden;
+    overflow-x: auto;
     -ms-overflow-style: none;
     scrollbar-width: none;
 }
@@ -502,10 +502,23 @@ header .master_play .bar input {
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: 9;
-
-    /* width: 300px; */
     padding: 10px;
     border-radius: 4px;
+}
+.loi {
+    position: absolute;
+    top: 9%;
+    left: 0;
+    transform: translate(-500px);
+    z-index: 9;
+    padding: 10px;
+    border-radius: 4px;
+    background-color: #fff;
+    color: red;
+}
+.loi.active {
+    transform: translate(0);
+    transition: all 1s linear;
 }
 .headerthongbao {
     display: flex;
@@ -646,7 +659,7 @@ header .master_play .bar input {
 }
 
 .song_side nav .infouser .end .matshead .infotopuser {
-    display: none;
+    display: flex;
     align-items: center;
     justify-content: flex-start;
     gap: 10px;
@@ -715,6 +728,15 @@ header .master_play .bar input {
     z-index: 3;
     padding: 10px 0 10px 10px;
 }
+.song_side nav .infouser .end .toggle_infouser  {
+    height: 350px;
+    overflow-x: hidden;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+.song_side nav .infouser .end .toggle_infouser::-webkit-scrollbar {
+    display: none;
+}
 .song_side nav .infouser .end .toggle_infouser img {
     width: 32px;
     height: 32px;
@@ -723,11 +745,13 @@ header .master_play .bar input {
     background-repeat: no-repeat;
     background-size: 100% 100%;
 }
-/* .song_side nav .infouser .end .toggle_infouser .infouser-header {
+.song_side nav .infouser .end .toggle_infouser .infouser-header {
     display: flex;
     gap: 20px;
-    border-bottom: 1px solid var(--text-color-B);
-} */
+    border-bottom: 1px solid var(--background-music);
+    padding: 0 0 10px 0;
+  margin: 0 10px 10px 0;
+}
 .song_side
     nav
     .infouser
@@ -739,6 +763,7 @@ header .master_play .bar input {
     font-size: 1.6rem;
     line-height: 2.2rem;
     font-weight: 400;
+    text-transform: capitalize;
 }
 .song_side nav .infouser .end .toggle_infouser .infouser-header .nametext .bd {
     color: var(--text-color-B);
@@ -1113,7 +1138,7 @@ header .master_play .bar input {
 }
 .option .menu-right-media {
     position: absolute;
-    bottom: 0;
+    
     left: -4px;
     display: none;
     flex-direction: column;
@@ -1123,8 +1148,13 @@ header .master_play .bar input {
     border-radius: 10px;
     color: var(--backgroundmain);
 }
-.bottom-listmmusic {
+.option .menu-right-media {
+    bottom: 0;
+}
+.menu-right-media.bottom-listmmusic {
+    bottom: -155px !important;
     left: -125px !important;
+    z-index: 99;
 }
 
 .option .menu-right-media .download:hover,
@@ -1143,10 +1173,9 @@ header .master_play .bar input {
 }
 
 .dot-3 {
-}
-.dot-3 .bi-three-dots {
     cursor: pointer;
 }
+
 
 .bottom-info-tacgia {
     color: var(--background-music);
@@ -1197,6 +1226,69 @@ header .master_play .bar input {
     letter-spacing: 0.36px;
     text-transform: capitalize;
 }
+/* ---------------------------------------------------------------------- */
+/* ---------------------------------------------------------------------- qc */
+.menu-qcao{
+    display: flex;
+    flex-direction: column;
+    margin-right: 10px;
+    gap: 10px;
+
+}
+.qcao1,.qcao2{
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding: 10px;
+    border-radius: 10px;
+
+}
+.qcao1 a,.qcao2 a{
+border: none;
+outline: none;
+display: flex;
+align-items: center;
+justify-content: flex-start;
+border-radius: 10px;
+padding: 10px 20px;
+background-color: #3576d7b8;
+width: fit-content;
+color: #fff;
+
+}
+.qcao1{
+    background-color: #376fc48e;
+}
+.qcao2{
+    background-color: #c8414183;
+}
+.name-qcao{
+    font-size: 22px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    letter-spacing: 0.36px;
+    color: #1e324ed4;
+}
+.title-qcao{
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    letter-spacing: 0.36px;
+    text-transform: capitalize;
+
+}
+.subtitle-qcao{
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    letter-spacing: 0.36px;
+    text-transform: capitalize;
+
+}
+
 /* ---------------------------------------------------------------------- */
 /* ---------------------------------------------------------------------- form login*/
 .form-login-regis{

@@ -70,7 +70,7 @@ document.addEventListener("DOMContentLoaded", () => {
                             itemlistdot1.style.display === "none" ||
                             getComputedStyle(itemlistdot1).display === "none";
                         itemlistdot1.style.display = isHidden1
-                            ? "block"
+                            ? "flex"
                             : "none";
                     } else {
                         itemlistdot1.style.display = "none";

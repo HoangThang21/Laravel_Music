@@ -23,7 +23,8 @@ return new class extends Migration
             $table->integer('xetduyet')->default(0);
             $table->integer('txtmanhac');
             $table->integer('txtgia');
-            $table->text('txtmotalyric');
+            $table->text('lyric');
+            $table->integer('vip')->default(0);
         });
     }
 

@@ -113,6 +113,7 @@ use Illuminate\Support\Facades\Route;
     Route::post('/Administrator/qlnhac/searchs', [AdminControllers::class, 'searchs']);
     //----------------------------------------------------------------
     Route::get('/Administrator/{id}', [AdminControllers::class, 'edit']);
+        //----------------------------------------------------------------
     Route::get('/', [ClientControllers::class, 'index']);
     Route::get('/trangchu', [ClientControllers::class, 'loadtrangchu'])->name('load.trangchu');
     Route::get('/yeuthich', [ClientControllers::class, 'loadyeuthich'])->name('load.yeuthich');
@@ -120,3 +121,5 @@ use Illuminate\Support\Facades\Route;
     Route::get('/Mchart', [ClientControllers::class, 'loadMchart'])->name('load.Mchart');
     Route::get('/ranksong', [ClientControllers::class, 'loadranksong'])->name('load.ranksong');
     Route::get('/topic', [ClientControllers::class, 'loadtopic'])->name('load.topic');
+    Route::post('/login', [ClientControllers::class, 'login'])->name('load.login');
+    Route::get('/logout', [ClientControllers::class, 'logout'])->name('load.logout');

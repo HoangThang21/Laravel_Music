@@ -66,16 +66,17 @@
                                 <div class="name-music-bottom">maroon 5 - memories</div>
                                 <a href="" class="name-tacgia">aa</a>
                             </div>
-                            <i class="bi bi-play-fill"></i>
+                            <i style="cursor: pointer;" class="bi bi-play-fill"></i>
                             <div class="option">
                                 <div class="dot-3"><i class="bi bi-three-dots"></i></div>
                                 <div class="menu-right-media bottom-listmmusic">
-                                    <div class="download" data-downloadmusic="holo.mp3"><i
+                                    <div title="Tải nhạc" class="download" data-downloadmusic="holo.mp3"><i
                                             class="bi bi-download"></i>Download
                                     </div>
-                                    <div class="nhaccho" data-cho="8217381" data-gia="3000"><i
+                                    <div title="Cài nhạc chờ" class="nhaccho" data-cho="8217381" data-gia="3000"><i
                                             class="bi bi-phone-vibrate"></i>Cài nhạc chờ
                                     </div>
+                                    <div class="sendchat"><i class="bi bi-chat-dots"></i>Share chat</div>
                                 </div>
                             </div>
                         </div>
@@ -91,6 +92,25 @@
     <div class="headerthongbao">
         <div class="tieude"></div>
         <i class="bi bi-x-lg" onclick="toggleMenu('thongbao')"></i>
+    </div>
+</div>
+<div class="loi  <?php if ($loi != '') {
+    echo 'active';
+} else {
+    echo '';
+} ?> " style="display:
+    <?php if ($loi != '') {
+        echo 'flex';
+    } else {
+        echo 'none';
+    } ?>">
+    <div class="headerthongbao">
+        <div class="tieude"><?php if ($loi != '') {
+            echo $loi;
+        } else {
+            echo $loi;
+        } ?></div>
+        <i class="bi bi-x-lg" onclick="toggleMenu('loi')"></i>
     </div>
 </div>
 <div class="form-login-regis">
@@ -170,7 +190,12 @@
             <span>Đăng ký</span>
         </button>
     </form>
-    <form class="form_container" action="#" method="post">
+    <form class="form_container"style="display:
+    <?php if ($loi != '') {
+        echo 'flex';
+    } else {
+        echo 'none';
+    } ?>" action="/login" method="post">
         @csrf
         <div class="x-tat" onclick="toggleMenuFlex('form_container')"><i class="bi bi-x"></i></div>
         <div class="logo_container"><img src="../../images/logomobifone.png" alt=""></div>
@@ -189,7 +214,7 @@
                 </path>
             </svg>
             <input placeholder="name@mail.com" title="Inpit title" name="input-name" type="text"
-                class="input_field" id="email_field">
+                class="input_field" id="email_field" required>
         </div>
         <div class="input_container">
             <label class="input_label" for="password_field">Password</label>
@@ -205,7 +230,7 @@
                 </path>
             </svg>
             <input placeholder="Password" title="Inpit title" name="input-password" type="password"
-                class="input_field" id="password_field">
+                class="input_field" id="password_field" required>
         </div>
         <div class="input_container in_con_ifo">
             <a href="#">Quên mật khẩu?</a>

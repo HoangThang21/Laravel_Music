@@ -775,6 +775,7 @@ class AdminControllers extends Controller
             'fnhac' => 'required|mimes:mp3',
             'fhinh' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'optloains' => ['required'],
+            'optloaiphi' => ['required'],
 
         ]);
         if ($request->input('txtgia') <= 0) {
@@ -800,6 +801,7 @@ class AdminControllers extends Controller
         $ns->maNhac = $request->input('txtmanhac');
         $ns->gia = $request->input('txtgia');
         $ns->lyric = $request->input('txtmotalyric');
+        $ns->vip = $request->input('optloaiphi');
         $ns->save();
         return redirect()->intended('/Administrator/qlnhac');
     }
@@ -1439,6 +1441,7 @@ class AdminControllers extends Controller
             'txtmotalyric' => ['required'],
             'fhinh' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'optloains' => ['required'],
+            'optloaiphi' => ['required'],
 
         ]);
         if ($request->input('txtgia') <= 0) {
@@ -1469,6 +1472,7 @@ class AdminControllers extends Controller
                         'maNhac' => $request->input('txtmanhac'),
                         'gia' => $request->input('txtgia'),
                         'lyric' => $request->input('txtmotalyric'),
+                        'vip' => $request->input('optloaiphi'),
 
                     ]);
             } else {
@@ -1481,6 +1485,7 @@ class AdminControllers extends Controller
                         'maNhac' => $request->input('txtmanhac'),
                         'gia' => $request->input('txtgia'),
                         'lyric' => $request->input('txtmotalyric'),
+                        'vip' => $request->input('optloaiphi'),
                     ]);
             }
         } else {
@@ -1495,6 +1500,7 @@ class AdminControllers extends Controller
                         'maNhac' => $request->input('txtmanhac'),
                         'gia' => $request->input('txtgia'),
                         'lyric' => $request->input('txtmotalyric'),
+                        'vip' => $request->input('optloaiphi'),
                     ]);
             } else {
                 $nhac = Nhac::where('id', $request->input('txtidnhac'))
@@ -1504,6 +1510,7 @@ class AdminControllers extends Controller
                         'maNhac' => $request->input('txtmanhac'),
                         'gia' => $request->input('txtgia'),
                         'lyric' => $request->input('txtmotalyric'),
+                        'vip' => $request->input('optloaiphi'),
                     ]);
             }
         }
