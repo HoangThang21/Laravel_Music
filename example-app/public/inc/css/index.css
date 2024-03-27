@@ -29,9 +29,7 @@
     padding: 0;
     font-family: "inter";
 }
-img {
-    pointer-events: none;
-}
+
 body {
     height: 100vh;
     font-family: Inter;
@@ -299,10 +297,9 @@ header .master_play h5 {
     margin-left: 15px;
     color: var(--text-color-light);
     line-height: 15px;
-    /* height: 30px; */
-    white-space: normal; /* Cho phép xuống dòng */
-    overflow: hidden; /* Ẩn nội dung dư thừa */
-    text-overflow: ellipsis; /* Hiển thị dấu chấm khi văn bản bị cắt ngắn */
+    white-space: normal;
+    overflow: hidden;
+    text-overflow: ellipsis;
     /* display: -webkit-box;
     -webkit-line-clamp: 1;  */
 }
@@ -435,12 +432,12 @@ header .master_play .bar input {
 .right-setup {
     position: relative;
 }
-.right-setup .menu-list-right-setup{
+.right-setup .menu-list-right-setup {
     position: relative;
 }
 .right-setup .menu-list-right-setup .right-menu-setup {
     transform: translateX(700px);
-    transition: .5s linear;
+    transition: 0.5s linear;
     position: absolute;
     display: flex;
     flex-direction: column;
@@ -454,7 +451,7 @@ header .master_play .bar input {
 }
 .right-setup .menu-list-right-setup .right-menu-setup.active {
     transform: translateX(19px);
-    transition: .5s linear;
+    transition: 0.5s linear;
 }
 .right-setup .menu-list-right-setup .right-menu-setup .menu-right-setup-list {
     display: flex;
@@ -465,7 +462,10 @@ header .master_play .bar input {
     -ms-overflow-style: none;
     scrollbar-width: none;
 }
-.right-setup .menu-list-right-setup .right-menu-setup .menu-right-setup-list::-webkit-scrollbar {
+.right-setup
+    .menu-list-right-setup
+    .right-menu-setup
+    .menu-right-setup-list::-webkit-scrollbar {
     display: none;
 }
 .vol .bar-vol {
@@ -642,7 +642,7 @@ header .master_play .bar input {
     width: 240px;
     cursor: pointer;
 }
-.song_side nav .infouser .end .matshead .login{
+.song_side nav .infouser .end .matshead .login {
     display: flex;
     color: var(--text-color-light);
     align-items: center;
@@ -653,7 +653,7 @@ header .master_play .bar input {
     border: 1px solid #ffffff5b;
     padding: 10px;
 }
-.song_side nav .infouser .end .matshead .login:hover{
+.song_side nav .infouser .end .matshead .login:hover {
     background: var(--text_music_gradient-3);
     border: 1px solid #ffffff5b;
 }
@@ -702,7 +702,7 @@ header .master_play .bar input {
     background-size: 100% 100%;
     position: relative;
 }
-.song_side nav .infouser .end .matshead .thongbaotop{
+.song_side nav .infouser .end .matshead .thongbaotop {
     position: relative;
 }
 .song_side nav .infouser .end .matshead .thongbaotop.active::after {
@@ -719,7 +719,7 @@ header .master_play .bar input {
 .song_side nav .infouser .end .toggle_infouser {
     display: none;
     position: absolute;
-   top: calc(100% + 4px);
+    top: calc(100% + 4px);
     left: -10px;
     background: var(--text_music_gradient-4);
     color: var(--backgroundmain);
@@ -728,7 +728,7 @@ header .master_play .bar input {
     z-index: 3;
     padding: 10px 0 10px 10px;
 }
-.song_side nav .infouser .end .toggle_infouser  {
+.song_side nav .infouser .end .toggle_infouser {
     height: 350px;
     overflow-x: hidden;
     -ms-overflow-style: none;
@@ -750,7 +750,7 @@ header .master_play .bar input {
     gap: 20px;
     border-bottom: 1px solid var(--background-music);
     padding: 0 0 10px 0;
-  margin: 0 10px 10px 0;
+    margin: 0 10px 10px 0;
 }
 .song_side
     nav
@@ -927,9 +927,10 @@ header .master_play .bar input {
     display: flex;
     align-items: center;
     justify-content: flex-start;
+    border-radius: 8px;
 }
 .media:hover {
-    background-color: rgba(29, 29, 29, 1);
+    background-color: rgba(77, 74, 74, 0.5);
 }
 .media-left {
     display: flex;
@@ -1022,7 +1023,7 @@ header .master_play .bar input {
     text-transform: capitalize;
     white-space: nowrap;
     overflow: hidden; /* Ẩn nội dung dư thừa */
-    text-overflow: ellipsis; /
+    text-overflow: ellipsis;
 }
 .name-tacgia {
     color: var(--text-color-light);
@@ -1138,7 +1139,7 @@ header .master_play .bar input {
 }
 .option .menu-right-media {
     position: absolute;
-    
+
     left: -4px;
     display: none;
     flex-direction: column;
@@ -1158,12 +1159,12 @@ header .master_play .bar input {
 }
 
 .option .menu-right-media .download:hover,
-.option .menu-right-media .nhaccho:hover ,
+.option .menu-right-media .nhaccho:hover,
 .option .menu-right-media .sendchat:hover {
     background-color: #ffffff7d;
 }
 .option .menu-right-media .download,
-.option .menu-right-media .nhaccho ,
+.option .menu-right-media .nhaccho,
 .option .menu-right-media .sendchat {
     cursor: pointer;
     display: flex;
@@ -1175,7 +1176,6 @@ header .master_play .bar input {
 .dot-3 {
     cursor: pointer;
 }
-
 
 .bottom-info-tacgia {
     color: var(--background-music);
@@ -1228,41 +1228,40 @@ header .master_play .bar input {
 }
 /* ---------------------------------------------------------------------- */
 /* ---------------------------------------------------------------------- qc */
-.menu-qcao{
+.menu-qcao {
     display: flex;
     flex-direction: column;
     margin-right: 10px;
     gap: 10px;
-
 }
-.qcao1,.qcao2{
+.qcao1,
+.qcao2 {
     display: flex;
     flex-direction: column;
     gap: 6px;
     padding: 10px;
     border-radius: 10px;
-
 }
-.qcao1 a,.qcao2 a{
-border: none;
-outline: none;
-display: flex;
-align-items: center;
-justify-content: flex-start;
-border-radius: 10px;
-padding: 10px 20px;
-background-color: #3576d7b8;
-width: fit-content;
-color: #fff;
-
+.qcao1 a,
+.qcao2 a {
+    border: none;
+    outline: none;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    border-radius: 10px;
+    padding: 10px 20px;
+    background-color: #3576d7b8;
+    width: fit-content;
+    color: #fff;
 }
-.qcao1{
+.qcao1 {
     background-color: #376fc48e;
 }
-.qcao2{
+.qcao2 {
     background-color: #c8414183;
 }
-.name-qcao{
+.name-qcao {
     font-size: 22px;
     font-style: normal;
     font-weight: 700;
@@ -1270,38 +1269,45 @@ color: #fff;
     letter-spacing: 0.36px;
     color: #1e324ed4;
 }
-.title-qcao{
+.title-qcao {
     font-size: 14px;
     font-style: normal;
     font-weight: 700;
     line-height: normal;
     letter-spacing: 0.36px;
     text-transform: capitalize;
-
 }
-.subtitle-qcao{
+.subtitle-qcao {
     font-size: 12px;
     font-style: normal;
     font-weight: 500;
     line-height: normal;
     letter-spacing: 0.36px;
     text-transform: capitalize;
-
 }
 
 /* ---------------------------------------------------------------------- */
 /* ---------------------------------------------------------------------- form login*/
-.form-login-regis{
+.form-login-regis {
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%,-50%);
+    transform: translate(-50%, -50%);
     z-index: 999;
     display: flex;
     justify-content: center;
     align-items: center;
 }
-.form-login-regis .form_container,.form_container_register {
+.login-form {
+    display: none;
+    flex-direction: column;
+    background-color: #fff;
+    border-radius: 11px;
+    box-shadow: 0px 106px 42px rgba(0, 0, 0, 0.01),
+        0px 59px 36px rgba(0, 0, 0, 0.05), 0px 26px 26px rgba(0, 0, 0, 0.09),
+        0px 7px 15px rgba(0, 0, 0, 0.1), 0px 0px 0px rgba(0, 0, 0, 0.1);
+}
+.form_container_register {
     width: fit-content;
     height: fit-content;
     display: none;
@@ -1311,100 +1317,112 @@ color: #fff;
     gap: 15px;
     padding: 20px 40px 20px 40px;
     background-color: #ffffff;
-    box-shadow: 0px 106px 42px rgba(0, 0, 0, 0.01),
-      0px 59px 36px rgba(0, 0, 0, 0.05), 0px 26px 26px rgba(0, 0, 0, 0.09),
-      0px 7px 15px rgba(0, 0, 0, 0.1), 0px 0px 0px rgba(0, 0, 0, 0.1);
+
     border-radius: 11px;
     font-family: "Inter", sans-serif;
     position: relative;
-  }
-.form-login-regis  .form_container.active{
+}
+.form-login-regis .form_container {
+    width: fit-content;
+    height: fit-content;
     display: flex;
-  }
-.form-login-regis  .form_container .x-tat,
-.form-login-regis  .form_container_register .x-tat
-{
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    padding: 20px 40px 20px 40px;
+    background-color: #ffffff;
+
+    border-radius: 11px;
+    font-family: "Inter", sans-serif;
+    position: relative;
+}
+.form-login-regis .form_container.active {
+    display: flex;
+}
+.form-login-regis .form_container .x-tat,
+.form-login-regis .form_container_register .x-tat {
     position: absolute;
     z-index: 99;
     top: 20px;
     right: 20px;
     font-size: 24px;
     cursor: pointer;
-  }
-.form-login-regis .form_container_register.active{
+}
+.form-login-regis .form_container_register.active {
     display: flex;
-  }
- .form-login-regis .logo_container {
+}
+.form-login-regis .logo_container {
     box-sizing: border-box;
     width: 80px;
     height: 80px;
-    border: 1px solid #F7F7F8;
+    border: 1px solid #f7f7f8;
     border-radius: 11px;
-  }
- .form-login-regis .logo_container img{
+}
+.form-login-regis .logo_container img {
     width: 80px;
     height: 80px;
     background-repeat: no-repeat;
     background-size: cover;
-  }
-  
- .form-login-regis .title_container {
+}
+
+.form-login-regis .title_container {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     gap: 10px;
-  }
-  
- .form-login-regis .title {
+}
+
+.form-login-regis .title {
     margin: 0;
     font-size: 1.25rem;
     font-weight: 700;
     color: #212121;
-  }
-  
-  .form-login-regis .subtitle {
+}
+
+.form-login-regis .subtitle {
     font-size: 0.725rem;
     max-width: 80%;
     text-align: center;
     line-height: 1.1rem;
-    color: #8B8E98
-  }
- .form-login-regis .in_con_ifo{
+    color: #8b8e98;
+}
+.form-login-regis .in_con_ifo {
     display: flex !important;
     flex-direction: row !important;
     justify-content: space-between;
-  }
- .form-login-regis .in_con_ifo .create-account{
-   cursor: pointer;
-  }
- .form-login-regis .in_con_ifo .create-account:hover{
-   color: #115bfce6;
-  }
- .form-login-regis .input_container {
+}
+.form-login-regis .in_con_ifo .create-account {
+    cursor: pointer;
+}
+.form-login-regis .in_con_ifo .create-account:hover {
+    color: #115bfce6;
+}
+.form-login-regis .input_container {
     width: 100%;
     height: fit-content;
     position: relative;
     display: flex;
     flex-direction: column;
     gap: 5px;
-  }
- 
- .form-login-regis .icon {
+}
+
+.form-login-regis .icon {
     width: 20px;
     position: absolute;
     z-index: 99;
     left: 12px;
     bottom: 9px;
-  }
-  
- .form-login-regis .input_label {
+}
+
+.form-login-regis .input_label {
     font-size: 0.75rem;
-    color: #8B8E98;
+    color: #8b8e98;
     font-weight: 600;
-  }
-  
- .form-login-regis .input_field {
+}
+
+.form-login-regis .input_field {
     width: auto;
     height: 40px;
     padding: 0 0 0 40px;
@@ -1412,28 +1430,28 @@ color: #fff;
     outline: none;
     border: 1px solid #e5e5e5;
     filter: drop-shadow(0px 1px 0px #efefef)
-      drop-shadow(0px 1px 0.5px rgba(239, 239, 239, 0.5));
+        drop-shadow(0px 1px 0.5px rgba(239, 239, 239, 0.5));
     transition: all 0.3s cubic-bezier(0.15, 0.83, 0.66, 1);
-  }
-  
- .form-login-regis .input_field:focus {
+}
+
+.form-login-regis .input_field:focus {
     border: 1px solid transparent;
     box-shadow: 0px 0px 0px 2px #242424;
     background-color: transparent;
-  }
-  
- .form-login-regis .sign-in_btn {
+}
+
+.form-login-regis .sign-in_btn {
     width: 100%;
     height: 40px;
     border: 0;
-    background: #115DFC;
+    background: #115dfc;
     border-radius: 7px;
     outline: none;
     color: #ffffff;
     cursor: pointer;
-  }
-  
-.form-login-regis  .sign-in_ggl {
+}
+
+.sign-in_ggl {
     width: 100%;
     height: 40px;
     display: flex;
@@ -1444,31 +1462,99 @@ color: #fff;
     border-radius: 7px;
     outline: none;
     color: #242424;
-    border: 1px solid #e5e5e5;
-    filter: drop-shadow(0px 1px 0px #efefef)
-      drop-shadow(0px 1px 0.5px rgba(239, 239, 239, 0.5));
+    border: none;
     cursor: pointer;
-  }
-  .form-login-regis.separator {
+}
+.sign-in_ggl:hover {
+    background: rgba(224, 221, 221, 0.701);
+}
+.form-login-regis.separator {
     width: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 30px;
-    color: #8B8E98;
-  }
-  
- .form-login-regis .separator .line {
+    color: #8b8e98;
+}
+
+.form-login-regis .separator .line {
     display: block;
     width: 100%;
     height: 1px;
     border: 0;
     background-color: #e8e8e8;
-  }
-  
-  /* .note {
+}
+
+/* .note {
     font-size: 0.75rem;
     color: #8B8E98;
     text-decoration: underline;
   } */
+/* ---------------------------------------------------------------------- */
+/* ---------------------------------------------------------------------- content*/
+.contener {
+    margin: 20px 0 0 0;
+    display: flex;
+    flex-direction: column;
+}
+.contener .Top-Contener {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: var(--text-color-light);
+}
+.contener .Top-Contener a {
+    color: var(--text-color-light);
+}
+.contener .list-menu-contenter {
+    margin-top: 20px;
+    display: flex;
+    gap: 10px;
+}
+.contener .body-Contener {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.contener .item-body-content {
+    margin: 0 10px;
+    width: 200px;
+    height: 200px;
+    border-radius: 10px;
+    overflow: hidden;
+    position: relative;
+    transition: all 0.3s ease; 
+}
+.contener .item-body-content .hover-item-body-content {
+    background-color: #4f4c4c45;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    opacity: 0;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+.contener .item-body-content:hover .hover-item-body-content {
+   opacity: 1;
+}
+.contener .item-body-content img {
+    width: 200px;
+    height: 200px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    transition: all 0.3s ease;
+}
+.contener .item-body-content:hover img {
+    transform: scale(1.2);
+}
+.contener .title-body-content {
+}
+.contener .name-ns {
+}
+.contener .luotthich {
+}
 /* ---------------------------------------------------------------------- */

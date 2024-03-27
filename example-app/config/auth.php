@@ -44,6 +44,10 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
+        'google' => [
+            'driver' => 'session', 
+            'provider' => 'usersgg', 
+        ],
     ],
 
     /*
@@ -69,10 +73,10 @@ return [
             'model' => App\Models\User::class,
         ],
 
-        // 'users' => [
-        //     'driver' => 'database',
-        //     'table' => 'users',
-        // ],
+        'usersgg' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\UserAPI::class,
+        ],
     ],
 
     /*

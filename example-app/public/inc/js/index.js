@@ -66,7 +66,7 @@ document.addEventListener("DOMContentLoaded", () => {
     var form_container_register = document.querySelector(
         ".form_container_register"
     );
-    var form_container = document.querySelector(".form_container");
+    var form_container = document.querySelector(".login-form");
     create_account.addEventListener("click", function () {
         form_container_register.classList.add("active");
         form_container_register.style.display = "flex";

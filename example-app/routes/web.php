@@ -123,3 +123,5 @@ use Illuminate\Support\Facades\Route;
     Route::get('/topic', [ClientControllers::class, 'loadtopic'])->name('load.topic');
     Route::post('/login', [ClientControllers::class, 'login'])->name('load.login');
     Route::get('/logout', [ClientControllers::class, 'logout'])->name('load.logout');
+    Route::get('/logingg', [ClientControllers::class, 'logingg'])->name('load.logingg');
+    Route::get('/logingg/callback', [ClientControllers::class, 'callback'])->name('load.callback');

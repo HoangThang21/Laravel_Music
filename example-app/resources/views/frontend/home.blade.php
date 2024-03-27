@@ -158,12 +158,12 @@
                             class="loadmusic-dot bi bi-caret-right-fill"></i></div>
                     <div class="yeuthich-music" title="Thêm vào yêu thích"><i class="bi bi-heart"></i></div>
                     <div class="option">
-                        <div class="dot-3"><i
-                                class="bi bi-three-dots"></i></div>
+                        <div class="dot-3"><i class="bi bi-three-dots"></i></div>
                         <div class="menu-right-media ">
                             <div class="download" data-downloadmusic="holo.mp3"><i
                                     class="bi bi-download"></i>Download</div>
-                            <div class="nhaccho" data-cho="8217381" data-gia="3000"><i class="bi bi-phone-vibrate"></i>Cài nhạc chờ
+                            <div class="nhaccho" data-cho="8217381" data-gia="3000"><i
+                                    class="bi bi-phone-vibrate"></i>Cài nhạc chờ
                             </div>
                             <div class="sendchat"><i class="bi bi-chat-dots"></i>Share chat</div>
                         </div>
@@ -233,6 +233,37 @@
             </div>
 
         </div>
+    </div>
+    <div class="contener">
+        <div class="Top-Contener">
+            <h3>Chill</h3> <a href="#">Tất cả</a>
+        </div>
+        <div class="list-menu-contenter">
+            <div class="body-Contener">
+                <div class="item-body-content">
+                    <img src="../../images/1.jpg" alt="">
+                    <div class="hover-item-body-content">
+                        <i class="bi bi-caret-right-fill"></i>
+                    </div>
+                </div>
+                <p class="title-body-content">abc</p>
+            </div>
+            <div class="body-Contener">
+                <div class="item-body-content">
+                    <img src="../../images/1.jpg" alt="">
+                    <div class="hover-item-body-content">
+                        <i class="bi bi-caret-right-fill"></i>
+                    </div>
+                </div>
+                <p class="title-body-content">abc</p>
+            </div>
+        </div>
+    </div>
+    <div class="contener">
+        <img src="" alt="">
+        <div class="name-ns">thang</div>
+        <div class="luotthich">2.000</div>
+        <a href="">Quan tâm</a>
     </div>
 </div>
 @include('layouts.bottom')
