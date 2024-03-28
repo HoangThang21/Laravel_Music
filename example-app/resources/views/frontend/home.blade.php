@@ -102,7 +102,7 @@
                 </svg>
                 <p>Top Music</p>
             </div>
-            <a href="">Tất cả >></a>
+            <a href="">Tất cả <i class="bi bi-chevron-right"></i></a>
         </div>
         <div class="menu-media">
             <div class="media">
@@ -114,7 +114,8 @@
                             <div class="load-nghe"><i class="bi bi-caret-right-fill"></i></div>
                         </div>
                         <div class="name-media">
-                            <div class="name-music">maroon 5 - memories</div>
+                            <div class="name-music">maroon 5 - memories
+                            </div>
                             <div class="nametacgia">
                                 <a href="" class="name-tacgia">aa</a>
                                 <div class="info-name-tacgia">
@@ -236,9 +237,18 @@
     </div>
     <div class="contener">
         <div class="Top-Contener">
-            <h3>Chill</h3> <a href="#">Tất cả</a>
+            <h3>Chill</h3> <a href="#">Tất cả <i class="bi bi-chevron-right"></i></a>
         </div>
         <div class="list-menu-contenter">
+            <div class="body-Contener">
+                <div class="item-body-content">
+                    <img src="../../images/1.jpg" alt="">
+                    <div class="hover-item-body-content">
+                        <i class="bi bi-caret-right-fill"></i>
+                    </div>
+                </div>
+                <div class="title-body-content">abcádccccccccccccccccccccccccccccccccccccccccccccccccccccccc</div>
+            </div>
             <div class="body-Contener">
                 <div class="item-body-content">
                     <img src="../../images/1.jpg" alt="">
@@ -260,10 +270,62 @@
         </div>
     </div>
     <div class="contener">
-        <img src="" alt="">
-        <div class="name-ns">thang</div>
-        <div class="luotthich">2.000</div>
-        <a href="">Quan tâm</a>
+        <div class="Top-Contener">
+            <h3>Nghệ sĩ </h3>
+            <a href="#">Tất cả <i class="bi bi-chevron-right"></i></a>
+        </div>
+        <div class="list-menu-contenter_ns">
+            <div class="body-Contener_ns">
+                <img class="img-ns" src="../../images/1.jpg" alt="">
+                <div class="name-ns">thang</div>
+                <div class="luotthich">2.000 thích</div>
+                <a class="quantam" href=""><i class="bi bi-person-plus-fill"></i> Quan tâm</a>
+            </div>
+            <div class="body-Contener_ns">
+                <img class="img-ns" src="../../images/1.jpg" alt="">
+                <div class="name-ns">thang</div>
+                <div class="luotthich">2.000 thích</div>
+                <a class="quantam" href=""><i class="bi bi-person-plus-fill"></i> Quan tâm</a>
+            </div>
+            <div class="body-Contener_ns">
+                <img class="img-ns" src="../../images/1.jpg" alt="">
+                <div class="name-ns">thang</div>
+                <div class="luotthich">2.000 thích</div>
+                <a class="quantam" href=""><i class="bi bi-person-plus-fill"></i> Quan tâm</a>
+            </div>
+            <div class="body-Contener_ns">
+                <img class="img-ns" src="../../images/1.jpg" alt="">
+                <div class="name-ns">thang</div>
+                <div class="luotthich">2.000 thích</div>
+                <a class="quantam" href=""><i class="bi bi-person-plus-fill"></i> Quan tâm</a>
+            </div>
+            <div class="body-Contener_ns">
+                <img class="img-ns" src="../../images/1.jpg" alt="">
+                <div class="name-ns">thang</div>
+                <div class="luotthich">2.000 thích</div>
+                <a class="quantam" href=""><i class="bi bi-person-plus-fill"></i> Quan tâm</a>
+            </div>
+            <div class="body-Contener_ns">
+                <img class="img-ns" src="../../images/1.jpg" alt="">
+                <div class="name-ns">thang</div>
+                <div class="luotthich">2.000 thích</div>
+                <a class="quantam" href=""><i class="bi bi-person-plus-fill"></i> Quan tâm</a>
+            </div>
+            <div class="body-Contener_ns">
+                <img class="img-ns" src="../../images/1.jpg" alt="">
+                <div class="name-ns">thang</div>
+                <div class="luotthich">2.000 thích</div>
+                <a class="quantam" href=""><i class="bi bi-person-plus-fill"></i> Quan tâm</a>
+            </div>
+            <div class="body-Contener_ns">
+                <img class="img-ns" src="../../images/1.jpg" alt="">
+                <div class="name-ns">thang</div>
+                <div class="luotthich">2.000 thích</div>
+                <a class="quantam" href=""><i class="bi bi-person-plus-fill"></i> Quan tâm</a>
+            </div>
+        </div>
+
+
     </div>
 </div>
 @include('layouts.bottom')

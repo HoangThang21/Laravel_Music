@@ -105,26 +105,26 @@ class ClientControllers extends Controller
     public function loadyeuthich()
     {
 
-        return view('frontend.menu.yeuthich', ['activerity' => 1, 'content' => '']);
+        return view('frontend.menu.yeuthich', ['activerity' => 1, 'loi' => '', 'content' => '']);
     }
 
     public function loadlivechat()
     {
-        return view('frontend.menu.livechat', ['activerity' => 2, 'content' => '']);
+        return view('frontend.menu.livechat', ['activerity' => 2,  'loi' => '','content' => '']);
     }
     public function loadMchart()
     {
 
-        return view('frontend.menu.Mchart', ['activerity' => 3, 'content' => '']);
+        return view('frontend.menu.Mchart', ['activerity' => 3, 'loi' => '', 'content' => '']);
     }
     public function loadranksong()
     {
 
-        return view('frontend.menu.ranksong', ['activerity' => 4, 'content' => '']);
+        return view('frontend.menu.ranksong', ['activerity' => 4, 'loi' => '', 'content' => '']);
     }
     public function loadtopic()
     {
 
-        return view('frontend.menu.topic', ['activerity' => 5, 'content' => '']);
+        return view('frontend.menu.topic', ['activerity' => 5, 'content' => '', 'loi' => '',]);
     }
 }

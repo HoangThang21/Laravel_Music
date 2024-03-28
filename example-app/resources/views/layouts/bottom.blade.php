@@ -197,7 +197,7 @@
     } ?>">
         <form class="form_container"action="/login" method="post">
             @csrf
-            <div class="x-tat" onclick="toggleMenuFlex('form_container')"><i class="bi bi-x"></i></div>
+            <div class="x-tat" onclick="toggleMenuFlex('login-form')"><i class="bi bi-x"></i></div>
             <div class="logo_container"><img src="../../images/logomobifone.png" alt=""></div>
             <div class="title_container">
                 <p class="title">Đăng nhập</p>
@@ -248,7 +248,7 @@
 
         </form>
         <button title="Sign In" type="submit" class="sign-in_ggl">
-            <a href="/logingg">Đăng nhập với Google</a>
+            <a href="/logingg"><img src="../../images/google.png" alt="">Đăng nhập với Google</a>
         </button>
     </div>
 </div>

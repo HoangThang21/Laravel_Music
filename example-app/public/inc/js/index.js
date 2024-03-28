@@ -72,7 +72,32 @@ document.addEventListener("DOMContentLoaded", () => {
         form_container_register.style.display = "flex";
         form_container.classList.remove("active");
         form_container.style.display = "none";
-      
+    });
+    const container = document.querySelector(".list-menu-contenter_ns");
+    let isMouseDown = false;
+    let startX;
+    let currentTranslateX = 0;
+    let prevTranslateX = 0;
+
+    container.addEventListener("mousedown", (e) => {
+        isMouseDown = true;
+        startX = e.pageX;
+        container.style.cursor = "grabbing";
+    });
+
+    window.addEventListener("mouseup", () => {
+        isMouseDown = false;
+        container.style.cursor = "grab";
+    });
+
+    container.addEventListener("mouseleave", () => {
+        isMouseDown = false;
+    });
+
+    container.addEventListener("mousemove", (e) => {
+        if (!isMouseDown) return;
+        e.preventDefault();
+        container.scrollLeft += startX - e.pageX;
     });
 });
 function toggleMenu(name) {
