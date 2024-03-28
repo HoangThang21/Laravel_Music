@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Album;
+use App\Models\Nghesi;
+use App\Models\Nhac;
 use App\Models\User;
 use App\Models\UserAPI;
 use Exception;
@@ -19,7 +22,7 @@ class ClientControllers extends Controller
      */
     public function index()
     {
-
+        
         if (Auth::guard('web')->check()) {
             return view('frontend.home', [
                 'ttnguoidung' => Auth::guard('web')->user(),
@@ -36,7 +39,18 @@ class ClientControllers extends Controller
                 'loi' => '',
             ]);
         }
-        return view('frontend.home', ['activerity' => 0, 'content' => '', 'loi' => '']);
+        return view('frontend.home', [
+            'activerity' => 0, 
+            'Albumtop3'=>Album::latest()->take(3)->get(),
+            'Chill'=>Album::inRandomOrder()->take(3)->get(),
+            'CanLike'=>Album::inRandomOrder()->take(3)->get(),
+            'Nhactop10'=>Nhac::where('xetduyet',1)->latest()->take(10)->get(),
+            'Nghesitop20'=>Nghesi::inRandomOrder()->take(20)->get(),
+            'nghesi'=>Nghesi::all(),
+            'album'=>Album::all(),
+            'content' => '',
+             'loi' => '',
+            ]);
     }
 
     public function loadtrangchu()

@@ -34,6 +34,7 @@
             <!-- Danh sách người dùng -->
             <table class="table table-hover">
                   <tr>
+                  <th>STT</th> 
                   <th>Tên nhạc</th> 
                   <th>Nhạc</th> 
                   <th>Hình</th>
@@ -42,8 +43,11 @@
                  
                   
                  </tr>
-                <?php foreach ($nhac as $nd): ?>
-                  <tr>
+                 @foreach ($nhac as $nd)
+                 <tr>
+                    <td>@php
+                        $number = str_pad($loop->iteration, 2, '0', STR_PAD_LEFT); // Định dạng số với hai chữ số và thêm số 0 ở đầu nếu cần
+                    @endphp {{ $number }}</td>
                       <td>{{ $nd['tennhac'] }}</td>
                       <td><audio controls>
                         <source src="../../music/{{ $nd['nhaclink']  }}" type="audio/mp3">
@@ -73,8 +77,7 @@
                   </td>
                   </tr>    
                     
-                  
-                  <?php endforeach; ?>
+                 @endforeach
             </table>
           
           </div>

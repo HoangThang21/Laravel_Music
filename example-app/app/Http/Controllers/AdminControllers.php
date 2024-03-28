@@ -708,7 +708,7 @@ class AdminControllers extends Controller
                 'userapi' =>  UserAPI::all(),
                 'nghesi' =>  Nghesi::all(),
                 'album' =>  Album::all(),
-                'nhac' => Nhac::all(),
+                'nhac' => Nhac::orderBy('created_at', 'desc')->get(),
                 'searchbarinput' => '',
                 'contentFilter' => '-1',
                 'active' => '',

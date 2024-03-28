@@ -26,42 +26,26 @@
     <div class="albumlist">
         <div class="pre"> <i class="bi bi-chevron-left"></i></div>
         <div class="list-item">
-            <div class="listitemalbum">
-                <div class="item-album">
-                    <img src="../../images/1.jpg" alt="">
-                    <div class="item-list-info-user">
-                        <div class="infoalbum">
-                            <div class="nameAlbum">Hay1</div>
-                            <div class="namenghesi">Nguyễn Thắng</div>
+            @foreach ($Albumtop3 as $albtop3)
+                <div class="listitemalbum">
+                    <div class="item-album">
+                        <img src="../../images/{{ $albtop3->hinhalbum }}" alt="">
+                        <div class="item-list-info-user">
+                            <div class="infoalbum">
+                                <div class="nameAlbum">{{ $albtop3->tenalbum }}</div>
+                                <div class="namenghesi">
+                                    @foreach ($nghesi as $ns)
+                                        @if ($albtop3->nghesi_idalbum == $ns->id)
+                                            {{ $ns->tennghesi }}
+                                        @endif
+                                    @endforeach
+                                </div>
+                            </div>
+                            <i class="bi bi-caret-right-fill"></i>
                         </div>
-                        <i class="bi bi-caret-right-fill"></i>
                     </div>
                 </div>
-            </div>
-            <div class="listitemalbum">
-                <div class="item-album">
-                    <img src="../../images/2.jpg" alt="">
-                    <div class="item-list-info-user">
-                        <div class="infoalbum">
-                            <div class="nameAlbum">Hay2</div>
-                            <div class="namenghesi">Nguyễn Thắng</div>
-                        </div>
-                        <i class="bi bi-caret-right-fill"></i>
-                    </div>
-                </div>
-            </div>
-            <div class="listitemalbum">
-                <div class="item-album">
-                    <img src="../../images/3.png" alt="">
-                    <div class="item-list-info-user">
-                        <div class="infoalbum">
-                            <div class="nameAlbum">Hay3</div>
-                            <div class="namenghesi">Nguyễn Thắng</div>
-                        </div>
-                        <i class="bi bi-caret-right-fill"></i>
-                    </div>
-                </div>
-            </div>
+            @endforeach
         </div>
         <div class="next"> <i class="bi bi-chevron-right"></i></div>
     </div>
@@ -105,133 +89,110 @@
             <a href="">Tất cả <i class="bi bi-chevron-right"></i></a>
         </div>
         <div class="menu-media">
-            <div class="media">
-                <div class="media-left">
-                    <span>01</span>
-                    <div class="info-media">
-                        <div class="img-media">
-                            <img src="../../images/3.png" alt="">
-                            <div class="load-nghe"><i class="bi bi-caret-right-fill"></i></div>
-                        </div>
-                        <div class="name-media">
-                            <div class="name-music">maroon 5 - memories
+            @foreach ($Nhactop10 as $nhactop10)
+                @php
+                    $number = str_pad($loop->iteration, 2, '0', STR_PAD_LEFT); // Định dạng số với hai chữ số và thêm số 0 ở đầu nếu cần
+                @endphp
+                <div class="media">
+                    <div class="media-left">
+                        <span>{{ $number }}</span>
+                        <div class="info-media">
+                            <div class="img-media">
+                                <img src="../../images/{{ $nhactop10->imagemusic }}" alt="">
+                                <div class="load-nghe"><i class="bi bi-caret-right-fill"></i></div>
                             </div>
-                            <div class="nametacgia">
-                                <a href="" class="name-tacgia">aa</a>
-                                <div class="info-name-tacgia">
-                                    <div class="top-info-tacgia">
-                                        <div class="topleft-tacgia">
-                                            <img src="../../images/3.png" alt="">
-                                            <div class="iftacgia">
-                                                <a href="" class="nametacgia-info">tên tác giả
-                                                    aaaaaaaaaaaaaaâ</a>
-                                                <div class="luotquantam-info">2000 quan tâm</div>
-                                            </div>
-                                        </div>
-                                        <div class="topright-tacgia">quan tâm +</div>
-                                    </div>
-                                    <div class="bottom-info-tacgia">
-                                        <p>Mới</p>
-                                        <div class="bottom-menu">
-                                            <div class="list-album-tacgia">
-                                                <div class="item-album-tacgia">
-                                                    <img src="../../images/3.png" alt="">
-                                                    <a href="">Ten album aaaaaaaaaaaaaaa</a>
-                                                    <p>2023</p>
-                                                </div>
-                                            </div>
-                                            <div class="list-album-tacgia">
-                                                <div class="item-album-tacgia">
-                                                    <img src="../../images/3.png" alt="">
-                                                    <a href="">Ten album aaaaaaaaaaaaaaa</a>
-                                                    <p>2023</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                            <div class="name-media">
+                                <div class="name-music">{{ $nhactop10->tennhac }}
+                                </div>
+                                <div class="nametacgia">
+                                    @foreach ($album as $alb)
+                                        @if ($alb->id == $nhactop10->album_idnhac)
+                                            @foreach ($nghesi as $ns)
+                                                @if ($ns->id == $alb->nghesi_idalbum)
+                                                    <a href="/nghe-si/{{ $ns->id }}"
+                                                        class="name-tacgia">{{ $ns->tennghesi }}</a>
+                                                    <div class="info-name-tacgia">
+                                                        <div class="top-info-tacgia">
+                                                            <div class="topleft-tacgia">
+                                                                @php
+                                                                    $userimg = DB::table('user')
+                                                                        ->where('id', $ns->id_nghesi_user)
+                                                                        ->pluck('image')
+                                                                        ->first();
+                                                                @endphp
+                                                                <img src="../../images/{{ $userimg }}"
+                                                                    alt="">
+                                                                <div class="iftacgia">
+                                                                    <a href=""
+                                                                        class="nametacgia-info">{{ $ns->tennghesi }}</a>
+                                                                    <div class="luotquantam-info">{{ $ns->quantam }}
+                                                                        quan tâm</div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="topright-tacgia"
+                                                                data-quantamns="{{ $ns->id }}">Quan tâm +</div>
+                                                        </div>
+                                                        <div class="bottom-info-tacgia">
+                                                            <p>Mới</p>
+                                                            <div class="bottom-menu">
+                                                                @php
+                                                                    $items = DB::table('album')
+                                                                        ->where('nghesi_idalbum', $ns->id)
+                                                                        ->take(3)
+                                                                        ->get();
+                                                                @endphp
+                                                                @foreach ($items as $item)
+                                                                    <div class="list-album-tacgia">
+                                                                        <div class="item-album-tacgia">
+                                                                            <img src="../../images/{{ $item->hinhalbum }}"
+                                                                                alt="">
+                                                                            <a
+                                                                                href="/album/{{ $item->id }}">{{ $item->tenalbum }}</a>
+                                                                            <p>{{ $item->namphathanh }}</p>
+                                                                        </div>
+                                                                    </div>
+                                                                @endforeach
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                @endif
+                                            @endforeach
+                                        @endif
+                                    @endforeach
+
+
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="media-right">
-                    <div class="time-curent-media"><span>2:00</span><i
-                            class="loadmusic-dot bi bi-caret-right-fill"></i></div>
-                    <div class="yeuthich-music" title="Thêm vào yêu thích"><i class="bi bi-heart"></i></div>
-                    <div class="option">
-                        <div class="dot-3"><i class="bi bi-three-dots"></i></div>
-                        <div class="menu-right-media ">
-                            <div class="download" data-downloadmusic="holo.mp3"><i
-                                    class="bi bi-download"></i>Download</div>
-                            <div class="nhaccho" data-cho="8217381" data-gia="3000"><i
-                                    class="bi bi-phone-vibrate"></i>Cài nhạc chờ
-                            </div>
-                            <div class="sendchat"><i class="bi bi-chat-dots"></i>Share chat</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="media">
-                <div class="media-left">
-                    <span>01</span>
-                    <div class="info-media">
-                        <div class="img-media">
-                            <img src="../../images/3.png" alt="">
-                            <div class="load-nghe"><i class="bi bi-caret-right-fill"></i></div>
-                        </div>
-                        <div class="name-media">
-                            <div class="name-music">maroon 5 - memories</div>
-                            <div class="nametacgia">
-                                <a href="" class="name-tacgia">aa</a>
-                                <div class="info-name-tacgia">
-                                    <div class="top-info-tacgia">
-                                        <div class="topleft-tacgia">
-                                            <img src="../../images/3.png" alt="">
-                                            <div class="iftacgia">
-                                                <a href="" class="nametacgia-info">tên tác giả
-                                                    aaaaaaaaaaaaaaâ</a>
-                                                <div class="luotquantam-info">2000 quan tâm</div>
-                                            </div>
-                                        </div>
-                                        <div class="topright-tacgia">quan tâm +</div>
-                                    </div>
-                                    <div class="bottom-info-tacgia">
-                                        <p>Mới</p>
-                                        <div class="bottom-menu">
-                                            <div class="list-album-tacgia">
-                                                <div class="item-album-tacgia">
-                                                    <img src="../../images/3.png" alt="">
-                                                    <a href="">Ten album aaaaaaaaaaaaaaa</a>
-                                                    <p>2023</p>
-                                                </div>
-                                            </div>
-                                            <div class="list-album-tacgia">
-                                                <div class="item-album-tacgia">
-                                                    <img src="../../images/3.png" alt="">
-                                                    <a href="">Ten album aaaaaaaaaaaaaaa</a>
-                                                    <p>2023</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                    <div class="media-right">
+                        @php
+                            $filePath = public_path('music/' . $nhactop10->nhaclink);
+                            $getID3 = new getID3();
+                            $fileInfo = $getID3->analyze($filePath);
+                            if (isset($fileInfo['playtime_string'])) {
+                                $duration = $fileInfo['playtime_string'];
+                            }
+                        @endphp
+                        <div class="time-curent-media"><span>{{ $duration }}</span><i
+                                class="loadmusic-dot bi bi-caret-right-fill"></i></div>
+                        <div class="yeuthich-music" title="Thêm vào yêu thích"><i class="bi bi-heart"></i></div>
+                        <div class="option">
+                            <div class="dot-3"><i class="bi bi-three-dots"></i></div>
+                            <div class="menu-right-media ">
+                                <div class="download" data-downloadmusic="{{ $nhactop10->nhaclink }}"><i
+                                        class="bi bi-download"></i>Download</div>
+                                <div class="nhaccho" data-cho="{{ $nhactop10->maNhac }}"
+                                    data-gia="{{ $nhactop10->gia }}"><i class="bi bi-phone-vibrate"></i>Cài nhạc chờ
                                 </div>
+                                <div class="sendchat"><i class="bi bi-chat-dots"></i>Share chat</div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="media-right">
-                    <div class="time-curent-media"><span>2:00</span><i
-                            class="loadmusic-dot bi bi-caret-right-fill"></i></div>
-                    <div class="yeuthich-music" title="Thêm vào yêu thích"><i class="bi bi-heart"></i></div>
-                    <div class="option">
-                        <div class="dot-3"><i class="bi bi-three-dots"></i></div>
-                        <div class="menu-right-media">
-                            <div class="download" data-downloadmusic="holo.mp3">download</div>
-                            <div class="nhaccho" data-cho="111111111" data-gia="3000000">Cài nhạc chờ</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            @endforeach
+
 
         </div>
     </div>
@@ -240,33 +201,35 @@
             <h3>Chill</h3> <a href="#">Tất cả <i class="bi bi-chevron-right"></i></a>
         </div>
         <div class="list-menu-contenter">
+            @foreach ($Chill as $item)
             <div class="body-Contener">
-                <div class="item-body-content">
-                    <img src="../../images/1.jpg" alt="">
+                <div class="item-body-content" data-album="{{ $item->id }}">
+                    <img src="../../images/{{ $item->hinhalbum }}" alt="">
                     <div class="hover-item-body-content">
                         <i class="bi bi-caret-right-fill"></i>
                     </div>
                 </div>
-                <div class="title-body-content">abcádccccccccccccccccccccccccccccccccccccccccccccccccccccccc</div>
+                <div class="title-body-content">{{ $item->tenalbum }}</div>
             </div>
+            @endforeach
+        </div>
+    </div>
+    <div class="contener">
+        <div class="Top-Contener">
+            <h3>Có thể bạn thích</h3> <a href="#">Tất cả <i class="bi bi-chevron-right"></i></a>
+        </div>
+        <div class="list-menu-contenter">
+            @foreach ($CanLike as $item)
             <div class="body-Contener">
-                <div class="item-body-content">
-                    <img src="../../images/1.jpg" alt="">
+                <div class="item-body-content" data-album="{{ $item->id }}">
+                    <img src="../../images/{{ $item->hinhalbum }}" alt="">
                     <div class="hover-item-body-content">
                         <i class="bi bi-caret-right-fill"></i>
                     </div>
                 </div>
-                <p class="title-body-content">abc</p>
+                <div class="title-body-content">{{ $item->tenalbum }}</div>
             </div>
-            <div class="body-Contener">
-                <div class="item-body-content">
-                    <img src="../../images/1.jpg" alt="">
-                    <div class="hover-item-body-content">
-                        <i class="bi bi-caret-right-fill"></i>
-                    </div>
-                </div>
-                <p class="title-body-content">abc</p>
-            </div>
+            @endforeach
         </div>
     </div>
     <div class="contener">
@@ -275,54 +238,16 @@
             <a href="#">Tất cả <i class="bi bi-chevron-right"></i></a>
         </div>
         <div class="list-menu-contenter_ns">
+            @foreach ($Nghesitop20 as $nstop20)
             <div class="body-Contener_ns">
                 <img class="img-ns" src="../../images/1.jpg" alt="">
-                <div class="name-ns">thang</div>
-                <div class="luotthich">2.000 thích</div>
-                <a class="quantam" href=""><i class="bi bi-person-plus-fill"></i> Quan tâm</a>
+                <div class="name-ns">{{ $nstop20->tennghesi }}</div>
+                <div class="luotthich">{{ $nstop20->quantam }} thích</div>
+                <div class="quantam"  data-quantam="{{ $nstop20->id }}"><i class="bi bi-person-plus-fill"></i> Quan tâm</div>
             </div>
-            <div class="body-Contener_ns">
-                <img class="img-ns" src="../../images/1.jpg" alt="">
-                <div class="name-ns">thang</div>
-                <div class="luotthich">2.000 thích</div>
-                <a class="quantam" href=""><i class="bi bi-person-plus-fill"></i> Quan tâm</a>
-            </div>
-            <div class="body-Contener_ns">
-                <img class="img-ns" src="../../images/1.jpg" alt="">
-                <div class="name-ns">thang</div>
-                <div class="luotthich">2.000 thích</div>
-                <a class="quantam" href=""><i class="bi bi-person-plus-fill"></i> Quan tâm</a>
-            </div>
-            <div class="body-Contener_ns">
-                <img class="img-ns" src="../../images/1.jpg" alt="">
-                <div class="name-ns">thang</div>
-                <div class="luotthich">2.000 thích</div>
-                <a class="quantam" href=""><i class="bi bi-person-plus-fill"></i> Quan tâm</a>
-            </div>
-            <div class="body-Contener_ns">
-                <img class="img-ns" src="../../images/1.jpg" alt="">
-                <div class="name-ns">thang</div>
-                <div class="luotthich">2.000 thích</div>
-                <a class="quantam" href=""><i class="bi bi-person-plus-fill"></i> Quan tâm</a>
-            </div>
-            <div class="body-Contener_ns">
-                <img class="img-ns" src="../../images/1.jpg" alt="">
-                <div class="name-ns">thang</div>
-                <div class="luotthich">2.000 thích</div>
-                <a class="quantam" href=""><i class="bi bi-person-plus-fill"></i> Quan tâm</a>
-            </div>
-            <div class="body-Contener_ns">
-                <img class="img-ns" src="../../images/1.jpg" alt="">
-                <div class="name-ns">thang</div>
-                <div class="luotthich">2.000 thích</div>
-                <a class="quantam" href=""><i class="bi bi-person-plus-fill"></i> Quan tâm</a>
-            </div>
-            <div class="body-Contener_ns">
-                <img class="img-ns" src="../../images/1.jpg" alt="">
-                <div class="name-ns">thang</div>
-                <div class="luotthich">2.000 thích</div>
-                <a class="quantam" href=""><i class="bi bi-person-plus-fill"></i> Quan tâm</a>
-            </div>
+            @endforeach
+            
+            
         </div>
 
 

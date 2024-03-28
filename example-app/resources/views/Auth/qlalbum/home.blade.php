@@ -38,41 +38,43 @@
         <!-- Danh sách người dùng -->
         <table class="table table-hover">
             <tr>
+                <th>STT</th>
                 <th>Hình</th>
                 <th>Tên album</th>
                 <th>Năm phát hành</th>
                 <th>Nghệ sĩ </th>
                 <th>Thể loại</th>
                 <th>Chức năng</th>
-               
+
             </tr>
-            <?php foreach ($album as $nd): ?>
-            <tr>
-                <td><img src="../../images/{{ $nd['hinhalbum'] }}" width="80" class="img-thumbnail"></td>
-                <td>{{ $nd['tenalbum'] }}</td>
-                <td>{{ $nd['namphathanh'] }}</td>
-                <?php foreach ($nghesi as $ns): 
+            @foreach ($album as $nd)
+                <tr>
+                    <td>@php
+                        $number = str_pad($loop->iteration, 2, '0', STR_PAD_LEFT); // Định dạng số với hai chữ số và thêm số 0 ở đầu nếu cần
+                    @endphp {{ $number }}</td>
+                    <td><img src="../../images/{{ $nd['hinhalbum'] }}" width="80" class="img-thumbnail"></td>
+                    <td>{{ $nd['tenalbum'] }}</td>
+                    <td>{{ $nd['namphathanh'] }}</td>
+                    <?php foreach ($nghesi as $ns): 
                         if($nd['nghesi_idalbum']==$ns['id']){
                       ?>
-                <td>{{ $ns['tennghesi'] }}</td>
-                <?php } endforeach; ?>
-                <?php foreach ($theloai as $tl): 
+                    <td>{{ $ns['tennghesi'] }}</td>
+                    <?php } endforeach; ?>
+                    <?php foreach ($theloai as $tl): 
                         if($nd['theloai_idalbum']==$tl['id']){
                       ?>
-                <td>{{ $tl['tentheloai'] }}</td>
-                <?php } endforeach; ?>
+                    <td>{{ $tl['tentheloai'] }}</td>
+                    <?php } endforeach; ?>
 
-                <td><a href="/Administrator/qlalbum/xoaalbum&{{ $nd['id'] }}-alb" class="text-danger">Xóa</a>
-                    <span> | </span>
-                    <a href="/Administrator/qlalbum/suaalbum&{{ $nd['id'] }}-alb" class="text-warning">Sửa</a>
-                    <span> | </span>
-                    <a href="/Administrator/qlalbum/xemalbum&{{ $nd['id'] }}-alb" class="text-info">Xem</a>
-                </td>
-                
-            </tr>
+                    <td><a href="/Administrator/qlalbum/xoaalbum&{{ $nd['id'] }}-alb" class="text-danger">Xóa</a>
+                        <span> | </span>
+                        <a href="/Administrator/qlalbum/suaalbum&{{ $nd['id'] }}-alb" class="text-warning">Sửa</a>
+                        <span> | </span>
+                        <a href="/Administrator/qlalbum/xemalbum&{{ $nd['id'] }}-alb" class="text-info">Xem</a>
+                    </td>
 
-
-            <?php endforeach; ?>
+                </tr>
+            @endforeach
         </table>
 
     </div>

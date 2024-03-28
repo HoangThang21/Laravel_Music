@@ -475,7 +475,7 @@ header .master_play .bar input {
     height: 3px;
     left: 0;
     top: 0%;
-    transition:all 0s linear;
+    transition: all 0s linear;
 }
 .vol .dot {
     position: absolute;
@@ -486,7 +486,7 @@ header .master_play .bar input {
     left: 0%;
     top: 30%;
     transform: translate(-50%, -50%);
-    transition:all 0s linear;
+    transition: all 0s linear;
 }
 .right-setup .range-vol {
     opacity: 0;
@@ -518,7 +518,7 @@ header .master_play .bar input {
 }
 .loi.active {
     transform: translate(0);
-    transition:all 0s linear;
+    transition: all 0s linear;
 }
 .headerthongbao {
     display: flex;
@@ -790,7 +790,7 @@ header .master_play .bar input {
     display: none;
 }
 .song_side .contentsong .rightsong {
-    width: 400px;
+    width: 294px;
     position: relative;
     height: 100%;
     background-color: #df0a43;
@@ -1016,7 +1016,7 @@ header .master_play .bar input {
     line-height: normal;
     letter-spacing: 0.36px;
     text-transform: capitalize;
-    white-space: normal;
+    white-space: nowrap;
     overflow: hidden; /* Ẩn nội dung dư thừa */
     text-overflow: ellipsis;
 }
@@ -1106,8 +1106,15 @@ header .master_play .bar input {
 }
 .topright-tacgia {
     color: var(--background-music);
+    padding: 6px;
+    border-radius: 5px;
+    background-color: #ffffff73;
     width: 100%;
     white-space: nowrap;
+    cursor: pointer;
+}
+.topright-tacgia:hover {
+    background-color: #62abe073;
 }
 .media-right {
     width: 50%;
@@ -1212,6 +1219,7 @@ header .master_play .bar input {
 }
 .item-album-tacgia a {
     color: var(--background-music);
+    margin-top: 6px;
     width: 80px;
     display: flex;
     align-items: flex-start;
@@ -1343,7 +1351,6 @@ header .master_play .bar input {
     border-radius: 11px;
     font-family: "Inter", sans-serif;
     position: relative;
-  
 }
 .form-login-regis .form_container.active {
     display: flex;
@@ -1597,6 +1604,7 @@ header .master_play .bar input {
     border: 1px solid #fff;
 }
 .contener .item-body-content:hover .hover-item-body-content {
+    transition: all 0.5s linear;
     opacity: 1;
 }
 .list-menu-contenter_ns {
@@ -1625,10 +1633,11 @@ header .master_play .bar input {
     height: 200px;
     background-repeat: no-repeat;
     background-size: cover;
-    transition: all 0s ease;
+    transition: all 0.5s linear;
 }
 .contener .item-body-content:hover img {
-    transform: scale(1.2);
+    transition: all 0.5s linear;
+    transform: scale(1.1);
 }
 .contener .img-ns {
     width: 100px;
@@ -1660,7 +1669,9 @@ header .master_play .bar input {
     padding: 6px;
     border-radius: 4px;
     background: #ffffff;
+    color: var(--backgroundmain);
     margin-top: 10px;
+    cursor: pointer;
 }
 .contener .quantam:hover {
     background: blue;

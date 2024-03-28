@@ -10,12 +10,16 @@
         <!-- Danh sách người dùng -->
         <table class="table table-hover">
             <tr>
+                <th>STT</th>
                 <th>Tên thể loại</th>
                 <th>Chức năng</th>
                 <th></th>
             </tr>
-            <?php foreach ($theloai as $nd): ?>
+            @foreach ($theloai as $nd)
             <tr>
+                <td>@php
+                    $number = str_pad($loop->iteration, 2, '0', STR_PAD_LEFT); // Định dạng số với hai chữ số và thêm số 0 ở đầu nếu cần
+                @endphp {{ $number }}</td>
                 <td>{{ $nd['tentheloai'] }}</td>
                 <td><a href="/Administrator/qltheloai/xoatheloai&{{ $nd['id'] }}-tl"
                         class="text-danger delete-link">Xóa</a>
@@ -23,9 +27,7 @@
                     <a href="/Administrator/qltheloai/suatheloai&{{ $nd['id'] }}-tl" class="text-warning ">Sửa</a>
                 </td>
             </tr>
-
-
-            <?php endforeach; ?>
+            @endforeach
         </table>
 
     </div>
