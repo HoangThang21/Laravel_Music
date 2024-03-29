@@ -1,6 +1,34 @@
 </div>
 <div class="rightsong">
-    right
+    <div class="menu-rightsong">
+        <div class="top-menu-rightsong">Top Lượt nghe <i class="bi bi-caret-right-fill"></i></div>
+        <div class="menu-scroll-rightsong">
+            <div class="list-menu-rightsong">
+                <div class="left-list-menu-rightsong">
+                    <img src="" alt="">
+                    <div class="name-rightsong">aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</div>
+                </div>
+                <i class="bi bi-caret-right-fill"></i>
+            </div>
+           
+
+        </div>
+    </div>
+    <div class="menu-rightsong">
+        <div class="top-menu-rightsong">Nhạc Premium <span><i class="bi bi-chevron-compact-right"></i></span></div>
+        <div class="menu-scroll-rightsong">
+            <div class="list-menu-rightsong">
+                <div class="left-list-menu-rightsong">
+                    <img src="" alt="">
+                    <div class="name-rightsong">aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa </div><span>premium</span>
+                </div>
+                <i class="bi bi-caret-right-fill"></i>
+            </div>
+            
+
+        </div>
+    </div>
+
 </div>
 </div>
 
@@ -147,7 +175,7 @@
                 </path>
             </svg>
             <input placeholder="Email hoặc Số điện thoại" title="Email hoặc Số điện thoại" name="input-name"
-                type="text" class="input_field" autocomplete="off" >
+                type="text" class="input_field" autocomplete="off">
         </div>
         <div class="input_container">
             <label class="input_label">Mật khẩu</label>

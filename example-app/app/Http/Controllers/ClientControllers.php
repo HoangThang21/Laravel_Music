@@ -22,13 +22,21 @@ class ClientControllers extends Controller
      */
     public function index()
     {
-        
+        // Auth::guard('web')->logout();
+        // Auth::guard('google')->logout();
         if (Auth::guard('web')->check()) {
             return view('frontend.home', [
                 'ttnguoidung' => Auth::guard('web')->user(),
                 'activerity' => 0,
                 'content' => '',
                 'loi' => '',
+                'Albumtop3' => Album::latest()->take(3)->get(),
+                'Chill' => Album::inRandomOrder()->take(3)->get(),
+                'CanLike' => Album::inRandomOrder()->take(3)->get(),
+                'Nhactop10' => Nhac::where('xetduyet', 1)->latest()->take(10)->get(),
+                'Nghesitop20' => Nghesi::inRandomOrder()->take(20)->get(),
+                'nghesi' => Nghesi::all(),
+                'album' => Album::all(),
             ]);
         }
         if (Auth::guard('google')->check()) {
@@ -37,20 +45,27 @@ class ClientControllers extends Controller
                 'activerity' => 0,
                 'content' => '',
                 'loi' => '',
+                'Albumtop3' => Album::latest()->take(3)->get(),
+                'Chill' => Album::inRandomOrder()->take(3)->get(),
+                'CanLike' => Album::inRandomOrder()->take(3)->get(),
+                'Nhactop10' => Nhac::where('xetduyet', 1)->latest()->take(10)->get(),
+                'Nghesitop20' => Nghesi::inRandomOrder()->take(20)->get(),
+                'nghesi' => Nghesi::all(),
+                'album' => Album::all(),
             ]);
         }
         return view('frontend.home', [
-            'activerity' => 0, 
-            'Albumtop3'=>Album::latest()->take(3)->get(),
-            'Chill'=>Album::inRandomOrder()->take(3)->get(),
-            'CanLike'=>Album::inRandomOrder()->take(3)->get(),
-            'Nhactop10'=>Nhac::where('xetduyet',1)->latest()->take(10)->get(),
-            'Nghesitop20'=>Nghesi::inRandomOrder()->take(20)->get(),
-            'nghesi'=>Nghesi::all(),
-            'album'=>Album::all(),
+            'activerity' => 0,
+            'Albumtop3' => Album::latest()->take(3)->get(),
+            'Chill' => Album::inRandomOrder()->take(3)->get(),
+            'CanLike' => Album::inRandomOrder()->take(3)->get(),
+            'Nhactop10' => Nhac::where('xetduyet', 1)->latest()->take(10)->get(),
+            'Nghesitop20' => Nghesi::inRandomOrder()->take(20)->get(),
+            'nghesi' => Nghesi::all(),
+            'album' => Album::all(),
             'content' => '',
-             'loi' => '',
-            ]);
+            'loi' => '',
+        ]);
     }
 
     public function loadtrangchu()
@@ -124,7 +139,7 @@ class ClientControllers extends Controller
 
     public function loadlivechat()
     {
-        return view('frontend.menu.livechat', ['activerity' => 2,  'loi' => '','content' => '']);
+        return view('frontend.menu.livechat', ['activerity' => 2,  'loi' => '', 'content' => '']);
     }
     public function loadMchart()
     {
@@ -134,7 +149,14 @@ class ClientControllers extends Controller
     public function loadranksong()
     {
 
-        return view('frontend.menu.ranksong', ['activerity' => 4, 'loi' => '', 'content' => '']);
+        return view('frontend.menu.ranksong', [
+            'activerity' => 4,
+            'loi' => '',
+            'content' => '',
+            'Nhactop10' => Nhac::orderBy('luotnghe', 'desc')->get(),
+            'nghesi' => Nghesi::all(),
+            'album' => Album::all(),
+        ]);
     }
     public function loadtopic()
     {

@@ -85,6 +85,7 @@
                     </defs>
                 </svg>
                 <p>Top Music</p>
+                <i class="bi bi-caret-right-fill"></i>
             </div>
             <a href="">Tất cả <i class="bi bi-chevron-right"></i></a>
         </div>

@@ -44,18 +44,26 @@ document.addEventListener("DOMContentLoaded", () => {
     // document.addEventListener('contextmenu', function(event) {
     //     event.preventDefault();
     // });
-    document.querySelector(".pre").addEventListener("click", function () {
-        var list = document.querySelector(".list-item");
-        var firstItem = list.firstElementChild;
-        list.removeChild(firstItem);
-        list.appendChild(firstItem);
-    });
-    document.querySelector(".next").addEventListener("click", function () {
-        var list = document.querySelector(".list-item");
-        var lastItem = list.lastElementChild;
-        list.removeChild(lastItem);
-        list.insertBefore(lastItem, list.firstElementChild);
-    }); //chạy slider
+    var pre = document.querySelector(".pre");
+    if (pre) {
+        pre.addEventListener("click", function () {
+            var list = document.querySelector(".list-item");
+            var firstItem = list.firstElementChild;
+            list.removeChild(firstItem);
+            list.appendChild(firstItem);
+        });
+    }
+
+    var next = document.querySelector(".next");
+    if (next) {
+        next.addEventListener("click", function () {
+            var list = document.querySelector(".list-item");
+            var lastItem = list.lastElementChild;
+            list.removeChild(lastItem);
+            list.insertBefore(lastItem, list.firstElementChild);
+        });
+    }
+    //chạy slider
     // setInterval(function () {
     //     var list = document.querySelector(".list-item");
     //     var lastItem = list.lastElementChild;
@@ -78,27 +86,28 @@ document.addEventListener("DOMContentLoaded", () => {
     let startX;
     let currentTranslateX = 0;
     let prevTranslateX = 0;
+    if (container) {
+        container.addEventListener("mousedown", (e) => {
+            isMouseDown = true;
+            startX = e.pageX;
+            container.style.cursor = "grabbing";
+        });
 
-    container.addEventListener("mousedown", (e) => {
-        isMouseDown = true;
-        startX = e.pageX;
-        container.style.cursor = "grabbing";
-    });
+        window.addEventListener("mouseup", () => {
+            isMouseDown = false;
+            container.style.cursor = "grab";
+        });
 
-    window.addEventListener("mouseup", () => {
-        isMouseDown = false;
-        container.style.cursor = "grab";
-    });
+        container.addEventListener("mouseleave", () => {
+            isMouseDown = false;
+        });
 
-    container.addEventListener("mouseleave", () => {
-        isMouseDown = false;
-    });
-
-    container.addEventListener("mousemove", (e) => {
-        if (!isMouseDown) return;
-        e.preventDefault();
-        container.scrollLeft += startX - e.pageX;
-    });
+        container.addEventListener("mousemove", (e) => {
+            if (!isMouseDown) return;
+            e.preventDefault();
+            container.scrollLeft += startX - e.pageX;
+        });
+    }
 });
 function toggleMenu(name) {
     var menuFilter = document.querySelector("." + name);

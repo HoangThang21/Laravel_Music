@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -152,6 +153,11 @@
                                     </div>
                                 </div>
                                 <div class="menu-toggle_infouser">
+                                    <a href="/thongtin-user/{{ $ttnguoidung->id }}"><i class="bi bi-file-earmark-person"></i>Thông tin</a>
+                                    @if ($ttnguoidung->quyen == 4)
+                                        <a href="">hehe</a>
+                                    @endif
+                                    <a href="/infonghesi/{{ $ttnguoidung->id }}"><i class="bi bi-file-earmark-music-fill"></i>Nghệ sĩ</a>
                                     <a href="/logout"><i class="bi bi-box-arrow-right"></i>Đăng xuất</a>
                                 </div>
                             </div>
