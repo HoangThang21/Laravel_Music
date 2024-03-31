@@ -36,8 +36,6 @@ class AdminControllers extends Controller
         if (Auth::guard('api')->check()) {
 
             $arr = '';
-
-            // dd( explode("\r\n",$request->input('message-input')));
             foreach (explode("\r\n", $request->input('message-input')) as $message) {
                 $arr = $arr . "<p>$message</p>";
             };

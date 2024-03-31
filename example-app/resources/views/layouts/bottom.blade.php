@@ -286,6 +286,7 @@
     var csrfToken = ` {{ csrf_token() }}`;
     var activemenu = '{{ $activerity }}';
 </script>
+<script src="https://js.pusher.com/8.2.0/pusher.min.js"></script>
 <script type="text/javascript" src="../../inc/js/redict.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <script src="https://cdn.ckeditor.com/ckeditor5/40.0.0/classic/ckeditor.js"></script>

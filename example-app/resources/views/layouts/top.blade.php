@@ -153,11 +153,13 @@
                                     </div>
                                 </div>
                                 <div class="menu-toggle_infouser">
-                                    <a href="/thongtin-user/{{ $ttnguoidung->id }}"><i class="bi bi-file-earmark-person"></i>Thông tin</a>
+                                    <a href="/thongtin-user"><i
+                                            class="bi bi-file-earmark-person"></i>Thông tin</a>
                                     @if ($ttnguoidung->quyen == 4)
                                         <a href="">hehe</a>
                                     @endif
-                                    <a href="/infonghesi/{{ $ttnguoidung->id }}"><i class="bi bi-file-earmark-music-fill"></i>Nghệ sĩ</a>
+                                    <a href="/infonghesi"><i
+                                            class="bi bi-file-earmark-music-fill"></i>Nghệ sĩ</a>
                                     <a href="/logout"><i class="bi bi-box-arrow-right"></i>Đăng xuất</a>
                                 </div>
                             </div>
@@ -189,6 +191,8 @@
                                     </div>
                                 </div>
                                 <div class="menu-toggle_infouser">
+                                    <a href="/thongtin-user"><i
+                                            class="bi bi-file-earmark-person"></i>Thông tin</a>
                                     <a href="/logout"><i class="bi bi-box-arrow-right"></i>Đăng xuất</a>
                                 </div>
                             </div>

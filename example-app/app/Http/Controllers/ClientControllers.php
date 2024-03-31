@@ -2,11 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\CallLoad;
 use App\Models\Album;
+use App\Models\Mess;
 use App\Models\Nghesi;
 use App\Models\Nhac;
 use App\Models\User;
 use App\Models\UserAPI;
+use Carbon\Carbon;
+use Carbon\Exceptions\Exception as ExceptionsException;
 use Exception;
 use Illuminate\Support\Facades\View;
 use Illuminate\Http\Request;
@@ -40,6 +44,7 @@ class ClientControllers extends Controller
             ]);
         }
         if (Auth::guard('google')->check()) {
+          
             return view('frontend.home', [
                 'ttnguoidung' => Auth::guard('google')->user(),
                 'activerity' => 0,
@@ -74,8 +79,16 @@ class ClientControllers extends Controller
     }
     public function logout()
     {
-        User::where('id', Auth::guard('web')->user()->id)->update(['online' => 0]);
-        Auth::guard('web')->logout();
+        if (Auth::guard('web')->check()) {
+            User::where('id', Auth::guard('web')->user()->id)->update(['online' => 0]);
+
+            Auth::guard('web')->logout();
+        }
+        if (Auth::guard('google')->check()) {
+            UserAPI::where('id', Auth::guard('google')->user()->id)->update(['online' => 0]);
+            Auth::guard('google')->logout();
+        }
+
         return  redirect()->intended('/');
     }
     public function login(Request $request)
@@ -126,9 +139,9 @@ class ClientControllers extends Controller
             'quyen' => 3,
             'trangthai' => 1,
         ]);
-        Auth::guard('google')->logout();
-        Auth::guard('google')->login($userxacthuc);
+        Auth::guard('google')->login(UserAPI::where('email', $userxacthuc->email)->first());
         UserAPI::where('email', $userxacthuc->email)->update(['online' => 1]);
+       
         return redirect()->intended('/');
     }
     public function loadyeuthich()
@@ -139,7 +152,73 @@ class ClientControllers extends Controller
 
     public function loadlivechat()
     {
-        return view('frontend.menu.livechat', ['activerity' => 2,  'loi' => '', 'content' => '']);
+        if (Auth::guard('web')->check()) {
+            return view('frontend.menu.livechat', [
+                'ttnguoidung' => Auth::guard('web')->user(),
+                'chat' => Mess::all(),
+                'nhac' => Nhac::all(),
+                'namemusic' => '',
+                'activerity' => 2,
+                'loi' => '',
+                'content' => ''
+            ]);
+        }
+        if (Auth::guard('google')->check()) {
+            return view('frontend.menu.livechat', [
+                'ttnguoidung' => Auth::guard('google')->user(),
+                'chat' => Mess::all(),
+                'nhac' => Nhac::all(),
+                'namemusic' => '',
+                'activerity' => 2,
+                'loi' => '',
+                'content' => ''
+            ]);
+        }
+        return view('frontend.menu.livechat', [
+            'ttnguoidung' => Auth::guard('web')->user(),
+            'chat' => Mess::all(),
+            'nhac' => Nhac::all(),
+            'namemusic' => '',
+            'activerity' => 2,
+            'loi' => '',
+            'content' => '',
+            'login' => 1,
+        ]);
+    }
+    public function sendchat(Request $request)
+    {
+        
+            try{
+                $arr = '';
+                foreach (explode("\r\n", $request->input('message-input')) as $message) {
+                    $arr = $arr . "<p>$message</p>";
+                };
+                $mess = new Mess();
+                if (Auth::guard('web')->check()) {
+                    $userid = Auth::guard('web')->user();
+                    $mess->iduser = $userid->id;
+                }
+                if (Auth::guard('google')->check()) {
+                    $userid = Auth::guard('google')->user();
+                    $mess->idusergg = $userid->id;
+                }
+              
+                $mess->tenuser = $userid->name;
+                
+                $mess->hinhuser = $userid->image;
+                if ($request->input('linknhac')) {
+                    $mess->idnhac = $request->input('linknhac');
+                }
+                $mess->noidung = $arr;
+                $mess->time = Carbon::now();;
+                $mess->save();
+                event(new CallLoad('Success'));
+                return  redirect()->intended('/livechat');
+            } catch(Exception $e){
+                return  redirect()->intended('/livechat');
+            }
+           
+        
     }
     public function loadMchart()
     {

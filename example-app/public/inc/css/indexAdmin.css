@@ -437,6 +437,7 @@ li {
 .card_success {
     display: block;
 }
+/* -----------------------------------------chat */
 .chat-content {
     background-color: #eeeeee;
     box-shadow: 1px 2px 2px 2px #f7f5f5;

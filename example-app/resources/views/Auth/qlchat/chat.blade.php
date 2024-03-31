@@ -79,26 +79,26 @@
                                             class="bi bi-trash-fill"></i>Ban</a>
                                 </div>
                             </div>
+                            
                 @endif
-
 
         </div>
 @endforeach
 <button id="scrollButton" style="display: none;"><i class="bi bi-caret-down-fill"></i></button>
-    </div>
-    <form method="post" enctype="multipart/form-data" id="formchat" action="/Administrator/broadcast">
-        @csrf
-        @if ($namemusic)
-            <div class="musicform">
-                <input type="hidden" name="linknhac" value="{{ $namemusic->id }}" readonly>
-                <a target="_black" href="../../music/{{ $namemusic->nhaclink }}">{{ $namemusic->tennhac }}</a>
-                <i class="bi bi-music-note-beamed"></i>
-            </div>
-        @endif
-        <textarea id="message-input" name="message-input" placeholder="Nhập nội dung..."></textarea>
-        <div id="output"></div>
-        <button id="submitchat" type="submit"><i class="bi bi-cursor-fill"></i> Gửi</button>
-    </form>
-    </div>
+</div>
+<form method="post" enctype="multipart/form-data" id="formchat" action="/Administrator/broadcast">
+    @csrf
+    @if ($namemusic)
+        <div class="musicform">
+            <input type="hidden" name="linknhac" value="{{ $namemusic->id }}" readonly>
+            <a target="_black" href="../../music/{{ $namemusic->nhaclink }}">{{ $namemusic->tennhac }}</a>
+            <i class="bi bi-music-note-beamed"></i>
+        </div>
     @endif
-    @include('layoutsAdmin.bottom')
+    <textarea id="message-input" name="message-input" placeholder="Nhập nội dung..."></textarea>
+    <div id="output"></div>
+    <button id="submitchat" type="submit"><i class="bi bi-cursor-fill"></i> Gửi</button>
+</form>
+</div>
+@endif
+@include('layoutsAdmin.bottom')
