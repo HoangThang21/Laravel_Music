@@ -1,3 +1,3 @@
 @include('layouts.top')
-<div class="">Mchart</div>
+<div id="myfirstchart" style="height: 250px;"></div>
 @include('layouts.bottom')

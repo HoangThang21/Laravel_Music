@@ -11,15 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('mess', function (Blueprint $table) {
+        Schema::create('ranks', function (Blueprint $table) {
             $table->increments('id');
-            $table->Integer('iduser')->nullable();
-            $table->Integer('idusergg')->nullable();
-            $table->string('tenuser');
-            $table->text('hinhuser');
-            $table->integer('idnhac')->nullable();
-            $table->text('noidung');
-            $table->string('time');
+            $table->string('tensong');
+            $table->string('nghesi');
+            $table->string('thoigian');
+            $table->string('phantram');
             $table->timestamps();
         });
     }
@@ -29,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('mess');
+        Schema::dropIfExists('ranks');
     }
 };

@@ -10,7 +10,7 @@
                 </div>
                 <i class="bi bi-caret-right-fill"></i>
             </div>
-           
+
 
         </div>
     </div>
@@ -24,7 +24,7 @@
                 </div>
                 <i class="bi bi-caret-right-fill"></i>
             </div>
-            
+
 
         </div>
     </div>
@@ -221,7 +221,11 @@
     <?php if ($loi != '') {
         echo 'flex';
     } else {
+        if ($login == 1) {
+        echo 'flex';
+    } else {
         echo 'none';
+    }
     } ?>">
         <form class="form_container"action="/login" method="post">
             @csrf
@@ -285,10 +289,13 @@
 <script>
     var csrfToken = ` {{ csrf_token() }}`;
     var activemenu = '{{ $activerity }}';
+    var rank = {!! $rank !!};
 </script>
 <script src="https://js.pusher.com/8.2.0/pusher.min.js"></script>
 <script type="text/javascript" src="../../inc/js/redict.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
 <script src="https://cdn.ckeditor.com/ckeditor5/40.0.0/classic/ckeditor.js"></script>
 
 </body>

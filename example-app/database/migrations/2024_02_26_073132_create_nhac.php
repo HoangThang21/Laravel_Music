@@ -21,9 +21,9 @@ return new class extends Migration
             $table->timestamps();
             $table->unsignedInteger('album_idnhac');
             $table->integer('xetduyet')->default(0);
-            $table->integer('txtmanhac');
-            $table->integer('txtgia');
+            $table->integer('maNhac');
             $table->text('lyric');
+            $table->integer('gia');
             $table->integer('vip')->default(0);
         });
     }

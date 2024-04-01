@@ -7,6 +7,7 @@ use App\Models\Album;
 use App\Models\Mess;
 use App\Models\Nghesi;
 use App\Models\Nhac;
+use App\Models\Ranks;
 use App\Models\User;
 use App\Models\UserAPI;
 use Carbon\Carbon;
@@ -41,10 +42,12 @@ class ClientControllers extends Controller
                 'Nghesitop20' => Nghesi::inRandomOrder()->take(20)->get(),
                 'nghesi' => Nghesi::all(),
                 'album' => Album::all(),
+                'login' => 0,
+                'rank' => '',
             ]);
         }
         if (Auth::guard('google')->check()) {
-          
+
             return view('frontend.home', [
                 'ttnguoidung' => Auth::guard('google')->user(),
                 'activerity' => 0,
@@ -57,6 +60,8 @@ class ClientControllers extends Controller
                 'Nghesitop20' => Nghesi::inRandomOrder()->take(20)->get(),
                 'nghesi' => Nghesi::all(),
                 'album' => Album::all(),
+                'login' => 0,
+                'rank' => '',
             ]);
         }
         return view('frontend.home', [
@@ -70,6 +75,8 @@ class ClientControllers extends Controller
             'album' => Album::all(),
             'content' => '',
             'loi' => '',
+            'login' => 0,
+            'rank' => '',
         ]);
     }
 
@@ -111,16 +118,71 @@ class ClientControllers extends Controller
                         }
                     } else {
 
-                        return view('frontend.home', ['activerity' => 0, 'loi' => 'Tài khoản hoặc mật khẩu không đúng. Vui lòng nhập lại']);
+                        return view(
+                            'frontend.home',
+                            [
+                                'login' => 1,
+                                'activerity' => 0,
+                                'Albumtop3' => Album::latest()->take(3)->get(),
+                                'Chill' => Album::inRandomOrder()->take(3)->get(),
+                                'CanLike' => Album::inRandomOrder()->take(3)->get(),
+                                'Nhactop10' => Nhac::where('xetduyet', 1)->latest()->take(10)->get(),
+                                'Nghesitop20' => Nghesi::inRandomOrder()->take(20)->get(),
+                                'nghesi' => Nghesi::all(),
+                                'album' => Album::all(),
+                                'content' => '',
+                                'loi' => 'Tài khoản hoặc mật khẩu không đúng. Vui lòng nhập lại',
+                                'rank' => '',
+                            ]
+                        );
                     }
                 } else {
-                    return view('frontend.home', ['activerity' => 0, 'loi' => 'Tài khoản của bạn đã bị khóa vui lòng liên hệ Admin']);
+                    return view('frontend.home', [
+                        'login' => 1,
+                        'activerity' => 0,
+                        'Albumtop3' => Album::latest()->take(3)->get(),
+                        'Chill' => Album::inRandomOrder()->take(3)->get(),
+                        'CanLike' => Album::inRandomOrder()->take(3)->get(),
+                        'Nhactop10' => Nhac::where('xetduyet', 1)->latest()->take(10)->get(),
+                        'Nghesitop20' => Nghesi::inRandomOrder()->take(20)->get(),
+                        'nghesi' => Nghesi::all(),
+                        'album' => Album::all(),
+                        'content' => '',
+                        'loi' => 'Tài khoản của bạn đã bị khóa vui lòng liên hệ Admin',
+                        'rank' => '',
+                    ]);
                 }
             } else {
-                return view('frontend.home', ['activerity' => 0, 'loi' => '']);
+                return view('frontend.home', [
+                    'login' => 1,
+                    'activerity' => 0,
+                    'Albumtop3' => Album::latest()->take(3)->get(),
+                    'Chill' => Album::inRandomOrder()->take(3)->get(),
+                    'CanLike' => Album::inRandomOrder()->take(3)->get(),
+                    'Nhactop10' => Nhac::where('xetduyet', 1)->latest()->take(10)->get(),
+                    'Nghesitop20' => Nghesi::inRandomOrder()->take(20)->get(),
+                    'nghesi' => Nghesi::all(),
+                    'album' => Album::all(),
+                    'content' => '',
+                    'loi' => '',
+                    'rank' => '',
+                ]);
             }
         } catch (Exception $e) {
-            return view('frontend.home', ['activerity' => 0, 'loi' => '']);
+            return view('frontend.home', [
+                'login' => 1,
+                'activerity' => 0,
+                'Albumtop3' => Album::latest()->take(3)->get(),
+                'Chill' => Album::inRandomOrder()->take(3)->get(),
+                'CanLike' => Album::inRandomOrder()->take(3)->get(),
+                'Nhactop10' => Nhac::where('xetduyet', 1)->latest()->take(10)->get(),
+                'Nghesitop20' => Nghesi::inRandomOrder()->take(20)->get(),
+                'nghesi' => Nghesi::all(),
+                'album' => Album::all(),
+                'content' => '',
+                'loi' => 'Nhập không đúng. Vui lòng nhập lại',
+                'rank' => '',
+            ]);
         }
         return redirect()->intended('/');
     }
@@ -141,7 +203,7 @@ class ClientControllers extends Controller
         ]);
         Auth::guard('google')->login(UserAPI::where('email', $userxacthuc->email)->first());
         UserAPI::where('email', $userxacthuc->email)->update(['online' => 1]);
-       
+
         return redirect()->intended('/');
     }
     public function loadyeuthich()
@@ -160,7 +222,9 @@ class ClientControllers extends Controller
                 'namemusic' => '',
                 'activerity' => 2,
                 'loi' => '',
-                'content' => ''
+                'content' => '',
+                'login' => 0,
+                'rank' => '',
             ]);
         }
         if (Auth::guard('google')->check()) {
@@ -171,63 +235,73 @@ class ClientControllers extends Controller
                 'namemusic' => '',
                 'activerity' => 2,
                 'loi' => '',
-                'content' => ''
+                'content' => '',
+                'login' => 0,
+                'rank' => '',
             ]);
         }
-        return view('frontend.menu.livechat', [
-            'ttnguoidung' => Auth::guard('web')->user(),
-            'chat' => Mess::all(),
-            'nhac' => Nhac::all(),
-            'namemusic' => '',
-            'activerity' => 2,
-            'loi' => '',
+        return view('frontend.home', [
+            'activerity' => 0,
+            'Albumtop3' => Album::latest()->take(3)->get(),
+            'Chill' => Album::inRandomOrder()->take(3)->get(),
+            'CanLike' => Album::inRandomOrder()->take(3)->get(),
+            'Nhactop10' => Nhac::where('xetduyet', 1)->latest()->take(10)->get(),
+            'Nghesitop20' => Nghesi::inRandomOrder()->take(20)->get(),
+            'nghesi' => Nghesi::all(),
+            'album' => Album::all(),
             'content' => '',
+            'loi' => 'Vui lòng đăng nhập để chat.',
             'login' => 1,
+            'rank' => '',
         ]);
     }
     public function sendchat(Request $request)
     {
-        
-            try{
-                $arr = '';
-                foreach (explode("\r\n", $request->input('message-input')) as $message) {
-                    $arr = $arr . "<p>$message</p>";
-                };
-                $mess = new Mess();
-                if (Auth::guard('web')->check()) {
-                    $userid = Auth::guard('web')->user();
-                    $mess->iduser = $userid->id;
-                }
-                if (Auth::guard('google')->check()) {
-                    $userid = Auth::guard('google')->user();
-                    $mess->idusergg = $userid->id;
-                }
-              
-                $mess->tenuser = $userid->name;
-                
-                $mess->hinhuser = $userid->image;
-                if ($request->input('linknhac')) {
-                    $mess->idnhac = $request->input('linknhac');
-                }
-                $mess->noidung = $arr;
-                $mess->time = Carbon::now();;
-                $mess->save();
-                event(new CallLoad('Success'));
-                return  redirect()->intended('/livechat');
-            } catch(Exception $e){
-                return  redirect()->intended('/livechat');
+
+        try {
+            $arr = '';
+            foreach (explode("\r\n", $request->input('message-input')) as $message) {
+                $arr = $arr . "<p>$message</p>";
+            };
+            $mess = new Mess();
+            if (Auth::guard('web')->check()) {
+                $userid = Auth::guard('web')->user();
+                $mess->iduser = $userid->id;
             }
-           
-        
+            if (Auth::guard('google')->check()) {
+                $userid = Auth::guard('google')->user();
+                $mess->idusergg = $userid->id;
+            }
+
+            $mess->tenuser = $userid->name;
+
+            $mess->hinhuser = $userid->image;
+            if ($request->input('linknhac')) {
+                $mess->idnhac = $request->input('linknhac');
+            }
+            $mess->noidung = $arr;
+            $mess->time = Carbon::now();;
+            $mess->save();
+            event(new CallLoad('Success'));
+            return  redirect()->intended('/livechat');
+        } catch (Exception $e) {
+            return  redirect()->intended('/livechat');
+        }
     }
     public function loadMchart()
     {
-
-        return view('frontend.menu.Mchart', ['activerity' => 3, 'loi' => '', 'content' => '']);
+        dd(Nhac::orderBy('luotnghe', 'desc')->limit(3)->get()->sum('luotnghe'));
+        // dd(Ranks::orderBy('thoigian', 'desc')->get()->toArray());
+        return view('frontend.menu.Mchart', [
+            'activerity' => 3,
+            'loi' => '',
+            'content' => '',
+            'login' => 0,
+            'rank' => json_encode(Ranks::orderBy('thoigian', 'desc')->get()),
+        ]);
     }
     public function loadranksong()
     {
-
         return view('frontend.menu.ranksong', [
             'activerity' => 4,
             'loi' => '',
@@ -235,6 +309,8 @@ class ClientControllers extends Controller
             'Nhactop10' => Nhac::orderBy('luotnghe', 'desc')->get(),
             'nghesi' => Nghesi::all(),
             'album' => Album::all(),
+            'login' => 0,
+            'rank' => '',
         ]);
     }
     public function loadtopic()

@@ -9,6 +9,7 @@
     <link rel="shortcut icon" href="../../images/logomobifone.png" type="image/png">
     <link href="../../inc/css/index.css" rel="stylesheet">
     <link href="../../inc/css/home.css" rel="stylesheet">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
 </head>

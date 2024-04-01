@@ -531,9 +531,7 @@ header .master_play .bar input {
     cursor: pointer;
     color: #000;
 }
-.headerthongbao i:hover {
-    color: var(--text-color-light);
-}
+
 .tieude {
     color: #000000;
     font-size: 16px;
@@ -1603,7 +1601,7 @@ header .master_play .bar input {
     justify-content: center;
     gap: 10px;
     background: #ffffff;
-
+    border-radius: 11px;
     font-size: 18px;
     font-weight: 500;
     border: none;
