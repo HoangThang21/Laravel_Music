@@ -43,7 +43,7 @@ class ClientControllers extends Controller
                 'nghesi' => Nghesi::all(),
                 'album' => Album::all(),
                 'login' => 0,
-                'rank' => '',
+                'rank' => 'null',
             ]);
         }
         if (Auth::guard('google')->check()) {
@@ -61,7 +61,7 @@ class ClientControllers extends Controller
                 'nghesi' => Nghesi::all(),
                 'album' => Album::all(),
                 'login' => 0,
-                'rank' => '',
+                'rank' => 'null',
             ]);
         }
         return view('frontend.home', [
@@ -76,7 +76,7 @@ class ClientControllers extends Controller
             'content' => '',
             'loi' => '',
             'login' => 0,
-            'rank' => '',
+            'rank' => 'null',
         ]);
     }
 
@@ -132,7 +132,7 @@ class ClientControllers extends Controller
                                 'album' => Album::all(),
                                 'content' => '',
                                 'loi' => 'Tài khoản hoặc mật khẩu không đúng. Vui lòng nhập lại',
-                                'rank' => '',
+                                'rank' => 'null',
                             ]
                         );
                     }
@@ -149,7 +149,7 @@ class ClientControllers extends Controller
                         'album' => Album::all(),
                         'content' => '',
                         'loi' => 'Tài khoản của bạn đã bị khóa vui lòng liên hệ Admin',
-                        'rank' => '',
+                        'rank' => 'null',
                     ]);
                 }
             } else {
@@ -165,7 +165,7 @@ class ClientControllers extends Controller
                     'album' => Album::all(),
                     'content' => '',
                     'loi' => '',
-                    'rank' => '',
+                    'rank' => 'null',
                 ]);
             }
         } catch (Exception $e) {
@@ -181,7 +181,7 @@ class ClientControllers extends Controller
                 'album' => Album::all(),
                 'content' => '',
                 'loi' => 'Nhập không đúng. Vui lòng nhập lại',
-                'rank' => '',
+                'rank' => 'null',
             ]);
         }
         return redirect()->intended('/');
@@ -224,7 +224,7 @@ class ClientControllers extends Controller
                 'loi' => '',
                 'content' => '',
                 'login' => 0,
-                'rank' => '',
+                'rank' => 'null',
             ]);
         }
         if (Auth::guard('google')->check()) {
@@ -237,7 +237,7 @@ class ClientControllers extends Controller
                 'loi' => '',
                 'content' => '',
                 'login' => 0,
-                'rank' => '',
+                'rank' => 'null',
             ]);
         }
         return view('frontend.home', [
@@ -252,7 +252,7 @@ class ClientControllers extends Controller
             'content' => '',
             'loi' => 'Vui lòng đăng nhập để chat.',
             'login' => 1,
-            'rank' => '',
+            'rank' => 'null',
         ]);
     }
     public function sendchat(Request $request)
@@ -290,14 +290,13 @@ class ClientControllers extends Controller
     }
     public function loadMchart()
     {
-        dd(Nhac::orderBy('luotnghe', 'desc')->limit(3)->get()->sum('luotnghe'));
-        // dd(Ranks::orderBy('thoigian', 'desc')->get()->toArray());
+       
         return view('frontend.menu.Mchart', [
             'activerity' => 3,
             'loi' => '',
             'content' => '',
             'login' => 0,
-            'rank' => json_encode(Ranks::orderBy('thoigian', 'desc')->get()),
+            'rank' => json_encode(Ranks::orderBy('id', 'desc')->take(3)->select("tensong1", "nghesi1","phantram1","tensong2", "nghesi2","phantram2","tensong3", "nghesi3","phantram3","thoigian")->get()->toArray()),
         ]);
     }
     public function loadranksong()
@@ -310,7 +309,7 @@ class ClientControllers extends Controller
             'nghesi' => Nghesi::all(),
             'album' => Album::all(),
             'login' => 0,
-            'rank' => '',
+            'rank' => 'null',
         ]);
     }
     public function loadtopic()

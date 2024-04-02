@@ -23,6 +23,9 @@
     --text-color-B: #b8b8b8;
     --color-tim: #b5179e;
     --background-music: #1d1d1d;
+    --menu-list-t1:#4a90e2;
+    --menu-list-t2:#27bd9c;
+    --menu-list-t3:#e35050;
 }
 * {
     margin: 0;
@@ -2106,4 +2109,14 @@ p {
     gap: 6px;
     padding: 6px;
 }
+/* ---------------------------------------------------------------------- */
+/* ---------------------------------------------------------------------- rank-menu-list-top-3 */
+.rank-menu-list-top-3{
+    font-size: 16px;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    gap: 10px;
+}
+
 /* ---------------------------------------------------------------------- */

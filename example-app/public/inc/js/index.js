@@ -108,22 +108,36 @@ document.addEventListener("DOMContentLoaded", () => {
             container.scrollLeft += startX - e.pageX;
         });
     }
-    console.log(rank);
+
     var myfirstchart = document.getElementById("myfirstchart");
     if (myfirstchart) {
-        var rankchart = new Morris.Area({
+        var rankchart = new Morris.Line({
             element: "myfirstchart",
-            data: [
-                { year: "2008", value: 20 },
-                { year: "2008", value: 23 },
-                { year: "2009", value: 10 },
-                { year: "2010", value: 5 },
-                { year: "2011", value: 5 },
-                { year: "2012", value: 20 },
-            ],
-            xkey: "year",
-            ykeys: ["value"],
-            labels: ["Value"],
+            lineColors: ["#4a90e2", "#27bd9c", "#e35050"],
+            poinFillColors: ["#fff"],
+            poinStrokeColors: ["#000"],
+            fillOpacity: 0.6,
+            hodeHover: true,
+            parseTime: false,
+            behaveLikeLine: true,
+            data: rank,
+            xkey: "thoigian",
+            ykeys: ["phantram1", "phantram2", "phantram3"],
+            labels: [rank[0].tensong1, rank[0].tensong2, rank[0].tensong3],
+            hoverCallback: function (index, options, content, row) {
+                console.log(options);
+                return (
+                    `<div class="rank-menu-list-top-3"> <div className="menu-list-t1" style=" color: var(--menu-list-t1);">Top 1:` +
+                    row.tensong1 
+                    +
+                    `</div><div className="menu-list-t2" style=" color: var(--menu-list-t2);">Top 2:`+row.tensong2
+                    +
+                    `</div><div className="menu-list-t3" style=" color: var(--menu-list-t3);">Top 3:`+row.tensong3
+                    +
+                    `</div></div>`
+                );
+            },
+            resize: true,
         });
     }
 });

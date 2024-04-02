@@ -13,10 +13,17 @@ return new class extends Migration
     {
         Schema::create('ranks', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('tensong');
-            $table->string('nghesi');
+            $table->string('tensong1');
+            $table->string('phantram1');
+            $table->string('nghesi1');
+            $table->string('tensong2');
+            $table->string('phantram2');
+            $table->string('nghesi2');
+            $table->string('tensong3');
+            $table->string('phantram3');
+            $table->string('nghesi3');
             $table->string('thoigian');
-            $table->string('phantram');
+            
             $table->timestamps();
         });
     }
