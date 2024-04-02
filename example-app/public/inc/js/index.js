@@ -21,6 +21,14 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         });
     }
+    const regis_in_btn = document.querySelector(".regis-in_btn");
+    if (regis_in_btn) {
+        regis_in_btn.addEventListener("click", function (event) {
+            console.log("a");
+            event.preventDefault(); // Ngăn chặn form tự động submit
+            $("#form_container_register").submit(); // Gửi form tìm kiếm
+        });
+    }
     setInterval(function () {
         var searchBar = document.querySelector(".searchbar-input");
         if (searchBar) {
@@ -111,6 +119,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
     var myfirstchart = document.getElementById("myfirstchart");
     if (myfirstchart) {
+        var tmp = rank[0];
+        rank[0] = rank[2];
+        rank[2] = tmp;
         var rankchart = new Morris.Line({
             element: "myfirstchart",
             lineColors: ["#4a90e2", "#27bd9c", "#e35050"],
@@ -125,15 +136,13 @@ document.addEventListener("DOMContentLoaded", () => {
             ykeys: ["phantram1", "phantram2", "phantram3"],
             labels: [rank[0].tensong1, rank[0].tensong2, rank[0].tensong3],
             hoverCallback: function (index, options, content, row) {
-                console.log(options);
                 return (
-                    `<div class="rank-menu-list-top-3"> <div className="menu-list-t1" style=" color: var(--menu-list-t1);">Top 1:` +
-                    row.tensong1 
-                    +
-                    `</div><div className="menu-list-t2" style=" color: var(--menu-list-t2);">Top 2:`+row.tensong2
-                    +
-                    `</div><div className="menu-list-t3" style=" color: var(--menu-list-t3);">Top 3:`+row.tensong3
-                    +
+                    `<div class="rank-menu-list-top-3"> <div className="menu-list-t1" style=" color: var(--backgroundmain);">Top 1:` +
+                    row.tensong1 +
+                    `</div><div className="menu-list-t2" style=" color: var(--backgroundmain);">Top 2:` +
+                    row.tensong2 +
+                    `</div><div className="menu-list-t3" style=" color: var(--backgroundmain);">Top 3:` +
+                    row.tensong3 +
                     `</div></div>`
                 );
             },

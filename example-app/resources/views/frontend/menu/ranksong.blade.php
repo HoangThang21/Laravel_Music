@@ -34,7 +34,7 @@
                         </linearGradient>
                     </defs>
                 </svg>
-                <p>Bảng xếp hạng</p>
+                <p>Nhạc mới</p>
                 <i class="bi bi-caret-right-fill"></i>
             </div>
             <a href="">Tất cả <i class="bi bi-chevron-right"></i></a>

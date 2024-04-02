@@ -14,10 +14,10 @@ return new class extends Migration
         Schema::create('user', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name')->nullable();
-            $table->string('sdt');
+            $table->string('sdt')->nullable();
             $table->string('email');
             $table->string('password');
-            $table->string('image')->nullable();
+            $table->string('image')->default('user-profile.png');
             $table->string('quyen');
             $table->timestamps();
             $table->text('thuvien')->nullable();

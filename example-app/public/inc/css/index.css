@@ -18,14 +18,20 @@
         rgba(183, 9, 82, 0.74) 124.22%
     );
     --text_music_gradient-4: linear-gradient(180deg, #b5e0ff 0%, #f475a2 100%);
-
+    --background_gradient-5: linear-gradient(
+        90deg,
+        #ff8a00 1.83%,
+        #c71ee2 38.01%,
+        #9735e3 71.25%,
+        #431be2 99.61%
+    );
     --text-color-light: #fff;
     --text-color-B: #b8b8b8;
     --color-tim: #b5179e;
     --background-music: #1d1d1d;
-    --menu-list-t1:#4a90e2;
-    --menu-list-t2:#27bd9c;
-    --menu-list-t3:#e35050;
+    --menu-list-t1: #4a90e2;
+    --menu-list-t2: #27bd9c;
+    --menu-list-t3: #e35050;
 }
 * {
     margin: 0;
@@ -1170,8 +1176,11 @@ header .master_play .bar input {
 }
 .nametacgia {
     position: relative;
+    width: fit-content;
+    height: fit-content;
 }
 .info-name-tacgia {
+    /* height: 100%; */
     display: none;
     position: absolute;
     background: var(--text_music_gradient-4);
@@ -1180,8 +1189,7 @@ header .master_play .bar input {
     border-radius: 10px;
     animation-delay: 3s;
 }
-.nametacgia .name-tacgia:hover ~.info-name-tacgia{
-    animation-delay: 3s;
+.nametacgia:hover .name-tacgia ~ .info-name-tacgia {
     display: block;
 }
 .top-info-tacgia {
@@ -1594,6 +1602,22 @@ header .master_play .bar input {
     outline: none;
     color: #ffffff;
     cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.form-login-regis .regis-in_btn {
+    width: 100%;
+    height: 40px;
+    border: 0;
+    background: #115dfc;
+    border-radius: 7px;
+    outline: none;
+    color: #ffffff;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .sign-in_ggl {
@@ -1851,7 +1875,7 @@ header .master_play .bar input {
     z-index: 99;
     cursor: pointer;
     left: 50%;
-    transform: translate(-50%,-50%);
+    transform: translate(-50%, -50%);
     transition: all 1s linear;
     display: none;
 }
@@ -2111,7 +2135,7 @@ p {
 }
 /* ---------------------------------------------------------------------- */
 /* ---------------------------------------------------------------------- rank-menu-list-top-3 */
-.rank-menu-list-top-3{
+.rank-menu-list-top-3 {
     font-size: 16px;
     display: flex;
     flex-direction: column;
@@ -2119,4 +2143,16 @@ p {
     gap: 10px;
 }
 
+/* ---------------------------------------------------------------------- */
+/* ---------------------------------------------------------------------- Mchart*/
+.Mchart-menu .tieude {
+    margin: 20px;
+    width: fit-content;
+    font-size: 40px;
+    font-weight: 700;
+    line-height: 48px;
+    background: var(--background_gradient-5);
+    background-clip: text;
+    color: transparent;
+}
 /* ---------------------------------------------------------------------- */

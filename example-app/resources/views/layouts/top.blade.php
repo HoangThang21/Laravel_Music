@@ -46,7 +46,7 @@
                     <span></span><i class="bi bi-music-note-beamed"></i>Mchart
                 </a>
                 <a class="itemmenu" href="/ranksong" id="ranksong">
-                    <span></span><i class="bi bi-music-note-beamed"></i>Bảng xếp hạng
+                    <span></span><i class="bi bi-music-note-beamed"></i>Nhạc mới
                 </a>
                 <a class="itemmenu" href="/topic" id="topic">
                     <span></span><i class="bi bi-music-note-beamed"></i>Chủ đề & thể loại

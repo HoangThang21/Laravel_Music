@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('user_a_p_i', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
-            $table->string('sdt');
+            $table->string('sdt')->nullable();
             $table->string('email');
             $table->string('image')->default('user-profile.png');
             $table->string('quyen');

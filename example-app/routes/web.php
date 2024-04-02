@@ -125,4 +125,5 @@ use Illuminate\Support\Facades\Route;
     Route::post('/sendchat', [ClientControllers::class, 'sendchat'])->name('load.sendchat');
     Route::get('/logout', [ClientControllers::class, 'logout'])->name('load.logout');
     Route::get('/logingg', [ClientControllers::class, 'logingg'])->name('load.logingg');
+    Route::post('/register', [ClientControllers::class, 'register'])->name('load.register');
     Route::get('/logingg/callback', [ClientControllers::class, 'callback'])->name('load.callback');
