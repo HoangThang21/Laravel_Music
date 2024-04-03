@@ -168,3 +168,42 @@ function toggleMenuFlex(name) {
         menuFilter.style.display = isHidden1 ? "flex" : "none";
     }
 }
+
+    var menuFilter = document.querySelectorAll(".body-topic-item");
+    var cbcontent = document.querySelectorAll(".bottom-topic .item-xthem");
+    var cb = document.querySelectorAll(".bottom-topic i");
+    cbcontent.forEach(function (cbcontent1, indexcbcontent1) {
+        cbcontent1.addEventListener("click", function () {
+            menuFilter.forEach(function (menuFilter1, indexmenuFilter1) {
+                if(indexcbcontent1==indexmenuFilter1){
+                    cb.forEach(function (cb1, indexcb1) {
+                        if(indexcb1==indexmenuFilter1){
+                            console.log(indexcbcontent1,indexmenuFilter1,indexcb1);
+                            if (menuFilter1) {
+                                const isHidden1 =
+                                    menuFilter1.style.height == "180px" ||
+                                    getComputedStyle(menuFilter1).height == "180px";
+                                menuFilter1.style.height = isHidden1 ? "100%" : "180px";
+                            }
+                            if (cbcontent1.textContent.includes("Rút gọn")) {
+                                cbcontent1.textContent = "Xem thêm";
+                                cb1.classList.remove("bi-caret-down-fill");
+                                cb1.classList.add("bi-caret-up-fill");
+                            }
+                            else if (cbcontent1.textContent.includes("Xem thêm")) {
+                                    cbcontent1.textContent = "Rút gọn";
+                                    cb1.classList.remove("bi-caret-up-fill");
+                                    cb1.classList.add("bi-caret-down-fill");
+                                
+                                }
+                        }})
+                    
+                }
+                
+            })
+           
+        })})
+   
+
+
+

@@ -127,3 +127,4 @@ use Illuminate\Support\Facades\Route;
     Route::get('/logingg', [ClientControllers::class, 'logingg'])->name('load.logingg');
     Route::post('/register', [ClientControllers::class, 'register'])->name('load.register');
     Route::get('/logingg/callback', [ClientControllers::class, 'callback'])->name('load.callback');
+    Route::get('/thongtin-user', [ClientControllers::class, 'thongtinuser'])->name('load.thongtinuser');

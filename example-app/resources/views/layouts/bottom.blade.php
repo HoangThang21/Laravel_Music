@@ -292,6 +292,7 @@
     var csrfToken = ` {{ csrf_token() }}`;
     var activemenu = '{{ $activerity }}';
     var rank = {!! $rank !!};
+    var rightsong_var = {{ $rightsong }};
 </script>
 <script src="https://js.pusher.com/8.2.0/pusher.min.js"></script>
 <script type="text/javascript" src="../../inc/js/redict.js"></script>

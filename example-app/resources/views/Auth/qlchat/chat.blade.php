@@ -81,7 +81,6 @@
                             </div>
                             
                 @endif
-
         </div>
 @endforeach
 <button id="scrollButton" style="display: none;"><i class="bi bi-caret-down-fill"></i></button>

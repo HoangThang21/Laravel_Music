@@ -113,16 +113,49 @@ document.addEventListener("DOMContentLoaded", () => {
     const submitchat = document.querySelector(".submitchat");
     if (submitchat) {
         submitchat.addEventListener("click", function (event) {
-            event.preventDefault(); 
-            $("#formchat").submit(); 
+            event.preventDefault();
+            $("#formchat").submit();
             setloadchat = true;
         });
     }
+    const rightsong = document.querySelector(".rightsong");
+    if (rightsong) {
+        if (rightsong_var == 1) {
+            rightsong.style.display = "none";
+        } else {
+            rightsong.style.display = "block";
+        }
+    }
+    const inputImage = document.getElementById("inputImage");
+    if (inputImage) {
+        document
+            .getElementById("imageContainer")
+            .addEventListener("click", function () {
+                inputImage.click();
+                inputImage.addEventListener("input", function (e) {
+                    var file = e.target.files[0];
+                    var reader = new FileReader();
+                    reader.onload = function (e) {
+                        document
+                            .getElementById("imagePreview")
+                            .setAttribute("src", e.target.result);
+                    };
+
+                    reader.readAsDataURL(file);
+                    console.log(inputImage.value);
+                });
+            });
+    }
+
     var messagesDiv = $("#messages");
     var scrollButton = $("#scrollButton");
 
     messagesDiv.scroll(function () {
-        console.log(messagesDiv.prop("scrollHeight"), messagesDiv.scrollTop() ,messagesDiv.prop("scrollHeight") - messagesDiv.scrollTop());
+        console.log(
+            messagesDiv.prop("scrollHeight"),
+            messagesDiv.scrollTop(),
+            messagesDiv.prop("scrollHeight") - messagesDiv.scrollTop()
+        );
         if (messagesDiv.prop("scrollHeight") - messagesDiv.scrollTop() > 1000) {
             scrollButton.fadeIn();
         } else {
@@ -228,8 +261,7 @@ document.addEventListener("DOMContentLoaded", () => {
                                     <img src="../../images/${chat.hinhuser}" alt="">
                                 </div>    </div>
                             `;
-                        }
-                        else  if (chat.idusergg == response.ttnguoidung.id) {
+                        } else if (chat.idusergg == response.ttnguoidung.id) {
                             theload += `
                             <div class="right message">
                             <div class="bodymessage">
@@ -300,8 +332,7 @@ document.addEventListener("DOMContentLoaded", () => {
                                     <img src="../../images/${chat.hinhuser}" alt="">
                                 </div>    </div>
                             `;
-                        }
-                        else {
+                        } else {
                             theload += `
                             <div class="left message">
                                 <div class="img">

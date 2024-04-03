@@ -1,3 +1,34 @@
 @include('layouts.top')
-<div class="">topic</div>
+<div class="menu-topic">
+    <div class="item-list-topic">
+        <div class="header-topic">Nhạc Việt Nam</div>
+        <div class="body-topic-item" style="height: 180px;">
+            <div class="item">1ádsa</div>
+            <div class="item">2sad</div>
+            <div class="item">3ád</div>
+            <div class="item">4ádá</div>
+        </div>
+        <div class="bottom-topic">
+            <div class="item-xthem" >
+            Xem thêm </div>
+            <i class="bi bi-caret-down-fill"></i>
+        </div>
+       
+    </div>
+    <div class="item-list-topic">
+        <div class="header-topic">Nhạc Quốc Tế</div>
+        <div class="body-topic-item" style="height: 180px;">
+            <div class="item">1ádsa</div>
+            <div class="item">2sad</div>
+            <div class="item">3ád</div>
+            <div class="item">4ádá</div>
+        </div>
+        <div class="bottom-topic">
+            <div class="item-xthem">
+            Xem thêm </div>
+            <i class="bi bi-caret-down-fill"></i>
+        </div>
+       
+    </div>
+</div>
 @include('layouts.bottom')

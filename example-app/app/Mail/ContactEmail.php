@@ -31,7 +31,7 @@ class ContactEmail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Mật khẩu mới',
+            subject: 'MobiSong',
         );
     }
 

@@ -14,8 +14,8 @@ class RankingController extends Controller
 {
     public function updateWeeklyRankings()
     {
-        $top3Songs = Nhac::orderBy('luotnghe', 'desc')->limit(3)->get();
-        $totalListens = Nhac::orderBy('luotnghe', 'desc')->limit(3)->get()->sum('luotnghe');
+        $top3Songs = Nhac::where('vip', 0)->orderBy('luotnghe', 'desc')->limit(3)->get();
+        $totalListens = Nhac::where('vip', 0)->orderBy('luotnghe', 'desc')->limit(3)->get()->sum('luotnghe');
 
         $ranks = new Ranks;
         $ranks->tensong1 = $top3Songs[0]->tennhac;
