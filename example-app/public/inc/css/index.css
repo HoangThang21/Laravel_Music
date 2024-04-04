@@ -165,12 +165,17 @@ header .menu_side .home_rec p {
 header .menu_side .playlist {
     /* padding:  0 20px; */
     height: 255px;
-    overflow-x: hidden;
+    overflow-x: auto;
     -ms-overflow-style: none;
-    scrollbar-width: none;
+    /* scrollbar-width: none; */
+    scroll-behavior: smooth;
 }
 header .menu_side .playlist::-webkit-scrollbar {
-    display: none;
+    width: 4px;
+}
+header .menu_side .playlist::-webkit-scrollbar-thumb {
+   background: var(--text-color-B);
+    border-radius: 6px;
 }
 header .menu_side .playlist a {
     display: flex;
@@ -524,8 +529,10 @@ header .master_play .bar input {
     z-index: 9;
     padding: 10px;
     border-radius: 4px;
+    line-height: 22px;
     background-color: #fff;
     color: red;
+    width: 340px;
 }
 .loi.active {
     transform: translate(0);
@@ -810,15 +817,20 @@ header .master_play .bar input {
 }
 
 .song_side .contentsong #song_side {
-    width: -webkit-fill-available;
+    width: 100%;
     position: relative;
     height: 80%;
-    overflow-x: hidden;
-    -ms-overflow-style: none;
-    scrollbar-width: none;
+    overflow-x: auto;
+    /* -ms-overflow-style: none; */
+    scroll-behavior: smooth;
 }
 .song_side .contentsong #song_side::-webkit-scrollbar {
-    display: none;
+    width: 4px;
+
+}
+.song_side .contentsong #song_side::-webkit-scrollbar-thumb {
+   background: var(--text-color-B);
+    border-radius: 6px;
 }
 .song_side .contentsong .rightsong {
     width: 34%;
@@ -847,8 +859,13 @@ header .master_play .bar input {
     transition: all 0.1s linear;
 }
 .rightsong .menu-rightsong .menu-scroll-rightsong::-webkit-scrollbar {
-    width: 0;
+   display: none;
 }
+
+/* .rightsong .menu-rightsong .menu-scroll-rightsong::-webkit-scrollbar-thumb {
+   background: var(--text-color-B);
+    border-radius: 6px;
+} */
 .rightsong .top-menu-rightsong {
     display: flex;
     justify-content: space-between;
@@ -891,6 +908,9 @@ header .master_play .bar input {
     border-radius: 44px;
     border: 1px solid var(--A, #b5179e);
     background: lightgray 50% / cover no-repeat;
+}
+.rightsong .list-menu-rightsong i {
+    cursor: pointer;
 }
 .rightsong .name-rightsong {
     width: 100px;
@@ -1851,12 +1871,18 @@ header .master_play .bar input {
     height: 86%;
     /* display: flex;
     flex-direction: column; */
-    overflow-x: hidden;
-    -ms-overflow-style: none;
-    scrollbar-width: none;
+    overflow-x: auto;
+    /* -ms-overflow-style: none;
+    scrollbar-width: none; */
+    scroll-behavior: smooth;
 }
 .chat-content .messages::-webkit-scrollbar {
-    display: none;
+    width: 4px;
+}
+
+.chat-content .messages::-webkit-scrollbar-thumb {
+   background: var(--text-color-B);
+    border-radius: 6px;
 }
 .chat-content #formchat {
     display: flex;
@@ -2283,13 +2309,16 @@ p {
 .ttuser-menu .bottom-body-user {
 }
 .ttuser-menu .bottom-body-user .form-bottom-body-user {
-    display: flex;
+    display: none;
     flex-direction: column;
     align-items: center;
     gap: 20px;
     width: fit-content;
     height: fit-content;
     margin-top: 20px;
+}
+.ttuser-menu .bottom-body-user .form-bottom-body-user.active {
+    display: flex;
 }
 .ttuser-menu .bottom-body-user .form-bottom-body-user button {
     display: flex;
@@ -2327,13 +2356,23 @@ p {
     transition: all 0.3s ease;
     color: rgb(255, 255, 255);
 }
-
 .ttuser-menu
     .bottom-body-user
     .form-bottom-body-user
     .inputGroup
     :is(input:focus, input:valid)
     ~ label {
+    transform: translateY(-50%) scale(0.9);
+    margin: 0em;
+    margin-left: 1.3em;
+    padding: 0.4em;
+    background: var(--backgroundmain);
+}
+.ttuser-menu
+    .bottom-body-user
+    .form-bottom-body-user
+    .inputGroup.activeamil
+    label {
     transform: translateY(-50%) scale(0.9);
     margin: 0em;
     margin-left: 1.3em;

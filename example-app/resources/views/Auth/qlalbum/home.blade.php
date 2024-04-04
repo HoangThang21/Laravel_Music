@@ -66,7 +66,7 @@
                     <td>{{ $tl['tentheloai'] }}</td>
                     <?php } endforeach; ?>
 
-                    <td><a href="/Administrator/qlalbum/xoaalbum&{{ $nd['id'] }}-alb" class="text-danger">Xóa</a>
+                    <td><a href="/Administrator/qlalbum/xoaalbum&{{ $nd['id'] }}-alb" class="text-danger delete-link">Xóa</a>
                         <span> | </span>
                         <a href="/Administrator/qlalbum/suaalbum&{{ $nd['id'] }}-alb" class="text-warning">Sửa</a>
                         <span> | </span>

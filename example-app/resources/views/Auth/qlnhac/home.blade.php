@@ -62,7 +62,7 @@
                     @endforeach
                     
                     
-                      <td><a href="/Administrator/qlnhac/xoanhac&{{ $nd['id'] }}-music" class="text-danger">Xóa</a>
+                      <td><a href="/Administrator/qlnhac/xoanhac&{{ $nd['id'] }}-music" class="text-danger delete-link" >Xóa</a>
                              <span> | </span>
                           <a href="/Administrator/qlnhac/suanhac&{{ $nd['id'] }}-music" class="text-warning">Sửa</a>
                      </td>

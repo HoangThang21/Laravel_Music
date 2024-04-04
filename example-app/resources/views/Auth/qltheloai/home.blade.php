@@ -22,7 +22,7 @@
                 @endphp {{ $number }}</td>
                 <td>{{ $nd['tentheloai'] }}</td>
                 <td><a href="/Administrator/qltheloai/xoatheloai&{{ $nd['id'] }}-tl"
-                        class="text-danger delete-link">Xóa</a>
+                        class="text-danger delete-link" >Xóa</a>
                     <span> | </span>
                     <a href="/Administrator/qltheloai/suatheloai&{{ $nd['id'] }}-tl" class="text-warning ">Sửa</a>
                 </td>

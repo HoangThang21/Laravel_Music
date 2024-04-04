@@ -12,7 +12,7 @@
                             </div>
                             <div class="item-list-dot">
                                 <a href="/Administrator/xoachat&{{ $ch->id }}"><i
-                                        class="bi bi-trash-fill"></i>Xóa</a>
+                                        class="bi bi-trash-fill delete-link"></i>Xóa</a>
                             </div>
                         </div>
                         <div class="bodymessage">
@@ -30,12 +30,10 @@
                                             <i class="bi bi-music-note-beamed"></i>
                                             <div class="nhac"><a target="_black"
                                                     href="../../music/{{ $nh->nhaclink }}">{{ $nh->tennhac }}</a></div>
-
                                         </div>
                                     @endif
                                 @endforeach
                             @endif
-
                         </div>
                         <div class="img">
                             <img src="../../images/{{ $ch->hinhuser }}" alt="">
@@ -74,9 +72,7 @@
                                 </div>
                                 <div class="item-list-dot">
                                     <a href="/Administrator/xoachat&{{ $ch->id }}"><i
-                                            class="bi bi-trash-fill"></i>Xóa</a>
-                                    <a href="/Administrator/xoachat&{{ $ch->id }}"><i
-                                            class="bi bi-trash-fill"></i>Ban</a>
+                                            class="bi bi-trash-fill delete-link"></i>Xóa</a>
                                 </div>
                             </div>
                             

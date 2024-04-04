@@ -3,29 +3,31 @@
     <div class="menu-rightsong">
         <div class="top-menu-rightsong">Top Lượt nghe <i class="bi bi-caret-right-fill"></i></div>
         <div class="menu-scroll-rightsong">
-            <div class="list-menu-rightsong">
-                <div class="left-list-menu-rightsong">
-                    <img src="" alt="">
-                    <div class="name-rightsong">aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</div>
+            @foreach ($Nhactopluotnghe as $ntluotnghe)
+                <div class="list-menu-rightsong">
+                    <div class="left-list-menu-rightsong">
+                        <img src="../../images/{{ $ntluotnghe->imagemusic }}" alt="">
+                        <div class="name-rightsong">{{ $ntluotnghe->tennhac }}</div>
+                    </div>
+                    <i class="bi bi-caret-right-fill"></i>
                 </div>
-                <i class="bi bi-caret-right-fill"></i>
-            </div>
-
+            @endforeach
 
         </div>
     </div>
     <div class="menu-rightsong">
         <div class="top-menu-rightsong">Nhạc Premium <span><i class="bi bi-chevron-compact-right"></i></span></div>
         <div class="menu-scroll-rightsong">
-            <div class="list-menu-rightsong">
-                <div class="left-list-menu-rightsong">
-                    <img src="" alt="">
-                    <div class="name-rightsong">aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa </div><span>premium</span>
+            @foreach ($Nhactopvip as $ntluotnghe)
+                <div class="list-menu-rightsong">
+                    <div class="left-list-menu-rightsong">
+                        <img src="../../images/{{ $ntluotnghe->imagemusic }}" alt="">
+                        <div class="name-rightsong">{{ $ntluotnghe->tennhac }}</div>
+                        <span>premium</span>
+                    </div>
+                    <i class="bi bi-caret-right-fill"></i>
                 </div>
-                <i class="bi bi-caret-right-fill"></i>
-            </div>
-
-
+            @endforeach
         </div>
     </div>
 
@@ -223,10 +225,10 @@
         echo 'flex';
     } else {
         if ($login == 1) {
-        echo 'flex';
-    } else {
-        echo 'none';
-    }
+            echo 'flex';
+        } else {
+            echo 'none';
+        }
     } ?>">
         <form class="form_container"action="/login" method="post">
             @csrf
@@ -269,7 +271,7 @@
                 <a href="#">Quên mật khẩu?</a>
                 <p class="create-account">Tạo tài khoản</p>
             </div>
-            <button type="submit" title="Sign In"  class="sign-in_btn">
+            <button type="submit" title="Sign In" class="sign-in_btn">
                 <span>Đăng nhập</span>
             </button>
 
