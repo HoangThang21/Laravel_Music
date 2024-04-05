@@ -126,26 +126,7 @@ document.addEventListener("DOMContentLoaded", () => {
             rightsong.style.display = "block";
         }
     }
-    const inputImage = document.getElementById("inputImage");
-    if (inputImage) {
-        document
-            .getElementById("imageContainer")
-            .addEventListener("click", function () {
-                inputImage.click();
-                inputImage.addEventListener("input", function (e) {
-                    var file = e.target.files[0];
-                    var reader = new FileReader();
-                    reader.onload = function (e) {
-                        document
-                            .getElementById("imagePreview")
-                            .setAttribute("src", e.target.result);
-                    };
-
-                    reader.readAsDataURL(file);
-                    console.log(inputImage.value);
-                });
-            });
-    }
+    
 
     var messagesDiv = $("#messages");
     var scrollButton = $("#scrollButton");

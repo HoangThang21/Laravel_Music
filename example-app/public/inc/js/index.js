@@ -197,7 +197,29 @@ document.addEventListener("DOMContentLoaded", () => {
     var cbcontent_ttuser_top = document.querySelectorAll(
         ".form-bottom-body-user"
     );
-        
+    var changeImageText = document.querySelector(
+        ".changeImageText"
+    );
+    const inputImage = document.getElementById("inputImage");
+    if (inputImage) {
+        document
+            .getElementById("changeImageText")
+            .addEventListener("click", function () {
+                inputImage.click();
+                inputImage.addEventListener("input", function (e) {
+                    var file = e.target.files[0];
+                    var reader = new FileReader();
+                    reader.onload = function (e) {
+                        document
+                            .getElementById("imagePreview")
+                            .setAttribute("src", e.target.result);
+                    };
+
+                    reader.readAsDataURL(file);
+                    console.log(inputImage.value);
+                });
+            });
+    }
     if (menuFilter_ttuser_top) {
         menuFilter_ttuser_top.forEach(function (menuFilter1, indexcbcontent1) {
             menuFilter1.addEventListener("click", function () {
@@ -205,8 +227,15 @@ document.addEventListener("DOMContentLoaded", () => {
                     cbcontent_ttuser_top1,
                     indexcbcontent_ttuser_top
                 ) {
+                    if(indexcbcontent1==0){
+                        changeImageText.style.display='block';
+                    }
+                    else{
+                        changeImageText.style.display='none';
+                    }
                     if (indexcbcontent1 == indexcbcontent_ttuser_top) {
                         menuFilter1.classList.add("active");
+                        
                         cbcontent_ttuser_top1.classList.add("active");
                     }
                     else{
@@ -217,6 +246,7 @@ document.addEventListener("DOMContentLoaded", () => {
                         indexcbcontent2
                     ) {
                         if (indexcbcontent1 != indexcbcontent2) {
+                           
                             menuFilter2.classList.remove("active");
                             
                         }

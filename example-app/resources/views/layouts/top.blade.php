@@ -18,9 +18,10 @@
     <header>
         <div class="menu_side">
             <a href="/trangchu" class="home_rec" id="home_rec">
-                <img src="../../images/logomobifone.png" alt="" sizes="28">
-                <p><span style="color: rgb(37, 82, 231)">Mobi</span><span style="color: rgb(204, 51, 51)">Song</span>
-                </p>
+                <img src="../../images/logo_funring.png" alt="" sizes="28">
+                {{-- <p><span>Mobi</span></p> --}}
+                {{-- <p><span style="color: rgb(37, 82, 231)">Mobi</span><span style="color: rgb(204, 51, 51)">Song</span>
+                </p> --}}
             </a>
             <div class="menu">
                 <p>Menu</p>

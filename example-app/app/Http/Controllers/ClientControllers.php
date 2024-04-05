@@ -379,7 +379,8 @@ class ClientControllers extends Controller
         ]);
         if ($loi) {
             if (Auth::guard('web')->check()) {
-            
+                $user= User::where("email",Auth::guard('web')->user()->email)->first();
+                
             }
             if (Auth::guard('google')->check()) {
                 
