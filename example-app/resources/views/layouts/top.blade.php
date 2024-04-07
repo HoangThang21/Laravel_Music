@@ -68,7 +68,10 @@
 
         <div class="song_side">
             <nav>
-
+                <div class="redict">
+                    <div id="backBtn"><i class="bi bi-chevron-left"></i></div>
+                    <div id="nextBtn"><i class="bi bi-chevron-right"></i></div>
+                </div>
                 <form action="/search?=" method="post" id="searchForm">
                     @csrf
                     <div class="searchbar">
@@ -155,13 +158,11 @@
                                     </div>
                                 </div>
                                 <div class="menu-toggle_infouser">
-                                    <a href="/thongtin-user"><i
-                                            class="bi bi-file-earmark-person"></i>Thông tin</a>
+                                    <a href="/thongtin-user"><i class="bi bi-file-earmark-person"></i>Thông tin</a>
                                     @if ($ttnguoidung->quyen == 4)
                                         <a href="">hehe</a>
                                     @endif
-                                    <a href="/infonghesi"><i
-                                            class="bi bi-file-earmark-music-fill"></i>Nghệ sĩ</a>
+                                    <a href="/infonghesi"><i class="bi bi-file-earmark-music-fill"></i>Nghệ sĩ</a>
                                     <a href="/logout"><i class="bi bi-box-arrow-right"></i>Đăng xuất</a>
                                 </div>
                             </div>
@@ -193,8 +194,7 @@
                                     </div>
                                 </div>
                                 <div class="menu-toggle_infouser">
-                                    <a href="/thongtin-user"><i
-                                            class="bi bi-file-earmark-person"></i>Thông tin</a>
+                                    <a href="/thongtin-user"><i class="bi bi-file-earmark-person"></i>Thông tin</a>
                                     <a href="/logout"><i class="bi bi-box-arrow-right"></i>Đăng xuất</a>
                                 </div>
                             </div>

@@ -936,4 +936,94 @@ class ClientControllers extends Controller
             'rank' => 'null', 'rightsong' => 0,
         ]);
     }
+    public function albumbaihat(string $name){
+        // dd($name);
+        $nhac=Nhac::where('vip', 0)->where('xetduyet', 1)->where('id',$name)->first();
+        $album= Album::where('id',$nhac->album_idnhac)->first();
+        $nghesi=Nghesi::where('id', $album->nghesi_idalbum)->first();
+        if (Auth::guard('web')->check()) {
+            return view('frontend.List.AlbumBaiHat', [
+                'ttnguoidung' => Auth::guard('web')->user(),
+                'activerity' => 0,
+                'loi' => '',
+                'loingoai' => '',
+
+                'Nhactopluotnghe' => Nhac::where('vip', 0)->where('xetduyet', 1)->where('luotnghe', "desc")->latest()->take(2)->get(),
+                'Nhactopvip' => Nhac::where('vip', 1)->where('xetduyet', 1)->where('luotnghe', "desc")->latest()->take(2)->get(),
+                'Nhactop10' => Nhac::where('vip', 0)->where('xetduyet', 1)->latest()->take(10)->get(),
+     
+                'nghesi' => Nghesi::all(),
+                'album' => Album::all(),
+                'login' => 0,
+                'rank' => 'null',
+                'rightsong' => 1,
+            ]);
+        }
+        if (Auth::guard('google')->check()) {
+
+            return view('frontend.List.AlbumBaiHat', [
+                'ttnguoidung' => Auth::guard('google')->user(),
+                'activerity' => 0,
+
+                'loi' => '',
+                'loingoai' => '',
+                'Nhacalbumbaihat'=>$nhac,
+                'Nhactopluotnghe' => Nhac::where('vip', 0)->where('xetduyet', 1)->where('luotnghe', "desc")->latest()->take(2)->get(),
+                'Nhactopvip' => Nhac::where('vip', 1)->where('xetduyet', 1)->where('luotnghe', "desc")->latest()->take(2)->get(),
+                'nghesi' =>  $nghesi,
+                'album' => $album,
+                'login' => 0,
+                'rank' => 'null',
+                'rightsong' => 1,
+            ]);
+        }
+        return view('frontend.menu.topic', [
+            'activerity' => 0,
+          
+            'Nhactop10' => Nhac::where('vip', 0)->where('xetduyet', 1)->latest()->take(10)->get(),
+            'Nhactopluotnghe' => Nhac::where('vip', 0)->where('xetduyet', 1)->where('luotnghe', "desc")->latest()->take(2)->get(),
+            'Nhactopvip' => Nhac::where('vip', 1)->where('xetduyet', 1)->where('luotnghe', "desc")->latest()->take(2)->get(),
+
+            'nghesi' => Nghesi::all(),
+            'album' => Album::all(),
+
+            'loi' => '',
+            'loingoai' => '',
+            'login' => 0,
+            'rank' => 'null',
+            'rightsong' => 1,
+        ]);
+        
+    }
+    public function loadchat()
+    {
+        if (Auth::guard('web')->check()) {
+            return response()->json( [
+                'ttnguoidung' => Auth::guard('web')->user(),
+                'activerity' => 0,
+                'loi' => '',
+                'loingoai' => '',
+                'login' => 0,
+                'rank' => 'null',
+                'chat' => Mess::all(),
+                'nhac' => Nhac::all(), 
+                'rightsong' => 0,
+            ]);
+        }
+        if (Auth::guard('google')->check()) {
+            return response()->json([
+                'ttnguoidung' => Auth::guard('google')->user(),
+                'activerity' => 0,
+                'loi' => '',
+                'loingoai' => '',
+       
+               
+                'login' => 0,
+                'rank' => 'null',
+                'chat' => Mess::all(),
+                'nhac' => Nhac::all(), 
+                'rightsong' => 0,
+            ]);
+        }
+    }
 }

@@ -197,9 +197,7 @@ document.addEventListener("DOMContentLoaded", () => {
     var cbcontent_ttuser_top = document.querySelectorAll(
         ".form-bottom-body-user"
     );
-    var changeImageText = document.querySelector(
-        ".changeImageText"
-    );
+    var changeImageText = document.querySelector(".changeImageText");
     const inputImage = document.getElementById("inputImage");
     if (inputImage) {
         document
@@ -227,17 +225,15 @@ document.addEventListener("DOMContentLoaded", () => {
                     cbcontent_ttuser_top1,
                     indexcbcontent_ttuser_top
                 ) {
-                    if(indexcbcontent1==0){
-                        changeImageText.style.display='block';
-                    }
-                    else{
-                        changeImageText.style.display='none';
+                    if (indexcbcontent1 == 0) {
+                        changeImageText.style.display = "block";
+                    } else {
+                        changeImageText.style.display = "none";
                     }
                     if (indexcbcontent1 == indexcbcontent_ttuser_top) {
                         menuFilter1.classList.add("active");
                         cbcontent_ttuser_top1.classList.add("active");
-                    }
-                    else{
+                    } else {
                         cbcontent_ttuser_top1.classList.remove("active");
                     }
                     menuFilter_ttuser_top.forEach(function (
@@ -245,12 +241,32 @@ document.addEventListener("DOMContentLoaded", () => {
                         indexcbcontent2
                     ) {
                         if (indexcbcontent1 != indexcbcontent2) {
-                           
                             menuFilter2.classList.remove("active");
                         }
                     });
                 });
             });
+        });
+    }
+    const name_music = document.querySelectorAll(".name-music");
+    if (name_music) {
+        name_music.forEach(function (name_music1, indexcbcontent1) {
+            name_music1.addEventListener("click", function () {
+                var musicUrl = name_music1.getAttribute("data-nhacredict");
+                window.location.href = "/album/" + musicUrl;
+            });
+        });
+    }
+    const nextBtn = document.getElementById("nextBtn");
+    if (nextBtn) {
+        nextBtn.addEventListener("click", function () {
+            history.forward();
+        });
+    }
+    const backBtn = document.getElementById("backBtn");
+    if (backBtn) {
+        backBtn.addEventListener("click", function () {
+            history.back();
         });
     }
 });

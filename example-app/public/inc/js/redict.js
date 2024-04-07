@@ -132,11 +132,7 @@ document.addEventListener("DOMContentLoaded", () => {
     var scrollButton = $("#scrollButton");
 
     messagesDiv.scroll(function () {
-        console.log(
-            messagesDiv.prop("scrollHeight"),
-            messagesDiv.scrollTop(),
-            messagesDiv.prop("scrollHeight") - messagesDiv.scrollTop()
-        );
+        
         if (messagesDiv.prop("scrollHeight") - messagesDiv.scrollTop() > 1000) {
             scrollButton.fadeIn();
         } else {
@@ -165,7 +161,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if (setloadchat) {
             $.ajax({
                 type: "GET",
-                url: "/Administrator/loadchat",
+                url: "/loadchat",
                 success: function (response) {
                     $(".messages").empty();
                     setloadchat = false;

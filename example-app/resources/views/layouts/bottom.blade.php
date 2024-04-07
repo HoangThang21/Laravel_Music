@@ -107,6 +107,7 @@
                                             class="bi bi-phone-vibrate"></i>Cài nhạc chờ
                                     </div>
                                     <div class="sendchat"><i class="bi bi-chat-dots"></i>Share chat</div>
+                                    <div class="Xoa"><i class="bi bi-trash"></i>Xóa</div>
                                 </div>
                             </div>
                         </div>
