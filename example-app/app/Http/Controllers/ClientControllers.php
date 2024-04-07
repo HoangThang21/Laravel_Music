@@ -33,8 +33,9 @@ class ClientControllers extends Controller
             return view('frontend.home', [
                 'ttnguoidung' => Auth::guard('web')->user(),
                 'activerity' => 0,
-                'content' => '',
+
                 'loi' => '',
+                'loingoai' => '',
                 'Albumtop3' => Album::latest()->take(3)->get(),
                 'Chill' => Album::inRandomOrder()->take(3)->get(),
                 'CanLike' => Album::inRandomOrder()->take(3)->get(),
@@ -46,7 +47,7 @@ class ClientControllers extends Controller
                 'album' => Album::all(),
                 'login' => 0,
                 'rank' => 'null',
-                'rightsong'=>0,
+                'rightsong' => 0,
             ]);
         }
         if (Auth::guard('google')->check()) {
@@ -54,8 +55,9 @@ class ClientControllers extends Controller
             return view('frontend.home', [
                 'ttnguoidung' => Auth::guard('google')->user(),
                 'activerity' => 0,
-                'content' => '',
+
                 'loi' => '',
+                'loingoai' => '',
                 'Albumtop3' => Album::latest()->take(3)->get(),
                 'Chill' => Album::inRandomOrder()->take(3)->get(),
                 'CanLike' => Album::inRandomOrder()->take(3)->get(),
@@ -67,7 +69,7 @@ class ClientControllers extends Controller
                 'album' => Album::all(),
                 'login' => 0,
                 'rank' => 'null',
-                'rightsong'=>0,
+                'rightsong' => 0,
             ]);
         }
         return view('frontend.home', [
@@ -81,11 +83,12 @@ class ClientControllers extends Controller
             'Nghesitop20' => Nghesi::inRandomOrder()->take(20)->get(),
             'nghesi' => Nghesi::all(),
             'album' => Album::all(),
-            'content' => '',
+
             'loi' => '',
+            'loingoai' => '',
             'login' => 0,
             'rank' => 'null',
-            'rightsong'=>0,
+            'rightsong' => 0,
         ]);
     }
 
@@ -119,17 +122,16 @@ class ClientControllers extends Controller
             ]);
             if (Auth::guard('web')->check()) {
                 User::where('id', Auth::guard('web')->user()->id)->update(['online' => 0]);
-    
+
                 Auth::guard('web')->logout();
             }
             if (Auth::guard('google')->check()) {
-    
+
                 UserAPI::where('id', Auth::guard('google')->user()->id)->update(['online' => 0]);
                 Auth::guard('google')->logout();
             }
             $users = User::where("email", $request->input('input-name'))->first();
-            if($users->trangthai==0){
-             
+            if ($users->trangthai == 0) {
                 return view(
                     'frontend.home',
                     [
@@ -144,24 +146,41 @@ class ClientControllers extends Controller
                         'Nghesitop20' => Nghesi::inRandomOrder()->take(20)->get(),
                         'nghesi' => Nghesi::all(),
                         'album' => Album::all(),
-                        'content' => '',
+
+                        'loingoai' => '',
                         'loi' => 'Tài khoản bị khóa vui lòng liên hệ Admin qua Email:nhacchomobifone@gmail.com',
                         'rank' => 'null',
-                        'rightsong'=>0,
+                        'rightsong' => 0,
                     ]
                 );
-            }
-            else{
+            } else {
                 if ($credentials) {
                     if ($users->trangthai != 0) {
                         if (Hash::check($request->input('input-password'), $users->password)) {
                             Auth::guard('web')->login($users);
                             if (Auth::guard('web')->check()) {
                                 User::where('id', Auth::guard('web')->user()->id)->update(['online' => 1]);
-                                return redirect()->intended('/');
+                                return view('frontend.home', [
+                                    'ttnguoidung' => Auth::guard('web')->user(),
+                                    'activerity' => 0,
+                                    'loi' => '',
+                                    'loingoai' => 'Đăng nhập thành công',
+                                    'Albumtop3' => Album::latest()->take(3)->get(),
+                                    'Chill' => Album::inRandomOrder()->take(3)->get(),
+                                    'CanLike' => Album::inRandomOrder()->take(3)->get(),
+                                    'Nhactopluotnghe' => Nhac::where('vip', 0)->where('xetduyet', 1)->where('luotnghe', "desc")->latest()->take(2)->get(),
+                                    'Nhactopvip' => Nhac::where('vip', 1)->where('xetduyet', 1)->where('luotnghe', "desc")->latest()->take(2)->get(),
+                                    'Nhactop10' => Nhac::where('vip', 0)->where('xetduyet', 1)->latest()->take(10)->get(),
+                                    'Nghesitop20' => Nghesi::inRandomOrder()->take(20)->get(),
+                                    'nghesi' => Nghesi::all(),
+                                    'album' => Album::all(),
+                                    'login' => 0,
+                                    'rank' => 'null',
+                                    'rightsong' => 0,
+                                ]);
                             }
                         } else {
-    
+
                             return view(
                                 'frontend.home',
                                 [
@@ -176,10 +195,11 @@ class ClientControllers extends Controller
                                     'Nghesitop20' => Nghesi::inRandomOrder()->take(20)->get(),
                                     'nghesi' => Nghesi::all(),
                                     'album' => Album::all(),
-                                    'content' => '',
+
+                                    'loingoai' => '',
                                     'loi' => 'Tài khoản hoặc mật khẩu không đúng. Vui lòng nhập lại',
                                     'rank' => 'null',
-                                    'rightsong'=>0,
+                                    'rightsong' => 0,
                                 ]
                             );
                         }
@@ -196,10 +216,11 @@ class ClientControllers extends Controller
                             'Nghesitop20' => Nghesi::inRandomOrder()->take(20)->get(),
                             'nghesi' => Nghesi::all(),
                             'album' => Album::all(),
-                            'content' => '',
+
+                            'loingoai' => '',
                             'loi' => 'Tài khoản của bạn đã bị khóa vui lòng liên hệ Admin',
                             'rank' => 'null',
-                            'rightsong'=>0,
+                            'rightsong' => 0,
                         ]);
                     }
                 } else {
@@ -215,14 +236,14 @@ class ClientControllers extends Controller
                         'Nghesitop20' => Nghesi::inRandomOrder()->take(20)->get(),
                         'nghesi' => Nghesi::all(),
                         'album' => Album::all(),
-                        'content' => '',
+
                         'loi' => '',
+                        'loingoai' => '',
                         'rank' => 'null',
-                        'rightsong'=>0,
+                        'rightsong' => 0,
                     ]);
                 }
             }
-            
         } catch (Exception $e) {
             return view('frontend.home', [
                 'login' => 1,
@@ -236,10 +257,11 @@ class ClientControllers extends Controller
                 'Nghesitop20' => Nghesi::inRandomOrder()->take(20)->get(),
                 'nghesi' => Nghesi::all(),
                 'album' => Album::all(),
-                'content' => '',
+
+                'loingoai' => '',
                 'loi' => 'Nhập không đúng. Vui lòng nhập lại',
                 'rank' => 'null',
-                'rightsong'=>0,
+                'rightsong' => 0,
             ]);
         }
         return redirect()->intended('/');
@@ -279,11 +301,12 @@ class ClientControllers extends Controller
             'Nghesitop20' => Nghesi::inRandomOrder()->take(20)->get(),
             'nghesi' => Nghesi::all(),
             'album' => Album::all(),
-            'content' => '',
+
+            'loingoai' => '',
             'loi' => 'Vui lòng đăng nhập để xem nhạc đã yêu thích.',
             'login' => 1,
             'rank' => 'null',
-            'rightsong'=>0,
+            'rightsong' => 0,
         ]);
     }
 
@@ -299,10 +322,11 @@ class ClientControllers extends Controller
                 'namemusic' => '',
                 'activerity' => 2,
                 'loi' => '',
-                'content' => '',
+                'loingoai' => '',
+
                 'login' => 0,
                 'rank' => 'null',
-                'rightsong'=>0,
+                'rightsong' => 0,
             ]);
         }
         if (Auth::guard('google')->check()) {
@@ -315,10 +339,11 @@ class ClientControllers extends Controller
                 'namemusic' => '',
                 'activerity' => 2,
                 'loi' => '',
-                'content' => '',
+                'loingoai' => '',
+
                 'login' => 0,
                 'rank' => 'null',
-                'rightsong'=>0,
+                'rightsong' => 0,
             ]);
         }
         return view('frontend.home', [
@@ -332,11 +357,12 @@ class ClientControllers extends Controller
             'Nghesitop20' => Nghesi::inRandomOrder()->take(20)->get(),
             'nghesi' => Nghesi::all(),
             'album' => Album::all(),
-            'content' => '',
+
             'loi' => 'Vui lòng đăng nhập để chat.',
+            'loingoai' => '',
             'login' => 1,
             'rank' => 'null',
-            'rightsong'=>0,
+            'rightsong' => 0,
         ]);
     }
     public function sendchat(Request $request)
@@ -372,18 +398,73 @@ class ClientControllers extends Controller
             return  redirect()->intended('/livechat');
         }
     }
-    public function changettuser(Request $request){
+    public function changettuser(Request $request)
+    {
         $loi = $request->validate([
             'txtname' => ['required'],
             'txtemail' => ['required'],
         ]);
         if ($loi) {
             if (Auth::guard('web')->check()) {
-                $user= User::where("email",Auth::guard('web')->user()->email)->first();
-                
+                if ($request->file('inputImage') != null) {
+                    $generatedimage = 'image' . time() . '-' . $request->file('inputImage')->getClientOriginalName();
+                    $request->file('inputImage')->move(public_path('images'), $generatedimage);
+                    $user = User::where("email", Auth::guard('web')->user()->email)->update(
+                        [
+                            'name' => $request->input('txtname'),
+                            'sdt' => $request->input('txtsdt'),
+                            'image' => $generatedimage,
+
+                        ]
+                    );
+                    $mess = Mess::where('iduser', Auth::guard('web')->user()->id)->update([
+                        'tenuser' => $request->input('txtname'),
+                        'hinhuser' => $generatedimage,
+                    ]);
+                    return redirect()->intended('/thongtin-user');
+                } else {
+                    $user = User::where("email", Auth::guard('web')->user()->email)->update(
+                        [
+                            'name' => $request->input('txtname'),
+                            'sdt' => $request->input('txtsdt'),
+                        ]
+                    );
+                    $mess = Mess::where('iduser', Auth::guard('web')->user()->id)->update([
+                        'tenuser' => $request->input('txtname'),
+
+                    ]);
+                    return redirect()->intended('/thongtin-user');
+                }
             }
             if (Auth::guard('google')->check()) {
-                
+                if ($request->file('inputImage') != null) {
+                    $generatedimage = 'image' . time() . '-' . $request->file('inputImage')->getClientOriginalName();
+                    $request->file('inputImage')->move(public_path('images'), $generatedimage);
+                    $user = UserAPI::where("email", Auth::guard('google')->user()->email)->update(
+                        [
+                            'name' => $request->input('txtname'),
+                            'sdt' => $request->input('txtsdt'),
+                            'image' => $generatedimage,
+
+                        ]
+                    );
+                    $mess = Mess::where('iduser', Auth::guard('google')->user()->id)->update([
+                        'tenuser' => $request->input('txtname'),
+                        'hinhuser' => $generatedimage,
+                    ]);
+                    return redirect()->intended('/thongtin-user');
+                } else {
+                    $user = UserAPI::where("email", Auth::guard('google')->user()->email)->update(
+                        [
+                            'name' => $request->input('txtname'),
+                            'sdt' => $request->input('txtsdt'),
+                        ]
+                    );
+                    $mess = Mess::where('iduser', Auth::guard('google')->user()->id)->update([
+                        'tenuser' => $request->input('txtname'),
+                    ]);
+                    return redirect()->intended('/thongtin-user');
+                }
             }
         } else {
             if (Auth::guard('web')->check()) {
@@ -395,10 +476,11 @@ class ClientControllers extends Controller
                     'namemusic' => '',
                     'activerity' => 0,
                     'loi' => '',
-                    'content' => '',
+                    'loingoai' => '',
+
                     'login' => 0,
                     'rank' => 'null',
-                    'rightsong'=>1,
+                    'rightsong' => 1,
                 ]);
             }
             if (Auth::guard('google')->check()) {
@@ -410,10 +492,178 @@ class ClientControllers extends Controller
                     'namemusic' => '',
                     'activerity' => 0,
                     'loi' => '',
-                    'content' => '',
+                    'loingoai' => '',
+
                     'login' => 0,
                     'rank' => 'null',
-                    'rightsong'=>1,
+                    'rightsong' => 1,
+                ]);
+            }
+        }
+    }
+    public function changepassttuser(Request $request)
+    {
+        $loi = $request->validate([
+            'txtmkcu' => ['required'],
+            'txtmkmoi' => ['required'],
+            'txtxnmkmoi' => ['required'],
+        ]);
+
+        if ($loi) {
+            if ($request->input('txtmkmoi') == $request->input('txtxnmkmoi')) {
+                if (Auth::guard('web')->check()) {
+                    if (Hash::check($request->input('txtmkcu'),  Auth::guard('web')->user()->password)) {
+                        $user = User::where("email", Auth::guard('web')->user()->email)->update(
+                            [
+                                'password' => Hash::make($request->input('txtxnmkmoi')),
+                            ]
+                        );
+                        User::where('id', Auth::guard('web')->user()->id)->update(['online' => 0]);
+                        Auth::guard('web')->logout();
+                        return view('frontend.home', [
+                            'ttnguoidung' => Auth::guard('web')->user(),
+                            'activerity' => 0,
+                            'loi' => '',
+                            'loingoai' => '',
+                            'Albumtop3' => Album::latest()->take(3)->get(),
+                            'Chill' => Album::inRandomOrder()->take(3)->get(),
+                            'CanLike' => Album::inRandomOrder()->take(3)->get(),
+                            'Nhactopluotnghe' => Nhac::where('vip', 0)->where('xetduyet', 1)->where('luotnghe', "desc")->latest()->take(2)->get(),
+                            'Nhactopvip' => Nhac::where('vip', 1)->where('xetduyet', 1)->where('luotnghe', "desc")->latest()->take(2)->get(),
+                            'Nhactop10' => Nhac::where('vip', 0)->where('xetduyet', 1)->latest()->take(10)->get(),
+                            'Nghesitop20' => Nghesi::inRandomOrder()->take(20)->get(),
+                            'nghesi' => Nghesi::all(),
+                            'album' => Album::all(),
+                            'login' => 1,
+                            'rank' => 'null',
+                            'rightsong' => 0,
+                        ]);
+                    } else {
+                        return view('frontend.menu.thongtinuser', [
+                            'ttnguoidung' => Auth::guard('web')->user(),
+                            'Nhactopluotnghe' => Nhac::where('vip', 0)->where('xetduyet', 1)->where('luotnghe', "desc")->latest()->take(2)->get(),
+                            'Nhactopvip' => Nhac::where('vip', 1)->where('xetduyet', 1)->where('luotnghe', "desc")->latest()->take(2)->get(),
+                            'nhac' => Nhac::where('vip', 0)->get(),
+                            'namemusic' => '',
+                            'activerity' => 0,
+                            'loi' => '',
+                            'loingoai' => 'Mật khẩu cũ không chính xác',
+                            'login' => 0,
+                            'rank' => 'null',
+                            'rightsong' => 1,
+                        ]);
+                    }
+                }
+                if (Auth::guard('google')->check()) {
+                    if (Hash::check($request->input('txtmkcu'),  Auth::guard('web')->user()->password)) {
+                        $user = UserAPI::where("email", Auth::guard('google')->user()->email)->update(
+                            ['password' => Hash::make($request->input('txtxnmkmoi')),]
+                        );
+
+                        UserAPI::where('id', Auth::guard('google')->user()->id)->update(['online' => 0]);
+                        Auth::guard('google')->logout();
+                        // $googleLogoutUrl = 'https://accounts.google.com/logout?continue=https://www.google.com';
+                        // return redirect()->to($googleLogoutUrl);
+                        return view('frontend.home', [
+                            'ttnguoidung' => Auth::guard('web')->user(),
+                            'activerity' => 0,
+                            'loi' => '',
+                            'loingoai' => '',
+                            'Albumtop3' => Album::latest()->take(3)->get(),
+                            'Chill' => Album::inRandomOrder()->take(3)->get(),
+                            'CanLike' => Album::inRandomOrder()->take(3)->get(),
+                            'Nhactopluotnghe' => Nhac::where('vip', 0)->where('xetduyet', 1)->where('luotnghe', "desc")->latest()->take(2)->get(),
+                            'Nhactopvip' => Nhac::where('vip', 1)->where('xetduyet', 1)->where('luotnghe', "desc")->latest()->take(2)->get(),
+                            'Nhactop10' => Nhac::where('vip', 0)->where('xetduyet', 1)->latest()->take(10)->get(),
+                            'Nghesitop20' => Nghesi::inRandomOrder()->take(20)->get(),
+                            'nghesi' => Nghesi::all(),
+                            'album' => Album::all(),
+                            'login' => 1,
+                            'rank' => 'null',
+                            'rightsong' => 0,
+                        ]);
+                    } else {
+                        return view('frontend.menu.thongtinuser', [
+                            'ttnguoidung' => Auth::guard('google')->user(),
+                            'Nhactopluotnghe' => Nhac::where('vip', 0)->where('xetduyet', 1)->where('luotnghe', "desc")->latest()->take(2)->get(),
+                            'Nhactopvip' => Nhac::where('vip', 1)->where('xetduyet', 1)->where('luotnghe', "desc")->latest()->take(2)->get(),
+                            'nhac' => Nhac::where('vip', 0)->get(),
+                            'namemusic' => '',
+                            'activerity' => 0,
+                            'loi' => '',
+                            'loingoai' => 'Mật khẩu cũ không chính xác',
+                            'login' => 0,
+                            'rank' => 'null',
+                            'rightsong' => 1,
+                        ]);
+                    }
+                }
+            } else {
+
+                if (Auth::guard('web')->check()) {
+                    return view('frontend.menu.thongtinuser', [
+                        'ttnguoidung' => Auth::guard('web')->user(),
+                        'Nhactopluotnghe' => Nhac::where('vip', 0)->where('xetduyet', 1)->where('luotnghe', "desc")->latest()->take(2)->get(),
+                        'Nhactopvip' => Nhac::where('vip', 1)->where('xetduyet', 1)->where('luotnghe', "desc")->latest()->take(2)->get(),
+                        'nhac' => Nhac::where('vip', 0)->get(),
+                        'namemusic' => '',
+                        'activerity' => 0,
+                        'loi' => '',
+                        'loingoai' => 'Mật khẩu xác nhận không chính xác. Vui lòng nhập lại',
+
+                        'login' => 0,
+                        'rank' => 'null',
+                        'rightsong' => 1,
+                    ]);
+                }
+                if (Auth::guard('google')->check()) {
+                    return view('frontend.menu.thongtinuser', [
+                        'ttnguoidung' => Auth::guard('google')->user(),
+                        'Nhactopluotnghe' => Nhac::where('vip', 0)->where('xetduyet', 1)->where('luotnghe', "desc")->latest()->take(2)->get(),
+                        'Nhactopvip' => Nhac::where('vip', 1)->where('xetduyet', 1)->where('luotnghe', "desc")->latest()->take(2)->get(),
+                        'nhac' => Nhac::where('vip', 0)->get(),
+                        'namemusic' => '',
+                        'activerity' => 0,
+                        'loi' => '',
+                        'loingoai' => 'Mật khẩu xác nhận không chính xác. Vui lòng nhập lại',
+
+                        'login' => 0,
+                        'rank' => 'null',
+                        'rightsong' => 1,
+                    ]);
+                }
+            }
+        } else {
+            if (Auth::guard('web')->check()) {
+                return view('frontend.menu.thongtinuser', [
+                    'ttnguoidung' => Auth::guard('web')->user(),
+                    'Nhactopluotnghe' => Nhac::where('vip', 0)->where('xetduyet', 1)->where('luotnghe', "desc")->latest()->take(2)->get(),
+                    'Nhactopvip' => Nhac::where('vip', 1)->where('xetduyet', 1)->where('luotnghe', "desc")->latest()->take(2)->get(),
+                    'nhac' => Nhac::where('vip', 0)->get(),
+                    'namemusic' => '',
+                    'activerity' => 0,
+                    'loi' => '',
+                    'loingoai' => '',
+
+                    'login' => 0,
+                    'rank' => 'null',
+                    'rightsong' => 1,
+                ]);
+            }
+            if (Auth::guard('google')->check()) {
+                return view('frontend.menu.thongtinuser', [
+                    'ttnguoidung' => Auth::guard('google')->user(),
+                    'Nhactopluotnghe' => Nhac::where('vip', 0)->where('xetduyet', 1)->where('luotnghe', "desc")->latest()->take(2)->get(),
+                    'Nhactopvip' => Nhac::where('vip', 1)->where('xetduyet', 1)->where('luotnghe', "desc")->latest()->take(2)->get(),
+                    'nhac' => Nhac::where('vip', 0)->get(),
+                    'namemusic' => '',
+                    'activerity' => 0,
+                    'loi' => '',
+                    'loingoai' => '',
+
+                    'login' => 0,
+                    'rank' => 'null',
+                    'rightsong' => 1,
                 ]);
             }
         }
@@ -441,11 +691,11 @@ class ClientControllers extends Controller
                         'Nghesitop20' => Nghesi::inRandomOrder()->take(20)->get(),
                         'nghesi' => Nghesi::all(),
                         'album' => Album::all(),
-                        'content' => '',
+
                         'loi' => 'Email hoặc số điện thoại đã có. Vui lòng nhập lại',
                         'login' => 0,
                         'rank' => 'null',
-                        'rightsong'=>0,
+                        'rightsong' => 0,
                     ]);
                 }
 
@@ -468,11 +718,12 @@ class ClientControllers extends Controller
                     'Nghesitop20' => Nghesi::inRandomOrder()->take(20)->get(),
                     'nghesi' => Nghesi::all(),
                     'album' => Album::all(),
-                    'content' => '',
+
                     'loi' => 'Đăng ký thành công',
+                    'loingoai' => '',
                     'login' => 1,
                     'rank' => 'null',
-                    'rightsong'=>0,
+                    'rightsong' => 0,
                 ]);
             } else {
 
@@ -487,11 +738,12 @@ class ClientControllers extends Controller
                     'Nghesitop20' => Nghesi::inRandomOrder()->take(20)->get(),
                     'nghesi' => Nghesi::all(),
                     'album' => Album::all(),
-                    'content' => '',
+
                     'loi' => 'Mật khẩu và xác nhận mật khẩu không đúng. Vui lòng nhập lại',
+                    'loingoai' => '',
                     'login' => 0,
                     'rank' => 'null',
-                    'rightsong'=>0,
+                    'rightsong' => 0,
                 ]);
             }
         } else {
@@ -506,11 +758,12 @@ class ClientControllers extends Controller
                 'Nghesitop20' => Nghesi::inRandomOrder()->take(20)->get(),
                 'nghesi' => Nghesi::all(),
                 'album' => Album::all(),
-                'content' => '',
+
                 'loi' => 'Chưa có nhập đầy đủ. Vui lòng nhập lại',
+                'loingoai' => '',
                 'login' => 0,
                 'rank' => 'null',
-                'rightsong'=>0,
+                'rightsong' => 0,
             ]);
         }
     }
@@ -520,15 +773,15 @@ class ClientControllers extends Controller
             return view('frontend.menu.Mchart', [
                 'ttnguoidung' => Auth::guard('web')->user(),
                 'activerity' => 3,
-                'loi' => '',
-                'content' => '',
+                'loi' => '', 'loingoai' => '',
+
                 'Nhactopluotnghe' => Nhac::where('vip', 0)->where('xetduyet', 1)->where('luotnghe', "desc")->latest()->take(2)->get(),
                 'Nhactopvip' => Nhac::where('vip', 1)->where('xetduyet', 1)->where('luotnghe', "desc")->latest()->take(2)->get(),
                 'Nhactop10' => Nhac::where('vip', 0)->orderBy('luotnghe', 'desc')->get(),
                 'nghesi' => Nghesi::all(),
                 'album' => Album::all(),
                 'login' => 0,
-                'rightsong'=>0,
+                'rightsong' => 0,
                 'rank' => json_encode(Ranks::orderBy('id', 'desc')->latest()->take(3)->select("tensong1", "nghesi1", "phantram1", "tensong2", "nghesi2", "phantram2", "tensong3", "nghesi3", "phantram3", "thoigian")->get()->toArray()),
             ]);
         }
@@ -537,29 +790,30 @@ class ClientControllers extends Controller
                 'ttnguoidung' => Auth::guard('google')->user(),
                 'activerity' => 3,
                 'loi' => '',
-                'content' => '',
+                'loingoai' => '',
+
                 'Nhactopluotnghe' => Nhac::where('vip', 0)->where('xetduyet', 1)->where('luotnghe', "desc")->latest()->take(2)->get(),
                 'Nhactopvip' => Nhac::where('vip', 1)->where('xetduyet', 1)->where('luotnghe', "desc")->latest()->take(2)->get(),
                 'Nhactop10' => Nhac::where('vip', 0)->orderBy('luotnghe', 'desc')->get(),
                 'nghesi' => Nghesi::all(),
                 'album' => Album::all(),
                 'login' => 0,
-                'rightsong'=>0,
+                'rightsong' => 0,
                 'rank' => json_encode(Ranks::orderBy('id', 'desc')->latest()->take(3)->select("tensong1", "nghesi1", "phantram1", "tensong2", "nghesi2", "phantram2", "tensong3", "nghesi3", "phantram3", "thoigian")->get()->toArray()),
             ]);
-         
         }
         return view('frontend.menu.Mchart', [
             'activerity' => 3,
             'loi' => '',
-            'content' => '',
+            'loingoai' => '',
+
             'Nhactopluotnghe' => Nhac::where('vip', 0)->where('xetduyet', 1)->where('luotnghe', "desc")->latest()->take(2)->get(),
             'Nhactopvip' => Nhac::where('vip', 1)->where('xetduyet', 1)->where('luotnghe', "desc")->latest()->take(2)->get(),
             'Nhactop10' => Nhac::where('vip', 0)->orderBy('luotnghe', 'desc')->get(),
             'nghesi' => Nghesi::all(),
             'album' => Album::all(),
             'login' => 0,
-            'rightsong'=>0,
+            'rightsong' => 0,
             'rank' => json_encode(Ranks::orderBy('id', 'desc')->latest()->take(3)->select("tensong1", "nghesi1", "phantram1", "tensong2", "nghesi2", "phantram2", "tensong3", "nghesi3", "phantram3", "thoigian")->get()->toArray()),
         ]);
     }
@@ -573,11 +827,11 @@ class ClientControllers extends Controller
                 'nhac' => Nhac::where('vip', 0)->get(),
                 'namemusic' => '',
                 'activerity' => 0,
-                'loi' => '',
-                'content' => '',
+                'loi' => '', 'loingoai' => '',
+
                 'login' => 0,
                 'rank' => 'null',
-                'rightsong'=>1,
+                'rightsong' => 1,
             ]);
         }
         if (Auth::guard('google')->check()) {
@@ -588,11 +842,11 @@ class ClientControllers extends Controller
                 'nhac' => Nhac::where('vip', 0)->get(),
                 'namemusic' => '',
                 'activerity' => 0,
-                'loi' => '',
-                'content' => '',
+                'loi' => '', 'loingoai' => '',
+
                 'login' => 0,
                 'rank' => 'null',
-                'rightsong'=>1,
+                'rightsong' => 1,
             ]);
         }
     }
@@ -602,8 +856,8 @@ class ClientControllers extends Controller
             return view('frontend.menu.ranksong', [
                 'ttnguoidung' => Auth::guard('web')->user(),
                 'activerity' => 4,
-                'loi' => '',
-                'content' => '',
+                'loi' => '', 'loingoai' => '',
+
                 'Nhactop10' => Nhac::where('vip', 0)->orderBy('id', 'desc')->get(),
                 'nghesi' => Nghesi::all(),
                 'Nhactopluotnghe' => Nhac::where('vip', 0)->where('xetduyet', 1)->where('luotnghe', "desc")->latest()->take(2)->get(),
@@ -611,30 +865,29 @@ class ClientControllers extends Controller
                 'album' => Album::all(),
                 'login' => 0,
                 'rank' => 'null',
-                'rightsong'=>0,
+                'rightsong' => 0,
             ]);
         }
         if (Auth::guard('google')->check()) {
             return view('frontend.menu.ranksong', [
                 'ttnguoidung' => Auth::guard('google')->user(),
                 'activerity' => 4,
-            'loi' => '',
-            'content' => '',
-            'Nhactop10' => Nhac::where('vip', 0)->orderBy('id', 'desc')->get(),
-            'nghesi' => Nghesi::all(),
-            'Nhactopluotnghe' => Nhac::where('vip', 0)->where('xetduyet', 1)->where('luotnghe', "desc")->latest()->take(2)->get(),
-            'Nhactopvip' => Nhac::where('vip', 1)->where('xetduyet', 1)->where('luotnghe', "desc")->latest()->take(2)->get(),
-            'album' => Album::all(),
-            'login' => 0,
-            'rank' => 'null',
-            'rightsong'=>0,
+                'loi' => '', 'loingoai' => '',
+
+                'Nhactop10' => Nhac::where('vip', 0)->orderBy('id', 'desc')->get(),
+                'nghesi' => Nghesi::all(),
+                'Nhactopluotnghe' => Nhac::where('vip', 0)->where('xetduyet', 1)->where('luotnghe', "desc")->latest()->take(2)->get(),
+                'Nhactopvip' => Nhac::where('vip', 1)->where('xetduyet', 1)->where('luotnghe', "desc")->latest()->take(2)->get(),
+                'album' => Album::all(),
+                'login' => 0,
+                'rank' => 'null',
+                'rightsong' => 0,
             ]);
-         
         }
         return view('frontend.menu.ranksong', [
             'activerity' => 4,
-            'loi' => '',
-            'content' => '',
+            'loi' => '', 'loingoai' => '',
+
             'Nhactopluotnghe' => Nhac::where('vip', 0)->where('xetduyet', 1)->where('luotnghe', "desc")->latest()->take(2)->get(),
             'Nhactopvip' => Nhac::where('vip', 1)->where('xetduyet', 1)->where('luotnghe', "desc")->latest()->take(2)->get(),
             'Nhactop10' => Nhac::where('vip', 0)->orderBy('id', 'desc')->get(),
@@ -642,7 +895,7 @@ class ClientControllers extends Controller
             'album' => Album::all(),
             'login' => 0,
             'rank' => 'null',
-            'rightsong'=>0,
+            'rightsong' => 0,
         ]);
     }
     public function loadtopic()
@@ -653,11 +906,11 @@ class ClientControllers extends Controller
                 'Nhactopluotnghe' => Nhac::where('vip', 0)->where('xetduyet', 1)->where('luotnghe', "desc")->latest()->take(2)->get(),
                 'Nhactopvip' => Nhac::where('vip', 1)->where('xetduyet', 1)->where('luotnghe', "desc")->latest()->take(2)->get(),
                 'activerity' => 5,
-                'content' => '',
-                'loi' => '',
+
+                'loi' => '', 'loingoai' => '',
                 'login' => 0,
                 'rank' => 'null',
-                'rightsong'=>0,
+                'rightsong' => 0,
             ]);
         }
         if (Auth::guard('google')->check()) {
@@ -666,22 +919,21 @@ class ClientControllers extends Controller
                 'Nhactopluotnghe' => Nhac::where('vip', 0)->where('xetduyet', 1)->where('luotnghe', "desc")->latest()->take(2)->get(),
                 'Nhactopvip' => Nhac::where('vip', 1)->where('xetduyet', 1)->where('luotnghe', "desc")->latest()->take(2)->get(),
                 'activerity' => 5,
-                'content' => '',
-                'loi' => '',
+
+                'loi' => '', 'loingoai' => '',
                 'login' => 0,
                 'rank' => 'null',
-                'rightsong'=>0,
+                'rightsong' => 0,
             ]);
-         
         }
         return view('frontend.menu.topic', [
             'Nhactopluotnghe' => Nhac::where('vip', 0)->where('xetduyet', 1)->where('luotnghe', "desc")->latest()->take(2)->get(),
             'Nhactopvip' => Nhac::where('vip', 1)->where('xetduyet', 1)->where('luotnghe', "desc")->latest()->take(2)->get(),
             'activerity' => 5,
-            'content' => '',
-            'loi' => '',
+
+            'loi' => '', 'loingoai' => '',
             'login' => 0,
-            'rank' => 'null','rightsong'=>0,
+            'rank' => 'null', 'rightsong' => 0,
         ]);
     }
 }

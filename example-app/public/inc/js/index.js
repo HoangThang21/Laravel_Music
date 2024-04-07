@@ -175,14 +175,14 @@ document.addEventListener("DOMContentLoaded", () => {
                             }
                             if (cbcontent1.textContent.includes("Rút gọn")) {
                                 cbcontent1.textContent = "Xem thêm";
-                                cb1.classList.remove("bi-caret-down-fill");
-                                cb1.classList.add("bi-caret-up-fill");
+                                cb1.classList.remove("bi-caret-up-fill");
+                                cb1.classList.add("bi-caret-down-fill");
                             } else if (
                                 cbcontent1.textContent.includes("Xem thêm")
                             ) {
                                 cbcontent1.textContent = "Rút gọn";
-                                cb1.classList.remove("bi-caret-up-fill");
-                                cb1.classList.add("bi-caret-down-fill");
+                                cb1.classList.remove("bi-caret-down-fill");
+                                cb1.classList.add("bi-caret-up-fill");
                             }
                         }
                     });
@@ -235,7 +235,6 @@ document.addEventListener("DOMContentLoaded", () => {
                     }
                     if (indexcbcontent1 == indexcbcontent_ttuser_top) {
                         menuFilter1.classList.add("active");
-                        
                         cbcontent_ttuser_top1.classList.add("active");
                     }
                     else{
@@ -248,7 +247,6 @@ document.addEventListener("DOMContentLoaded", () => {
                         if (indexcbcontent1 != indexcbcontent2) {
                            
                             menuFilter2.classList.remove("active");
-                            
                         }
                     });
                 });

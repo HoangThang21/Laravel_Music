@@ -53,18 +53,18 @@
                 <?php   };?>
                 <button type="submit">Lưu</button>
             </form>
-            <form action="#" method="post" id="form-bottom-body-user-chane" class="form-bottom-body-user">
+            <form action="/changepassttuser" method="post" id="form-bottom-body-user-chane" class="form-bottom-body-user">
                 @csrf
                 <div class="inputGroup">
-                    <input type="text" id="txtmkcu" name="txtmkcu" required autocomplete="off">
+                    <input type="password" id="txtmkcu" name="txtmkcu" required autocomplete="off">
                     <label for="txtmkcu">Mật khẩu cũ</label>
                 </div>
                 <div class="inputGroup">
-                    <input type="text" id="txtmkmoi" name="txtmkmoi" required autocomplete="off">
+                    <input type="password" id="txtmkmoi" name="txtmkmoi" required autocomplete="off">
                     <label for="txtmkmoi">Mâtk khẩu mới</label>
                 </div>
                 <div class="inputGroup">
-                    <input type="text" id="txtxnmkmoi" name="txtxnmkmoi" required autocomplete="off">
+                    <input type="password" id="txtxnmkmoi" name="txtxnmkmoi" required autocomplete="off">
                     <label for="txtxnmkmoi">Xác nhận mật khẩu</label>
                 </div>
                 <button type="submit">Lưu</button>

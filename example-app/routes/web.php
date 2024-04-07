@@ -129,3 +129,4 @@ use Illuminate\Support\Facades\Route;
     Route::get('/logingg/callback', [ClientControllers::class, 'callback'])->name('load.callback');
     Route::get('/thongtin-user', [ClientControllers::class, 'thongtinuser'])->name('load.thongtinuser');
     Route::post('/changettuser', [ClientControllers::class, 'changettuser'])->name('load.changettuser');
+    Route::post('/changepassttuser', [ClientControllers::class, 'changepassttuser'])->name('load.changepassttuser');

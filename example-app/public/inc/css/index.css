@@ -174,7 +174,7 @@ header .menu_side .playlist::-webkit-scrollbar {
     width: 4px;
 }
 header .menu_side .playlist::-webkit-scrollbar-thumb {
-   background: var(--text-color-B);
+    background: var(--text-color-B);
     border-radius: 6px;
 }
 header .menu_side .playlist a {
@@ -532,7 +532,8 @@ header .master_play .bar input {
     line-height: 22px;
     background-color: #fff;
     color: red;
-    width: 340px;
+    max-width: 340px;
+    width: fit-content;
 }
 .loi.active {
     transform: translate(0);
@@ -826,10 +827,9 @@ header .master_play .bar input {
 }
 .song_side .contentsong #song_side::-webkit-scrollbar {
     width: 4px;
-
 }
 .song_side .contentsong #song_side::-webkit-scrollbar-thumb {
-   background: var(--text-color-B);
+    background: var(--text-color-B);
     border-radius: 6px;
 }
 .song_side .contentsong .rightsong {
@@ -859,7 +859,7 @@ header .master_play .bar input {
     transition: all 0.1s linear;
 }
 .rightsong .menu-rightsong .menu-scroll-rightsong::-webkit-scrollbar {
-   display: none;
+    display: none;
 }
 
 /* .rightsong .menu-rightsong .menu-scroll-rightsong::-webkit-scrollbar-thumb {
@@ -1172,6 +1172,10 @@ header .master_play .bar input {
     white-space: nowrap;
     overflow: hidden; /* Ẩn nội dung dư thừa */
     text-overflow: ellipsis;
+    cursor: pointer;
+}
+.name-music:hover {
+    color: var(--color-tim);
 }
 .name-music-bottom {
     width: 160px;
@@ -1874,14 +1878,13 @@ header .master_play .bar input {
     overflow-x: auto;
     /* -ms-overflow-style: none;
     scrollbar-width: none; */
-    scroll-behavior: smooth;
 }
 .chat-content .messages::-webkit-scrollbar {
     width: 4px;
 }
 
 .chat-content .messages::-webkit-scrollbar-thumb {
-   background: var(--text-color-B);
+    background: var(--text-color-B);
     border-radius: 6px;
 }
 .chat-content #formchat {

@@ -19,7 +19,7 @@
                                         <div class="load-nghe"><i class="bi bi-caret-right-fill"></i></div>
                                     </div>
                                     <div class="name-media">
-                                        <div class="name-music">{{ $nhactop10->tennhac }}
+                                        <div class="name-music"  data-nhacredict="{{ $nhactop10->id }}">{{ $nhactop10->tennhac }}
                                         </div>
                                         <div class="nametacgia">
                                             @foreach ($album as $alb)
