@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Music - Nghe nhạc chờ mới HOT nhất, tải nhạc MP3 chất lượng cao</title>
-    <link rel="shortcut icon" href="../../images/logomobifone.png" type="image/png">
+    <link rel="shortcut icon" href="../../images/logo_funring.png" type="image/png">
     <link href="../../inc/css/index.css" rel="stylesheet">
     <link href="../../inc/css/home.css" rel="stylesheet">
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css">

@@ -39,8 +39,58 @@
                                         @endphp
                                         <div class="time-curent-media"><span>{{ $duration }}</span><i
                                                 class="loadmusic-dot bi bi-caret-right-fill"></i></div>
-                                        <div class="yeuthich-music" title="Thêm vào yêu thích"><i
-                                                class="bi bi-heart"></i></div>
+                                                @if (Auth::guard('web')->check())
+                                                @php
+                                                    $inputString = $ttnguoidung->thuvien;
+                                                    $parts = explode('-', $inputString);
+                                                    $check = 0;
+                                                @endphp
+                                                @foreach ($parts as $index => $part)
+                                                    @php
+                                                        $currentNumber = (int) $part;
+                                                    @endphp
+                                                    @if ($currentNumber == $Nhacalbumbaihat->id)
+                                                        @php
+                    
+                                                            $check = 1;
+                                                        @endphp
+                                                        <div class="yeuthich-music "data-yeutich="{{ $Nhacalbumbaihat->id }}"
+                                                            title="Thêm vào yêu thích"><i class="bi bi-heart-fill"></i></div>
+                                                    @endif
+                                                @endforeach
+                                                @if ($check == 0)
+                                                    <div class="yeuthich-music "data-yeutich="{{ $Nhacalbumbaihat->id }}"
+                                                        title="Thêm vào yêu thích"><i class="bi bi-heart"></i></div>
+                                                @endif
+                                            @else
+                                                @if (Auth::guard('google')->check())
+                                                    @php
+                                                        $inputString = $ttnguoidung->thuvien;
+                                                        $parts = explode('-', $inputString);
+                                                        $check = 0;
+                                                    @endphp
+                                                    @foreach ($parts as $index => $part)
+                                                        @php
+                                                            $currentNumber = (int) $part;
+                                                        @endphp
+                                                        @if ($currentNumber == $Nhacalbumbaihat->id)
+                                                            @php
+                    
+                                                                $check = 1;
+                                                            @endphp
+                                                            <div class="yeuthich-music "data-yeutich="{{ $Nhacalbumbaihat->id }}"
+                                                                title="Thêm vào yêu thích"><i class="bi bi-heart-fill"></i></div>
+                                                        @endif
+                                                    @endforeach
+                                                    @if ($check == 0)
+                                                        <div class="yeuthich-music "data-yeutich="{{ $Nhacalbumbaihat->id }}"
+                                                            title="Thêm vào yêu thích"><i class="bi bi-heart"></i></div>
+                                                    @endif
+                                                @else
+                                                    <div class="yeuthich-music "data-yeutich="{{ $Nhacalbumbaihat->id }}"
+                                                        title="Thêm vào yêu thích"><i class="bi bi-heart"></i></div>
+                                                @endif
+                                            @endif
                                         <div class="option">
                                             <div class="dot-3"><i class="bi bi-three-dots"></i></div>
                                             <div class="menu-right-media ">

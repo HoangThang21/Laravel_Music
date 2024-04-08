@@ -655,7 +655,6 @@ header .master_play .bar input {
 .song_side nav .redict #nextBtn {
     cursor: pointer;
     padding: 6px;
-
 }
 .song_side nav .infouser {
     position: absolute;
@@ -1225,7 +1224,22 @@ header .master_play .bar input {
     border-radius: 10px;
     animation-delay: 3s;
 }
+
+.info-name-tacgia-top {
+    /* height: 100%; */
+    display: none;
+    position: absolute;
+    background: var(--text_music_gradient-4);
+    top: 15px;
+    padding: 10px;
+    border-radius: 10px;
+    animation-delay: 3s;
+    z-index: 99;
+}
 .nametacgia:hover .name-tacgia ~ .info-name-tacgia {
+    display: block;
+}
+.nametacgia:hover .name-tacgia ~ .info-name-tacgia-top {
     display: block;
 }
 .top-info-tacgia {
@@ -1300,7 +1314,9 @@ header .master_play .bar input {
     display: flex;
     justify-content: flex-end;
     cursor: pointer;
+    color: var(--color-tim);
 }
+
 .time-curent-media {
     width: 25%;
 }
@@ -2414,12 +2430,16 @@ p {
     justify-content: space-between;
 }
 .left-top-album-baihat {
+    position: sticky;
+    top: 0;
     width: 30%;
+    height: fit-content;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
     gap: 10px;
+    margin-top: 30px;
 }
 .left-top-album-baihat .left-top-album-baihat-tennhac {
     font-size: 20px;

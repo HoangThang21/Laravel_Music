@@ -129,6 +129,8 @@ use Illuminate\Support\Facades\Route;
     Route::get('/logingg/callback', [ClientControllers::class, 'callback'])->name('load.callback');
     Route::get('/thongtin-user', [ClientControllers::class, 'thongtinuser'])->name('load.thongtinuser');
     Route::get('/album/{name}', [ClientControllers::class, 'albumbaihat'])->name('load.albumbaihat');
+    Route::get('/album-nghesi/{name}', [ClientControllers::class, 'albumnghesi'])->name('load.albumnghesi');
     Route::get('/loadchat', [ClientControllers::class, 'loadchat'])->name('load.loadchat');
     Route::post('/changettuser', [ClientControllers::class, 'changettuser'])->name('load.changettuser');
     Route::post('/changepassttuser', [ClientControllers::class, 'changepassttuser'])->name('load.changepassttuser');
+    Route::get('/addmusic/{id}-{name}', [ClientControllers::class, 'addmusic'])->name('load.addmusic');

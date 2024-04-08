@@ -103,7 +103,8 @@
                                 <div class="load-nghe"><i class="bi bi-caret-right-fill"></i></div>
                             </div>
                             <div class="name-media">
-                                <div class="name-music" data-nhacredict="{{ $nhactop10->id }}">{{ $nhactop10->tennhac }}
+                                <div class="name-music" data-nhacredict="{{ $nhactop10->id }}">
+                                    {{ $nhactop10->tennhac }}
                                 </div>
                                 <div class="nametacgia">
                                     @foreach ($album as $alb)
@@ -124,14 +125,78 @@
                                                                 <img src="../../images/{{ $userimg }}"
                                                                     alt="">
                                                                 <div class="iftacgia">
-                                                                    <a href=""
+                                                                    <a href="/nghe-si/{{ $ns->id }}"
                                                                         class="nametacgia-info">{{ $ns->tennghesi }}</a>
-                                                                    <div class="luotquantam-info">{{ $ns->quantam }}
-                                                                        quan tâm</div>
+                                                                    @php
+                                                                        $inputString = $ns->quantam;
+                                                                        $parts = explode('-', $inputString);
+                                                                        $check = 0;
+                                                                    @endphp
+                                                                    @foreach ($parts as $index => $part)
+                                                                        @if ($part)
+                                                                            @php
+                                                                                $check += 1;
+                                                                            @endphp
+                                                                        @endif
+                                                                    @endforeach
+                                                                    @if ($check > 0)
+                                                                        <div class="luotquantam-info">
+                                                                            {{ $check }}
+                                                                            quan tâm</div>
+                                                                    @endif
+
                                                                 </div>
                                                             </div>
-                                                            <div class="topright-tacgia"
-                                                                data-quantamns="{{ $ns->id }}">Quan tâm +</div>
+                                                            {{-- -------------------------------- --}}
+                                                            @if (Auth::guard('web')->check())
+                                                                @php
+                                                                    $isInterested =
+                                                                        strpos($ns->quantam, $ttnguoidung->id) !==
+                                                                        false;
+                                                                @endphp
+                                                                <div class="topright-tacgia"
+                                                                    data-quantam="{{ $ns->id }}"
+                                                                    @if ($isInterested) {{ 'style=background:blue;color:#fff' }}
+                            @else
+                                {{ '' }} @endif>
+                                                                    <i class="bi bi-person-plus-fill"></i>
+                                                                    @if ($isInterested)
+                                                                        {{ 'Đã quan tâm' }}
+                                                                    @else
+                                                                        {{ 'Quan tâm' }}
+                                                                    @endif
+                                                                </div>
+                                                            @else
+                                                                @if (Auth::guard('google')->check())
+                                                                    @php
+                                                                        $isInterested =
+                                                                            strpos(
+                                                                                $ns->quantam,
+                                                                                $ttnguoidung->id . 'gg',
+                                                                            ) !== false;
+                                                                    @endphp
+                                                                    <div class="topright-tacgia"
+                                                                        data-quantam="{{ $ns->id }}"
+                                                                        @if ($isInterested)
+                                                                         {{ `style="background: blue; color:#fff"` }}
+                                                                        @else
+                                                                            {{ '' }} 
+                                                                        @endif>
+                                                                        <i class="bi bi-person-plus-fill"></i>
+                                                                        @if ($isInterested)
+                                                                            {{ 'Đã quan tâm' }}
+                                                                        @else
+                                                                            {{ 'Quan tâm' }}
+                                                                        @endif
+                                                                    </div>
+                                                                @else
+                                                                    <div class="topright-tacgia"
+                                                                        data-quantam="{{ $ns->id }}"><i
+                                                                            class="bi bi-person-plus-fill"></i>
+                                                                        Quan tâm</div>
+                                                                @endif
+                                                            @endif
+
                                                         </div>
                                                         <div class="bottom-info-tacgia">
                                                             <p>Mới</p>
@@ -148,12 +213,11 @@
                                                                             <img src="../../images/{{ $item->hinhalbum }}"
                                                                                 alt="">
                                                                             <a
-                                                                                href="/album/{{ $item->id }}">{{ $item->tenalbum }}</a>
+                                                                                href="/album-nghesi/{{ $item->id }}">{{ $item->tenalbum }}</a>
                                                                             <p>{{ $item->namphathanh }}</p>
                                                                         </div>
                                                                     </div>
                                                                 @endforeach
-
                                                             </div>
                                                         </div>
                                                     </div>
@@ -178,7 +242,58 @@
                         @endphp
                         <div class="time-curent-media"><span>{{ $duration }}</span><i
                                 class="loadmusic-dot bi bi-caret-right-fill"></i></div>
-                        <div class="yeuthich-music" title="Thêm vào yêu thích"><i class="bi bi-heart"></i></div>
+                        @if (Auth::guard('web')->check())
+                            @php
+                                $inputString = $ttnguoidung->thuvien;
+                                $parts = explode('-', $inputString);
+                                $check = 0;
+                            @endphp
+                            @foreach ($parts as $index => $part)
+                                @php
+                                    $currentNumber = (int) $part;
+                                @endphp
+                                @if ($currentNumber == $nhactop10->id)
+                                    @php
+
+                                        $check = 1;
+                                    @endphp
+                                    <div class="yeuthich-music"data-yeutich="{{ $nhactop10->id }}"
+                                        title="Thêm vào yêu thích"><i class="bi bi-heart-fill"></i></div>
+                                @endif
+                            @endforeach
+                            @if ($check == 0)
+                                <div class="yeuthich-music"data-yeutich="{{ $nhactop10->id }}"
+                                    title="Thêm vào yêu thích"><i class="bi bi-heart"></i></div>
+                            @endif
+                        @else
+                            @if (Auth::guard('google')->check())
+                                @php
+                                    $inputString = $ttnguoidung->thuvien;
+                                    $parts = explode('-', $inputString);
+                                    $check = 0;
+                                @endphp
+                                @foreach ($parts as $index => $part)
+                                    @php
+                                        $currentNumber = (int) $part;
+                                    @endphp
+                                    @if ($currentNumber == $nhactop10->id)
+                                        @php
+
+                                            $check = 1;
+                                        @endphp
+                                        <div class="yeuthich-music"data-yeutich="{{ $nhactop10->id }}"
+                                            title="Thêm vào yêu thích"><i class="bi bi-heart-fill"></i></div>
+                                    @endif
+                                @endforeach
+                                @if ($check == 0)
+                                    <div class="yeuthich-music"data-yeutich="{{ $nhactop10->id }}"
+                                        title="Thêm vào yêu thích"><i class="bi bi-heart"></i></div>
+                                @endif
+                            @else
+                                <div class="yeuthich-music"data-yeutich="{{ $nhactop10->id }}"
+                                    title="Thêm vào yêu thích"><i class="bi bi-heart"></i></div>
+                            @endif
+                        @endif
                         <div class="option">
                             <div class="dot-3"><i class="bi bi-three-dots"></i></div>
                             <div class="menu-right-media ">
@@ -203,15 +318,15 @@
         </div>
         <div class="list-menu-contenter">
             @foreach ($Chill as $item)
-            <div class="body-Contener">
-                <div class="item-body-content" data-album="{{ $item->id }}">
-                    <img src="../../images/{{ $item->hinhalbum }}" alt="">
-                    <div class="hover-item-body-content">
-                        <i class="bi bi-caret-right-fill"></i>
+                <div class="body-Contener">
+                    <div class="item-body-content" data-album="{{ $item->id }}">
+                        <img src="../../images/{{ $item->hinhalbum }}" alt="">
+                        <div class="hover-item-body-content">
+                            <i class="bi bi-caret-right-fill"></i>
+                        </div>
                     </div>
+                    <div class="title-body-content">{{ $item->tenalbum }}</div>
                 </div>
-                <div class="title-body-content">{{ $item->tenalbum }}</div>
-            </div>
             @endforeach
         </div>
     </div>
@@ -221,15 +336,15 @@
         </div>
         <div class="list-menu-contenter">
             @foreach ($CanLike as $item)
-            <div class="body-Contener">
-                <div class="item-body-content" data-album="{{ $item->id }}">
-                    <img src="../../images/{{ $item->hinhalbum }}" alt="">
-                    <div class="hover-item-body-content">
-                        <i class="bi bi-caret-right-fill"></i>
+                <div class="body-Contener">
+                    <div class="item-body-content" data-album="{{ $item->id }}">
+                        <img src="../../images/{{ $item->hinhalbum }}" alt="">
+                        <div class="hover-item-body-content">
+                            <i class="bi bi-caret-right-fill"></i>
+                        </div>
                     </div>
+                    <div class="title-body-content">{{ $item->tenalbum }}</div>
                 </div>
-                <div class="title-body-content">{{ $item->tenalbum }}</div>
-            </div>
             @endforeach
         </div>
     </div>
@@ -240,18 +355,66 @@
         </div>
         <div class="list-menu-contenter_ns">
             @foreach ($Nghesitop20 as $nstop20)
-            <div class="body-Contener_ns">
-                <img class="img-ns" src="../../images/1.jpg" alt="">
-                <div class="name-ns">{{ $nstop20->tennghesi }}</div>
-                <div class="luotthich">{{ $nstop20->quantam }} thích</div>
-                <div class="quantam"  data-quantam="{{ $nstop20->id }}"><i class="bi bi-person-plus-fill"></i> Quan tâm</div>
-            </div>
+                <div class="body-Contener_ns">
+                    <img class="img-ns" src="../../images/1.jpg" alt="">
+                    <div class="name-ns">{{ $nstop20->tennghesi }}</div>
+                    @php
+                        $inputString = $nstop20->quantam;
+                        $parts = explode('-', $inputString);
+                        $check = 0;
+                    @endphp
+                    @foreach ($parts as $index => $part)
+                        @if ($part)
+                            @php
+                                $check += 1;
+                            @endphp
+                        @endif
+                    @endforeach
+                    @if ($check > 0)
+                        <div class="luotthich">{{ $check }} thích</div>
+                    @endif
+                    {{-- ---------------------------------------------------- --}}
+                    @if (Auth::guard('web')->check())
+                        @php
+                            $isInterested = strpos($nstop20->quantam, $ttnguoidung->id) !== false;
+                        @endphp
+                        <div class="quantam" data-quantam="{{ $nstop20->id }}"
+                            @if ($isInterested) {{ 'style=background:blue;color:#fff' }}
+                            @else
+                                {{ '' }} @endif>
+                            <i class="bi bi-person-plus-fill"></i>
+                            @if ($isInterested)
+                                {{ 'Đã quan tâm' }}
+                            @else
+                                {{ 'Quan tâm' }}
+                            @endif
+                        </div>
+                    @else
+                        @if (Auth::guard('google')->check())
+                            @php
+                                $isInterested = strpos($nstop20->quantam, $ttnguoidung->id . 'gg') !== false;
+                            @endphp
+                            <div class="quantam"
+                                data-quantam="{{ $nstop20->id }}"@if ($isInterested) {{ `style="background: blue; color:#fff"` }}
+                                @else
+                                    {{ '' }} @endif>
+                                <i class="bi bi-person-plus-fill"></i>
+                                @if ($isInterested)
+                                    {{ 'Đã quan tâm' }}
+                                @else
+                                    {{ 'Quan tâm' }}
+                                @endif
+                            </div>
+                        @else
+                            <div class="quantam" data-quantam="{{ $nstop20->id }}"><i
+                                    class="bi bi-person-plus-fill"></i>
+                                Quan tâm</div>
+                        @endif
+                    @endif
+
+                </div>
             @endforeach
-            
-            
         </div>
-
-
     </div>
 </div>
 @include('layouts.bottom')

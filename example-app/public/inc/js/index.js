@@ -269,6 +269,80 @@ document.addEventListener("DOMContentLoaded", () => {
             history.back();
         });
     }
+    var yeuthich_music = document.querySelectorAll(".yeuthich-music");
+    if (yeuthich_music) {
+        yeuthich_music.forEach(function (menuFilter1, indexcbcontent1) {
+            menuFilter1.addEventListener("click", function () {
+                $.ajax({
+                    type: "get",
+                    url:
+                        "/addmusic/" +
+                        menuFilter1.getAttribute("data-yeutich") +
+                        "-addLabary",
+                    success: function (data) {
+                        window.location.href = currentUrl;
+                    },
+
+                    error: function (error) {
+                        console.error("Đã xảy ra lỗi: ", error);
+                    },
+                });
+            });
+        });
+    }
+    var item_body_content = document.querySelectorAll(".item-body-content");
+    if (item_body_content) {
+        item_body_content.forEach(function (menuFilter1, indexcbcontent1) {
+            menuFilter1.addEventListener("click", function () {
+                window.location.href = '/album-nghesi/'+menuFilter1.getAttribute("data-album");
+                
+            });
+        });
+    }
+    var quantam = document.querySelectorAll(".quantam");
+    if (quantam) {
+        quantam.forEach(function (menuFilter1, indexcbcontent1) {
+            menuFilter1.addEventListener("click", function () {
+                console.log(  menuFilter1.getAttribute("data-quantam"));
+                $.ajax({
+                    type: "get",
+                    url:
+                        "/addquantam/" +
+                        menuFilter1.getAttribute("data-quantam") +
+                        "-addQuantam",
+                    success: function (data) {
+                        window.location.href = currentUrl;
+                    },
+
+                    error: function (error) {
+                        console.error("Đã xảy ra lỗi: ", error);
+                    },
+                });
+            });
+        });
+    }
+    var topright_tacgia = document.querySelectorAll(".topright-tacgia");
+    if (topright_tacgia) {
+        topright_tacgia.forEach(function (menuFilter1, indexcbcontent1) {
+            menuFilter1.addEventListener("click", function () {
+                console.log(  menuFilter1.getAttribute("data-quantam"));
+                $.ajax({
+                    type: "get",
+                    url:
+                        "/addquantam/" +
+                        menuFilter1.getAttribute("data-quantam") +
+                        "-addQuantam",
+                    success: function (data) {
+                        window.location.href = currentUrl;
+                    },
+
+                    error: function (error) {
+                        console.error("Đã xảy ra lỗi: ", error);
+                    },
+                });
+            });
+        });
+    }
 });
 function toggleMenu(name) {
     var menuFilter = document.querySelector("." + name);

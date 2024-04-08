@@ -9,7 +9,7 @@
     <link href="../../inc/css/app.css" rel="stylesheet">
     <link href="../../inc/css/indexAdmin.css" rel="stylesheet">
   
-    <link rel="shortcut icon" href="../../images/logomobifone.png" type="image/png">
+    <link rel="shortcut icon" href="../../images/logo_funring.png" type="image/png">
 
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
 

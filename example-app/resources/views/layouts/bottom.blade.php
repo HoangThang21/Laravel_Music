@@ -314,6 +314,19 @@
     var rank = {!! $rank !!};
     var rightsong_var = {{ $rightsong }};
 </script>
+@if (Auth::guard('web')->check())
+    <script>
+        var user = `{{ $ttnguoidung->id }}`;
+    </script>
+@endif
+@if (Auth::guard('google')->check())
+    <script>
+        var user = `{{ $ttnguoidung->id }}`;
+    </script>
+@endif
+<script>
+    var currentUrl = "{{ request()->url() }}";
+</script>
 <script src="https://js.pusher.com/8.2.0/pusher.min.js"></script>
 <script type="text/javascript" src="../../inc/js/redict.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>

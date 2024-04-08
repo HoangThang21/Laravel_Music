@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Login</title>
     <link href="../../inc/css/app.css" rel="stylesheet">
-    <link rel="shortcut icon" href="../../images/webicon.png" type="image/png">
+    <link rel="shortcut icon" href="../../images/logo_funring.png" type="image/png">
     {{-- <script src="../../inc/js/app.js"></script> --}}
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
 
