@@ -28,7 +28,7 @@
                                                         @if ($ns->id == $alb->nghesi_idalbum)
                                                             <a href="/nghe-si/{{ $ns->id }}"
                                                                 class="name-tacgia">{{ $ns->tennghesi }}</a>
-                                                            <div class="info-name-tacgia">
+                                                            <div class="info-name-tacgia-top ">
                                                                 <div class="top-info-tacgia">
                                                                     <div class="topleft-tacgia">
                                                                         @php

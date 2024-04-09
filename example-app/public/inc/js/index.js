@@ -16,6 +16,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (search) {
         search.addEventListener("keypress", function (event) {
             if (event.keyCode === 13) {
+              
                 event.preventDefault(); // Ngăn chặn form tự động submit
                 $("#searchForm").submit(); // Gửi form tìm kiếm
             }
@@ -32,23 +33,17 @@ document.addEventListener("DOMContentLoaded", () => {
     setInterval(function () {
         var searchBar = document.querySelector(".searchbar-input");
         if (searchBar) {
-            searchBar.addEventListener("input", function () {
-                if (searchBar.value.trim() != "") {
-                    document.querySelector(
-                        ".delete-icon-wrapper"
-                    ).style.display = "block";
-                } else {
-                    document.querySelector(
-                        ".delete-icon-wrapper"
-                    ).style.display = "none";
-                }
-            });
-            if (searchBar.value == "") {
-                document.querySelector(".delete-icon-wrapper").style.display =
-                    "none";
+            if (searchBar.value.trim() != "") {
+                document.querySelector(
+                    ".delete-icon-wrapper"
+                ).style.display = "block";
+            } else {
+                document.querySelector(
+                    ".delete-icon-wrapper"
+                ).style.display = "none";
             }
         }
-    }, 1000);
+    }, 500);
     // document.addEventListener('contextmenu', function(event) {
     //     event.preventDefault();
     // });
@@ -257,9 +252,9 @@ document.addEventListener("DOMContentLoaded", () => {
             });
         });
     }
-    const nextBtn = document.getElementById("nextBtn");
-    if (nextBtn) {
-        nextBtn.addEventListener("click", function () {
+    const all = document.getElementById("all");
+    if (all) {
+        all.addEventListener("click", function () {
             history.forward();
         });
     }
@@ -294,8 +289,8 @@ document.addEventListener("DOMContentLoaded", () => {
     if (item_body_content) {
         item_body_content.forEach(function (menuFilter1, indexcbcontent1) {
             menuFilter1.addEventListener("click", function () {
-                window.location.href = '/album-nghesi/'+menuFilter1.getAttribute("data-album");
-                
+                window.location.href =
+                    "/album-nghesi/" + menuFilter1.getAttribute("data-album");
             });
         });
     }
@@ -303,8 +298,8 @@ document.addEventListener("DOMContentLoaded", () => {
     if (item_list_info_user) {
         item_list_info_user.forEach(function (menuFilter1, indexcbcontent1) {
             menuFilter1.addEventListener("click", function () {
-                window.location.href = '/album-nghesi/'+menuFilter1.getAttribute("data-album");
-                
+                window.location.href =
+                    "/album-nghesi/" + menuFilter1.getAttribute("data-album");
             });
         });
     }
@@ -312,7 +307,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (quantam) {
         quantam.forEach(function (menuFilter1, indexcbcontent1) {
             menuFilter1.addEventListener("click", function () {
-                console.log(  menuFilter1.getAttribute("data-quantam"));
+                console.log(menuFilter1.getAttribute("data-quantam"));
                 $.ajax({
                     type: "get",
                     url:
@@ -334,7 +329,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (topright_tacgia) {
         topright_tacgia.forEach(function (menuFilter1, indexcbcontent1) {
             menuFilter1.addEventListener("click", function () {
-                console.log(  menuFilter1.getAttribute("data-quantam"));
+                console.log(menuFilter1.getAttribute("data-quantam"));
                 $.ajax({
                     type: "get",
                     url:
@@ -350,6 +345,101 @@ document.addEventListener("DOMContentLoaded", () => {
                     },
                 });
             });
+        });
+    }
+    const alls = document.querySelector(".all");
+    const song = document.querySelector(".song");
+    const album = document.querySelector(".album");
+    const nghesi = document.querySelector(".nghesi");
+    const all_search = document.querySelector(".all-search");
+    const song_search_click = document.querySelector(".song-search-click");
+    const alblum_search_click = document.querySelector(".album-search-click");
+    const nghesi_search_click = document.querySelector(".nghesi-search-click");
+    const song_search = document.querySelector(".song-search");
+    const alblum_search = document.querySelector(".album-search");
+    const nghesi_search = document.querySelector(".nghesi-search");
+    if (alls) {
+        alls.addEventListener("click", function () {
+            alls.classList.add("active");
+            song.classList.remove("active");
+            album.classList.remove("active");
+            nghesi.classList.remove("active");
+            all_search.style.display = "block";
+            song_search_click.style.display = "none";
+            alblum_search_click.style.display = "none";
+            nghesi_search_click.style.display = "none";
+        });
+    }
+    if (song) {
+        song.addEventListener("click", function () {
+            alls.classList.remove("active");
+            song.classList.add("active");
+            album.classList.remove("active");
+            nghesi.classList.remove("active");
+            all_search.style.display = "none";
+            song_search_click.style.display = "block";
+            alblum_search_click.style.display = "none";
+            nghesi_search_click.style.display = "none";
+        });
+    }
+    if (song_search) {
+        song_search.addEventListener("click", function () {
+            alls.classList.remove("active");
+            song.classList.add("active");
+            album.classList.remove("active");
+            nghesi.classList.remove("active");
+            all_search.style.display = "none";
+            song_search_click.style.display = "block";
+            alblum_search_click.style.display = "none";
+            nghesi_search_click.style.display = "none";
+        });
+    }
+    if (album) {
+        album.addEventListener("click", function () {
+            alls.classList.remove("active");
+            song.classList.remove("active");
+            album.classList.add("active");
+            nghesi.classList.remove("active");
+            all_search.style.display = "none";
+            song_search_click.style.display = "none";
+            alblum_search_click.style.display = "block";
+            nghesi_search_click.style.display = "none";
+        });
+    }
+    if (alblum_search) {
+        alblum_search.addEventListener("click", function () {
+            alls.classList.remove("active");
+            song.classList.remove("active");
+            album.classList.add("active");
+            nghesi.classList.remove("active");
+            all_search.style.display = "none";
+            song_search_click.style.display = "none";
+            alblum_search_click.style.display = "block";
+            nghesi_search_click.style.display = "none";
+        });
+    }
+    if (nghesi) {
+        nghesi.addEventListener("click", function () {
+            alls.classList.remove("active");
+            song.classList.remove("active");
+            album.classList.remove("active");
+            nghesi.classList.add("active");
+            all_search.style.display = "none";
+            song_search_click.style.display = "none";
+            alblum_search_click.style.display = "none";
+            nghesi_search_click.style.display = "block";
+        });
+    }
+    if (nghesi_search) {
+        nghesi_search.addEventListener("click", function () {
+            alls.classList.remove("active");
+            song.classList.remove("active");
+            album.classList.remove("active");
+            nghesi.classList.add("active");
+            all_search.style.display = "none";
+            song_search_click.style.display = "none";
+            alblum_search_click.style.display = "none";
+            nghesi_search_click.style.display = "block";
         });
     }
 });

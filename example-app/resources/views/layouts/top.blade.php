@@ -83,7 +83,16 @@
                             <div class="searchbar-center">
                                 <div class="searchbar-input-spacer"></div>
                                 <input type="text"name='searchbar_input' class="searchbar-input" maxlength="2048"
-                                    placeholder="Tìm kiếm nhạc, nghệ sĩ">
+                                    placeholder="Tìm kiếm nhạc, nghệ sĩ"
+                                    value="<?php
+                                        if($valuesreach!=""){
+                                            echo $valuesreach;
+                                        }
+                                        else {
+                                            echo '';
+                                        }
+                                    ?>"
+                                    >
                             </div>
                             <div class="searchbar-left">
                                 <div class="delete-icon-wrapper">
