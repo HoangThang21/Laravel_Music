@@ -3,8 +3,10 @@ document.addEventListener("DOMContentLoaded", () => {
     playlist.forEach(function (playlist, index) {
         if (index == activemenu) {
             playlist.classList.add("active");
+            
         } else {
             playlist.classList.remove("active");
+           
         }
     });
     var list_memu = document.querySelector(".menu-list-right-setup #list-memu");
@@ -26,8 +28,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (activemenu == 2) {
         $("#searchForm").hide();
+        $("#Noidung").each(function() {
+            $(this).append("<p>Live chat</p>");
+        });
     } else {
         $("#searchForm").show();
+        $("#Noidung p").remove();
+
     }
     var thongbao = document.querySelector(".thongbao");
     var tieudeDiv = document.querySelector(".tieude");
@@ -126,13 +133,11 @@ document.addEventListener("DOMContentLoaded", () => {
             rightsong.style.display = "block";
         }
     }
-    
 
     var messagesDiv = $("#messages");
     var scrollButton = $("#scrollButton");
 
     messagesDiv.scroll(function () {
-        
         if (messagesDiv.prop("scrollHeight") - messagesDiv.scrollTop() > 1000) {
             scrollButton.fadeIn();
         } else {

@@ -872,17 +872,44 @@ header .master_play .bar input {
 .rightsong .menu-rightsong .menu-scroll-rightsong::-webkit-scrollbar {
     display: none;
 }
+.rightsong .menu-rightsong .menu-scroll-rightsong-user {
+    height: 90%;
+    display: flex;
+    flex-direction: column;
 
-/* .rightsong .menu-rightsong .menu-scroll-rightsong::-webkit-scrollbar-thumb {
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+    transition: all 0.1s linear;
+}
+.rightsong .menu-rightsong .menu-scroll-rightsong-user::-webkit-scrollbar {
+    display: none;
+}
+
+.rightsong .menu-rightsong .menu-scroll-rightsong-user::-webkit-scrollbar-thumb {
    background: var(--text-color-B);
     border-radius: 6px;
-} */
+}
 .rightsong .top-menu-rightsong {
     display: flex;
     justify-content: space-between;
     align-items: center;
     color: var(--text-color-B);
     font-size: 19px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    letter-spacing: 0.38px;
+    text-transform: capitalize;
+    border-bottom: 1px solid var(--color-tim);
+    padding: 0 20px 10px;
+    margin: 10px 20px 20px;
+}
+.rightsong .top-menu-rightsong-user {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: var(--menu-list-t2);
+    font-size: 14px;
     font-style: normal;
     font-weight: 600;
     line-height: normal;
@@ -911,6 +938,13 @@ header .master_play .bar input {
     display: flex;
     gap: 10px;
     align-items: center;
+    position: relative;
+}
+.rightsong .left-list-menu-rightsong-user {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    flex-direction: column;
     position: relative;
 }
 .rightsong .left-list-menu-rightsong img {
@@ -1133,6 +1167,11 @@ header .master_play .bar input {
     background-repeat: no-repeat;
     background-size: 100% 100%;
     border: 1px solid var(--a, #1756b5);
+}
+#Noidung{
+    color: var(--text-color-light);
+    font-size: 32px;
+    text-transform: capitalize;
 }
 .load-nghe {
     background-color: #b8b8b837;

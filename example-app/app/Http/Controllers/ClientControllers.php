@@ -345,7 +345,7 @@ class ClientControllers extends Controller
                 'activerity' => 2,
                 'loi' => '',
                 'loingoai' => '',
-
+                'chatonline'=>1,
                 'login' => 0,
                 'rank' => 'null',
                 'rightsong' => 0,
@@ -362,7 +362,7 @@ class ClientControllers extends Controller
                 'activerity' => 2,
                 'loi' => '',
                 'loingoai' => '',
-
+                'chatonline'=>1,
                 'login' => 0,
                 'rank' => 'null',
                 'rightsong' => 0,
@@ -379,7 +379,7 @@ class ClientControllers extends Controller
             'Nghesitop20' => Nghesi::inRandomOrder()->take(20)->get(),
             'nghesi' => Nghesi::all(),
             'album' => Album::all(),
-
+            'chatonline'=>'',
             'loi' => 'Vui lòng đăng nhập để chat.',
             'loingoai' => '',
             'login' => 1,
@@ -470,7 +470,7 @@ class ClientControllers extends Controller
 
                         ]
                     );
-                    $mess = Mess::where('iduser', Auth::guard('google')->user()->id)->update([
+                    $mess = Mess::where('idusergg', Auth::guard('google')->user()->id)->update([
                         'tenuser' => $request->input('txtname'),
                         'hinhuser' => $generatedimage,
                     ]);
@@ -1076,6 +1076,41 @@ class ClientControllers extends Controller
             'rightsong' => 1,
         ]);
     }
+    public function addquantam(string $name)
+    {
+        $parts = explode('-',$name);
+       
+        if (Auth::guard('web')->check()) {
+           
+            $nghesi = Nghesi::where('id', $parts[0])->first();
+            if (Str::contains($nghesi->quantam, Auth::guard('web')->user()->id.'-')) {
+                // Nếu có, thay thế '3-' bằng ''
+                $string = Str::replaceFirst(Auth::guard('web')->user()->id.'-', '', $nghesi->quantam);
+            } else {
+                // Nếu không, thêm '3-' vào cuối chuỗi
+                $string =$nghesi->quantam.Auth::guard('web')->user()->id.'-';
+            }
+                  $nghesiupdate = Nghesi::where('id', $parts[0])->update([
+                'quantam'=>$string,
+                    ]);
+            return response()->json(['success' => $parts[0]]);
+        }
+        if (Auth::guard('google')->check()) {
+            $nghesi = Nghesi::where('id', $parts[0])->first();
+            if (Str::contains($nghesi->quantam, Auth::guard('google')->user()->id.'gg-')) {
+                // Nếu có, thay thế '3-' bằng ''
+                $string = Str::replaceFirst(Auth::guard('google')->user()->id.'gg-', '', $nghesi->quantam);
+            } else {
+                // Nếu không, thêm '3-' vào cuối chuỗi
+                $string =$nghesi->quantam.Auth::guard('google')->user()->id.'gg-';
+            }
+                  $nghesiupdate = Nghesi::where('id', $parts[0])->update([
+                'quantam'=>$string,
+                    ]);
+            return response()->json(['success' => $parts[0]]);
+        }
+       
+    }
     public function addmusic(string $id, string $name)
     {
         $string='';
@@ -1149,5 +1184,65 @@ class ClientControllers extends Controller
                 'rightsong' => 0,
             ]);
         }
+    }
+    public function searchs(Request $request)
+    {
+        
+        $nhac=Nhac::where('tennhac', 'like', '%' . $request->input('searchbar_input') . '%')->get();
+        $nghesi=Nghesi::where('tennghesi', 'like', '%' . $request->input('searchbar_input') . '%')->get();
+        if (Auth::guard('web')->check()) {
+            return view('frontend.List.Search', [
+                'ttnguoidung' => Auth::guard('web')->user(),
+                'activerity' => 0,
+
+                'loi' => '',
+                'loingoai' => '',
+                'Nhactopluotnghe' => Nhac::where('vip', 0)->where('xetduyet', 1)->where('luotnghe', "desc")->latest()->take(2)->get(),
+                'Nhactopvip' => Nhac::where('vip', 1)->where('xetduyet', 1)->where('luotnghe', "desc")->latest()->take(2)->get(),
+                'Nhactop10' => Nhac::where('vip', 0)->where('xetduyet', 1)->latest()->take(10)->get(),
+                'Nghesitop20' => Nghesi::inRandomOrder()->take(20)->get(),
+                'nghesi' => Nghesi::all(),
+                'album' => Album::all(),
+                'login' => 0,
+                'rank' => 'null',
+                'rightsong' => 0,
+            ]);
+        }
+        if (Auth::guard('google')->check()) {
+
+            return view('frontend.List.Search', [
+                'ttnguoidung' => Auth::guard('google')->user(),
+                'activerity' => 0,
+
+                'loi' => '',
+                'loingoai' => '',
+                
+                'Nhactopluotnghe' => Nhac::where('vip', 0)->where('xetduyet', 1)->where('luotnghe', "desc")->latest()->take(2)->get(),
+                'Nhactopvip' => Nhac::where('vip', 1)->where('xetduyet', 1)->where('luotnghe', "desc")->latest()->take(2)->get(),
+                'Nhactop10' => Nhac::where('vip', 0)->where('xetduyet', 1)->latest()->take(10)->get(),
+                'Nghesitop20' => Nghesi::inRandomOrder()->take(20)->get(),
+                'nghesi' => Nghesi::all(),
+                'album' => Album::all(),
+                'login' => 0,
+                'rank' => 'null',
+                'rightsong' => 0,
+            ]);
+        }
+        return view('frontend.List.Search', [
+            'activerity' => 0,
+           
+            'Nhactop10' => Nhac::where('vip', 0)->where('xetduyet', 1)->latest()->take(10)->get(),
+            'Nhactopluotnghe' => Nhac::where('vip', 0)->where('xetduyet', 1)->where('luotnghe', "desc")->latest()->take(2)->get(),
+            'Nhactopvip' => Nhac::where('vip', 1)->where('xetduyet', 1)->where('luotnghe', "desc")->latest()->take(2)->get(),
+            'Nghesitop20' => Nghesi::inRandomOrder()->take(20)->get(),
+            'nghesi' => Nghesi::all(),
+            'album' => Album::all(),
+
+            'loi' => '',
+            'loingoai' => '',
+            'login' => 0,
+            'rank' => 'null',
+            'rightsong' => 0,
+        ]);
     }
 }

@@ -299,6 +299,15 @@ document.addEventListener("DOMContentLoaded", () => {
             });
         });
     }
+    var item_list_info_user = document.querySelectorAll(".item-list-info-user");
+    if (item_list_info_user) {
+        item_list_info_user.forEach(function (menuFilter1, indexcbcontent1) {
+            menuFilter1.addEventListener("click", function () {
+                window.location.href = '/album-nghesi/'+menuFilter1.getAttribute("data-album");
+                
+            });
+        });
+    }
     var quantam = document.querySelectorAll(".quantam");
     if (quantam) {
         quantam.forEach(function (menuFilter1, indexcbcontent1) {

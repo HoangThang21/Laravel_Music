@@ -1,35 +1,59 @@
 </div>
 <div class="rightsong">
-    <div class="menu-rightsong">
-        <div class="top-menu-rightsong">Top Lượt nghe <i class="bi bi-caret-right-fill"></i></div>
-        <div class="menu-scroll-rightsong">
-            @foreach ($Nhactopluotnghe as $ntluotnghe)
-                <div class="list-menu-rightsong">
-                    <div class="left-list-menu-rightsong">
-                        <img src="../../images/{{ $ntluotnghe->imagemusic }}" alt="">
-                        <div class="name-rightsong">{{ $ntluotnghe->tennhac }}</div>
-                    </div>
-                    <i class="bi bi-caret-right-fill"></i>
-                </div>
-            @endforeach
+    @if ($chatonline)
+        <div class="menu-rightsong">
+            <div class="top-menu-rightsong-user"> <i class="bi bi-dot"></i> Người dùng đang online </div>
+            <div class="menu-scroll-rightsong-user">
+                @foreach ($Nhactopluotnghe as $ntluotnghe)
+                    <div class="list-menu-rightsong">
+                        <div class="left-list-menu-rightsong">
+                            <img src="../../images/{{ $ntluotnghe->imagemusic }}" alt="">
+                            <div class="left-list-menu-rightsong-user">
+                                <div class="name-rightsong">{{ $ntluotnghe->tennhac }}</div>
+                                <div class="name-rightsong">{{ $ntluotnghe->tennhac }}</div>
+                            </div>
 
-        </div>
-    </div>
-    <div class="menu-rightsong">
-        <div class="top-menu-rightsong">Nhạc Premium <span><i class="bi bi-chevron-compact-right"></i></span></div>
-        <div class="menu-scroll-rightsong">
-            @foreach ($Nhactopvip as $ntluotnghe)
-                <div class="list-menu-rightsong">
-                    <div class="left-list-menu-rightsong">
-                        <img src="../../images/{{ $ntluotnghe->imagemusic }}" alt="">
-                        <div class="name-rightsong">{{ $ntluotnghe->tennhac }}</div>
-                        <span>premium</span>
+                        </div>
+
                     </div>
-                    <i class="bi bi-caret-right-fill"></i>
-                </div>
-            @endforeach
+                @endforeach
+
+            </div>
         </div>
-    </div>
+    @else
+        <div class="menu-rightsong">
+            <div class="top-menu-rightsong">Top Lượt nghe <i class="bi bi-caret-right-fill"></i></div>
+            <div class="menu-scroll-rightsong">
+                @foreach ($Nhactopluotnghe as $ntluotnghe)
+                    <div class="list-menu-rightsong">
+                        <div class="left-list-menu-rightsong">
+                            <img src="../../images/{{ $ntluotnghe->imagemusic }}" alt="">
+                            <div class="name-rightsong">{{ $ntluotnghe->tennhac }}</div>
+                        </div>
+                        <i class="bi bi-caret-right-fill"></i>
+                    </div>
+                @endforeach
+
+            </div>
+        </div>
+        <div class="menu-rightsong">
+            <div class="top-menu-rightsong">Nhạc Premium <span><i class="bi bi-chevron-compact-right"></i></span></div>
+            <div class="menu-scroll-rightsong">
+                @foreach ($Nhactopvip as $ntluotnghe)
+                    <div class="list-menu-rightsong">
+                        <div class="left-list-menu-rightsong">
+                            <img src="../../images/{{ $ntluotnghe->imagemusic }}" alt="">
+                            <div class="name-rightsong">{{ $ntluotnghe->tennhac }}</div>
+                            <span>premium</span>
+                        </div>
+                        <i class="bi bi-caret-right-fill"></i>
+                    </div>
+                @endforeach
+            </div>
+        </div>
+    @endif
+
+
 
 </div>
 </div>

@@ -72,6 +72,7 @@
                     <div id="backBtn"><i class="bi bi-chevron-left"></i></div>
                     <div id="nextBtn"><i class="bi bi-chevron-right"></i></div>
                 </div>
+                <div id="Noidung"></div>
                 <form action="/search?=" method="post" id="searchForm">
                     @csrf
                     <div class="searchbar">

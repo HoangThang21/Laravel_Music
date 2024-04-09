@@ -48,12 +48,72 @@
                                                                                 <div class="iftacgia">
                                                                                     <a href="/nghe-si/{{ $ns->id }}"
                                                                                         class="nametacgia-info">{{ $ns->tennghesi }}</a>
-                                                                                    <div class="luotquantam-info">{{ $ns->quantam }}
-                                                                                        quan tâm</div>
+                                                                                        @php
+                                                                                        $inputString = $ns->quantam;
+                                                                                        $parts = explode('-', $inputString);
+                                                                                        $check = 0;
+                                                                                    @endphp
+                                                                                    @foreach ($parts as $index => $part)
+                                                                                        @if ($part)
+                                                                                            @php
+                                                                                                $check += 1;
+                                                                                            @endphp
+                                                                                        @endif
+                                                                                    @endforeach
+                                                                                    @if ($check >= 0)
+                                                                                        <div class="luotquantam-info">
+                                                                                            {{ $check }}
+                                                                                            quan tâm</div>
+                                                                                            @endif
+                
                                                                                 </div>
                                                                             </div>
+                                                                            {{-- -------------------------------- --}}
+                                                                            @if (Auth::guard('web')->check())
+                                                                                @php
+                                                                                    $isInterested =
+                                                                                        strpos($ns->quantam, $ttnguoidung->id) !==
+                                                                                        false;
+                                                                                @endphp
+                                                                                <div class="topright-tacgia"
+                                                                                    data-quantam="{{ $ns->id }}"
+                                                                                    @if ($isInterested) {{ 'style=background:blue;color:#fff' }}
+                                                                                    @else
+                                                                                        {{ '' }} @endif>
+                                                                                    <i class="bi bi-person-plus-fill"></i>
+                                                                                    @if ($isInterested)
+                                                                                        {{ 'Đã quan tâm' }}
+                                                                                    @else
+                                                                                        {{ 'Quan tâm' }}
+                                                                                    @endif
+                                                                                </div>
+                                                                            @else
+                                                                                @if (Auth::guard('google')->check())
+                                                                                @php
+                                                                                $isInterested =
+                                                                                    strpos($ns->quantam, $ttnguoidung->id) !==
+                                                                                    false;
+                                                                            @endphp
                                                                             <div class="topright-tacgia"
-                                                                                data-quantamns="{{ $ns->id }}">Quan tâm +</div>
+                                                                                data-quantam="{{ $ns->id }}"
+                                                                                @if ($isInterested) {{ 'style=background:blue;color:#fff' }}
+                                                                        @else
+                                                                            {{ '' }} @endif>
+                                                                                <i class="bi bi-person-plus-fill"></i>
+                                                                                @if ($isInterested)
+                                                                                    {{ 'Đã quan tâm' }}
+                                                                                @else
+                                                                                    {{ 'Quan tâm' }}
+                                                                                @endif
+                                                                            </div>
+                                                                                @else
+                                                                                    <div class="topright-tacgia"
+                                                                                        data-quantam="{{ $ns->id }}"><i
+                                                                                            class="bi bi-person-plus-fill"></i>
+                                                                                        Quan tâm</div>
+                                                                                @endif
+                                                                            @endif
+                
                                                                         </div>
                                                                         <div class="bottom-info-tacgia">
                                                                             <p>Mới</p>
