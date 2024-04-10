@@ -487,7 +487,7 @@ header .master_play .bar input {
 .vol .bar-vol {
     position: absolute;
     background: var(--text_music_gradient-2);
-    width: 0;
+    width: 100%;
     height: 3px;
     left: 0;
     top: 0%;
@@ -499,7 +499,7 @@ header .master_play .bar input {
     height: 5px;
     background: rgb(255, 255, 255);
     border-radius: 50%;
-    left: 0%;
+    left: 100%;
     top: 30%;
     transform: translate(-12%, -32%);
     transition: all 0s linear;
@@ -1143,6 +1143,9 @@ header .master_play .bar input {
     justify-content: flex-start;
     align-items: center;
 }
+.media.active {
+    background-color: rgba(77, 74, 74, 0.5);
+}
 .info-media {
     display: flex;
     gap: 10px;
@@ -1204,6 +1207,7 @@ header .master_play .bar input {
 .media:hover .load-nghe {
     display: flex;
 }
+
 .info-media-bottom:hover .load-nghe-bottom {
     display: flex;
 }

@@ -100,7 +100,7 @@
             <div class="le-right-setup">
                 <i class="bi bi-volume-up" id="vol-up"></i>
                 <div class="vol">
-                    <input type="range" name="range-seek-vol" id="seek-vol" class="range-vol" max="100"
+                    <input type="range" name="range-seek-vol" id="seek-vol" class="range-vol" max="100" value="100"
                         min="0" />
                     <div class="bar-vol" id="bar-vol"></div>
                     <div class="dot" id="dot-music"></div>
@@ -327,6 +327,7 @@
 
 </header>
 <script type="text/javascript" src="../../inc/js/index.js"></script>
+<script type="text/javascript" src="../../inc/js/song.js"></script>
 <script>
     var csrfToken = ` {{ csrf_token() }}`;
     var activemenu = '{{ $activerity }}';

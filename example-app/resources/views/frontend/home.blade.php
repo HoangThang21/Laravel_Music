@@ -95,12 +95,12 @@
                     $number = str_pad($loop->iteration, 2, '0', STR_PAD_LEFT); // Định dạng số với hai chữ số và thêm số 0 ở đầu nếu cần
                 @endphp
                 <div class="media">
-                    <div class="media-left">
+                    <div class="media-left ">
                         <span>{{ $number }}</span>
                         <div class="info-media">
                             <div class="img-media">
                                 <img src="../../images/{{ $nhactop10->imagemusic }}" alt="">
-                                <div class="load-nghe"><i class="bi bi-caret-right-fill"></i></div>
+                                <div class="load-nghe" data-song="{{ $nhactop10->id }}"><i class="bi bi-play-fill"></i></div>
                             </div>
                             <div class="name-media">
                                 <div class="name-music" data-nhacredict="{{ $nhactop10->id }}">
@@ -144,7 +144,6 @@
                                                                             {{ $check }}
                                                                             quan tâm</div>
                                                                     @endif
-
                                                                 </div>
                                                             </div>
                                                             {{-- -------------------------------- --}}
@@ -236,8 +235,8 @@
                                 $duration = $fileInfo['playtime_string'];
                             }
                         @endphp
-                        <div class="time-curent-media"><span>{{ $duration }}</span><i
-                                class="loadmusic-dot bi bi-caret-right-fill"></i></div>
+                        <div class="time-curent-media" data-song="{{ $nhactop10->id }}"><span>{{ $duration }}</span><i
+                                class="loadmusic-dot bi bi-play-fill"></i></div>
                         @if (Auth::guard('web')->check())
                             @php
                                 $inputString = $ttnguoidung->thuvien;

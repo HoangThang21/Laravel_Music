@@ -1386,4 +1386,40 @@ class ClientControllers extends Controller
                 'rightsong' => 0,
         ]);
     }
+    public function luotnghe(Request $request, string $id)
+    {
+
+        // Xử lý tăng lượt nghe ở đây
+        $luotnghe = Nhac::where('id', $id)->first();
+        $nhac = Nhac::where('id', $id)->update([
+            'luotnghe' => $luotnghe->luotnghe + 1,
+        ]);
+
+
+        return response()->json(['success' => $id, 'success1' => $request]);
+    }
+    public function loadmusic(Request $request, string $id)
+    {
+
+        $nhac = Nhac::where('id', $id)->first();
+
+        if (!$nhac) {
+            return response()->json(['error' => 'Không tìm thấy bản ghi nhạc'], 404);
+        }
+
+        $album = Album::where('id', $nhac->album_idnhac)->first();
+
+        if (!$album) {
+            return response()->json(['error' => 'Không tìm thấy bản ghi album'], 404);
+        }
+
+        $nghesi = Nghesi::where('id', $album->nghesi_idalbum)->first();
+
+        if (!$nghesi) {
+            return response()->json(['error' => 'Không tìm thấy bản ghi nghệ sĩ'], 404);
+        }
+
+        // Trả về dữ liệu thành công
+        return response()->json(['success' => $nhac, 'successns' => $nghesi]);
+    }
 }

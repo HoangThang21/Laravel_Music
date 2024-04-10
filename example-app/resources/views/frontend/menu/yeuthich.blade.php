@@ -61,7 +61,7 @@
                                                     <div class="info-media">
                                                         <div class="img-media">
                                                             <img src="../../images/{{ $n->imagemusic }}" alt="">
-                                                            <div class="load-nghe"><i
+                                                            <div class="load-nghe" data-song="{{ $nhactop10->id }}"><i
                                                                     class="bi bi-caret-right-fill"></i>
                                                             </div>
                                                         </div>
@@ -213,7 +213,7 @@
                                                             $duration = $fileInfo['playtime_string'];
                                                         }
                                                     @endphp
-                                                    <div class="time-curent-media"><span>{{ $duration }}</span><i
+                                                    <div class="time-curent-media"data-song="{{ $n->id }}"><span>{{ $duration }}</span><i
                                                             class="loadmusic-dot bi bi-caret-right-fill"></i></div>
                                                     <div class="yeuthich-music" data-yeutich="{{ $n->id}}" title="Đã yêu thích"><i class="bi bi-heart-fill"></i></div>
                                                     <div class="option">

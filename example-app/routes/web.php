@@ -139,3 +139,5 @@ use Illuminate\Support\Facades\Route;
     Route::post('/changettuser', [ClientControllers::class, 'changettuser'])->name('load.changettuser');
     Route::post('/changepassttuser', [ClientControllers::class, 'changepassttuser'])->name('load.changepassttuser');
     Route::get('/addmusic/{id}-{name}', [ClientControllers::class, 'addmusic'])->name('load.addmusic');
+    Route::post('/ln/{id}', [ClientControllers::class, 'luotnghe']);
+    Route::post('/loadmusic/{id}', [ClientControllers::class, 'loadmusic']);

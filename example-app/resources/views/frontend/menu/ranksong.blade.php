@@ -50,7 +50,7 @@
                         <div class="info-media">
                             <div class="img-media">
                                 <img src="../../images/{{ $nhactop10->imagemusic }}" alt="">
-                                <div class="load-nghe"><i class="bi bi-caret-right-fill"></i></div>
+                                <div class="load-nghe"data-song="{{ $nhactop10->id }}"><i class="bi bi-caret-right-fill"></i></div>
                             </div>
                             <div class="name-media">
                                 <div class="name-music"  data-nhacredict="{{ $nhactop10->id }}">{{ $nhactop10->tennhac }}
@@ -186,7 +186,7 @@
                                 $duration = $fileInfo['playtime_string'];
                             }
                         @endphp
-                        <div class="time-curent-media"><span>{{ $duration }}</span><i
+                        <div class="time-curent-media"data-song="{{ $nhactop10->id }}"><span>{{ $duration }}</span><i
                                 class="loadmusic-dot bi bi-caret-right-fill"></i></div>
                                 @if (Auth::guard('web')->check())
                                 @php
