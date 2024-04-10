@@ -233,7 +233,7 @@
                                         data-gia="{{ $nhactop10->gia }}"><i class="bi bi-phone-vibrate"></i>Cài nhạc
                                         chờ
                                     </div>
-                                    <div class="sendchat"><i class="bi bi-chat-dots"></i>Share chat</div>
+                                    <div class="sendchat" data-sendchat="{{ $nhactop10->id }}><i class="bi bi-chat-dots"></i>Share chat</div>
                                 </div>
                             </div>
                         </div>
@@ -272,7 +272,7 @@
                 @foreach ($Nghesitop20 as $nstop20)
                     <div class="body-Contener_ns">
                         <img class="img-ns" src="../../images/1.jpg" alt="">
-                        <div class="name-ns">{{ $nstop20->tennghesi }}</div>
+                        <div class="name-ns" onclick="ClickNghesi({{ $nstop20->id }})">{{ $nstop20->tennghesi }}</div>
                         @php
                             $inputString = $nstop20->quantam;
                             $parts = explode('-', $inputString);
@@ -553,7 +553,7 @@
                                         data-gia="{{ $nhactop10->gia }}"><i class="bi bi-phone-vibrate"></i>Cài nhạc
                                         chờ
                                     </div>
-                                    <div class="sendchat"><i class="bi bi-chat-dots"></i>Share chat</div>
+                                    <div class="sendchat" data-sendchat="{{ $nhactop10->id }}><i class="bi bi-chat-dots"></i>Share chat</div>
                                 </div>
                             </div>
                         </div>
@@ -592,7 +592,7 @@
                 @foreach ($nghesisearch as $nstop20)
                     <div class="body-Contener-search ">
                         <img class="img-ns" src="../../images/1.jpg" alt="">
-                        <div class="name-ns">{{ $nstop20->tennghesi }}</div>
+                        <div class="name-ns" onclick="ClickNghesi({{ $nstop20->id }})">{{ $nstop20->tennghesi }}</div>
                         @php
                             $inputString = $nstop20->quantam;
                             $parts = explode('-', $inputString);

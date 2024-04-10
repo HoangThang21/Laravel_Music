@@ -873,16 +873,15 @@ header .master_play .bar input {
     display: none;
 }
 .rightsong .menu-rightsong .menu-scroll-rightsong-user {
-    height: 90%;
+    height: 350px;
     display: flex;
     flex-direction: column;
-
-    overflow-x: hidden;
+    overflow-x: auto;
     scroll-behavior: smooth;
     transition: all 0.1s linear;
 }
 .rightsong .menu-rightsong .menu-scroll-rightsong-user::-webkit-scrollbar {
-    display: none;
+    width: 4px;
 }
 
 .rightsong
@@ -1806,7 +1805,7 @@ header .master_play .bar input {
 .contener .list-menu-contenter-search {
     margin-top: 20px;
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr ;
+    grid-template-columns: 1fr 1fr 1fr;
     gap: 10px;
 }
 .contener .body-Contener {
@@ -1911,6 +1910,7 @@ header .master_play .bar input {
 .contener .title-body-content {
 }
 .contener .name-ns {
+    cursor: pointer;
     font-size: 18px;
     font-style: normal;
     font-weight: 700;
@@ -2030,10 +2030,14 @@ header .master_play .bar input {
     background: rgba(65, 65, 65, 0.65);
     padding: 10px;
     border-radius: 6px;
+    
+}
+.musicform a {
+    color: #fff;
 }
 .submitchat {
     position: absolute;
-    right: 71px;
+    right: 75px;
     cursor: pointer;
     margin-right: 20px;
 }
@@ -2535,15 +2539,13 @@ p {
     position: sticky;
     top: 0;
     z-index: 99;
-    background:var(--backgroundmain);
-   
+    background: var(--backgroundmain);
 }
 .left-header-search {
     font-size: 24px;
     padding: 10px 0;
-
 }
-.noidung {
+.left-header-search .noidung {
     padding: 0 10px;
     border-right: 1px solid #fff;
 }
@@ -2557,36 +2559,32 @@ p {
 .right-header-search .all,
 .right-header-search .song,
 .right-header-search .album,
-.right-header-search .nghesi
- {
-  cursor: pointer;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: fit-content;
-  height: 100%;
-  color: var(--text-color-B);
+.right-header-search .nghesi {
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: fit-content;
+    height: 100%;
+    color: var(--text-color-B);
 }
 .right-header-search .all:hover,
 .right-header-search .song:hover,
 .right-header-search .album:hover,
-.right-header-search .nghesi:hover
- {
+.right-header-search .nghesi:hover {
     color: var(--text-color-light);
 }
 .right-header-search .all.active,
 .right-header-search .song.active,
 .right-header-search .album.active,
-.right-header-search .nghesi.active
- {
+.right-header-search .nghesi.active {
     z-index: 100;
     color: var(--text-color-light);
     border-bottom: 2px solid #1554c8;
 }
 .song-search,
 .album-search,
-.nghesi-search
-{
+.nghesi-search {
     cursor: pointer;
 }
 /* ---------------------------------------------------------------------- */

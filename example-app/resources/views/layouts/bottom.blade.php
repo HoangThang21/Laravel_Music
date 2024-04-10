@@ -2,22 +2,24 @@
 <div class="rightsong">
     @if ($chatonline)
         <div class="menu-rightsong">
-            <div class="top-menu-rightsong-user"> <i class="bi bi-dot"></i> Người dùng đang online </div>
+            <div class="top-menu-rightsong-user">
+                <div class=""><i class="bi bi-dot"></i> Người dùng đang online</div>
+            </div>
             <div class="menu-scroll-rightsong-user">
-                @foreach ($Nhactopluotnghe as $ntluotnghe)
-                    <div class="list-menu-rightsong">
-                        <div class="left-list-menu-rightsong">
-                            <img src="../../images/{{ $ntluotnghe->imagemusic }}" alt="">
-                            <div class="left-list-menu-rightsong-user">
-                                <div class="name-rightsong">{{ $ntluotnghe->tennhac }}</div>
-                                <div class="name-rightsong">{{ $ntluotnghe->tennhac }}</div>
+                @foreach ($chatonline as $onlineUsers)
+                    @foreach ($onlineUsers as $user)
+                        <div class="list-menu-rightsong">
+                            <div class="left-list-menu-rightsong">
+                                <img src="../../images/{{ $user->image }}" alt="">
+                                <div class="left-list-menu-rightsong-user">
+                                    <div class="name-rightsong">{{ $user->name }}</div>
+                                </div>
+
                             </div>
 
                         </div>
-
-                    </div>
+                    @endforeach
                 @endforeach
-
             </div>
         </div>
     @else
@@ -124,13 +126,6 @@
                             <div class="option">
                                 <div class="dot-3"><i class="bi bi-three-dots"></i></div>
                                 <div class="menu-right-media bottom-listmmusic">
-                                    <div title="Tải nhạc" class="download" data-downloadmusic="holo.mp3"><i
-                                            class="bi bi-download"></i>Download
-                                    </div>
-                                    <div title="Cài nhạc chờ" class="nhaccho" data-cho="8217381" data-gia="3000"><i
-                                            class="bi bi-phone-vibrate"></i>Cài nhạc chờ
-                                    </div>
-                                    <div class="sendchat"><i class="bi bi-chat-dots"></i>Share chat</div>
                                     <div class="Xoa"><i class="bi bi-trash"></i>Xóa</div>
                                 </div>
                             </div>

@@ -59,7 +59,7 @@
 
             </div>
             <div class="giothieu">
-                <a href="/trangchu" target="_blank"> <i class="bi bi-exclamation-circle"></i>Giới thiệu</a>
+                <a href="/gioithieu" target="_blank"> <i class="bi bi-exclamation-circle"></i>Giới thiệu</a>
             </div>
             {{-- <div class="version">
                 version 1.0.0
@@ -73,7 +73,7 @@
                     <div id="nextBtn"><i class="bi bi-chevron-right"></i></div>
                 </div>
                 <div id="Noidung"></div>
-                <form action="/search?=" method="post" id="searchForm">
+                <form action="/search" method="post" id="searchForm">
                     @csrf
                     <div class="searchbar">
                         <div class="searchbar-wrapper">
@@ -83,16 +83,13 @@
                             <div class="searchbar-center">
                                 <div class="searchbar-input-spacer"></div>
                                 <input type="text"name='searchbar_input' class="searchbar-input" maxlength="2048"
-                                    placeholder="Tìm kiếm nhạc, nghệ sĩ"
-                                    value="<?php
-                                        if($valuesreach!=""){
-                                            echo $valuesreach;
-                                        }
-                                        else {
-                                            echo '';
-                                        }
-                                    ?>"
-                                    >
+                                    placeholder="Tìm kiếm nhạc, nghệ sĩ" value="<?php
+                                    if ($valuesreach != '') {
+                                        echo $valuesreach;
+                                    } else {
+                                        echo '';
+                                    }
+                                    ?>">
                             </div>
                             <div class="searchbar-left">
                                 <div class="delete-icon-wrapper">
@@ -157,22 +154,22 @@
                                         <div class="title-qcao">Chỉ với 3.000 đ/tuần</div>
                                         <div class="subtitle-qcao">Nghe nhạc với chất lượng cao nhất, Toàn bộ đặc quyền
                                             Vip với kho nhạc</div>
-                                        <a href="">Xem chi tiết</a>
+                                        <a  href="/vip" target="_blank">Xem chi tiết</a>
                                     </div>
                                     <div class="qcao2">
                                         <div class="name-qcao">MobiSong <span>Vip</span></div>
                                         <div class="title-qcao">Chỉ với 10.000 đ/tháng</div>
                                         <div class="subtitle-qcao">Nghe nhạc với chất lượng cao nhất, Toàn bộ đặc quyền
                                             Vip với kho nhạc</div>
-                                        <a href="">Xem chi tiết</a>
+                                        <a  href="/vip" target="_blank">Xem chi tiết</a>
                                     </div>
                                 </div>
                                 <div class="menu-toggle_infouser">
                                     <a href="/thongtin-user"><i class="bi bi-file-earmark-person"></i>Thông tin</a>
-                                    @if ($ttnguoidung->quyen == 4)
-                                        <a href="">hehe</a>
-                                    @endif
-                                    <a href="/infonghesi"><i class="bi bi-file-earmark-music-fill"></i>Nghệ sĩ</a>
+                                    {{-- @if ($ttnguoidung->quyen == 4)
+                                        <a href="/infonghesi"><i class="bi bi-file-earmark-music-fill"></i>Nghệ sĩ</a>
+                                    @endif --}}
+
                                     <a href="/logout"><i class="bi bi-box-arrow-right"></i>Đăng xuất</a>
                                 </div>
                             </div>

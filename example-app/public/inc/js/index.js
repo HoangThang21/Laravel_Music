@@ -252,6 +252,8 @@ document.addEventListener("DOMContentLoaded", () => {
             });
         });
     }
+  
+ 
     const all = document.getElementById("all");
     if (all) {
         all.addEventListener("click", function () {
@@ -460,4 +462,7 @@ function toggleMenuFlex(name) {
             getComputedStyle(menuFilter).display === "none";
         menuFilter.style.display = isHidden1 ? "flex" : "none";
     }
+}
+function ClickNghesi(name) {
+     window.location.href = "/nghe-si/" + name;
 }

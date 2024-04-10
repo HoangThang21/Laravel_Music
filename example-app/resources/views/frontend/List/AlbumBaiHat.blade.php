@@ -5,7 +5,22 @@
             <img src="../../images/{{ $Nhacalbumbaihat->imagemusic }}" alt="">
             <div class="left-top-album-baihat-tennhac">{{ $Nhacalbumbaihat->tennhac }}</div>
             <div class="left-top-album-baihat-nghesi">{{ $nghesi->tennghesi }}<i class="bi bi-dot"></i>{{ $album->namphathanh }}</div>
-            <div class="left-top-album-baihat-yeuthich">{{ $nghesi->quantam }} yêu thích</div>
+            @php
+                        $inputString = $nghesi->quantam;
+                        $parts = explode('-', $inputString);
+                        $check = 0;
+                    @endphp
+                    @foreach ($parts as $index => $part)
+                        @if ($part)
+                            @php
+                                $check += 1;
+                            @endphp
+                        @endif
+                    @endforeach
+                    @if ($check >= 0)
+                    <div class="left-top-album-baihat-yeuthich">{{ $check }} yêu thích</div>
+                    @endif
+           
         </div>
         <div class="right-top-album-baihat">
             <div class="botom-mchart">
@@ -101,7 +116,7 @@
                                                     data-gia="{{ $Nhacalbumbaihat->gia }}"><i
                                                         class="bi bi-phone-vibrate"></i>Cài nhạc chờ
                                                 </div>
-                                                <div class="sendchat"><i class="bi bi-chat-dots"></i>Share chat</div>
+                                                <div class="sendchat" data-sendchat="{{ $Nhacalbumbaihat->id }}><i class="bi bi-chat-dots"></i>Share chat</div>
                                             </div>
                                         </div>
                                     </div>

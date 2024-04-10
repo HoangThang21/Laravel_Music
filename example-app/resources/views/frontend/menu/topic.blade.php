@@ -3,10 +3,10 @@
     <div class="item-list-topic">
         <div class="header-topic">Nhạc Việt Nam</div>
         <div class="body-topic-item" style="height: 180px;">
-            <div class="item">1ádsa</div>
-            <div class="item">2sad</div>
-            <div class="item">3ád</div>
-            <div class="item">4ádá</div>
+            <div class="item">Nhạc trẻ</div>
+            <div class="item">Trữ tình & Bolero</div>
+            <div class="item">Edm</div>
+            <div class="item">Nhạc thiếu nhi</div>
         </div>
         <div class="bottom-topic">
             <div class="item-xthem" >
@@ -18,10 +18,10 @@
     <div class="item-list-topic">
         <div class="header-topic">Nhạc Quốc Tế</div>
         <div class="body-topic-item" style="height: 180px;">
-            <div class="item">1ádsa</div>
-            <div class="item">2sad</div>
-            <div class="item">3ád</div>
-            <div class="item">4ádá</div>
+            <div class="item">Nhạc Việt</div>
+            <div class="item">Nhạc Châu Á</div>
+            <div class="item">Nhạc Châu Mỹ</div>
+            <div class="item">Khác</div>
         </div>
         <div class="bottom-topic">
             <div class="item-xthem">

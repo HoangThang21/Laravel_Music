@@ -3,10 +3,8 @@ document.addEventListener("DOMContentLoaded", () => {
     playlist.forEach(function (playlist, index) {
         if (index == activemenu) {
             playlist.classList.add("active");
-            
         } else {
             playlist.classList.remove("active");
-           
         }
     });
     var list_memu = document.querySelector(".menu-list-right-setup #list-memu");
@@ -28,17 +26,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (activemenu == 2) {
         $("#searchForm").hide();
-        $("#Noidung").each(function() {
+        $("#Noidung").each(function () {
             $(this).append("<p>Live chat</p>");
         });
     } else {
         $("#searchForm").show();
         $("#Noidung p").remove();
-
     }
     var thongbao = document.querySelector(".thongbao");
     var tieudeDiv = document.querySelector(".tieude");
     var nhaccholist = document.querySelectorAll(".nhaccho");
+    var sendchat = document.querySelectorAll(".sendchat");
     nhaccholist.forEach(function (nhaccholistitem, index) {
         nhaccholistitem.addEventListener("click", function () {
             var dataChoValue = nhaccholistitem.getAttribute("data-cho");
@@ -58,14 +56,23 @@ document.addEventListener("DOMContentLoaded", () => {
                 ")";
         });
     });
-    var downloadButton = document.querySelector(".menu-right-media .download");
-    downloadButton.addEventListener("click", function () {
-        var musicUrl = this.getAttribute("data-downloadmusic");
-        var downloadLink = document.createElement("a");
-        downloadLink.href = "../../music/" + musicUrl;
-        downloadLink.download = musicUrl;
-        downloadLink.click();
+    sendchat.forEach(function (sendchatitem, index) {
+        sendchatitem.addEventListener("click", function () {
+            var dataChoValue = sendchatitem.getAttribute("data-sendchat");
+            window.location.href = "/livechat/" + dataChoValue;
+        });
     });
+    var downloadButton = document.querySelector(".menu-right-media .download");
+    if (downloadButton) {
+        downloadButton.addEventListener("click", function () {
+            var musicUrl = this.getAttribute("data-downloadmusic");
+            var downloadLink = document.createElement("a");
+            downloadLink.href = "../../music/" + musicUrl;
+            downloadLink.download = musicUrl;
+            downloadLink.click();
+        });
+    }
+
     function menuAll(itemcha, itemcon) {
         let menudot = document.querySelectorAll("." + itemcha);
         var itemlistdot = document.querySelectorAll("." + itemcon);
