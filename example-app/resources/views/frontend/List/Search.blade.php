@@ -233,7 +233,7 @@
                                         data-gia="{{ $nhactop10->gia }}"><i class="bi bi-phone-vibrate"></i>Cài nhạc
                                         chờ
                                     </div>
-                                    <div class="sendchat" data-sendchat="{{ $nhactop10->id }}><i class="bi bi-chat-dots"></i>Share chat</div>
+                                    <div class="sendchat" data-sendchat="{{ $nhactop10->id }}"><i class="bi bi-chat-dots"></i>Share chat</div>
                                 </div>
                             </div>
                         </div>
@@ -271,7 +271,11 @@
             <div class="list-menu-contenter_ns">
                 @foreach ($Nghesitop20 as $nstop20)
                     <div class="body-Contener_ns">
-                        <img class="img-ns" src="../../images/1.jpg" alt="">
+                        @foreach ($user as $item)
+                        @if ($item->id==$nstop20->id_nghesi_user)
+                        <img class="img-ns" src="../../images/{{ $item->image }}" alt="">
+                        @endif
+                    @endforeach
                         <div class="name-ns" onclick="ClickNghesi({{ $nstop20->id }})">{{ $nstop20->tennghesi }}</div>
                         @php
                             $inputString = $nstop20->quantam;
@@ -553,7 +557,7 @@
                                         data-gia="{{ $nhactop10->gia }}"><i class="bi bi-phone-vibrate"></i>Cài nhạc
                                         chờ
                                     </div>
-                                    <div class="sendchat" data-sendchat="{{ $nhactop10->id }}><i class="bi bi-chat-dots"></i>Share chat</div>
+                                    <div class="sendchat" data-sendchat="{{ $nhactop10->id }}"><i class="bi bi-chat-dots"></i>Share chat</div>
                                 </div>
                             </div>
                         </div>
@@ -591,7 +595,11 @@
             <div class="list-menu-contenter-search">
                 @foreach ($nghesisearch as $nstop20)
                     <div class="body-Contener-search ">
-                        <img class="img-ns" src="../../images/1.jpg" alt="">
+                        @foreach ($user as $item)
+                        @if ($item->id==$nstop20->id_nghesi_user)
+                        <img class="img-ns" src="../../images/{{ $item->image }}" alt="">
+                        @endif
+                    @endforeach
                         <div class="name-ns" onclick="ClickNghesi({{ $nstop20->id }})">{{ $nstop20->tennghesi }}</div>
                         @php
                             $inputString = $nstop20->quantam;

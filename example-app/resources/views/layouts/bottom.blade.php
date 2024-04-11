@@ -39,10 +39,11 @@
             </div>
         </div>
         <div class="menu-rightsong">
-            <div class="top-menu-rightsong">Nhạc Premium <span><i class="bi bi-chevron-compact-right"></i></span></div>
+            <div class="top-menu-rightsong prenium">Nhạc Premium <span><i
+                        class="bi bi-chevron-compact-right"></i></span></div>
             <div class="menu-scroll-rightsong">
                 @foreach ($Nhactopvip as $ntluotnghe)
-                    <div class="list-menu-rightsong">
+                    <div class="list-menu-rightsong ">
                         <div class="left-list-menu-rightsong">
                             <img src="../../images/{{ $ntluotnghe->imagemusic }}" alt="">
                             <div class="name-rightsong">{{ $ntluotnghe->tennhac }}</div>
@@ -100,8 +101,8 @@
             <div class="le-right-setup">
                 <i class="bi bi-volume-up" id="vol-up"></i>
                 <div class="vol">
-                    <input type="range" name="range-seek-vol" id="seek-vol" class="range-vol" max="100" value="100"
-                        min="0" />
+                    <input type="range" name="range-seek-vol" id="seek-vol" class="range-vol" max="100"
+                        value="100" min="0" />
                     <div class="bar-vol" id="bar-vol"></div>
                     <div class="dot" id="dot-music"></div>
                 </div>
@@ -333,18 +334,24 @@
     var activemenu = '{{ $activerity }}';
     var rank = {!! $rank !!};
     var rightsong_var = {{ $rightsong }};
+    
 </script>
+
 @if (Auth::guard('web')->check())
     <script>
         var user = `{{ $ttnguoidung->id }}`;
+        var prenium = `{{ $ttnguoidung->vip }}`;
     </script>
 @endif
 @if (Auth::guard('google')->check())
     <script>
         var user = `{{ $ttnguoidung->id }}`;
+        var prenium = `{{ $ttnguoidung->vip }}`;
     </script>
 @endif
+
 <script>
+    var myMusic = [];
     var currentUrl = "{{ request()->url() }}";
 </script>
 <script src="https://js.pusher.com/8.2.0/pusher.min.js"></script>

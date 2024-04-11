@@ -65,11 +65,21 @@ document.addEventListener("DOMContentLoaded", () => {
     var downloadButton = document.querySelector(".menu-right-media .download");
     if (downloadButton) {
         downloadButton.addEventListener("click", function () {
-            var musicUrl = this.getAttribute("data-downloadmusic");
-            var downloadLink = document.createElement("a");
-            downloadLink.href = "../../music/" + musicUrl;
-            downloadLink.download = musicUrl;
-            downloadLink.click();
+            if(prenium==1){
+                var musicUrl = this.getAttribute("data-downloadmusic");
+                var downloadLink = document.createElement("a");
+                downloadLink.href = "../../music/" + musicUrl;
+                downloadLink.download = musicUrl;
+                downloadLink.click();
+            }
+            else{
+                var loi = document.querySelector(".loi");
+                loi.classList.add('active');
+                loi.style.display="flex";
+                loi.querySelector('.tieude').textContent="Vui lòng nâng vip để tải."
+                console.log(loi)
+            }
+            
         });
     }
 

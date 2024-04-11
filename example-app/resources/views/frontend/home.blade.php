@@ -1,5 +1,6 @@
 @include('layouts.top')
 <div class="bodyhome">
+
     <div class="discover">
         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="25" viewBox="0 0 20 25" fill="none">
             <path
@@ -351,7 +352,12 @@
         <div class="list-menu-contenter_ns">
             @foreach ($Nghesitop20 as $nstop20)
                 <div class="body-Contener_ns">
-                    <img class="img-ns" src="../../images/1.jpg" alt="">
+                    @foreach ($user as $item)
+                        @if ($item->id==$nstop20->id_nghesi_user)
+                        <img class="img-ns" src="../../images/{{ $item->image }}" alt="">
+                        @endif
+                    @endforeach
+                   
                     <div class="name-ns" onclick="ClickNghesi({{ $nstop20->id }})">{{ $nstop20->tennghesi }}</div>
                     @php
                         $inputString = $nstop20->quantam;

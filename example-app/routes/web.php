@@ -141,3 +141,5 @@ use Illuminate\Support\Facades\Route;
     Route::get('/addmusic/{id}-{name}', [ClientControllers::class, 'addmusic'])->name('load.addmusic');
     Route::post('/ln/{id}', [ClientControllers::class, 'luotnghe']);
     Route::post('/loadmusic/{id}', [ClientControllers::class, 'loadmusic']);
+    Route::post('/save-my-music', [ClientControllers::class, 'saveMyMusic']);
+    Route::get('/prenium', [ClientControllers::class, 'prenium']);

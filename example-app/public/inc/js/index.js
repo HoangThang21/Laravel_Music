@@ -16,7 +16,6 @@ document.addEventListener("DOMContentLoaded", () => {
     if (search) {
         search.addEventListener("keypress", function (event) {
             if (event.keyCode === 13) {
-              
                 event.preventDefault(); // Ngăn chặn form tự động submit
                 $("#searchForm").submit(); // Gửi form tìm kiếm
             }
@@ -34,13 +33,11 @@ document.addEventListener("DOMContentLoaded", () => {
         var searchBar = document.querySelector(".searchbar-input");
         if (searchBar) {
             if (searchBar.value.trim() != "") {
-                document.querySelector(
-                    ".delete-icon-wrapper"
-                ).style.display = "block";
+                document.querySelector(".delete-icon-wrapper").style.display =
+                    "block";
             } else {
-                document.querySelector(
-                    ".delete-icon-wrapper"
-                ).style.display = "none";
+                document.querySelector(".delete-icon-wrapper").style.display =
+                    "none";
             }
         }
     }, 500);
@@ -243,6 +240,13 @@ document.addEventListener("DOMContentLoaded", () => {
             });
         });
     }
+    const prenium = document.querySelector(".prenium i");
+    if (prenium) {
+        prenium.addEventListener("click", function () {
+            console.log('a');
+            window.location.href = "/prenium";
+        });
+    }
     const name_music = document.querySelectorAll(".name-music");
     if (name_music) {
         name_music.forEach(function (name_music1, indexcbcontent1) {
@@ -252,8 +256,7 @@ document.addEventListener("DOMContentLoaded", () => {
             });
         });
     }
-  
- 
+
     const all = document.getElementById("all");
     if (all) {
         all.addEventListener("click", function () {
@@ -464,5 +467,5 @@ function toggleMenuFlex(name) {
     }
 }
 function ClickNghesi(name) {
-     window.location.href = "/nghe-si/" + name;
+    window.location.href = "/nghe-si/" + name;
 }

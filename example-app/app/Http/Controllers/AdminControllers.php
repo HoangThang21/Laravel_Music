@@ -669,7 +669,7 @@ class AdminControllers extends Controller
                 'user' =>  User::all(),
                 'theloai' =>  Theloai::all(),
                 'userapi' =>  UserAPI::all(),
-                'nghesi' =>  Nghesi::all(),
+                'nghesi' =>  Nghesi::latest()->get(),
                 'nghesiapi' =>  [],
                 'searchbarinput' => '',
                 'contentFilter' => '-1',
@@ -687,7 +687,7 @@ class AdminControllers extends Controller
                 'theloai' =>  Theloai::all(),
                 'userapi' =>  UserAPI::all(),
                 'nghesi' =>  Nghesi::all(),
-                'album' =>  Album::all(),
+                'album' =>  Album::latest()->get(),
                 'nghesiapi' =>  [],
                 'searchbarinput' => '',
                 'contentFilter' => '-1',
@@ -930,7 +930,7 @@ class AdminControllers extends Controller
         $request->validate([
             'txtnghesi' => ['required'],
             'optloains' => ['required'],
-            'txtmota' => ['required'],
+           
         ]);
         $idnghesibt = User::where('email', $request->input('optloains'))->pluck('id')->first();
         $idnghesiapi = UserAPI::where('email', $request->input('optloains'))->pluck('id')->first();
@@ -1332,7 +1332,7 @@ class AdminControllers extends Controller
             'txttennghesi' => ['required'],
             'txtidnghesi' => ['required'],
             'txttype' => ['required'],
-            'txtmota' => ['required'],
+       
         ]);
 
         if ($request->input('txttype') == 'user') {

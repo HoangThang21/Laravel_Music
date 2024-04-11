@@ -61,7 +61,7 @@
                                                     <div class="info-media">
                                                         <div class="img-media">
                                                             <img src="../../images/{{ $n->imagemusic }}" alt="">
-                                                            <div class="load-nghe" data-song="{{ $nhactop10->id }}"><i
+                                                            <div class="load-nghe" data-song="{{ $n->id }}"><i
                                                                     class="bi bi-caret-right-fill"></i>
                                                             </div>
                                                         </div>
@@ -227,7 +227,7 @@
                                                                 data-gia="{{ $n->gia }}"><i
                                                                     class="bi bi-phone-vibrate"></i>Cài nhạc chờ
                                                             </div>
-                                                            <div class="sendchat" data-sendchat="{{ $n->id }}><i class="bi bi-chat-dots"></i>Share
+                                                            <div class="sendchat" data-sendchat="{{ $n->id }}"><i class="bi bi-chat-dots"></i>Share
                                                                 chat</div>
                                                         </div>
                                                     </div>

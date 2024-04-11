@@ -33,7 +33,7 @@
                                         <div class="info-media">
                                             <div class="img-media">
                                                 <img src="../../images/{{ $Nhacalbumbaihat->imagemusic }}" alt="">
-                                                <div class="load-nghe"data-song="{{ $nhactop10->id }}"><i class="bi bi-caret-right-fill"></i></div>
+                                                <div class="load-nghe"data-song="{{ $Nhacalbumbaihat->id }}"><i class="bi bi-caret-right-fill"></i></div>
                                             </div>
                                             <div class="name-media">
                                                 <div class="name-music" data-nhacredict="{{ $Nhacalbumbaihat->id }}">
@@ -116,7 +116,7 @@
                                                     data-gia="{{ $Nhacalbumbaihat->gia }}"><i
                                                         class="bi bi-phone-vibrate"></i>Cài nhạc chờ
                                                 </div>
-                                                <div class="sendchat" data-sendchat="{{ $Nhacalbumbaihat->id }}><i class="bi bi-chat-dots"></i>Share chat</div>
+                                                <div class="sendchat" data-sendchat="{{ $Nhacalbumbaihat->id }}"><i class="bi bi-chat-dots"></i>Share chat</div>
                                             </div>
                                         </div>
                                     </div>
