@@ -89,7 +89,7 @@
         </div>
         <span id="currentStart">0:00</span>
         <div class="bar">
-            <input type="range" name="range" id="seek" class="range" />
+            <input type="range" name="range" id="seek"  min="0" max="100" class="range" />
             <div class="bar2" id="bar2"></div>
             <div class="dot" id="dot_music"></div>
         </div>

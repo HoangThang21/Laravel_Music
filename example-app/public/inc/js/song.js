@@ -55,10 +55,17 @@ if (load_nghe) {
                 const icon2 = time_curent_mediaindex.querySelector("i");
                 const span2 = time_curent_mediaindex.querySelector("span");
                 if (indexi == time_curent_mediaindexindexi) {
-                    icon2.classList.remove("bi-play-fill");
-                    icon2.classList.add("bi-pause-fill");
-                    icon2.style.display = "block";
-                    span2.style.display = "none";
+                    if (icon.classList.contains("bi-pause-fill")) {
+                        icon2.classList.remove("bi-pause-fill");
+                        icon2.classList.add("bi-play-fill");
+                        icon2.style.display = "none";
+                        span2.style.display = "block";
+                    } else {
+                        icon2.classList.remove("bi-play-fill");
+                        icon2.classList.add("bi-pause-fill");
+                        icon2.style.display = "block";
+                        span2.style.display = "none";
+                    }
                 } else {
                     icon2.classList.remove("bi-pause-fill");
                     icon2.classList.add("bi-play-fill");
@@ -75,14 +82,13 @@ if (load_nghe) {
             // else {
             // }
             if (music.paused) {
-                if (setsong) {
-                    icon.classList.remove("bi-pause-fill");
-                    icon.classList.add("bi-play-fill");
-                    masterPlay.classList.remove("bi-pause-fill");
-                    masterPlay.classList.add("bi-play-fill");
-                    wave.classList.remove("active2");
-                    music.pause();
-                    setsong = false;
+                if (indexstartsong == indexi) {
+                    masterPlay.classList.remove("bi-play-fill");
+                    masterPlay.classList.add("bi-pause-fill");
+                    wave.classList.add("active2");
+                    icon.classList.remove("bi-play-fill");
+                    icon.classList.add("bi-pause-fill");
+                    music.play();
                 } else {
                     console.log("2");
                     $.ajax({
@@ -121,7 +127,6 @@ if (load_nghe) {
             } else {
                 if (indexstartsong != indexi) {
                     music.pause();
-                  
                     $.ajax({
                         type: "POST",
                         url: "/loadmusic/" + id,
@@ -307,27 +312,28 @@ seek_vol.addEventListener("input", function () {
 });
 
 if (rangeBar) {
-    rangeBar.addEventListener("change", function () {
+    rangeBar.addEventListener("input", function () {
         var value = rangeBar.value;
-    var percent = value - rangeBar.min;
-    bar2.style.width = percent + "%";
-    dot_music.style.left = percent + "%";
-        music.duration = rangeBar.value;
+        var percent = value - rangeBar.min;
+        bar2.style.width = percent + "%";
+        dot_music.style.left = percent + "%";
+        const newTime = music.duration * (rangeBar.value / 100);
+        music.currentTime = value;
         console.log(rangeBar.value, music.duration);
     });
 }
 music.addEventListener("timeupdate", displayTimer);
 function displayTimer() {
-    let { duration, currentTime } = music;
     rangeBar.max = music.duration;
-
-    currentEnd.textContent = formatTimer((duration - currentTime) | "00:00");
-    if (!duration) {
+    currentEnd.textContent = formatTimer(
+        (music.duration - music.currentTime) | "00:00"
+    );
+    if (!music.duration) {
         currentStart.textContent = "00:00";
     } else {
-        currentStart.textContent = formatTimer(currentTime);
+        currentStart.textContent = formatTimer(music.currentTime);
     }
-    let pro = parseInt((currentTime / duration) * 100);
+    let pro = parseInt((music.currentTime / music.duration) * 100);
 
     let seek = pro;
     bar2.style.width = `${seek}%`;

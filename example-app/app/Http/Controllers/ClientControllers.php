@@ -158,7 +158,7 @@ class ClientControllers extends Controller
                         'loingoai' => '',
                         'loi' => 'Tài khoản bị khóa vui lòng liên hệ Admin qua Email:mobi@gmail.com',
                         'rank' => 'null',
-                        'rightsong' => 0,
+                        'rightsong' => 0, 'user' => User::select('id', 'image')->get(),
                     ]
                 );
             } else {
@@ -190,7 +190,7 @@ class ClientControllers extends Controller
                                     'loingoai' => '',
                                     'loi' => 'Tài khoản hoặc mật khẩu không đúng. Vui lòng nhập lại',
                                     'rank' => 'null',
-                                    'rightsong' => 0,
+                                    'rightsong' => 0, 'user' => User::select('id', 'image')->get(),
                                 ]
                             );
                         }
@@ -211,7 +211,7 @@ class ClientControllers extends Controller
                             'loingoai' => '',
                             'loi' => 'Tài khoản của bạn đã bị khóa vui lòng liên hệ Admin',
                             'rank' => 'null',
-                            'rightsong' => 0,
+                            'rightsong' => 0, 'user' => User::select('id', 'image')->get(),
                         ]);
                     }
                 } else {
@@ -231,7 +231,7 @@ class ClientControllers extends Controller
                         'loi' => '',
                         'loingoai' => '',
                         'rank' => 'null',
-                        'rightsong' => 0,
+                        'rightsong' => 0, 'user' => User::select('id', 'image')->get(),
                     ]);
                 }
             }
@@ -252,7 +252,7 @@ class ClientControllers extends Controller
                 'loingoai' => '',
                 'loi' => 'Nhập không đúng. Vui lòng nhập lại',
                 'rank' => 'null',
-                'rightsong' => 0,
+                'rightsong' => 0, 'user' => User::select('id', 'image')->get(),
             ]);
         }
         return redirect()->intended('/');
@@ -296,7 +296,7 @@ class ClientControllers extends Controller
                 'album' => Album::all(),
                 'login' => 0,
                 'rank' => 'null',
-                'rightsong' => 1, 'valuesreach' => '',
+                'rightsong' => 1, 'user' => User::select('id', 'image')->get(), 'valuesreach' => '',
             ]);
         }
         if (Auth::guard('google')->check()) {
@@ -315,7 +315,7 @@ class ClientControllers extends Controller
                 'album' => Album::all(),
                 'login' => 0,
                 'rank' => 'null',
-                'rightsong' => 1, 'valuesreach' => '',
+                'rightsong' => 1, 'user' => User::select('id', 'image')->get(), 'valuesreach' => '',
             ]);
         }
         return view('frontend.home', [
@@ -334,7 +334,7 @@ class ClientControllers extends Controller
             'loi' => 'Vui lòng đăng nhập để xem nhạc đã yêu thích.',
             'login' => 1,
             'rank' => 'null',
-            'rightsong' => 0,
+            'rightsong' => 0, 'user' => User::select('id', 'image')->get(),
         ]);
     }
 
@@ -355,7 +355,7 @@ class ClientControllers extends Controller
                     'chatonline' => [User::where('online', 1)->get(), UserAPI::where('online', 1)->get()],
                     'login' => 0,
                     'rank' => 'null',
-                    'rightsong' => 0, 'valuesreach' => '',
+                    'rightsong' => 0, 'user' => User::select('id', 'image')->get(), 'valuesreach' => '',
                 ]);
             } else {
                 return view('frontend.home', [
@@ -376,7 +376,7 @@ class ClientControllers extends Controller
                     'loingoai' => 'Tài khoản đã bị cấm chat vui lòng liên hệ admin qua Email: mobi@gmail.com',
                     'login' => 0,
                     'rank' => 'null', 'valuesreach' => '',
-                    'rightsong' => 0,
+                    'rightsong' => 0, 'user' => User::select('id', 'image')->get(),
                 ]);
             }
         }
@@ -395,7 +395,7 @@ class ClientControllers extends Controller
                     'chatonline' => [User::where('online', 1)->get(), UserAPI::where('online', 1)->get()],
                     'login' => 0,
                     'rank' => 'null',
-                    'rightsong' => 0, 'valuesreach' => '',
+                    'rightsong' => 0, 'user' => User::select('id', 'image')->get(), 'valuesreach' => '',
                 ]);
             } else {
                 return view('frontend.home', [
@@ -416,7 +416,7 @@ class ClientControllers extends Controller
                     'loingoai' => 'Tài khoản đã bị cấm chat vui lòng liên hệ admin qua Email: mobi@gmail.com',
                     'login' => 0,
                     'rank' => 'null', 'valuesreach' => '',
-                    'rightsong' => 0,
+                    'rightsong' => 0, 'user' => User::select('id', 'image')->get(),
                 ]);
             }
         }
@@ -436,7 +436,7 @@ class ClientControllers extends Controller
             'loingoai' => '',
             'login' => 1,
             'rank' => 'null', 'valuesreach' => '',
-            'rightsong' => 0,
+            'rightsong' => 0, 'user' => User::select('id', 'image')->get(),
         ]);
     }
     public function loadlivechatsendchat(string $name)
@@ -456,7 +456,7 @@ class ClientControllers extends Controller
                 'chatonline' => [User::where('online', 1)->get(), UserAPI::where('online', 1)->get()],
                 'login' => 0,
                 'rank' => 'null',
-                'rightsong' => 0, 'valuesreach' => '',
+                'rightsong' => 0, 'user' => User::select('id', 'image')->get(), 'valuesreach' => '',
             ]);
         }
         if (Auth::guard('google')->check()) {
@@ -473,7 +473,7 @@ class ClientControllers extends Controller
                 'chatonline' => [User::where('online', 1)->get(), UserAPI::where('online', 1)->get()],
                 'login' => 0,
                 'rank' => 'null',
-                'rightsong' => 0, 'valuesreach' => '',
+                'rightsong' => 0, 'user' => User::select('id', 'image')->get(), 'valuesreach' => '',
             ]);
         }
         return view('frontend.home', [
@@ -492,7 +492,7 @@ class ClientControllers extends Controller
             'loingoai' => '',
             'login' => 1,
             'rank' => 'null', 'valuesreach' => '',
-            'rightsong' => 0,
+            'rightsong' => 0, 'user' => User::select('id', 'image')->get(),
         ]);
     }
     public function sendchat(Request $request)
@@ -610,7 +610,7 @@ class ClientControllers extends Controller
                     'valuesreach' => '',
                     'login' => 0,
                     'rank' => 'null',
-                    'rightsong' => 1,
+                    'rightsong' => 1, 'user' => User::select('id', 'image')->get(),
                 ]);
             }
             if (Auth::guard('google')->check()) {
@@ -626,7 +626,7 @@ class ClientControllers extends Controller
                     'valuesreach' => '',
                     'login' => 0,
                     'rank' => 'null',
-                    'rightsong' => 1,
+                    'rightsong' => 1, 'user' => User::select('id', 'image')->get(),
                 ]);
             }
         }
@@ -666,7 +666,7 @@ class ClientControllers extends Controller
                             'album' => Album::all(),
                             'login' => 1,
                             'rank' => 'null',
-                            'rightsong' => 0, 'valuesreach' => '',
+                            'rightsong' => 0, 'user' => User::select('id', 'image')->get(), 'valuesreach' => '',
                         ]);
                     } else {
                         return view('frontend.menu.thongtinuser', [
@@ -680,7 +680,7 @@ class ClientControllers extends Controller
                             'loingoai' => 'Mật khẩu cũ không chính xác',
                             'login' => 0,
                             'rank' => 'null',
-                            'rightsong' => 1, 'valuesreach' => '',
+                            'rightsong' => 1, 'user' => User::select('id', 'image')->get(), 'valuesreach' => '',
                         ]);
                     }
                 }
@@ -710,7 +710,7 @@ class ClientControllers extends Controller
                             'album' => Album::all(),
                             'login' => 1,
                             'rank' => 'null',
-                            'rightsong' => 0, 'valuesreach' => '',
+                            'rightsong' => 0, 'user' => User::select('id', 'image')->get(), 'valuesreach' => '',
                         ]);
                     } else {
                         return view('frontend.menu.thongtinuser', [
@@ -724,7 +724,7 @@ class ClientControllers extends Controller
                             'loingoai' => 'Mật khẩu cũ không chính xác',
                             'login' => 0,
                             'rank' => 'null', 'valuesreach' => '',
-                            'rightsong' => 1,
+                            'rightsong' => 1, 'user' => User::select('id', 'image')->get(),
                         ]);
                     }
                 }
@@ -743,7 +743,7 @@ class ClientControllers extends Controller
                         'valuesreach' => '',
                         'login' => 0,
                         'rank' => 'null',
-                        'rightsong' => 1,
+                        'rightsong' => 1, 'user' => User::select('id', 'image')->get(),
                     ]);
                 }
                 if (Auth::guard('google')->check()) {
@@ -759,7 +759,7 @@ class ClientControllers extends Controller
                         'valuesreach' => '',
                         'login' => 0,
                         'rank' => 'null',
-                        'rightsong' => 1,
+                        'rightsong' => 1, 'user' => User::select('id', 'image')->get(),
                     ]);
                 }
             }
@@ -777,7 +777,7 @@ class ClientControllers extends Controller
                     'valuesreach' => '',
                     'login' => 0,
                     'rank' => 'null',
-                    'rightsong' => 1,
+                    'rightsong' => 1, 'user' => User::select('id', 'image')->get(),
                 ]);
             }
             if (Auth::guard('google')->check()) {
@@ -793,7 +793,7 @@ class ClientControllers extends Controller
                     'valuesreach' => '',
                     'login' => 0,
                     'rank' => 'null',
-                    'rightsong' => 1,
+                    'rightsong' => 1, 'user' => User::select('id', 'image')->get(),
                 ]);
             }
         }
@@ -825,7 +825,7 @@ class ClientControllers extends Controller
                         'loi' => 'Email hoặc số điện thoại đã có. Vui lòng nhập lại',
                         'login' => 0,
                         'rank' => 'null', 'valuesreach' => '',
-                        'rightsong' => 0,
+                        'rightsong' => 0, 'user' => User::select('id', 'image')->get(),
                     ]);
                 }
 
@@ -853,7 +853,7 @@ class ClientControllers extends Controller
                     'loingoai' => '',
                     'login' => 1,
                     'rank' => 'null', 'valuesreach' => '',
-                    'rightsong' => 0,
+                    'rightsong' => 0, 'user' => User::select('id', 'image')->get(),
                 ]);
             } else {
 
@@ -873,7 +873,7 @@ class ClientControllers extends Controller
                     'loingoai' => '',
                     'login' => 0,
                     'rank' => 'null',
-                    'rightsong' => 0, 'valuesreach' => '',
+                    'rightsong' => 0, 'user' => User::select('id', 'image')->get(), 'valuesreach' => '',
                 ]);
             }
         } else {
@@ -893,7 +893,7 @@ class ClientControllers extends Controller
                 'loingoai' => '',
                 'login' => 0,
                 'rank' => 'null',
-                'rightsong' => 0, 'valuesreach' => '',
+                'rightsong' => 0, 'user' => User::select('id', 'image')->get(), 'valuesreach' => '',
             ]);
         }
     }
@@ -911,7 +911,7 @@ class ClientControllers extends Controller
                 'nghesi' => Nghesi::all(),
                 'album' => Album::all(),
                 'login' => 0, 'valuesreach' => '',
-                'rightsong' => 0,
+                'rightsong' => 0, 'user' => User::select('id', 'image')->get(),
                 'rank' => json_encode(Ranks::orderBy('id', 'desc')->latest()->take(3)->select("tensong1", "nghesi1", "phantram1", "tensong2", "nghesi2", "phantram2", "tensong3", "nghesi3", "phantram3", "thoigian")->get()->toArray()),
             ]);
         }
@@ -928,7 +928,7 @@ class ClientControllers extends Controller
                 'nghesi' => Nghesi::all(),
                 'album' => Album::all(),
                 'login' => 0,
-                'rightsong' => 0, 'valuesreach' => '',
+                'rightsong' => 0, 'user' => User::select('id', 'image')->get(), 'valuesreach' => '',
                 'rank' => json_encode(Ranks::orderBy('id', 'desc')->latest()->take(3)->select("tensong1", "nghesi1", "phantram1", "tensong2", "nghesi2", "phantram2", "tensong3", "nghesi3", "phantram3", "thoigian")->get()->toArray()),
             ]);
         }
@@ -943,7 +943,7 @@ class ClientControllers extends Controller
             'nghesi' => Nghesi::all(),
             'album' => Album::all(),
             'login' => 0,
-            'rightsong' => 0, 'valuesreach' => '',
+            'rightsong' => 0, 'user' => User::select('id', 'image')->get(), 'valuesreach' => '',
             'rank' => json_encode(Ranks::orderBy('id', 'desc')->latest()->take(3)->select("tensong1", "nghesi1", "phantram1", "tensong2", "nghesi2", "phantram2", "tensong3", "nghesi3", "phantram3", "thoigian")->get()->toArray()),
         ]);
     }
@@ -961,7 +961,7 @@ class ClientControllers extends Controller
                 'chatonline' => '',
                 'login' => 0,
                 'rank' => 'null',
-                'rightsong' => 1, 'valuesreach' => '',
+                'rightsong' => 1, 'user' => User::select('id', 'image')->get(), 'valuesreach' => '',
             ]);
         }
         if (Auth::guard('google')->check()) {
@@ -976,7 +976,7 @@ class ClientControllers extends Controller
                 'chatonline' => '',
                 'login' => 0,
                 'rank' => 'null',
-                'rightsong' => 1, 'valuesreach' => '',
+                'rightsong' => 1, 'user' => User::select('id', 'image')->get(), 'valuesreach' => '',
             ]);
         }
     }
@@ -995,7 +995,7 @@ class ClientControllers extends Controller
                 'album' => Album::all(),
                 'login' => 0,
                 'rank' => 'null',
-                'rightsong' => 0, 'valuesreach' => '',
+                'rightsong' => 0, 'user' => User::select('id', 'image')->get(), 'valuesreach' => '',
             ]);
         }
         if (Auth::guard('google')->check()) {
@@ -1011,7 +1011,7 @@ class ClientControllers extends Controller
                 'album' => Album::all(),
                 'login' => 0,
                 'rank' => 'null', 'valuesreach' => '',
-                'rightsong' => 0,
+                'rightsong' => 0, 'user' => User::select('id', 'image')->get(),
             ]);
         }
         return view('frontend.menu.ranksong', [
@@ -1025,7 +1025,7 @@ class ClientControllers extends Controller
             'album' => Album::all(),
             'login' => 0,
             'rank' => 'null', 'valuesreach' => '',
-            'rightsong' => 0,
+            'rightsong' => 0, 'user' => User::select('id', 'image')->get(),
         ]);
     }
     public function loadtopic()
@@ -1040,7 +1040,7 @@ class ClientControllers extends Controller
                 'loi' => '', 'loingoai' => '',
                 'login' => 0,
                 'rank' => 'null', 'valuesreach' => '',
-                'rightsong' => 0,
+                'rightsong' => 0, 'user' => User::select('id', 'image')->get(),
             ]);
         }
         if (Auth::guard('google')->check()) {
@@ -1053,7 +1053,7 @@ class ClientControllers extends Controller
                 'loi' => '', 'loingoai' => '',
                 'login' => 0,
                 'rank' => 'null', 'valuesreach' => '',
-                'rightsong' => 0,
+                'rightsong' => 0, 'user' => User::select('id', 'image')->get(),
             ]);
         }
         return view('frontend.menu.topic', [
@@ -1063,7 +1063,7 @@ class ClientControllers extends Controller
             'chatonline' => '',
             'loi' => '', 'loingoai' => '',
             'login' => 0, 'valuesreach' => '',
-            'rank' => 'null', 'rightsong' => 0,
+            'rank' => 'null', 'rightsong' => 0, 'user' => User::select('id', 'image')->get(),
         ]);
     }
     public function albumbaihat(string $name)
@@ -1086,7 +1086,7 @@ class ClientControllers extends Controller
                 'album' => $album,
                 'login' => 0,
                 'rank' => 'null', 'valuesreach' => '',
-                'rightsong' => 1,
+                'rightsong' => 1, 'user' => User::select('id', 'image')->get(),
             ]);
         }
         if (Auth::guard('google')->check()) {
@@ -1104,7 +1104,7 @@ class ClientControllers extends Controller
                 'album' => $album,
                 'login' => 0,
                 'rank' => 'null', 'valuesreach' => '',
-                'rightsong' => 1,
+                'rightsong' => 1, 'user' => User::select('id', 'image')->get(),
             ]);
         }
         return view('frontend.List.AlbumBaiHat', [
@@ -1119,7 +1119,7 @@ class ClientControllers extends Controller
             'album' => $album,
             'login' => 0,
             'rank' => 'null', 'valuesreach' => '',
-            'rightsong' => 1,
+            'rightsong' => 1, 'user' => User::select('id', 'image')->get(),
         ]);
     }
     public function albumnghesi(string $name)
@@ -1144,7 +1144,7 @@ class ClientControllers extends Controller
                 'albumns' => $album,
                 'login' => 0,
                 'rank' => 'null', 'valuesreach' => '',
-                'rightsong' => 1,
+                'rightsong' => 1, 'user' => User::select('id', 'image')->get(),
             ]);
         }
         if (Auth::guard('google')->check()) {
@@ -1164,7 +1164,7 @@ class ClientControllers extends Controller
                 'albumns' => $album,
                 'login' => 0,
                 'rank' => 'null', 'valuesreach' => '',
-                'rightsong' => 1,
+                'rightsong' => 1, 'user' => User::select('id', 'image')->get(),
             ]);
         }
         return view('frontend.List.Albumnghesi', [
@@ -1182,7 +1182,7 @@ class ClientControllers extends Controller
             'login' => 0,
             'rank' => 'null',
             'valuesreach' => '',
-            'rightsong' => 1,
+            'rightsong' => 1, 'user' => User::select('id', 'image')->get(),
         ]);
     }
     public function nghesiload(string $name)
@@ -1211,7 +1211,7 @@ class ClientControllers extends Controller
                 'login' => 0,
                 'rank' => 'null',
                 'valuesreach' => '',
-                'rightsong' => 1,
+                'rightsong' => 1, 'user' => User::select('id', 'image')->get(),
             ]);
         }
         if (Auth::guard('google')->check()) {
@@ -1233,7 +1233,7 @@ class ClientControllers extends Controller
                 'login' => 0,
                 'rank' => 'null',
                 'valuesreach' => '',
-                'rightsong' => 1,
+                'rightsong' => 1, 'user' => User::select('id', 'image')->get(),
             ]);
         }
         return view('frontend.List.NghesiInfo', [
@@ -1252,7 +1252,7 @@ class ClientControllers extends Controller
             'login' => 0,
             'rank' => 'null',
             'valuesreach' => '',
-            'rightsong' => 1,
+            'rightsong' => 1, 'user' => User::select('id', 'image')->get(),
         ]);
     }
     public function addquantam(string $name)
@@ -1343,7 +1343,7 @@ class ClientControllers extends Controller
                 'rank' => 'null',
                 'chat' => Mess::all(),
                 'nhac' => Nhac::all(),
-                'rightsong' => 0,
+                'rightsong' => 0, 'user' => User::select('id', 'image')->get(),
             ]);
         }
         if (Auth::guard('google')->check()) {
@@ -1358,7 +1358,7 @@ class ClientControllers extends Controller
                 'rank' => 'null',
                 'chat' => Mess::all(),
                 'nhac' => Nhac::all(),
-                'rightsong' => 0,
+                'rightsong' => 0, 'user' => User::select('id', 'image')->get(),
             ]);
         }
     }
@@ -1387,7 +1387,7 @@ class ClientControllers extends Controller
                 'nghesisearch' => $nghesi,
                 'valuesreach' => $request->input('searchbar_input'),
                 'rank' => 'null',
-                'rightsong' => 0,
+                'rightsong' => 0, 'user' => User::select('id', 'image')->get(),
             ]);
         }
         if (Auth::guard('google')->check()) {
@@ -1411,7 +1411,7 @@ class ClientControllers extends Controller
                 'nghesisearch' => $nghesi,
                 'valuesreach' => $request->input('searchbar_input'),
                 'rank' => 'null',
-                'rightsong' => 0,
+                'rightsong' => 0, 'user' => User::select('id', 'image')->get(),
             ]);
         }
         return view('frontend.List.Search', [
@@ -1432,7 +1432,7 @@ class ClientControllers extends Controller
             'nghesisearch' => $nghesi,
             'valuesreach' => $request->input('searchbar_input'),
             'rank' => 'null',
-            'rightsong' => 0,
+            'rightsong' => 0, 'user' => User::select('id', 'image')->get(),
         ]);
     }
     public function prenium()
@@ -1458,7 +1458,7 @@ class ClientControllers extends Controller
                 'nhac' => Nhac::all(),
                 'valuesreach' => '',
                 'rank' => 'null',
-                'rightsong' => 0,
+                'rightsong' => 0, 'user' => User::select('id', 'image')->get(),
             ]);
         }
         if (Auth::guard('google')->check()) {
@@ -1480,7 +1480,7 @@ class ClientControllers extends Controller
                 'nhac' => Nhac::all(),
                 'valuesreach' => '',
                 'rank' => 'null',
-                'rightsong' => 0,
+                'rightsong' => 0, 'user' => User::select('id', 'image')->get(),
             ]);
         }
         return view('frontend.List.Prenium', [
@@ -1500,7 +1500,7 @@ class ClientControllers extends Controller
             'nhac' => Nhac::all(),
             'valuesreach' => '',
             'rank' => 'null',
-            'rightsong' => 0,
+            'rightsong' => 0, 'user' => User::select('id', 'image')->get(),
         ]);
     }
     public function luotnghe(Request $request, string $id)

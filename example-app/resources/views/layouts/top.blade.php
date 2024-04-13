@@ -54,10 +54,7 @@
                 </a>
 
             </div>
-            <div class="menu_song">
-                nhac
-
-            </div>
+            
             <div class="giothieu">
                 <a href="/gioithieu" target="_blank"> <i class="bi bi-exclamation-circle"></i>Giới thiệu</a>
             </div>
