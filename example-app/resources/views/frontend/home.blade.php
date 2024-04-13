@@ -1,6 +1,5 @@
 @include('layouts.top')
 <div class="bodyhome">
-
     <div class="discover">
         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="25" viewBox="0 0 20 25" fill="none">
             <path
@@ -101,7 +100,8 @@
                         <div class="info-media">
                             <div class="img-media">
                                 <img src="../../images/{{ $nhactop10->imagemusic }}" alt="">
-                                <div class="load-nghe" data-song="{{ $nhactop10->id }}"><i class="bi bi-play-fill"></i></div>
+                                <div class="load-nghe" data-song="{{ $nhactop10->id }}"><i
+                                        class="bi bi-play-fill"></i></div>
                             </div>
                             <div class="name-media">
                                 <div class="name-music" data-nhacredict="{{ $nhactop10->id }}">
@@ -236,8 +236,8 @@
                                 $duration = $fileInfo['playtime_string'];
                             }
                         @endphp
-                        <div class="time-curent-media" data-song="{{ $nhactop10->id }}"><span>{{ $duration }}</span><i
-                                class="loadmusic-dot bi bi-play-fill"></i></div>
+                        <div class="time-curent-media" data-song="{{ $nhactop10->id }}">
+                            <span>{{ $duration }}</span><i class="loadmusic-dot bi bi-play-fill"></i></div>
                         @if (Auth::guard('web')->check())
                             @php
                                 $inputString = $ttnguoidung->thuvien;
@@ -298,7 +298,8 @@
                                 <div class="nhaccho" data-cho="{{ $nhactop10->maNhac }}"
                                     data-gia="{{ $nhactop10->gia }}"><i class="bi bi-phone-vibrate"></i>Cài nhạc chờ
                                 </div>
-                                <div class="sendchat" data-sendchat="{{ $nhactop10->id }}"><i class="bi bi-chat-dots"></i>Share chat</div>
+                                <div class="sendchat" data-sendchat="{{ $nhactop10->id }}"><i
+                                        class="bi bi-chat-dots"></i>Share chat</div>
                             </div>
                         </div>
                     </div>
@@ -353,11 +354,11 @@
             @foreach ($Nghesitop20 as $nstop20)
                 <div class="body-Contener_ns">
                     @foreach ($user as $item)
-                        @if ($item->id==$nstop20->id_nghesi_user)
-                        <img class="img-ns" src="../../images/{{ $item->image }}" alt="">
+                        @if ($item->id == $nstop20->id_nghesi_user)
+                            <img class="img-ns" src="../../images/{{ $item->image }}" alt="">
                         @endif
                     @endforeach
-                   
+
                     <div class="name-ns" onclick="ClickNghesi({{ $nstop20->id }})">{{ $nstop20->tennghesi }}</div>
                     @php
                         $inputString = $nstop20->quantam;

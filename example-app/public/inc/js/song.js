@@ -16,9 +16,6 @@ const currentEnd = document.getElementById("currentEnd");
 let setsavemusic = false;
 
 function Playing() {
-    music.addEventListener("loadedmetadata", function () {
-        rangeBar.max = music.duration;
-    });
     music.play();
     wave.classList.add("active2");
 }
@@ -98,12 +95,12 @@ if (load_nghe) {
                                 "../../images/" + data.success.imagemusic;
                             tenbaihat.innerText = data.success.tennhac;
                             nghesi.innerText = data.successns.tennghesi;
-                          
+
                             if (!myMusic.includes(data.success.nhaclink)) {
                                 console.log("vao2....");
                                 myMusic.push(data.success.nhaclink);
                             }
-                            setsavemusic=true;
+                            setsavemusic = true;
                             music.src = "../../music/" + data.success.nhaclink;
                             music.play();
                             indexstartsong = indexi;
@@ -124,7 +121,7 @@ if (load_nghe) {
             } else {
                 if (indexstartsong != indexi) {
                     music.pause();
-                    console.log("1");
+                  
                     $.ajax({
                         type: "POST",
                         url: "/loadmusic/" + id,
@@ -135,13 +132,12 @@ if (load_nghe) {
                                 "../../images/" + data.success.imagemusic;
                             tenbaihat.innerText = data.success.tennhac;
                             nghesi.innerText = data.successns.tennghesi;
-                        
+
                             if (!myMusic.includes(data.success.nhaclink)) {
                                 console.log("vao1....");
                                 myMusic.push(data.success.nhaclink);
-                             
                             }
-                            setsavemusic=true;
+                            setsavemusic = true;
                             music.src = "../../music/" + data.success.nhaclink;
                             music.play();
                             indexstartsong = indexi;
@@ -299,10 +295,27 @@ music.addEventListener("ended", () => {
         // });
     }
 });
+//volum
+var dot = document.getElementById("dot-music-vol");
+var bar3 = document.getElementById("bar-vol");
 seek_vol.addEventListener("input", function () {
+    var value = seek_vol.value;
+    var percent = value - seek_vol.min;
+    bar3.style.width = percent + "%";
+    dot.style.left = percent + "%";
     music.volume = seek_vol.value / 100;
 });
 
+if (rangeBar) {
+    rangeBar.addEventListener("change", function () {
+        var value = rangeBar.value;
+    var percent = value - rangeBar.min;
+    bar2.style.width = percent + "%";
+    dot_music.style.left = percent + "%";
+        music.duration = rangeBar.value;
+        console.log(rangeBar.value, music.duration);
+    });
+}
 music.addEventListener("timeupdate", displayTimer);
 function displayTimer() {
     let { duration, currentTime } = music;
@@ -328,23 +341,23 @@ function formatTimer(time) {
 
 setInterval(function () {
     if (setsavemusic) {
-        console.log(myMusic)
+        console.log(myMusic);
         $.ajax({
             url: "/save-my-music",
             method: "POST",
             data: {
-                myMusic:myMusic,
-                type:'up',
+                myMusic: myMusic,
+                type: "up",
                 _token: csrfToken,
             },
             success: function (response) {
-                var tmp= response.response;
-                console.log("Dữ liệu "+response.response);
+                var tmp = response.response;
+                console.log("Dữ liệu " + response.response);
             },
             error: function (xhr, status, error) {
                 console.error("Đã xảy ra lỗi: ", error);
             },
         });
-        setsavemusic= false;
+        setsavemusic = false;
     }
 }, 1000);

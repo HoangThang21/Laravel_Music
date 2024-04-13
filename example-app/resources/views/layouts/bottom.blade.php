@@ -104,7 +104,7 @@
                     <input type="range" name="range-seek-vol" id="seek-vol" class="range-vol" max="100"
                         value="100" min="0" />
                     <div class="bar-vol" id="bar-vol"></div>
-                    <div class="dot" id="dot-music"></div>
+                    <div class="dot" id="dot-music-vol"></div>
                 </div>
             </div>
             <i class="bi bi-shuffle" id="random"></i>

@@ -103,26 +103,7 @@ document.addEventListener("DOMContentLoaded", () => {
             });
         });
     }
-    var seekVol = document.getElementById("seek-vol");
-    var bar2 = document.getElementById("bar-vol");
-    var dot = document.getElementById("dot-music");
-    seekVol.addEventListener("input", function () {
-        var value = seekVol.value;
-        var percent = value - seekVol.min;
-        bar2.style.width = percent + "%";
-        dot.style.left = percent + "%";
-        console.log(percent);
-    });
-    var seek = document.getElementById("seek");
-    var bar2_seek = document.getElementById("bar2");
-    var dot_seek = document.getElementById("dot_music");
-    seek.addEventListener("input", function () {
-        var value = seek.value;
-        var percent = value - seek.min;
-        bar2_seek.style.width = percent + "%";
-        dot_seek.style.left = percent + "%";
-        console.log(percent);
-    });
+   
     menuAll("dot-3", "menu-right-media");
     setInterval(function () {
         thongbao.style.display = "none";
