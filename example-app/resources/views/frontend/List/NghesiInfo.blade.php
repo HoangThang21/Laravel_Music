@@ -29,12 +29,10 @@
                             @foreach ($albumns as $item)
                                 @foreach ($Nhacalbumbaihat as $nhactop10)
                                     @if ($item->id == $nhactop10->album_idnhac)
-                                        @php
-                                            $number = str_pad($loop->iteration, 2, '0', STR_PAD_LEFT); // Định dạng số với hai chữ số và thêm số 0 ở đầu nếu cần
-                                        @endphp
+                                        
                                         <div class="media">
                                             <div class="media-left">
-                                                <span>{{ $number }}</span>
+                                               
                                                 <div class="info-media">
                                                     <div class="img-media">
                                                         <img src="../../images/{{ $nhactop10->imagemusic }}"

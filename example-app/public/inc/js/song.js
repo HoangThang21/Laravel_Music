@@ -28,6 +28,7 @@ function PlayingEnd() {
 var setsong = false;
 var indexstartsong = -1;
 var found = false;
+var list = -1;
 if (load_nghe) {
     load_nghe.forEach(function (playButton, indexi) {
         playButton.addEventListener("click", () => {
@@ -58,19 +59,13 @@ if (load_nghe) {
                     if (icon.classList.contains("bi-pause-fill")) {
                         icon2.classList.remove("bi-pause-fill");
                         icon2.classList.add("bi-play-fill");
-                        icon2.style.display = "none";
-                        span2.style.display = "block";
                     } else {
                         icon2.classList.remove("bi-play-fill");
                         icon2.classList.add("bi-pause-fill");
-                        icon2.style.display = "block";
-                        span2.style.display = "none";
                     }
                 } else {
                     icon2.classList.remove("bi-pause-fill");
                     icon2.classList.add("bi-play-fill");
-                    icon2.style.display = "none";
-                    span2.style.display = "block";
                 }
             });
 
@@ -103,14 +98,13 @@ if (load_nghe) {
                             nghesi.innerText = data.successns.tennghesi;
 
                             if (!myMusic.includes(data.success.nhaclink)) {
-                                console.log("vao2....");
                                 myMusic.push(data.success.nhaclink);
                             }
+                            list = data.success.id;
                             setsavemusic = true;
                             music.src = "../../music/" + data.success.nhaclink;
                             music.play();
                             indexstartsong = indexi;
-
                             // music.play();
                         },
                         error: function (error) {
@@ -142,6 +136,7 @@ if (load_nghe) {
                                 console.log("vao1....");
                                 myMusic.push(data.success.nhaclink);
                             }
+                            list = data.success.id;
                             setsavemusic = true;
                             music.src = "../../music/" + data.success.nhaclink;
                             music.play();
@@ -187,23 +182,28 @@ if (load_nghe) {
         });
     });
 }
+let i = 0;
 masterPlay.addEventListener("click", () => {
-    // if (i == 0) {
-    //     myMusic = [...myMusic, baidau];
-    //     i = 1;
-    //     // $.ajax({
-    //     //     type: "POST",
-    //     //     url: "/ln/" + idbaidau,
-    //     //     dataType: "json",
-    //     //     data: { _token: csrfToken },
-    //     //     success: function (data) {
-    //     //         console.log("wellcome to diablu music");
-    //     //     },
-    //     //     error: function (error) {
-    //     //         console.error("Đã xảy ra lỗi: ", error);
-    //     //     },
-    //     // });
-    // }
+    if (i == 0) {
+
+        i=1;
+        $.ajax({
+            type: "POST",
+            url: "/loadmusic/" + baidau,
+            dataType: "json",
+            data: { _token: csrfToken },
+            success: function (data) {
+                music.src = "../../music/" + data.success.nhaclink;
+                music.play();
+                masterPlay.classList.remove("bi-play-fill");
+                masterPlay.classList.add("bi-pause-fill");
+                wave.classList.add("active2");
+            },
+            error: function (error) {
+                console.error("Đã xảy ra lỗi: ", error);
+            },
+        });
+    }
 
     if (masterPlay.classList.contains("bi-pause-fill")) {
         load_nghe.forEach(function (playButton, indexi) {
@@ -344,26 +344,39 @@ function formatTimer(time) {
     const s = Math.floor(time - m * 60);
     return `${m}:${s < 10 ? "0" : ""}${s}`;
 }
-
+var prniumlisti = document.querySelectorAll(".list-menu-rightsong i");
+prniumlisti.forEach(function (prniumlistitem, indexi1) {
+    prniumlistitem.addEventListener("click", () => {
+        
+        if(prenium==0){
+            var loi = document.querySelector(".loi");
+            loi.classList.add("active");
+            loi.style.display = "flex";
+            loi.querySelector(".tieude").textContent =
+                "Vui lòng nâng vip để nghe.";
+        }
+    })})
 setInterval(function () {
     if (setsavemusic) {
-        console.log(myMusic);
-        $.ajax({
-            url: "/save-my-music",
-            method: "POST",
-            data: {
-                myMusic: myMusic,
-                type: "up",
-                _token: csrfToken,
-            },
-            success: function (response) {
-                var tmp = response.response;
-                console.log("Dữ liệu " + response.response);
-            },
-            error: function (xhr, status, error) {
-                console.error("Đã xảy ra lỗi: ", error);
-            },
-        });
+        if (list != -1) {
+            $.ajax({
+                url: "/save-my-music",
+                method: "POST",
+                data: {
+                    myMusic: list,
+                    type: "up",
+                    _token: csrfToken,
+                },
+                success: function (response) {
+                    var tmp = response.response;
+                    console.log("Dữ liệu " + response.response);
+                },
+                error: function (xhr, status, error) {
+                    console.error("Đã xảy ra lỗi: ", error);
+                },
+            });
+        }
+
         setsavemusic = false;
     }
 }, 1000);

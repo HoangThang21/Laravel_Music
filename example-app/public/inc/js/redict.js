@@ -77,11 +77,11 @@ document.addEventListener("DOMContentLoaded", () => {
                 loi.style.display = "flex";
                 loi.querySelector(".tieude").textContent =
                     "Vui lòng nâng vip để tải.";
-                console.log(loi);
+            
             }
         });
     }
-
+   
     function menuAll(itemcha, itemcon) {
         let menudot = document.querySelectorAll("." + itemcha);
         var itemlistdot = document.querySelectorAll("." + itemcon);

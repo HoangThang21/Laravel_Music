@@ -935,6 +935,9 @@ header .master_play .bar input {
     border-radius: 6px;
     justify-content: space-between;
 }
+.rightsong .list-menu-rightsong:hover {
+    background-color: rgba(77, 74, 74, 0.5);
+}
 .rightsong .left-list-menu-rightsong {
     display: flex;
     gap: 10px;
@@ -968,9 +971,6 @@ header .master_play .bar input {
     line-height: normal;
     letter-spacing: 0.32px;
     text-transform: capitalize;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
 }
 .rightsong .left-list-menu-rightsong span {
     color: #ffffff;
@@ -1076,7 +1076,6 @@ header .master_play .bar input {
     background-color: #ffffff9e;
     color: var(--backgroundmain);
     cursor: pointer;
-   
 }
 .infoalbum {
     width: 140px;
@@ -1477,7 +1476,7 @@ header .master_play .bar input {
     line-height: normal;
     letter-spacing: 0.36px;
     text-transform: capitalize;
-    white-space: nowrap
+    white-space: nowrap;
 }
 .item-album-tacgia p {
     color: #1a1919;
@@ -1897,7 +1896,7 @@ header .master_play .bar input {
     align-items: center;
     scroll-snap-align: start;
 }
-.list-menu-contenter-search .body-Contener-search {
+.body-Contener_ns .body-Contener-search {
     display: flex;
     flex-direction: column;
     align-items: center;

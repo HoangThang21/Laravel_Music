@@ -4,9 +4,9 @@
         <div class="left-top-album-baihat">
             <img src="../../images/{{ $Nhacalbumbaihat->imagemusic }}" alt="">
             <div class="left-top-album-baihat-tennhac">{{ $Nhacalbumbaihat->tennhac }}</div>
-            <div class="left-top-album-baihat-nghesi">{{ $nghesi->tennghesi }}<i class="bi bi-dot"></i>{{ $album->namphathanh }}</div>
+            <div class="left-top-album-baihat-nghesi">{{ $nghesis->tennghesi }}<i class="bi bi-dot"></i>{{ $albums->namphathanh }}</div>
             @php
-                        $inputString = $nghesi->quantam;
+                        $inputString = $nghesis->quantam;
                         $parts = explode('-', $inputString);
                         $check = 0;
                     @endphp

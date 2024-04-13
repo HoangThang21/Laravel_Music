@@ -8,23 +8,32 @@
             <div class="menu-scroll-rightsong-user">
                 @foreach ($chatonline as $onlineUsers)
                     @foreach ($onlineUsers as $user)
-                        <div class="list-menu-rightsong">
-                            <div class="left-list-menu-rightsong">
-                                <img src="../../images/{{ $user->image }}" alt="">
-                                <div class="left-list-menu-rightsong-user">
-                                    <div class="name-rightsong">{{ $user->name }}</div>
+                        @if ($user->id == $ttnguoidung->id)
+                            <div class="list-menu-rightsong">
+                                <div class="left-list-menu-rightsong">
+                                    <img src="../../images/{{ $user->image }}" alt="">
+                                    <div class="left-list-menu-rightsong-user">
+                                        <div class="name-rightsong" style="color: aqua">{{ $user->name }}</div>
+                                    </div>
                                 </div>
-
                             </div>
-
-                        </div>
+                        @else
+                            <div class="list-menu-rightsong">
+                                <div class="left-list-menu-rightsong">
+                                    <img src="../../images/{{ $user->image }}" alt="">
+                                    <div class="left-list-menu-rightsong-user">
+                                        <div class="name-rightsong">{{ $user->name }}</div>
+                                    </div>
+                                </div>
+                            </div>
+                        @endif
                     @endforeach
                 @endforeach
             </div>
         </div>
     @else
         <div class="menu-rightsong">
-            <div class="top-menu-rightsong">Top Lượt nghe <i class="bi bi-caret-right-fill"></i></div>
+            <div class="top-menu-rightsong">Top Lượt nghe</div>
             <div class="menu-scroll-rightsong">
                 @foreach ($Nhactopluotnghe as $ntluotnghe)
                     <div class="list-menu-rightsong">
@@ -32,7 +41,7 @@
                             <img src="../../images/{{ $ntluotnghe->imagemusic }}" alt="">
                             <div class="name-rightsong">{{ $ntluotnghe->tennhac }}</div>
                         </div>
-                        <i class="bi bi-caret-right-fill"></i>
+                        <i data-song ="{{ $ntluotnghe->id }}" class="bi bi-caret-right-fill"></i>
                     </div>
                 @endforeach
 
@@ -43,13 +52,13 @@
                         class="bi bi-chevron-compact-right"></i></span></div>
             <div class="menu-scroll-rightsong">
                 @foreach ($Nhactopvip as $ntluotnghe)
-                    <div class="list-menu-rightsong ">
+                    <div class="list-menu-rightsong">
                         <div class="left-list-menu-rightsong">
                             <img src="../../images/{{ $ntluotnghe->imagemusic }}" alt="">
                             <div class="name-rightsong">{{ $ntluotnghe->tennhac }}</div>
                             <span>premium</span>
                         </div>
-                        <i class="bi bi-caret-right-fill"></i>
+                        <i data-song ="{{ $ntluotnghe->id }}" class="bi bi-caret-right-fill"></i>
                     </div>
                 @endforeach
             </div>
@@ -72,11 +81,21 @@
             <div class="wave1"></div>
             <div class="wave1"></div>
         </div>
-        <img src="../../images/img1710036980-6.png" alt="" class="IgMuSc" />
+        <img src="../../images/{{ $baidau->imagemusic }}" alt="" class="IgMuSc" />
         <div class="info_ns">
-            <h5 class="NameBai">memories
+            <h5 class="NameBai">{{ $baidau->tennhac }}
             </h5>
-            <div class="subtitle NameNS">maroon 5</div>
+            <div class="subtitle NameNS">
+                @foreach ($album as $alb)
+                    @if ($alb->id == $baidau->album_idnhac)
+                        @foreach ($nghesi as $ns)
+                            @if ($ns->id == $alb->nghesi_idalbum)
+                                {{ $ns->tennghesi }}
+                            @endif
+                        @endforeach
+                    @endif
+                @endforeach
+            </div>
         </div>
     </div>
     <div class="mid-master-play">
@@ -89,7 +108,7 @@
         </div>
         <span id="currentStart">0:00</span>
         <div class="bar">
-            <input type="range" name="range" id="seek"  min="0" max="100" class="range" />
+            <input type="range" name="range" id="seek" min="0" max="100" class="range" />
             <div class="bar2" id="bar2"></div>
             <div class="dot" id="dot_music"></div>
         </div>
@@ -113,24 +132,96 @@
                 <i class="bi bi-music-note-list" id="list-memu" title="Danh sách phát"></i>
                 <div class="right-menu-setup">
                     <h3>Danh sách phát</h3>
+
                     <div class="menu-right-setup-list">
-                        <div class="info-media-bottom">
-                            <div class="img-media">
-                                <img src="../../images/3.png" alt="">
-                                <div class="load-nghe-bottom"><i class="bi bi-caret-right-fill"></i></div>
-                            </div>
-                            <div class="name-media">
-                                <div class="name-music-bottom">maroon 5 - memories</div>
-                                <a href="" class="name-tacgia">aa</a>
-                            </div>
-                            <i style="cursor: pointer;" class="bi bi-play-fill"></i>
-                            <div class="option">
-                                <div class="dot-3"><i class="bi bi-three-dots"></i></div>
-                                <div class="menu-right-media bottom-listmmusic">
-                                    <div class="Xoa"><i class="bi bi-trash"></i>Xóa</div>
-                                </div>
-                            </div>
-                        </div>
+                        @if (Auth::guard('web')->check())
+                            @php
+                                $inputString = $ttnguoidung->danhsachphat;
+                                $parts = explode('-', $inputString);
+                            @endphp
+                            @foreach ($parts as $index => $part)
+                                @php
+                                    $currentNumber = (int) $part;
+                                @endphp
+                                @foreach ($nhacsesion as $nss)
+                                    @if ($nss->id == $currentNumber)
+                                        <div class="info-media-bottom">
+                                            <div class="img-media">
+                                                <img src="../../images/{{ $nss->imagemusic }}" alt="">
+                                                <div class="load-nghe-bottom"><i class="bi bi-caret-right-fill"></i>
+                                                </div>
+                                            </div>
+                                            <div class="name-media">
+                                                <div class="name-music-bottom">{{ $nss->tennhac }}</div>
+                                                <a href="" class="name-tacgia">
+                                                    @foreach ($album as $alb)
+                                                        @if ($alb->id == $nss->album_idnhac)
+                                                            @foreach ($nghesi as $ns)
+                                                                @if ($ns->id == $alb->nghesi_idalbum)
+                                                                    {{ $ns->tennghesi }}
+                                                                @endif
+                                                            @endforeach
+                                                        @endif
+                                                    @endforeach
+                                                </a>
+                                            </div>
+                                            <i style="cursor: pointer;" class="bi bi-play-fill"></i>
+                                            <div class="option">
+                                                <div class="dot-3"><i class="bi bi-three-dots"></i></div>
+                                                <div class="menu-right-media bottom-listmmusic">
+                                                    <div class="Xoa"><i class="bi bi-trash"></i>Xóa</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    @endif
+                                @endforeach
+                            @endforeach
+                        @endif
+                        @if (Auth::guard('google')->check())
+                            @php
+                                $inputString = $ttnguoidung->danhsachphat;
+                                $parts = explode('-', $inputString);
+                            @endphp
+                            @foreach ($parts as $index => $part)
+                                @php
+                                    $currentNumber = (int) $part;
+                                @endphp
+                                @foreach ($nhacsesion as $nss)
+                                    @if ($nss->id == $currentNumber)
+                                        <div class="info-media-bottom">
+                                            <div class="img-media">
+                                                <img src="../../images/{{ $nss->imagemusic }}" alt="">
+                                                <div class="load-nghe-bottom"><i class="bi bi-caret-right-fill"></i>
+                                                </div>
+                                            </div>
+                                            <div class="name-media">
+                                                <div class="name-music-bottom">{{ $nss->tennhac }}</div>
+                                                <a href="" class="name-tacgia">
+                                                    @foreach ($album as $alb)
+                                                        @if ($alb->id == $nss->album_idnhac)
+                                                            @foreach ($nghesi as $ns)
+                                                                @if ($ns->id == $alb->nghesi_idalbum)
+                                                                    {{ $ns->tennghesi }}
+                                                                @endif
+                                                            @endforeach
+                                                        @endif
+                                                    @endforeach
+                                                </a>
+                                            </div>
+                                            <i style="cursor: pointer;" class="bi bi-play-fill"></i>
+                                            <div class="option">
+                                                <div class="dot-3"><i class="bi bi-three-dots"></i></div>
+                                                <div class="menu-right-media bottom-listmmusic">
+                                                    <div class="Xoa"><i class="bi bi-trash"></i>Xóa</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    @endif
+                                @endforeach
+                            @endforeach
+                        @endif
+
+
                     </div>
                 </div>
             </div>
@@ -334,7 +425,7 @@
     var activemenu = '{{ $activerity }}';
     var rank = {!! $rank !!};
     var rightsong_var = {{ $rightsong }};
-    
+    var baidau = `{{ $baidau->id}}`;
 </script>
 
 @if (Auth::guard('web')->check())
