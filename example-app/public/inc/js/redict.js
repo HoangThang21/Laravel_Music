@@ -65,21 +65,20 @@ document.addEventListener("DOMContentLoaded", () => {
     var downloadButton = document.querySelector(".menu-right-media .download");
     if (downloadButton) {
         downloadButton.addEventListener("click", function () {
-            if(prenium==1){
+            if (prenium == 1) {
                 var musicUrl = this.getAttribute("data-downloadmusic");
                 var downloadLink = document.createElement("a");
                 downloadLink.href = "../../music/" + musicUrl;
                 downloadLink.download = musicUrl;
                 downloadLink.click();
-            }
-            else{
+            } else {
                 var loi = document.querySelector(".loi");
-                loi.classList.add('active');
-                loi.style.display="flex";
-                loi.querySelector('.tieude').textContent="Vui lòng nâng vip để tải."
-                console.log(loi)
+                loi.classList.add("active");
+                loi.style.display = "flex";
+                loi.querySelector(".tieude").textContent =
+                    "Vui lòng nâng vip để tải.";
+                console.log(loi);
             }
-            
         });
     }
 
@@ -103,12 +102,11 @@ document.addEventListener("DOMContentLoaded", () => {
             });
         });
     }
-   
+
     menuAll("dot-3", "menu-right-media");
     setInterval(function () {
         thongbao.style.display = "none";
     }, 30000);
-    //
     var contentDiv1 = $(".messages");
     contentDiv1.scrollTop(contentDiv1.prop("scrollHeight"));
     $("#message-input").on("input", function () {
