@@ -29,10 +29,8 @@
                             @foreach ($albumns as $item)
                                 @foreach ($Nhacalbumbaihat as $nhactop10)
                                     @if ($item->id == $nhactop10->album_idnhac)
-                                        
                                         <div class="media">
                                             <div class="media-left">
-                                               
                                                 <div class="info-media">
                                                     <div class="img-media">
                                                         <img src="../../images/{{ $nhactop10->imagemusic }}"

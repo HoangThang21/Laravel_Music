@@ -436,13 +436,23 @@ header .master_play .bar input {
     border-radius: 99px;
 }
 .right-setup #random,
-.right-setup #all,
+.right-setup #parrot,
 .right-setup #list-memu {
     cursor: pointer;
-    background: var(--text_music_gradient-2);
+
     border-radius: 4px;
     padding: 8px;
     display: block;
+}
+.right-setup #random.active,
+.right-setup #parrot.active,
+.right-setup #list-memu.active {
+    background: var(--text_music_gradient-2);
+}
+.right-setup #random:hover,
+.right-setup #parrot:hover,
+.right-setup #list-memu:hover {
+    background: var(--text-color-B);
 }
 
 .right-setup {

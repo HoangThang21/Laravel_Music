@@ -18,8 +18,8 @@ return new class extends Migration
             $table->integer('namphathanh');
             $table->timestamps();
             $table->unsignedInteger('nghesi_idalbum');
-            // $table->foreign('nghesi_id_album')->references('id')->on('nghesi');
             $table->unsignedInteger('theloai_idalbum');
+            // $table->foreign('nghesi_id_album')->references('id')->on('nghesi');
             // $table->foreign('theloai_id')->references('id')->on('theloai');
         });
     }

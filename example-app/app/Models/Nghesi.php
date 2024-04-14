@@ -11,4 +11,5 @@ class Nghesi extends Model
     protected $table = "nghesi";
     protected $primaryKey = "id";
     public $timestamps = true;
+   
 }

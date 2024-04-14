@@ -7,22 +7,7 @@ document.addEventListener("DOMContentLoaded", () => {
             playlist.classList.remove("active");
         }
     });
-    var list_memu = document.querySelector(".menu-list-right-setup #list-memu");
-    var active_right_menu_setup = true;
-    if (list_memu) {
-        list_memu.addEventListener("click", function () {
-            var right_menu_setup = document.querySelector(
-                ".menu-list-right-setup .right-menu-setup"
-            );
-            if (active_right_menu_setup) {
-                right_menu_setup.classList.add("active");
-                active_right_menu_setup = false;
-            } else {
-                right_menu_setup.classList.remove("active");
-                active_right_menu_setup = true;
-            }
-        });
-    }
+    
 
     if (activemenu == 2) {
         $("#searchForm").hide();

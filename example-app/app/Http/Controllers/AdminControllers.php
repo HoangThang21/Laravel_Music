@@ -930,7 +930,7 @@ class AdminControllers extends Controller
         $request->validate([
             'txtnghesi' => ['required'],
             'optloains' => ['required'],
-           
+
         ]);
         $idnghesibt = User::where('email', $request->input('optloains'))->pluck('id')->first();
         $idnghesiapi = UserAPI::where('email', $request->input('optloains'))->pluck('id')->first();
@@ -1054,8 +1054,22 @@ class AdminControllers extends Controller
 
 
                 if ($parts[1] == 'userde') {
+
                     $user = User::where('id', $parts[0])
-                        ->delete();
+                        ->first();
+                    $nghesi = Nghesi::where('id_nghesi_user', $user->id)->first();
+                    if ($nghesi) {
+                        $album = Album::where('nghesi_idalbum',  $nghesi->id)->get();
+
+                        foreach ($album as $alb) {
+                            Nhac::where('album_idnhac', $alb->id)
+                                ->delete();
+                        }
+                        Album::where('nghesi_idalbum',  $nghesi->id)->delete();
+                        Nghesi::where('id_nghesi_user', $user->id)->delete();
+                    }
+
+                    User::where('id', $parts[0])->delete();
 
                     return redirect()->intended('/Administrator');
                 }
@@ -1332,7 +1346,7 @@ class AdminControllers extends Controller
             'txttennghesi' => ['required'],
             'txtidnghesi' => ['required'],
             'txttype' => ['required'],
-       
+
         ]);
 
         if ($request->input('txttype') == 'user') {
@@ -1368,8 +1382,8 @@ class AdminControllers extends Controller
     }
     public function suaalbum(Request $request)
     {
-       
-        $a=$request->validate([
+
+        $a = $request->validate([
             'txtidalbum' => ['required'],
             'txttenalbum' => ['required'],
             'txtnamphathanh' => ['required'],
@@ -1377,11 +1391,11 @@ class AdminControllers extends Controller
             'optloaitl' => ['required'],
             'txthinha' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
-        
+
         if ($request->file('txthinha') != null) {
             $generatedimage = 'image' . time() . '-' . $request->file('txthinha')->getClientOriginalName();
             $request->file('txthinha')->move(public_path('images'), $generatedimage);
-            
+
             if ($request->input('txtnamphathanh') > 0) {
 
                 $al = Album::where('id', $request->input('txtidalbum'))->update([
@@ -1539,13 +1553,22 @@ class AdminControllers extends Controller
                     return redirect()->intended('/Administrator/qltheloai');
                 }
                 if ($parts[1] == 'ns') {
-                    $nghesi = Nghesi::where('id', $parts[0])
-                        ->delete();
+                    $nghesi = Nghesi::where('id', $parts[0])->first();
+                    $album = Album::where('nghesi_idalbum', $parts[0])->get();
+                    foreach ($album as $alb) {
+                        Nhac::where('album_idnhac', $alb->id)
+                            ->delete();
+                    }
+                    Album::where('nghesi_idalbum', $parts[0])->delete();
+                    Nghesi::where('id', $parts[0])->delete();
                     return redirect()->intended('/Administrator/qlnghesi');
                 }
                 if ($parts[1] == 'alb') {
-                    $nghesi = Album::where('id', $parts[0])
+                    Nhac::where('album_idnhac', $parts[0])
                         ->delete();
+                    Album::where('id', $parts[0])
+                        ->delete();
+
                     return redirect()->intended('/Administrator/qlalbum');
                 }
                 if ($parts[1] == 'music') {

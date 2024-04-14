@@ -13,6 +13,8 @@ const bar2 = document.getElementById("bar2");
 const dot_music = document.getElementById("dot_music");
 const currentStart = document.getElementById("currentStart");
 const currentEnd = document.getElementById("currentEnd");
+const parrotElement = document.getElementById("parrot");
+const randomElement = document.getElementById("random");
 let setsavemusic = false;
 
 function Playing() {
@@ -29,6 +31,8 @@ var setsong = false;
 var indexstartsong = -1;
 var found = false;
 var list = -1;
+var dem = 0;
+var baihientai = -1;
 if (load_nghe) {
     load_nghe.forEach(function (playButton, indexi) {
         playButton.addEventListener("click", () => {
@@ -85,7 +89,6 @@ if (load_nghe) {
                     icon.classList.add("bi-pause-fill");
                     music.play();
                 } else {
-                    console.log("2");
                     $.ajax({
                         type: "POST",
                         url: "/loadmusic/" + id,
@@ -97,14 +100,32 @@ if (load_nghe) {
                             tenbaihat.innerText = data.success.tennhac;
                             nghesi.innerText = data.successns.tennghesi;
 
-                            if (!myMusic.includes(data.success.nhaclink)) {
-                                myMusic.push(data.success.nhaclink);
+                            if (!myMusic.includes(data.success.id)) {
+                                myMusic.push(data.success.id);
                             }
                             list = data.success.id;
+
                             setsavemusic = true;
                             music.src = "../../music/" + data.success.nhaclink;
                             music.play();
                             indexstartsong = indexi;
+                            let indexArray = myMusic
+                                .map((element, index) =>
+                                    element === list ? index : -1
+                                )
+                                .filter((index) => index !== -1);
+
+                            if (indexArray.length > 0) {
+                                let vi_tri = indexArray[0];
+                                demnext = vi_tri;
+                                console.log(
+                                    `Vị trí của số ${list} trong mảng là: ${demnext}`
+                                );
+                            } else {
+                                console.log(
+                                    `Số ${list} không tồn tại trong mảng.`
+                                );
+                            }
                             // music.play();
                         },
                         error: function (error) {
@@ -132,16 +153,31 @@ if (load_nghe) {
                             tenbaihat.innerText = data.success.tennhac;
                             nghesi.innerText = data.successns.tennghesi;
 
-                            if (!myMusic.includes(data.success.nhaclink)) {
-                                console.log("vao1....");
-                                myMusic.push(data.success.nhaclink);
+                            if (!myMusic.includes(data.success.id)) {
+                                myMusic.push(data.success.id);
                             }
                             list = data.success.id;
                             setsavemusic = true;
                             music.src = "../../music/" + data.success.nhaclink;
                             music.play();
                             indexstartsong = indexi;
+                            let indexArray = myMusic
+                                .map((element, index) =>
+                                    element === list ? index : -1
+                                )
+                                .filter((index) => index !== -1);
 
+                            if (indexArray.length > 0) {
+                                let vi_tri = indexArray[0];
+                                demnext = vi_tri;
+                                console.log(
+                                    `Vị trí của số ${list} trong mảng là: ${demnext}`
+                                );
+                            } else {
+                                console.log(
+                                    `Số ${list} không tồn tại trong mảng.`
+                                );
+                            }
                             // music.play();
                         },
                         error: function (error) {
@@ -185,8 +221,7 @@ if (load_nghe) {
 let i = 0;
 masterPlay.addEventListener("click", () => {
     if (i == 0) {
-
-        i=1;
+        i = 1;
         $.ajax({
             type: "POST",
             url: "/loadmusic/" + baidau,
@@ -262,15 +297,158 @@ masterPlay.addEventListener("click", () => {
     }
     setplay = 1;
 });
+parrotElement.addEventListener("click", function () {
+    var isActive = parrotElement.classList.contains("active");
+    if (isActive) {
+        parrotElement.classList.remove("active");
+    } else {
+        parrotElement.classList.add("active");
+        randomElement.classList.remove("active");
+    }
+});
+randomElement.addEventListener("click", function () {
+    var isActive = randomElement.classList.contains("active");
+    if (isActive) {
+        randomElement.classList.remove("active");
+    } else {
+        randomElement.classList.add("active");
+        parrotElement.classList.remove("active");
+    }
+});
+var list_memu = document.querySelector(".menu-list-right-setup #list-memu");
+if (list_memu) {
+    list_memu.addEventListener("click", function () {
+        var right_menu_setup = document.querySelector(
+            ".menu-list-right-setup .right-menu-setup"
+        );
+        var isActive = list_memu.classList.contains("active");
+        if (isActive) {
+            right_menu_setup.classList.remove("active");
+            list_memu.classList.remove("active");
+        } else {
+            right_menu_setup.classList.add("active");
+            list_memu.classList.add("active");
+        }
+    });
+}
 music.addEventListener("ended", () => {
-    myMusic.splice(0, 1);
+    let indexArray = myMusic
+        .map((element, index) => (element === list ? index : -1))
+        .filter((index) => index !== -1);
+        var baixoa=indexArray[0]
+    demnext = indexArray[0] + 1;
+    myMusic.splice(baixoa, 1);
     setplay = 0;
     dem++;
     if (myMusic.length == 0) {
         PlayingEnd();
         dem = 0;
     } else {
-        Playing();
+        var isActive = parrotElement.classList.contains("active");
+        if (isActive) {
+            Playing();
+        } else {
+            var isActiverandom = randomElement.classList.contains("active");
+            if (isActiverandom) {
+                if (indexArray.length > 0) {
+                    if (demnext < myMusic.length) {
+                        $.ajax({
+                            type: "POST",
+                            url: "/loadmusic/" + myMusic[demnext],
+                            dataType: "json",
+                            data: { _token: csrfToken },
+                            success: function (data) {
+                                hinhnghenhac.src =
+                                    "../../images/" + data.success.imagemusic;
+                                tenbaihat.innerText = data.success.tennhac;
+                                nghesi.innerText = data.successns.tennghesi;
+
+                                if (!myMusic.includes(data.success.id)) {
+                                    myMusic.push(data.success.id);
+                                }
+
+                                list = data.success.id;
+                                setsavemusic = true;
+                                music.src =
+                                    "../../music/" + data.success.nhaclink;
+                                let indexArray = myMusic
+                                    .map((element, index) =>
+                                        element === list ? index : -1
+                                    )
+                                    .filter((index) => index !== -1);
+
+                                if (indexArray.length > 0) {
+                                    let vi_tri = indexArray[0];
+                                    demnext = vi_tri;
+                                    console.log(
+                                        `Vị trí của số ${list} trong mảng là: ${demnext}`
+                                    );
+                                } else {
+                                    console.log(
+                                        `Số ${list} không tồn tại trong mảng.`
+                                    );
+                                }
+                                music.play();
+
+                                // music.play();
+                            },
+                            error: function (error) {
+                                console.error("Đã xảy ra lỗi: ", error);
+                            },
+                        });
+                    } else {
+                        demnext = 0;
+                        console.log("end dem");
+                        $.ajax({
+                            type: "POST",
+                            url: "/loadmusic/" + myMusic[demnext],
+                            dataType: "json",
+                            data: { _token: csrfToken },
+                            success: function (data) {
+                                hinhnghenhac.src =
+                                    "../../images/" + data.success.imagemusic;
+                                tenbaihat.innerText = data.success.tennhac;
+                                nghesi.innerText = data.successns.tennghesi;
+
+                                if (!myMusic.includes(data.success.id)) {
+                                    myMusic.push(data.success.id);
+                                }
+                                list = data.success.id;
+                                setsavemusic = true;
+                                music.src =
+                                    "../../music/" + data.success.nhaclink;
+                                let indexArray = myMusic
+                                    .map((element, index) =>
+                                        element === list ? index : -1
+                                    )
+                                    .filter((index) => index !== -1);
+
+                                if (indexArray.length > 0) {
+                                    let vi_tri = indexArray[0];
+                                    demnext = vi_tri;
+                                    console.log(
+                                        `Vị trí của số ${list} trong mảng là: ${demnext}`
+                                    );
+                                } else {
+                                    console.log(
+                                        `Số ${list} không tồn tại trong mảng.`
+                                    );
+                                }
+                                music.play();
+
+                                // music.play();
+                            },
+                            error: function (error) {
+                                console.error("Đã xảy ra lỗi: ", error);
+                            },
+                        });
+                    }
+                } else {
+                    console.log(`Số ${list} không tồn tại trong mảng.`);
+                }
+            }
+        }
+
         // $.ajax({
         //     type: "POST",
         //     url: "/ln/" + thuvienA[0],
@@ -279,21 +457,6 @@ music.addEventListener("ended", () => {
         //     success: function (data) {
         //         console.log("wellcome to diablu music");
         //     },
-        //     error: function (error) {
-        //         console.error("Đã xảy ra lỗi: ", error);
-        //     },
-        // });
-        // $.ajax({
-        //     type: "POST",
-        //     url: "/loadmusic/" + thuvienA[0],
-        //     dataType: "json",
-        //     data: { _token: csrfToken },
-        //     success: function (data) {
-        //         IgMuSc.src = "../../images/" + data.success.imagemusic;
-        //         NameBai.innerText = data.success.tennhac;
-        //         NameNS.innerText = data.successns.tennghesi;
-        //     },
-
         //     error: function (error) {
         //         console.error("Đã xảy ra lỗi: ", error);
         //     },
@@ -347,15 +510,220 @@ function formatTimer(time) {
 var prniumlisti = document.querySelectorAll(".list-menu-rightsong i");
 prniumlisti.forEach(function (prniumlistitem, indexi1) {
     prniumlistitem.addEventListener("click", () => {
-        
-        if(prenium==0){
+        if (prenium == 0) {
             var loi = document.querySelector(".loi");
             loi.classList.add("active");
             loi.style.display = "flex";
             loi.querySelector(".tieude").textContent =
                 "Vui lòng nâng vip để nghe.";
         }
-    })})
+    });
+});
+let demnext = 0;
+const next = document.getElementById("next");
+if (next) {
+    next.addEventListener("click", function () {
+        if (myMusic.length != 0) {
+            let indexArray = myMusic
+                .map((element, index) => (element === list ? index : -1))
+                .filter((index) => index !== -1);
+            demnext = indexArray[0] + 1;
+            if (indexArray.length > 0) {
+                if (demnext < myMusic.length) {
+                    $.ajax({
+                        type: "POST",
+                        url: "/loadmusic/" + myMusic[demnext],
+                        dataType: "json",
+                        data: { _token: csrfToken },
+                        success: function (data) {
+                            hinhnghenhac.src =
+                                "../../images/" + data.success.imagemusic;
+                            tenbaihat.innerText = data.success.tennhac;
+                            nghesi.innerText = data.successns.tennghesi;
+
+                            if (!myMusic.includes(data.success.id)) {
+                                myMusic.push(data.success.id);
+                            }
+
+                            list = data.success.id;
+                            setsavemusic = true;
+                            music.src = "../../music/" + data.success.nhaclink;
+                            music.play();
+
+                            // music.play();
+                        },
+                        error: function (error) {
+                            console.error("Đã xảy ra lỗi: ", error);
+                        },
+                    });
+                } else {
+                    demnext = 0;
+                    console.log("end dem");
+                    $.ajax({
+                        type: "POST",
+                        url: "/loadmusic/" + myMusic[demnext],
+                        dataType: "json",
+                        data: { _token: csrfToken },
+                        success: function (data) {
+                            hinhnghenhac.src =
+                                "../../images/" + data.success.imagemusic;
+                            tenbaihat.innerText = data.success.tennhac;
+                            nghesi.innerText = data.successns.tennghesi;
+
+                            if (!myMusic.includes(data.success.id)) {
+                                myMusic.push(data.success.id);
+                            }
+                            list = data.success.id;
+                            setsavemusic = true;
+                            music.src = "../../music/" + data.success.nhaclink;
+                            music.play();
+
+                            // music.play();
+                        },
+                        error: function (error) {
+                            console.error("Đã xảy ra lỗi: ", error);
+                        },
+                    });
+                }
+            } else {
+                console.log(`Số ${list} không tồn tại trong mảng.`);
+            }
+        }
+        music.play();
+    });
+}
+const back = document.getElementById("back");
+if (back) {
+    back.addEventListener("click", function () {
+        if (myMusic.length != 0) {
+            let indexArray = myMusic
+                .map((element, index) => (element === list ? index : -1))
+                .filter((index) => index !== -1);
+            demnext = indexArray[0] - 1;
+            if (indexArray.length > 0) {
+                if (demnext >= 0) {
+                    $.ajax({
+                        type: "POST",
+                        url: "/loadmusic/" + myMusic[demnext],
+                        dataType: "json",
+                        data: { _token: csrfToken },
+                        success: function (data) {
+                            hinhnghenhac.src =
+                                "../../images/" + data.success.imagemusic;
+                            tenbaihat.innerText = data.success.tennhac;
+                            nghesi.innerText = data.successns.tennghesi;
+
+                            if (!myMusic.includes(data.success.id)) {
+                                myMusic.push(data.success.id);
+                            }
+
+                            list = data.success.id;
+                            setsavemusic = true;
+                            music.src = "../../music/" + data.success.nhaclink;
+                            music.play();
+
+                            // music.play();
+                        },
+                        error: function (error) {
+                            console.error("Đã xảy ra lỗi: ", error);
+                        },
+                    });
+                } else {
+                    demnext = myMusic[myMusic.length - 1];
+                    console.log("end dem", demnext);
+                    $.ajax({
+                        type: "POST",
+                        url: "/loadmusic/" + myMusic[myMusic.length - 1],
+                        dataType: "json",
+                        data: { _token: csrfToken },
+                        success: function (data) {
+                            hinhnghenhac.src =
+                                "../../images/" + data.success.imagemusic;
+                            tenbaihat.innerText = data.success.tennhac;
+                            nghesi.innerText = data.successns.tennghesi;
+
+                            if (!myMusic.includes(data.success.id)) {
+                                myMusic.push(data.success.id);
+                            }
+                            list = data.success.id;
+                            setsavemusic = true;
+                            music.src = "../../music/" + data.success.nhaclink;
+                            music.play();
+
+                            // music.play();
+                        },
+                        error: function (error) {
+                            console.error("Đã xảy ra lỗi: ", error);
+                        },
+                    });
+                }
+            } else {
+                console.log(`Số ${list} không tồn tại trong mảng.`);
+            }
+        }
+        music.play();
+    });
+}
+const nextforward = document.getElementById("nextforward");
+if (nextforward) {
+    nextforward.addEventListener("click", function () {
+        $.ajax({
+            type: "POST",
+            url: "/loadmusic/" + myMusic[myMusic.length - 1],
+            dataType: "json",
+            data: { _token: csrfToken },
+            success: function (data) {
+                hinhnghenhac.src = "../../images/" + data.success.imagemusic;
+                tenbaihat.innerText = data.success.tennhac;
+                nghesi.innerText = data.successns.tennghesi;
+
+                if (!myMusic.includes(data.success.id)) {
+                    myMusic.push(data.success.id);
+                }
+
+                list = data.success.id;
+                setsavemusic = true;
+                music.src = "../../music/" + data.success.nhaclink;
+                music.play();
+
+                // music.play();
+            },
+            error: function (error) {
+                console.error("Đã xảy ra lỗi: ", error);
+            },
+        });
+    });
+}
+const backward = document.getElementById("backward");
+if (backward) {
+    backward.addEventListener("click", function () {
+        $.ajax({
+            type: "POST",
+            url: "/loadmusic/" + myMusic[0],
+            dataType: "json",
+            data: { _token: csrfToken },
+            success: function (data) {
+                hinhnghenhac.src = "../../images/" + data.success.imagemusic;
+                tenbaihat.innerText = data.success.tennhac;
+                nghesi.innerText = data.successns.tennghesi;
+
+                if (!myMusic.includes(data.success.id)) {
+                    myMusic.push(data.success.id);
+                }
+
+                list = data.success.id;
+                setsavemusic = true;
+                music.src = "../../music/" + data.success.nhaclink;
+                music.play();
+
+                // music.play();
+            },
+            error: function (error) {
+                console.error("Đã xảy ra lỗi: ", error);
+            },
+        });
+    });
+}
 setInterval(function () {
     if (setsavemusic) {
         if (list != -1) {

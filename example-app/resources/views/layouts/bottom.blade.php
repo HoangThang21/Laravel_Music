@@ -76,7 +76,7 @@
 {{-- botom --}}
 <div class="master_play ">
     <div class="left-master-play">
-        <div class="wave active2">
+        <div class="wave">
             <div class="wave1"></div>
             <div class="wave1"></div>
             <div class="wave1"></div>
@@ -126,8 +126,8 @@
                     <div class="dot" id="dot-music-vol"></div>
                 </div>
             </div>
-            <i class="bi bi-shuffle" id="random"></i>
-            <i class="bi bi-arrow-repeat" id="all"></i>
+            <i class="bi bi-shuffle" title="Phát theo danh sách" id="random"></i>
+            <i class="bi bi-arrow-repeat" title="Lặp lại bài hát" id="parrot"></i>
             <div class="menu-list-right-setup">
                 <i class="bi bi-music-note-list" id="list-memu" title="Danh sách phát"></i>
                 <div class="right-menu-setup">
@@ -425,7 +425,7 @@
     var activemenu = '{{ $activerity }}';
     var rank = {!! $rank !!};
     var rightsong_var = {{ $rightsong }};
-    var baidau = `{{ $baidau->id}}`;
+    var baidau = `{{ $baidau->id }}`;
 </script>
 
 @if (Auth::guard('web')->check())

@@ -20,13 +20,13 @@ class RankingController extends Controller
         $ranks = new Ranks;
         $ranks->tensong1 = $top3Songs[0]->tennhac;
         $ranks->nghesi1 = Nghesi::where('id', Album::where('id', $top3Songs[0]->album_idnhac)->pluck('nghesi_idalbum')->first())->pluck('tennghesi')->first();
-        $ranks->phantram1 = ($top3Songs[0]->luotnghe / $totalListens) * 100;
+        $ranks->phantram1 = round(($top3Songs[0]->luotnghe / $totalListens) * 100);
         $ranks->tensong2 = $top3Songs[1]->tennhac;
         $ranks->nghesi2 = Nghesi::where('id', Album::where('id', $top3Songs[1]->album_idnhac)->pluck('nghesi_idalbum')->first())->pluck('tennghesi')->first();
-        $ranks->phantram2 = ($top3Songs[1]->luotnghe / $totalListens) * 100;
+        $ranks->phantram2 = round(($top3Songs[1]->luotnghe / $totalListens) * 100);
         $ranks->tensong3 = $top3Songs[2]->tennhac;
         $ranks->nghesi3 = Nghesi::where('id', Album::where('id', $top3Songs[2]->album_idnhac)->pluck('nghesi_idalbum')->first())->pluck('tennghesi')->first();
-        $ranks->phantram3 = ($top3Songs[2]->luotnghe / $totalListens) * 100;
+        $ranks->phantram3 = round(($top3Songs[2]->luotnghe / $totalListens) * 100);
         $ranks->thoigian = Carbon::now()->month . '/' . Carbon::now()->year;
 
         $ranks->save();
