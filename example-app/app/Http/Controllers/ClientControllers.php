@@ -1864,4 +1864,7 @@ class ClientControllers extends Controller
 
         return response()->json(['response' => [session()->get('myMusic')]]);
     }
+    public function gioithieu (){
+    return view('frontend.gioithieu.home');
+    }
 }

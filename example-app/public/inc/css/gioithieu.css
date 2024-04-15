@@ -1,0 +1,94 @@
+*,
+*:before,
+*:after {
+    box-sizing: border-box;
+}
+* {
+    margin: 0;
+    padding: 0;
+    font-family: Arial;
+}
+
+body {
+    min-height: 100vh;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 1;
+}
+.body {
+    display: flex;
+}
+.left {
+    padding: 20px 20px 0 20px;
+    position: sticky;
+    top: 0;
+    width: fit-content;
+    height: fit-content;
+}
+.left .title {
+    color: var(--funring-vn-mine-shaft, #222);
+    font-size: 25px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 37.5px; /* 150% */
+    text-transform: uppercase;
+}
+
+.left .menu {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    width: fit-content;
+    color: var(--funring-vn-mine-shaft, #3b3b3b);
+
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 24px; /* 150% */
+}
+.left .menu .itemmenu.active {
+    text-decoration: underline;
+    color: var(--funring-vn-dodger-blue, #1a86f1);
+}
+.left .menu .itemmenu:hover {
+    text-decoration: underline;
+}
+.left .menu .itemmenu {
+    cursor: pointer;
+    padding: 8px;
+    text-decoration: none;
+    color: var(--funring-vn-mine-shaft, #3b3b3b);
+}
+.right {
+    float: right;
+    width: 70%;
+    border-left: 1px solid #000;
+    padding: 20px;
+}
+.right .content {
+    padding: 8px;
+}
+.tt {
+    color: #585858;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 24px;
+    word-wrap: break-word;
+}
+table {
+    border-collapse: collapse; /* Loại bỏ khoảng cách giữa các ô */
+}
+
+td,
+th {
+    border: 1px solid black; /* Tạo viền 1px đen cho mỗi ô */
+    padding: 8px;
+}
+.m-10 {
+    margin: 10px;
+    line-height: 27px;
+}
+.m-20 {
+    line-height: 27px;
+    margin: 10px 20px;
+}

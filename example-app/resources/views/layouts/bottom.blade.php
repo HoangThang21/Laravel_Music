@@ -128,17 +128,16 @@
             </div>
             <i class="bi bi-shuffle" title="Phát theo danh sách" id="random"></i>
             <i class="bi bi-arrow-repeat" title="Lặp lại bài hát" id="parrot"></i>
-            <div class="menu-list-right-setup">
-                <i class="bi bi-music-note-list" id="list-memu" title="Danh sách phát"></i>
-                <div class="right-menu-setup">
-                    <h3>Danh sách phát</h3>
-
-                    <div class="menu-right-setup-list">
-                        @if (Auth::guard('web')->check())
-                            @php
-                                $inputString = $ttnguoidung->danhsachphat;
-                                $parts = explode('-', $inputString);
-                            @endphp
+            @if (Auth::guard('web')->check())
+                @php
+                    $inputString = $ttnguoidung->danhsachphat;
+                    $parts = explode('-', $inputString);
+                @endphp
+                <div class="menu-list-right-setup">
+                    <i class="bi bi-music-note-list" id="list-memu" title="Danh sách phát"></i>
+                    <div class="right-menu-setup">
+                        <h3>Danh sách phát</h3>
+                        <div class="menu-right-setup-list">
                             @foreach ($parts as $index => $part)
                                 @php
                                     $currentNumber = (int) $part;
@@ -176,55 +175,64 @@
                                     @endif
                                 @endforeach
                             @endforeach
-                        @endif
-                        @if (Auth::guard('google')->check())
-                            @php
-                                $inputString = $ttnguoidung->danhsachphat;
-                                $parts = explode('-', $inputString);
-                            @endphp
-                            @foreach ($parts as $index => $part)
-                                @php
-                                    $currentNumber = (int) $part;
-                                @endphp
-                                @foreach ($nhacsesion as $nss)
-                                    @if ($nss->id == $currentNumber)
-                                        <div class="info-media-bottom">
-                                            <div class="img-media">
-                                                <img src="../../images/{{ $nss->imagemusic }}" alt="">
-                                                <div class="load-nghe-bottom"><i class="bi bi-caret-right-fill"></i>
-                                                </div>
-                                            </div>
-                                            <div class="name-media">
-                                                <div class="name-music-bottom">{{ $nss->tennhac }}</div>
-                                                <a href="" class="name-tacgia">
-                                                    @foreach ($album as $alb)
-                                                        @if ($alb->id == $nss->album_idnhac)
-                                                            @foreach ($nghesi as $ns)
-                                                                @if ($ns->id == $alb->nghesi_idalbum)
-                                                                    {{ $ns->tennghesi }}
-                                                                @endif
-                                                            @endforeach
-                                                        @endif
-                                                    @endforeach
-                                                </a>
-                                            </div>
-                                            <i style="cursor: pointer;" class="bi bi-play-fill"></i>
-                                            <div class="option">
-                                                <div class="dot-3"><i class="bi bi-three-dots"></i></div>
-                                                <div class="menu-right-media bottom-listmmusic">
-                                                    <div class="Xoa"><i class="bi bi-trash"></i>Xóa</div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    @endif
-                                @endforeach
-                            @endforeach
-                        @endif
-
-
+                        </div>
                     </div>
                 </div>
-            </div>
+
+            @endif
+
+            @if (Auth::guard('google')->check())
+                @php
+                    $inputString = $ttnguoidung->danhsachphat;
+                    $parts = explode('-', $inputString);
+                @endphp
+                <div class="menu-list-right-setup">
+                    <i class="bi bi-music-note-list" id="list-memu" title="Danh sách phát"></i>
+                    <div class="right-menu-setup">
+                        <h3>Danh sách phát</h3>
+                        <div class="menu-right-setup-list">
+                            @foreach ($parts as $index => $part)
+                                @php
+                                    $currentNumber = (int) $part;
+                                @endphp
+                                @foreach ($nhacsesion as $nss)
+                                    @if ($nss->id == $currentNumber)
+                                        <div class="info-media-bottom">
+                                            <div class="img-media">
+                                                <img src="../../images/{{ $nss->imagemusic }}" alt="">
+                                                <div class="load-nghe-bottom"><i class="bi bi-caret-right-fill"></i>
+                                                </div>
+                                            </div>
+                                            <div class="name-media">
+                                                <div class="name-music-bottom">{{ $nss->tennhac }}</div>
+                                                <a href="" class="name-tacgia">
+                                                    @foreach ($album as $alb)
+                                                        @if ($alb->id == $nss->album_idnhac)
+                                                            @foreach ($nghesi as $ns)
+                                                                @if ($ns->id == $alb->nghesi_idalbum)
+                                                                    {{ $ns->tennghesi }}
+                                                                @endif
+                                                            @endforeach
+                                                        @endif
+                                                    @endforeach
+                                                </a>
+                                            </div>
+                                            <i style="cursor: pointer;" class="bi bi-play-fill"></i>
+                                            <div class="option">
+                                                <div class="dot-3"><i class="bi bi-three-dots"></i></div>
+                                                <div class="menu-right-media bottom-listmmusic">
+                                                    <div class="Xoa"><i class="bi bi-trash"></i>Xóa</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    @endif
+                                @endforeach
+                            @endforeach
+                        </div>
+                    </div>
+                </div>
+
+            @endif
         </div>
     </div>
 

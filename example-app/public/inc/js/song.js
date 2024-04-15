@@ -220,7 +220,7 @@ if (load_nghe) {
 }
 let i = 0;
 masterPlay.addEventListener("click", () => {
-    if (i == 0) {
+    if (i == 0 && myMusic.length == 0) {
         i = 1;
         $.ajax({
             type: "POST",
@@ -335,9 +335,9 @@ music.addEventListener("ended", () => {
     let indexArray = myMusic
         .map((element, index) => (element === list ? index : -1))
         .filter((index) => index !== -1);
-        var baixoa=indexArray[0]
+    var baixoa = indexArray[0];
     demnext = indexArray[0] + 1;
-    myMusic.splice(baixoa, 1);
+    // myMusic.splice(baixoa, 1);
     setplay = 0;
     dem++;
     if (myMusic.length == 0) {
@@ -446,6 +446,9 @@ music.addEventListener("ended", () => {
                 } else {
                     console.log(`Số ${list} không tồn tại trong mảng.`);
                 }
+                masterPlay.classList.remove("bi-play-fill");
+                masterPlay.classList.add("bi-pause-fill");
+                wave.classList.add("active2");
             }
         }
 
@@ -588,8 +591,11 @@ if (next) {
             } else {
                 console.log(`Số ${list} không tồn tại trong mảng.`);
             }
+            music.play();
+            masterPlay.classList.remove("bi-play-fill");
+            masterPlay.classList.add("bi-pause-fill");
+            wave.classList.add("active2");
         }
-        music.play();
     });
 }
 const back = document.getElementById("back");
@@ -660,68 +666,163 @@ if (back) {
             } else {
                 console.log(`Số ${list} không tồn tại trong mảng.`);
             }
+            music.play();
+            masterPlay.classList.remove("bi-play-fill");
+            masterPlay.classList.add("bi-pause-fill");
+            wave.classList.add("active2");
         }
-        music.play();
     });
 }
 const nextforward = document.getElementById("nextforward");
 if (nextforward) {
     nextforward.addEventListener("click", function () {
-        $.ajax({
-            type: "POST",
-            url: "/loadmusic/" + myMusic[myMusic.length - 1],
-            dataType: "json",
-            data: { _token: csrfToken },
-            success: function (data) {
-                hinhnghenhac.src = "../../images/" + data.success.imagemusic;
-                tenbaihat.innerText = data.success.tennhac;
-                nghesi.innerText = data.successns.tennghesi;
+        if (myMusic[myMusic.length - 1]) {
+            $.ajax({
+                type: "POST",
+                url: "/loadmusic/" + myMusic[myMusic.length - 1],
+                dataType: "json",
+                data: { _token: csrfToken },
+                success: function (data) {
+                    hinhnghenhac.src =
+                        "../../images/" + data.success.imagemusic;
+                    tenbaihat.innerText = data.success.tennhac;
+                    nghesi.innerText = data.successns.tennghesi;
 
-                if (!myMusic.includes(data.success.id)) {
-                    myMusic.push(data.success.id);
-                }
+                    if (!myMusic.includes(data.success.id)) {
+                        myMusic.push(data.success.id);
+                    }
 
-                list = data.success.id;
-                setsavemusic = true;
-                music.src = "../../music/" + data.success.nhaclink;
-                music.play();
+                    list = data.success.id;
+                    setsavemusic = true;
+                    music.src = "../../music/" + data.success.nhaclink;
+                    music.play();
 
-                // music.play();
-            },
-            error: function (error) {
-                console.error("Đã xảy ra lỗi: ", error);
-            },
-        });
+                    // music.play();
+                },
+                error: function (error) {
+                    console.error("Đã xảy ra lỗi: ", error);
+                },
+            });
+            masterPlay.classList.remove("bi-play-fill");
+            masterPlay.classList.add("bi-pause-fill");
+            wave.classList.add("active2");
+        }
     });
 }
 const backward = document.getElementById("backward");
 if (backward) {
     backward.addEventListener("click", function () {
-        $.ajax({
-            type: "POST",
-            url: "/loadmusic/" + myMusic[0],
-            dataType: "json",
-            data: { _token: csrfToken },
-            success: function (data) {
-                hinhnghenhac.src = "../../images/" + data.success.imagemusic;
-                tenbaihat.innerText = data.success.tennhac;
-                nghesi.innerText = data.successns.tennghesi;
+        if (myMusic[0]) {
+            $.ajax({
+                type: "POST",
+                url: "/loadmusic/" + myMusic[0],
+                dataType: "json",
+                data: { _token: csrfToken },
+                success: function (data) {
+                    hinhnghenhac.src =
+                        "../../images/" + data.success.imagemusic;
+                    tenbaihat.innerText = data.success.tennhac;
+                    nghesi.innerText = data.successns.tennghesi;
 
-                if (!myMusic.includes(data.success.id)) {
-                    myMusic.push(data.success.id);
+                    if (!myMusic.includes(data.success.id)) {
+                        myMusic.push(data.success.id);
+                    }
+
+                    list = data.success.id;
+                    setsavemusic = true;
+                    music.src = "../../music/" + data.success.nhaclink;
+                    music.play();
+
+                    // music.play();
+                },
+                error: function (error) {
+                    console.error("Đã xảy ra lỗi: ", error);
+                },
+            });
+        }
+        masterPlay.classList.remove("bi-play-fill");
+        masterPlay.classList.add("bi-pause-fill");
+        wave.classList.add("active2");
+    });
+}
+const discoveri = document.querySelector(".discover i");
+var demloadlistnhac = 0;
+if (discoveri) {
+    discoveri.addEventListener("click", function () {
+        if (discoveri.classList.contains("bi-pause-fill")) {
+            discoveri.classList.add("bi-play-fill");
+            discoveri.classList.remove("bi-pause-fill");
+            masterPlay.classList.add("bi-play-fill");
+            masterPlay.classList.remove("bi-pause-fill");
+            wave.classList.remove("active2");
+            music.pause();
+        } else {
+            masterPlay.classList.remove("bi-play-fill");
+            masterPlay.classList.add("bi-pause-fill");
+            discoveri.classList.remove("bi-play-fill");
+            discoveri.classList.add("bi-pause-fill");
+            wave.classList.add("active2");
+            music.play();
+        }
+        if (demloadlistnhac == 0) {
+            media.forEach(function (mediaitem, indexmedia) {
+                var mediaParent = mediaitem.querySelector(".media .load-nghe");
+                if (mediaParent) {
+                    myMusic.push(
+                        parseInt(mediaParent.getAttribute("data-song"))
+                    );
                 }
+            });
+            $.ajax({
+                type: "POST",
+                url: "/loadmusic/" + myMusic[0],
+                dataType: "json",
+                data: { _token: csrfToken },
+                success: function (data) {
+                    hinhnghenhac.src =
+                        "../../images/" + data.success.imagemusic;
+                    tenbaihat.innerText = data.success.tennhac;
+                    nghesi.innerText = data.successns.tennghesi;
 
-                list = data.success.id;
-                setsavemusic = true;
-                music.src = "../../music/" + data.success.nhaclink;
-                music.play();
+                    if (!myMusic.includes(data.success.id)) {
+                        myMusic.push(data.success.id);
+                    }
 
-                // music.play();
-            },
-            error: function (error) {
-                console.error("Đã xảy ra lỗi: ", error);
-            },
-        });
+                    list = data.success.id;
+                    setsavemusic = true;
+                    music.src = "../../music/" + data.success.nhaclink;
+                    let indexArray = myMusic
+                        .map((element, index) =>
+                            element === list ? index : -1
+                        )
+                        .filter((index) => index !== -1);
+
+                    if (indexArray.length > 0) {
+                        let vi_tri = indexArray[0];
+                        demnext = vi_tri;
+                        console.log(
+                            `Vị trí của số ${list} trong mảng là: ${demnext}`
+                        );
+                    } else {
+                        console.log(`Số ${list} không tồn tại trong mảng.`);
+                    }
+                    music.play();
+
+                    // music.play();
+                },
+                error: function (error) {
+                    console.error("Đã xảy ra lỗi: ", error);
+                },
+            });
+            masterPlay.classList.remove("bi-play-fill");
+            masterPlay.classList.add("bi-pause-fill");
+            discoveri.classList.remove("bi-play-fill");
+            discoveri.classList.add("bi-pause-fill");
+            wave.classList.add("active2");
+            demloadlistnhac++;
+        }
+
+        console.log(myMusic);
     });
 }
 setInterval(function () {
