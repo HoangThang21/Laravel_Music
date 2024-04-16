@@ -54,7 +54,7 @@
                 </a>
 
             </div>
-            
+
             <div class="giothieu">
                 <a href="/gioithieu" target="_blank"> <i class="bi bi-exclamation-circle"></i>Giới thiệu</a>
             </div>
@@ -151,14 +151,14 @@
                                         <div class="title-qcao">Chỉ với 3.000 đ/tuần</div>
                                         <div class="subtitle-qcao">Nghe nhạc với chất lượng cao nhất, Toàn bộ đặc quyền
                                             Vip với kho nhạc</div>
-                                        <a  href="/vip" target="_blank">Xem chi tiết</a>
+                                        <a href="/gioithieu" target="_blank">Xem chi tiết</a>
                                     </div>
                                     <div class="qcao2">
                                         <div class="name-qcao">MobiSong <span>Vip</span></div>
                                         <div class="title-qcao">Chỉ với 10.000 đ/tháng</div>
                                         <div class="subtitle-qcao">Nghe nhạc với chất lượng cao nhất, Toàn bộ đặc quyền
                                             Vip với kho nhạc</div>
-                                        <a  href="/vip" target="_blank">Xem chi tiết</a>
+                                        <a href="/gioithieu" target="_blank">Xem chi tiết</a>
                                     </div>
                                 </div>
                                 <div class="menu-toggle_infouser">

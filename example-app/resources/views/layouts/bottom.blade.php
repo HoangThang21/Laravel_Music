@@ -36,7 +36,7 @@
             <div class="top-menu-rightsong">Top Lượt nghe</div>
             <div class="menu-scroll-rightsong">
                 @foreach ($Nhactopluotnghe as $ntluotnghe)
-                    <div class="list-menu-rightsong">
+                    <div class="list-menu-rightsong topluotnghe">
                         <div class="left-list-menu-rightsong">
                             <img src="../../images/{{ $ntluotnghe->imagemusic }}" alt="">
                             <div class="name-rightsong">{{ $ntluotnghe->tennhac }}</div>
@@ -52,7 +52,7 @@
                         class="bi bi-chevron-compact-right"></i></span></div>
             <div class="menu-scroll-rightsong">
                 @foreach ($Nhactopvip as $ntluotnghe)
-                    <div class="list-menu-rightsong">
+                    <div class="list-menu-rightsong viprenium">
                         <div class="left-list-menu-rightsong">
                             <img src="../../images/{{ $ntluotnghe->imagemusic }}" alt="">
                             <div class="name-rightsong">{{ $ntluotnghe->tennhac }}</div>
@@ -136,7 +136,8 @@
                 <div class="menu-list-right-setup">
                     <i class="bi bi-music-note-list" id="list-memu" title="Danh sách phát"></i>
                     <div class="right-menu-setup">
-                        <h3>Danh sách phát</h3>
+                        <h3>Danh sách phát<i class="phatdshaynghe bi bi-play-fill">
+                            </i> </h3>
                         <div class="menu-right-setup-list">
                             @foreach ($parts as $index => $part)
                                 @php
@@ -147,12 +148,15 @@
                                         <div class="info-media-bottom">
                                             <div class="img-media">
                                                 <img src="../../images/{{ $nss->imagemusic }}" alt="">
-                                                <div class="load-nghe-bottom"><i class="bi bi-caret-right-fill"></i>
+                                                <div class="load-nghe-bottom" data-song="{{ $nss->id }}">
+                                                    <i class="bi bi-play-fill">
+
+                                                    </i>
                                                 </div>
                                             </div>
                                             <div class="name-media">
                                                 <div class="name-music-bottom">{{ $nss->tennhac }}</div>
-                                                <a href="" class="name-tacgia">
+                                                <a href="/nghe-si/ {{ $ns->id }}" class="name-tacgia">
                                                     @foreach ($album as $alb)
                                                         @if ($alb->id == $nss->album_idnhac)
                                                             @foreach ($nghesi as $ns)
@@ -164,7 +168,9 @@
                                                     @endforeach
                                                 </a>
                                             </div>
-                                            <i style="cursor: pointer;" class="bi bi-play-fill"></i>
+                                            <i style="cursor: pointer;" data-song="{{ $nss->id }}"
+                                                class="menuhaynghe bi
+                                                bi-play-fill"></i>
                                             <div class="option">
                                                 <div class="dot-3"><i class="bi bi-three-dots"></i></div>
                                                 <div class="menu-right-media bottom-listmmusic">
@@ -200,7 +206,9 @@
                                         <div class="info-media-bottom">
                                             <div class="img-media">
                                                 <img src="../../images/{{ $nss->imagemusic }}" alt="">
-                                                <div class="load-nghe-bottom"><i class="bi bi-caret-right-fill"></i>
+                                                <div class="load-nghe-bottom" data-song="{{ $nss->id }}">
+                                                    <i class="bi bi-play-fill">
+                                                    </i>
                                                 </div>
                                             </div>
                                             <div class="name-media">
@@ -217,7 +225,8 @@
                                                     @endforeach
                                                 </a>
                                             </div>
-                                            <i style="cursor: pointer;" class="bi bi-play-fill"></i>
+                                            <i style="cursor: pointer;" data-song="{{ $nss->id }}"class="menuhaynghe bi
+                                                bi-play-fill"></i>
                                             <div class="option">
                                                 <div class="dot-3"><i class="bi bi-three-dots"></i></div>
                                                 <div class="menu-right-media bottom-listmmusic">

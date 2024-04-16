@@ -37,7 +37,7 @@
                 <p>Nhạc mới</p>
                 <i class="bi bi-caret-right-fill"></i>
             </div>
-            <a href="">Tất cả <i class="bi bi-chevron-right"></i></a>
+           
         </div>
         <div class="menu-media">
             @foreach ($Nhactop10 as $nhactop10)
