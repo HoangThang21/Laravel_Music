@@ -414,7 +414,7 @@
                     class="input_field" autocomplete="current-password">
             </div>
             <div class="input_container in_con_ifo">
-                <a href="#">Quên mật khẩu?</a>
+                <a href="#" class="quenmatkhau">Quên mật khẩu?</a>
                 <p class="create-account">Tạo tài khoản</p>
             </div>
             <button type="submit" title="Sign In" class="sign-in_btn">

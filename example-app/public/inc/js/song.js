@@ -246,23 +246,23 @@ if (time_curent_media) {
                 menuhayngheindex,
                 menuhayngheindexindexi
             ) {
-                const icon = menuhayngheindex.querySelector("i");
+                const icon2 = menuhayngheindex.querySelector("i");
                 if (indexi == menuhayngheindexindexi) {
-                    if (playButton.classList.contains("bi-pause-fill")) {
-                        icon.classList.remove("bi-pause-fill");
-                        icon.classList.add("bi-play-fill");
+                    if (icon.classList.contains("bi-pause-fill")) {
+                        icon2.classList.remove("bi-play-fill");
+                        icon2.classList.add("bi-pause-fill");
                     } else {
-                        icon.classList.remove("bi-play-fill");
-                        icon.classList.add("bi-pause-fill");
+                        icon2.classList.remove("bi-pause-fill");
+                        icon2.classList.add("bi-play-fill");
                     }
                     menuhayngheindex.style.display = "flex";
                 } else {
-                    icon.classList.remove("bi-pause-fill");
-                    icon.classList.add("bi-play-fill");
+                    icon2.classList.remove("bi-pause-fill");
+                    icon2.classList.add("bi-play-fill");
                     menuhayngheindex.style.display = "";
                 }
             });
-         
+
             if (music.paused) {
                 if (indexstartsong == indexi) {
                     masterPlay.classList.remove("bi-play-fill");
@@ -996,7 +996,7 @@ if (discoveri) {
             mediaitem.classList.remove("active");
         });
         if (demloadlistnhac == 0) {
-            myMusic=[];
+            myMusic = [];
             media.forEach(function (mediaitem, indexmedia) {
                 var mediaParent = mediaitem.querySelector(".media .load-nghe");
                 if (mediaParent) {
@@ -1080,9 +1080,11 @@ if (phatdshaynghe) {
             mediaitem.classList.remove("active");
         });
         if (demloadlistnhachaynghe == 0) {
-            myMusic=[];
+            myMusic = [];
             info_media_bottom.forEach(function (mediaitem, indexmedia) {
-                var mediaParent = mediaitem.querySelector(".img-media .load-nghe-bottom");
+                var mediaParent = mediaitem.querySelector(
+                    ".img-media .load-nghe-bottom"
+                );
                 if (mediaParent) {
                     myMusic.push(
                         parseInt(mediaParent.getAttribute("data-song"))

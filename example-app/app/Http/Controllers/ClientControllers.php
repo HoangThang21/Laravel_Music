@@ -11,6 +11,7 @@ use App\Models\Ranks;
 use App\Models\Theloai;
 use App\Models\User;
 use App\Models\UserAPI;
+use App\Models\Comment;
 use Carbon\Carbon;
 use Carbon\Exceptions\Exception as ExceptionsException;
 use Exception;
@@ -516,28 +517,51 @@ class ClientControllers extends Controller
     public function loadlivechatsendchat(string $name)
     {
         if (Auth::guard('web')->check()) {
-
-            return view('frontend.menu.livechat', [
-                'ttnguoidung' => Auth::guard('web')->user(),
-                'chat' => Mess::all(),
-                'nhac' => Nhac::where('vip', 0)->get(),
-                'Nhactopluotnghe' => Nhac::where('vip', 0)->where('xetduyet', 1)->where('luotnghe', "desc")->latest()->take(10)->get(),
-                'Nhactopvip' => Nhac::where('vip', 1)->where('xetduyet', 1)->latest()->take(2)->get(),
-                'namemusic' => Nhac::where('vip', 0)->where('xetduyet', 1)->where('id', $name)->first(),
-                'activerity' => 2,
-                'loi' => '',
-                'baidau' => Nhac::where('vip', 0)->where('xetduyet', 1)->where('luotnghe', 'desc')->first(),
-                'loingoai' => '',
-                'chatonline' => [User::where('online', 1)->get(), UserAPI::where('online', 1)->get()],
-                'login' => 0,
-                'rank' => 'null', 'nghesi' => Nghesi::all(),
-                'album' => Album::all(),
-                'rightsong' => 0,
-                'user' => User::select('id', 'image')->get(),
-                'valuesreach' => '',
-                'session' => session()->get('myMusic'),
-                'nhacsesion' => Nhac::where('vip', 0)->where('xetduyet', 1)->get(),
-            ]);
+            if (Auth::guard('web')->user()->vip == 1) {
+                return view('frontend.menu.livechat', [
+                    'ttnguoidung' => Auth::guard('web')->user(),
+                    'chat' => Mess::all(),
+                    'nhac' => Nhac::where('vip', 0)->get(),
+                    'Nhactopluotnghe' => Nhac::where('vip', 0)->where('xetduyet', 1)->where('luotnghe', "desc")->latest()->take(10)->get(),
+                    'Nhactopvip' => Nhac::where('vip', 1)->where('xetduyet', 1)->latest()->take(2)->get(),
+                    'namemusic' => Nhac::where('xetduyet', 1)->where('id', $name)->first(),
+                    'activerity' => 2,
+                    'loi' => '',
+                    'baidau' => Nhac::where('vip', 0)->where('xetduyet', 1)->where('luotnghe', 'desc')->first(),
+                    'loingoai' => '',
+                    'chatonline' => [User::where('online', 1)->get(), UserAPI::where('online', 1)->get()],
+                    'login' => 0,
+                    'rank' => 'null', 'nghesi' => Nghesi::all(),
+                    'album' => Album::all(),
+                    'rightsong' => 0,
+                    'user' => User::select('id', 'image')->get(),
+                    'valuesreach' => '',
+                    'session' => session()->get('myMusic'),
+                    'nhacsesion' => Nhac::where('vip', 0)->where('xetduyet', 1)->get(),
+                ]);
+            } else {
+                return view('frontend.menu.livechat', [
+                    'ttnguoidung' => Auth::guard('web')->user(),
+                    'chat' => Mess::all(),
+                    'nhac' => Nhac::where('vip', 0)->get(),
+                    'Nhactopluotnghe' => Nhac::where('vip', 0)->where('xetduyet', 1)->where('luotnghe', "desc")->latest()->take(10)->get(),
+                    'Nhactopvip' => Nhac::where('vip', 1)->where('xetduyet', 1)->latest()->take(2)->get(),
+                    'namemusic' => Nhac::where('vip', 0)->where('xetduyet', 1)->where('id', $name)->first(),
+                    'activerity' => 2,
+                    'loi' => '',
+                    'baidau' => Nhac::where('vip', 0)->where('xetduyet', 1)->where('luotnghe', 'desc')->first(),
+                    'loingoai' => '',
+                    'chatonline' => [User::where('online', 1)->get(), UserAPI::where('online', 1)->get()],
+                    'login' => 0,
+                    'rank' => 'null', 'nghesi' => Nghesi::all(),
+                    'album' => Album::all(),
+                    'rightsong' => 0,
+                    'user' => User::select('id', 'image')->get(),
+                    'valuesreach' => '',
+                    'session' => session()->get('myMusic'),
+                    'nhacsesion' => Nhac::where('vip', 0)->where('xetduyet', 1)->get(),
+                ]);
+            }
         }
         if (Auth::guard('google')->check()) {
             return view('frontend.menu.livechat', [
@@ -696,6 +720,8 @@ class ClientControllers extends Controller
                     'namemusic' => '',
                     'activerity' => 0,
                     'loi' => '',
+                    'nghesi' => Nghesi::all(),
+                    'album' => Album::all(),
                     'baidau' => Nhac::where('vip', 0)->where('xetduyet', 1)->where('luotnghe', 'desc')->first(),
                     'loingoai' => '',
                     'valuesreach' => '',
@@ -715,7 +741,8 @@ class ClientControllers extends Controller
                     'nhac' => Nhac::where('vip', 0)->get(),
                     'namemusic' => '',
                     'activerity' => 0,
-                    'loi' => '',
+                    'loi' => '', 'nghesi' => Nghesi::all(),
+                    'album' => Album::all(),
                     'baidau' => Nhac::where('vip', 0)->where('xetduyet', 1)->where('luotnghe', 'desc')->first(),
                     'loingoai' => '',
                     'valuesreach' => '',
@@ -779,6 +806,8 @@ class ClientControllers extends Controller
                             'nhac' => Nhac::where('vip', 0)->get(),
                             'namemusic' => '',
                             'activerity' => 0,
+                            'nghesi' => Nghesi::all(),
+                            'album' => Album::all(),
                             'loi' => '',
                             'baidau' => Nhac::where('vip', 0)->where('xetduyet', 1)->where('luotnghe', 'desc')->first(),
                             'loingoai' => 'Mật khẩu cũ không chính xác',
@@ -832,7 +861,8 @@ class ClientControllers extends Controller
                             'Nhactopvip' => Nhac::where('vip', 1)->where('xetduyet', 1)->latest()->take(2)->get(),
                             'nhac' => Nhac::where('vip', 0)->get(),
                             'namemusic' => '',
-                            'activerity' => 0,
+                            'activerity' => 0, 'nghesi' => Nghesi::all(),
+                            'album' => Album::all(),
                             'loi' => '',
                             'baidau' => Nhac::where('vip', 0)->where('xetduyet', 1)->where('luotnghe', 'desc')->first(),
                             'loingoai' => 'Mật khẩu cũ không chính xác',
@@ -854,7 +884,8 @@ class ClientControllers extends Controller
                         'Nhactopvip' => Nhac::where('vip', 1)->where('xetduyet', 1)->latest()->take(2)->get(),
                         'nhac' => Nhac::where('vip', 0)->get(),
                         'namemusic' => '',
-                        'activerity' => 0,
+                        'activerity' => 0, 'nghesi' => Nghesi::all(),
+                        'album' => Album::all(),
                         'loi' => '',
                         'baidau' => Nhac::where('vip', 0)->where('xetduyet', 1)->where('luotnghe', 'desc')->first(),
                         'loingoai' => 'Mật khẩu xác nhận không chính xác. Vui lòng nhập lại',
@@ -875,7 +906,8 @@ class ClientControllers extends Controller
                         'nhac' => Nhac::where('vip', 0)->get(),
                         'namemusic' => '',
                         'activerity' => 0,
-                        'loi' => '',
+                        'loi' => '', 'nghesi' => Nghesi::all(),
+                        'album' => Album::all(),
                         'baidau' => Nhac::where('vip', 0)->where('xetduyet', 1)->where('luotnghe', 'desc')->first(),
                         'loingoai' => 'Mật khẩu xác nhận không chính xác. Vui lòng nhập lại',
                         'valuesreach' => '',
@@ -897,7 +929,8 @@ class ClientControllers extends Controller
                     'nhac' => Nhac::where('vip', 0)->get(),
                     'namemusic' => '',
                     'activerity' => 0,
-                    'loi' => '',
+                    'loi' => '', 'nghesi' => Nghesi::all(),
+                    'album' => Album::all(),
                     'baidau' => Nhac::where('vip', 0)->where('xetduyet', 1)->where('luotnghe', 'desc')->first(),
                     'loingoai' => '',
                     'valuesreach' => '',
@@ -917,7 +950,8 @@ class ClientControllers extends Controller
                     'nhac' => Nhac::where('vip', 0)->get(),
                     'namemusic' => '',
                     'activerity' => 0,
-                    'loi' => '',
+                    'loi' => '', 'nghesi' => Nghesi::all(),
+                    'album' => Album::all(),
                     'baidau' => Nhac::where('vip', 0)->where('xetduyet', 1)->where('luotnghe', 'desc')->first(),
                     'loingoai' => '',
                     'valuesreach' => '',
@@ -1123,6 +1157,8 @@ class ClientControllers extends Controller
                 'nhac' => Nhac::where('vip', 0)->get(),
                 'namemusic' => '',
                 'activerity' => 0,
+                'nghesi' => Nghesi::all(),
+                'album' => Album::all(),
                 'loi' => '',
                 'baidau' => Nhac::where('vip', 0)->where('xetduyet', 1)->where('luotnghe', 'desc')->first(), 'loingoai' => '',
                 'chatonline' => '',
@@ -1144,6 +1180,8 @@ class ClientControllers extends Controller
                 'namemusic' => '',
                 'activerity' => 0,
                 'loi' => '',
+                'nghesi' => Nghesi::all(),
+                'album' => Album::all(),
                 'baidau' => Nhac::where('vip', 0)->where('xetduyet', 1)->where('luotnghe', 'desc')->first(), 'loingoai' => '',
                 'chatonline' => '',
                 'login' => 0,
@@ -1220,6 +1258,7 @@ class ClientControllers extends Controller
     {
         if (Auth::guard('web')->check()) {
             return view('frontend.menu.topic', [
+                'theloai' => Theloai::all(),
                 'ttnguoidung' => Auth::guard('web')->user(), 'chatonline' => '',
                 'Nhactopluotnghe' => Nhac::where('vip', 0)->where('xetduyet', 1)->where('luotnghe', "desc")->latest()->take(10)->get(),
                 'Nhactopvip' => Nhac::where('vip', 1)->where('xetduyet', 1)->latest()->take(2)->get(),
@@ -1238,6 +1277,7 @@ class ClientControllers extends Controller
         }
         if (Auth::guard('google')->check()) {
             return view('frontend.menu.topic', [
+                'theloai' => Theloai::all(),
                 'ttnguoidung' => Auth::guard('google')->user(), 'chatonline' => '',
                 'Nhactopluotnghe' => Nhac::where('vip', 0)->where('xetduyet', 1)->where('luotnghe', "desc")->latest()->take(10)->get(),
                 'Nhactopvip' => Nhac::where('vip', 1)->where('xetduyet', 1)->latest()->take(2)->get(),
@@ -1255,6 +1295,7 @@ class ClientControllers extends Controller
             ]);
         }
         return view('frontend.menu.topic', [
+            'theloai' => Theloai::all(),
             'Nhactopluotnghe' => Nhac::where('vip', 0)->where('xetduyet', 1)->where('luotnghe', "desc")->latest()->take(10)->get(),
             'Nhactopvip' => Nhac::where('vip', 1)->where('xetduyet', 1)->latest()->take(2)->get(),
             'activerity' => 5,
@@ -1276,6 +1317,8 @@ class ClientControllers extends Controller
         $nhac = Nhac::where('vip', 0)->where('xetduyet', 1)->where('id', $name)->first();
         $album = Album::where('id', $nhac->album_idnhac)->first();
         $nghesi = Nghesi::where('id', $album->nghesi_idalbum)->first();
+        $comment = Comment::where("idnhac", $name)->get();
+        $countComment =  Comment::where("idnhac", $name)->get()->count();
         if (Auth::guard('web')->check()) {
             return view('frontend.List.AlbumBaiHat', [
                 'ttnguoidung' => Auth::guard('web')->user(),
@@ -1285,6 +1328,8 @@ class ClientControllers extends Controller
                 'baidau' => Nhac::where('vip', 0)->where('xetduyet', 1)->where('luotnghe', 'desc')->first(),
                 'loingoai' => '',
                 'Nhacalbumbaihat' => $nhac,
+                'comment' => $comment,
+                'countComment' => $countComment,
                 'Nhactopluotnghe' => Nhac::where('vip', 0)->where('xetduyet', 1)->where('luotnghe', "desc")->latest()->take(10)->get(),
                 'Nhactopvip' => Nhac::where('vip', 1)->where('xetduyet', 1)->latest()->take(2)->get(),
                 'nghesis' =>  $nghesi,
@@ -1309,6 +1354,8 @@ class ClientControllers extends Controller
                 'baidau' => Nhac::where('vip', 0)->where('xetduyet', 1)->where('luotnghe', 'desc')->first(),
                 'loingoai' => '',
                 'Nhacalbumbaihat' => $nhac,
+                'comment' => $comment,
+                'countComment' => $countComment,
                 'Nhactopluotnghe' => Nhac::where('vip', 0)->where('xetduyet', 1)->where('luotnghe', "desc")->latest()->take(10)->get(),
                 'Nhactopvip' => Nhac::where('vip', 1)->where('xetduyet', 1)->latest()->take(2)->get(),
                 'nghesis' =>  $nghesi,
@@ -1330,10 +1377,12 @@ class ClientControllers extends Controller
             'baidau' => Nhac::where('vip', 0)->where('xetduyet', 1)->where('luotnghe', 'desc')->first(),
             'loingoai' => '',
             'Nhacalbumbaihat' => $nhac,
+            'countComment' => $countComment,
             'Nhactopluotnghe' => Nhac::where('vip', 0)->where('xetduyet', 1)->where('luotnghe', "desc")->latest()->take(10)->get(),
             'Nhactopvip' => Nhac::where('vip', 1)->where('xetduyet', 1)->latest()->take(2)->get(),
             'nghesis' =>  $nghesi,
             'albums' => $album,
+            'comment' => $comment,
             'nghesi' => Nghesi::all(),
             'album' => Album::all(),
             'login' => 0,
@@ -1819,7 +1868,30 @@ class ClientControllers extends Controller
         // Trả về dữ liệu thành công
         return response()->json(['success' => $nhac, 'successns' => $nghesi]);
     }
-
+    public function commentmusic(Request $request, string $name)
+    {
+        if ($request->input('query')) {
+            if (Auth::guard('web')->check()) {
+                $comment = new Comment;
+                $comment->idnhac = $name;
+                $comment->ten = Auth::guard('web')->user()->email;
+                $comment->hinh = Auth::guard('web')->user()->image;
+                $comment->noidung = $request->input('query');
+                $comment->save();
+                return response()->json(['response' => "ok"]);
+            }
+            if (Auth::guard('google')->check()) {
+                $comment = new Comment;
+                $comment->idnhac = $name;
+                $comment->ten = Auth::guard('google')->user()->email;
+                $comment->hinh = Auth::guard('google')->user()->image;
+                $comment->noidung = $request->input('query');
+                $comment->save();
+                return response()->json(['response' => "ok"]);
+            }
+            return response()->json(['response' => "no"]);
+        }
+    }
     public function saveMyMusic(Request $request)
     {
         $id = $request->input('myMusic');

@@ -57,9 +57,7 @@ li {
 a {
     text-decoration: none;
 }
-img{
-    object-fit: cover;
-}
+
 header {
     position: relative;
     /* width: 85%;
@@ -2564,13 +2562,115 @@ p {
 }
 .bottom-album-baihat {
     display: flex;
+    justify-content: center;
+}
+.comment {
+    width: 55%;
+}
+.DivCommentWrapper,
+.commetus {
+    position: relative;
+}
+.DivCommentHeader {
+    padding-top: 10px;
+    padding-bottom: 7px;
+    padding-left: 38px;
+    padding-right: 34.99px;
+    left: 0px;
+    top: 0px;
+    position: absolute;
+    border-bottom: 2px #d5d5d5 solid;
+    justify-content: space-between;
+    align-items: flex-start;
+    display: inline-flex;
+}
+.DivCommentTotal {
+    align-self: stretch;
+    padding-bottom: 3.17px;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    display: inline-flex;
+}
+.BNhLuN {
+    color: #fff;
+    font-size: 14px;
+    font-family: Arial;
+    font-weight: 700;
+    line-height: 21px;
+    word-wrap: break-word;
+}
+
+.DivDropdown {
+    width: 157.16px;
+    align-self: stretch;
+    padding-top: 4.18px;
+    padding-bottom: 1.82px;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 9.45px;
+    display: flex;
+}
+.SortButtonWithThreeLinesSvg {
+    justify-content: flex-start;
+    align-items: flex-start;
+    display: flex;
+}
+.SortButtonWithThreeLinesSvgFill {
+    width: 18px;
+    height: 18px;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    display: inline-flex;
 }
-.title-bottom-album-baihat {
+.commetus {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+
+    flex-direction: column;
+    gap: 20px;
 }
-.content-bottom-album-baihat {
+.itemcomment {
+    margin: 0 20px;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    padding: 10px;
+    background: var(--background-music);
+    border-radius: 4px;
+}
+.itemcomment-img img {
+    object-fit: cover;
+    width: 50px;
+    height: 50px;
+    min-width: 50px;
+    border-radius: 50%;
+}
+.itemcomment-info {
+    width: fit-content;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+.itemcomment-ten {
+    color: var(--text-color-light);
+    width: fit-content;
+    font-size: 13px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 19.5px; /* 150% */
+}
+.itemcomment-comment {
+    display: inline-block;
+    width: fit-content;
+    color: var(--text-color-light);
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 19px; /* 135.714% */
+    text-wrap: wrap;
 }
 /* ---------------------------------------------------------------------- */
 /* ---------------------------------------------------------------------- search*/

@@ -151,7 +151,7 @@
                                                         style="color:#8b1717">Khóa</span>
                                                 </div>
                                             @endif
-                                            <div class="vipUser">Ngày hết hạn gói Prenium: Full</div>
+                                            <div class="vipUser">Vip:{{ $us['vip'] }}</div>
                                         </div>
                                     @endif
 
@@ -234,7 +234,7 @@
                                             <div class="trangthai">Trạng Thái: <span style="color:#8b1717">Khóa</span>
                                             </div>
                                         @endif
-                                        <div class="vipUser">Ngày hết hạn gói Prenium: Full</div>
+                                        <div class="vipUser">Vip:{{ $us['vip'] }}</div>
                                     </div>
                                 @endif
 
@@ -329,7 +329,7 @@
                                                         style="color:#8b1717">Khóa</span>
                                                 </div>
                                             @endif
-                                            <div class="vipUser">Ngày hết hạn gói Prenium: Full</div>
+                                            <div class="vipUser">Vip:{{ $us['vip'] }}</div>
                                         </div>
                                     @endif
 
@@ -411,7 +411,7 @@
                                             <div class="trangthai">Trạng Thái: <span style="color:#8b1717">Khóa</span>
                                             </div>
                                         @endif
-                                        <div class="vipUser">Ngày hết hạn gói Prenium: Full</div>
+                                        <div class="vipUser">Vip:{{ $us['vip'] }}</div>
                                     </div>
                                 @endif
 

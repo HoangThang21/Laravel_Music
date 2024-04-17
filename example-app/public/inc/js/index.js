@@ -151,11 +151,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 if (indexcbcontent1 == indexmenuFilter1) {
                     cb.forEach(function (cb1, indexcb1) {
                         if (indexcb1 == indexmenuFilter1) {
-                            console.log(
-                                indexcbcontent1,
-                                indexmenuFilter1,
-                                indexcb1
-                            );
                             if (menuFilter1) {
                                 const isHidden1 =
                                     menuFilter1.style.height == "180px" ||
@@ -243,7 +238,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const prenium = document.querySelector(".prenium i");
     if (prenium) {
         prenium.addEventListener("click", function () {
-            console.log('a');
+            console.log("a");
             window.location.href = "/prenium";
         });
     }
@@ -288,6 +283,48 @@ document.addEventListener("DOMContentLoaded", () => {
                     },
                 });
             });
+        });
+    }
+    var quenmatkhau = document.querySelector(".quenmatkhau");
+    if (quenmatkhau) {
+        quenmatkhau.addEventListener("click", function () {
+            var loi = document.querySelector(".loi");
+            loi.classList.add("active");
+            loi.style.display = "flex";
+            loi.querySelector(".tieude").textContent =
+                "Vui lòng liên hệ admin qua Email: mobifone@gmail.com.";
+        });
+    }
+    var DivSubmitCommentBtn = document.querySelector(".DivSubmitCommentBtn");
+    var NhPBNhLuNCABN = document.querySelector(".NhPBNhLuNCABN");
+    if (DivSubmitCommentBtn) {
+        DivSubmitCommentBtn.addEventListener("click", function () {
+            if (NhPBNhLuNCABN.value != "") {
+                $.ajax({
+                    type: "get",
+                    url:
+                        "/commentmusic/" +
+                        DivSubmitCommentBtn.getAttribute("data-songcomment"),
+                    data: {
+                        query: NhPBNhLuNCABN.value,
+                    },
+                    success: function (data) {
+                        if (data.response == "no") {
+                            var loi = document.querySelector(".loi");
+                            loi.classList.add("active");
+                            loi.style.display = "flex";
+                            loi.querySelector(".tieude").textContent =
+                                "Vui lòng đăng nhập để bình luận.";
+                        } else {
+                            window.location.href = currentUrl;
+                        }
+                    },
+
+                    error: function (error) {
+                        console.error("Đã xảy ra lỗi: ", error);
+                    },
+                });
+            }
         });
     }
     var item_body_content = document.querySelectorAll(".item-body-content");
