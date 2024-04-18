@@ -332,13 +332,10 @@
                                             <div class="vipUser">Vip:{{ $us['vip'] }}</div>
                                         </div>
                                     @endif
-
-
                                 </div>
                             </div>
                         @endif
                     @endif
-
                     {{-- quyền admin --}}
                     @if ($ttnguoidung['quyen'] == 1)
                         <div id="infolo">

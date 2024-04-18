@@ -1057,6 +1057,90 @@ if (discoveri) {
         console.log(myMusic);
     });
 }
+const baihatall = document.querySelector(".baihatall i");
+var demloadlistnhacall = 0;
+if (baihatall) {
+    baihatall.addEventListener("click", function () {
+        if (baihatall.classList.contains("bi-pause-fill")) {
+            baihatall.classList.add("bi-play-fill");
+            baihatall.classList.remove("bi-pause-fill");
+            masterPlay.classList.add("bi-play-fill");
+            masterPlay.classList.remove("bi-pause-fill");
+            wave.classList.remove("active2");
+            music.pause();
+        } else {
+            masterPlay.classList.remove("bi-play-fill");
+            masterPlay.classList.add("bi-pause-fill");
+            baihatall.classList.remove("bi-play-fill");
+            baihatall.classList.add("bi-pause-fill");
+            wave.classList.add("active2");
+            music.play();
+        }
+        media.forEach(function (mediaitem, indexmedia) {
+            mediaitem.classList.remove("active");
+        });
+        if (demloadlistnhacall == 0) {
+            myMusic = [];
+            media.forEach(function (mediaitem, indexmedia) {
+                var mediaParent = mediaitem.querySelector(".mediaallnhac .load-nghe");
+                if (mediaParent) {
+                    myMusic.push(
+                        parseInt(mediaParent.getAttribute("data-song"))
+                    );
+                }
+            });
+            $.ajax({
+                type: "POST",
+                url: "/loadmusic/" + myMusic[0],
+                dataType: "json",
+                data: { _token: csrfToken },
+                success: function (data) {
+                    hinhnghenhac.src =
+                        "../../images/" + data.success.imagemusic;
+                    tenbaihat.innerText = data.success.tennhac;
+                    nghesi.innerText = data.successns.tennghesi;
+
+                    if (!myMusic.includes(data.success.id)) {
+                        myMusic.push(data.success.id);
+                    }
+
+                    list = data.success.id;
+                    setsavemusic = true;
+                    music.src = "../../music/" + data.success.nhaclink;
+                    let indexArray = myMusic
+                        .map((element, index) =>
+                            element === list ? index : -1
+                        )
+                        .filter((index) => index !== -1);
+
+                    if (indexArray.length > 0) {
+                        let vi_tri = indexArray[0];
+                        demnext = vi_tri;
+                        console.log(
+                            `Vị trí của số ${list} trong mảng là: ${demnext}`
+                        );
+                    } else {
+                        console.log(`Số ${list} không tồn tại trong mảng.`);
+                    }
+                    music.play();
+
+                    // music.play();
+                },
+                error: function (error) {
+                    console.error("Đã xảy ra lỗi: ", error);
+                },
+            });
+            masterPlay.classList.remove("bi-play-fill");
+            masterPlay.classList.add("bi-pause-fill");
+            baihatall.classList.remove("bi-play-fill");
+            baihatall.classList.add("bi-pause-fill");
+            wave.classList.add("active2");
+            demloadlistnhacall++;
+        }
+
+        console.log(myMusic);
+    });
+}
 const phatdshaynghe = document.querySelector(".phatdshaynghe");
 var demloadlistnhachaynghe = 0;
 if (phatdshaynghe) {

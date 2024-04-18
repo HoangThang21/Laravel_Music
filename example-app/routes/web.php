@@ -146,3 +146,4 @@ use Illuminate\Support\Facades\Route;
     Route::get('/commentmusic/{name}', [ClientControllers::class, 'commentmusic']);
     Route::get('/prenium', [ClientControllers::class, 'prenium']);
     Route::get('/gioithieu', [ClientControllers::class, 'gioithieu']);
+    Route::get('/the-loai/{name}', [ClientControllers::class, 'trangtl']);

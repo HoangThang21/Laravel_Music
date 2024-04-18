@@ -327,6 +327,18 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         });
     }
+    var tlnhac = document.querySelectorAll(".body-topic-item .item");
+    if (tlnhac) {
+        tlnhac.forEach(function (tlnhac1, indexcbcontent1) {
+            tlnhac1.addEventListener("click", function () {
+                window.location.href =
+                    "/the-loai/" + tlnhac1.getAttribute("data-tl");
+                
+                
+            });
+        });
+        
+    }
     var item_body_content = document.querySelectorAll(".item-body-content");
     if (item_body_content) {
         item_body_content.forEach(function (menuFilter1, indexcbcontent1) {

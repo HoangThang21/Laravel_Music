@@ -1752,6 +1752,87 @@ class ClientControllers extends Controller
             'rightsong' => 0,
         ]);
     }
+    public function trangtl(string $name)
+    {
+        $tl= Theloai::where('id',$name)->first();
+        $album = Album::where('theloai_idalbum', $tl->id)->get();
+        if (Auth::guard('web')->check()) {
+            return view('frontend.List.Theloai', [
+                'ttnguoidung' => Auth::guard('web')->user(),
+                'activerity' => 5,
+                'chatonline' => '',
+                'loi' => '',
+                'baidau' => Nhac::where('vip', 0)->where('xetduyet', 1)->where('luotnghe', 'desc')->first(),
+                'loingoai' => '',
+                'user' => User::select('id', 'image')->get(),
+                'session' => session()->get('myMusic'),
+                'nhacsesion' => Nhac::where('vip', 0)->where('xetduyet', 1)->get(),
+                'Chill' => Album::inRandomOrder()->take(3)->get(),
+                'Nhactopluotnghe' => Nhac::where('vip', 0)->where('xetduyet', 1)->where('luotnghe', "desc")->latest()->take(10)->get(),
+                'Nhactopvip' => Nhac::where('vip', 1)->where('xetduyet', 1)->latest()->take(2)->get(),
+                'Nhactop10' => Nhac::where('vip', 0)->where('xetduyet', 1)->latest()->take(5)->get(),
+                'Nghesitop20' => Nghesi::inRandomOrder()->take(20)->get(),
+                'nghesi' => Nghesi::all(),
+                'album' => Album::all(),
+                'nhacsearch'=>Nhac::all(),
+                'login' => 0,
+                'albumsearch' => $album,
+                'valuesreach' =>'',
+                'rank' => 'null',
+                'rightsong' => 0,
+            ]);
+        }
+        if (Auth::guard('google')->check()) {
+
+            return view('frontend.List.Theloai', [
+                'ttnguoidung' => Auth::guard('google')->user(),
+                'activerity' => 5,
+                'chatonline' => '',
+                'loi' => '',
+                'baidau' => Nhac::where('vip', 0)->where('xetduyet', 1)->where('luotnghe', 'desc')->first(),
+                'loingoai' => '',
+                'user' => User::select('id', 'image')->get(),
+                'session' => session()->get('myMusic'),
+                'nhacsesion' => Nhac::where('vip', 0)->where('xetduyet', 1)->get(),
+                'Chill' => Album::inRandomOrder()->take(3)->get(),
+                'Nhactopluotnghe' => Nhac::where('vip', 0)->where('xetduyet', 1)->where('luotnghe', "desc")->latest()->take(10)->get(),
+                'Nhactopvip' => Nhac::where('vip', 1)->where('xetduyet', 1)->latest()->take(2)->get(),
+                'Nhactop10' => Nhac::where('vip', 0)->where('xetduyet', 1)->latest()->take(5)->get(),
+                'Nghesitop20' => Nghesi::inRandomOrder()->take(20)->get(),
+                'nghesi' => Nghesi::all(),
+                'album' => Album::all(),
+                'nhacsearch'=>Nhac::all(),
+                'login' => 0,
+                'albumsearch' => $album,
+                'valuesreach' =>'',
+                'rank' => 'null',
+                'rightsong' => 0,
+            ]);
+        }
+        return view('frontend.List.Theloai', [
+            'activerity' => 5,
+                'chatonline' => '',
+                'loi' => '',
+                'nhacsearch'=>Nhac::all(),
+                'baidau' => Nhac::where('vip', 0)->where('xetduyet', 1)->where('luotnghe', 'desc')->first(),
+                'loingoai' => '',
+                'user' => User::select('id', 'image')->get(),
+                'session' => session()->get('myMusic'),
+                'nhacsesion' => Nhac::where('vip', 0)->where('xetduyet', 1)->get(),
+                'Chill' => Album::inRandomOrder()->take(3)->get(),
+                'Nhactopluotnghe' => Nhac::where('vip', 0)->where('xetduyet', 1)->where('luotnghe', "desc")->latest()->take(10)->get(),
+                'Nhactopvip' => Nhac::where('vip', 1)->where('xetduyet', 1)->latest()->take(2)->get(),
+                'Nhactop10' => Nhac::where('vip', 0)->where('xetduyet', 1)->latest()->take(5)->get(),
+                'Nghesitop20' => Nghesi::inRandomOrder()->take(20)->get(),
+                'nghesi' => Nghesi::all(),
+                'album' => Album::all(),
+                'login' => 0,
+                'albumsearch' => $album,
+                'valuesreach' =>'',
+                'rank' => 'null',
+                'rightsong' => 0,
+        ]);
+    }
     public function prenium()
     {
         $nhac = Nhac::where('vip', 1)->where('xetduyet', 1)->latest()->get();

@@ -1032,6 +1032,24 @@ header .master_play .bar input {
     letter-spacing: 0.52px;
     text-transform: capitalize;
 }
+.bodyhome .baihatall {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.bodyhome .baihatall i {
+    font-size: 19px;
+    cursor: pointer;
+}
+.bodyhome .baihatall p {
+    color: #f1f1f1;
+    font-size: 26px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    letter-spacing: 0.52px;
+    text-transform: capitalize;
+}
 .albumlist {
     display: flex;
     margin: 10px 0 30px 0;
@@ -1924,7 +1942,7 @@ header .master_play .bar input {
     align-items: center;
     scroll-snap-align: start;
 }
-.body-Contener_ns .body-Contener-search {
+.body-Contener-search {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -2346,19 +2364,23 @@ p {
     border-radius: 20px;
     outline: none;
     height: 170px;
+    cursor: pointer;
 }
 
 .menu-topic .item:nth-child(1) {
-    background-color: #855d5d;
+    background-color: #da752d;
 }
 .menu-topic .item:nth-child(2) {
-    background-color: #4939a5;
+    background-color: #4f75c5;
 }
 .menu-topic .item:nth-child(3) {
-    background-color: #448b48;
+    background-color: #be504e;
 }
 .menu-topic .item:nth-child(4) {
     background-color: #56d763;
+}
+.menu-topic .item:nth-child(5) {
+    background-color: #56d7d5;
 }
 .menu-topic .bottom-topic {
     position: absolute;

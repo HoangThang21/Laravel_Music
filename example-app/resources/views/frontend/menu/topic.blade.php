@@ -4,7 +4,7 @@
         <div class="header-topic">Nhạc Việt Nam</div>
         <div class="body-topic-item" style="height: 180px;">
             @foreach ($theloai as $item)
-                <div class="item">{{ $item->tentheloai }}</div>
+                <div class="item" data-tl="{{ $item->id }}">{{ $item->tentheloai }}</div>
             @endforeach
 
 
