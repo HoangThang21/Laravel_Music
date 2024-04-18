@@ -140,6 +140,7 @@
                                             {{ $us['name'] }}
                                         </div>
                                         <div class="email">{{ $us['email'] }}</div>
+                                        <div class="email">{{ $us['sdt'] }}</div>
                                     </div>
                                     @if ($us['quyen'] != 1)
                                         <div class="mandates">
@@ -224,6 +225,7 @@
                                         {{ $us['name'] }}
                                     </div>
                                     <div class="email">{{ $us['email'] }}</div>
+                                    <div class="email">{{ $us['sdt'] }}</div>
                                 </div>
                                 @if ($us['quyen'] != 1)
                                     <div class="mandates">
@@ -317,6 +319,7 @@
                                             {{ $us['name'] }}
                                         </div>
                                         <div class="email">{{ $us['email'] }}</div>
+                                        <div class="email">{{ $us['sdt'] }}</div>
                                     </div>
                                     @if ($us['quyen'] != 1)
                                         <div class="mandates">
@@ -398,6 +401,7 @@
                                         {{ $us['name'] }}
                                     </div>
                                     <div class="email">{{ $us['email'] }}</div>
+                                    <div class="email">{{ $us['sdt'] }}</div>
                                 </div>
                                 @if ($us['quyen'] != 1)
                                     <div class="mandates">

@@ -17,26 +17,28 @@
                     @endphp
                 @endif
             @endforeach
+
             @if ($check >= 0)
                 <div class="left-top-album-baihat-yeuthich">{{ $check }} yêu thích</div>
             @endif
+            <div class="">{{ $nghesins->mota }}</div>
         </div>
         <div class="right-top-album-baihat">
             <div class="botom-mchart">
                 <div class="bodyhome">
                     <div class="table-music">
                         <div class="menu-media">
-                            @foreach ($albumns as $item)
+                            @foreach ($albumns as $albs)
                                 @foreach ($Nhacalbumbaihat as $nhactop10)
-                                    @if ($item->id == $nhactop10->album_idnhac)
+                                    @if ($albs->id == $nhactop10->album_idnhac)
                                         <div class="media">
-                                            <div class="media-left">
+                                            <div class="media-left ">
                                                 <div class="info-media">
                                                     <div class="img-media">
                                                         <img src="../../images/{{ $nhactop10->imagemusic }}"
                                                             alt="">
-                                                        <div class="load-nghe"data-song="{{ $nhactop10->id }}"><i class="bi bi-caret-right-fill"></i>
-                                                        </div>
+                                                        <div class="load-nghe" data-song="{{ $nhactop10->id }}"><i
+                                                                class="bi bi-play-fill"></i></div>
                                                     </div>
                                                     <div class="name-media">
                                                         <div class="name-music" data-nhacredict="{{ $nhactop10->id }}">
@@ -88,7 +90,6 @@
                                                                                                     {{ $check }}
                                                                                                     quan tâm</div>
                                                                                             @endif
-
                                                                                         </div>
                                                                                     </div>
                                                                                     {{-- -------------------------------- --}}
@@ -103,8 +104,8 @@
                                                                                         <div class="topright-tacgia"
                                                                                             data-quantam="{{ $ns->id }}"
                                                                                             @if ($isInterested) {{ 'style=background:blue;color:#fff' }}
-                                                                            @else
-                                                                                {{ '' }} @endif>
+                                                                                @else
+                                                                                    {{ '' }} @endif>
                                                                                             <i
                                                                                                 class="bi bi-person-plus-fill"></i>
                                                                                             @if ($isInterested)
@@ -125,8 +126,8 @@
                                                                                             <div class="topright-tacgia"
                                                                                                 data-quantam="{{ $ns->id }}"
                                                                                                 @if ($isInterested) {{ 'style=background:blue;color:#fff' }}
-                                                                @else
-                                                                    {{ '' }} @endif>
+                                                                            @else
+                                                                                {{ '' }} @endif>
                                                                                                 <i
                                                                                                     class="bi bi-person-plus-fill"></i>
                                                                                                 @if ($isInterested)
@@ -193,8 +194,10 @@
                                                         $duration = $fileInfo['playtime_string'];
                                                     }
                                                 @endphp
-                                                <div class="time-curent-media"data-song="{{ $nhactop10->id }}"><span>{{ $duration }}</span><i
-                                                        class="loadmusic-dot bi bi-caret-right-fill"></i></div>
+                                                <div class="time-curent-media" data-song="{{ $nhactop10->id }}">
+                                                    <span>{{ $duration }}</span><i
+                                                        class="loadmusic-dot bi bi-play-fill"></i>
+                                                </div>
                                                 @if (Auth::guard('web')->check())
                                                     @php
                                                         $inputString = $ttnguoidung->thuvien;
@@ -260,8 +263,8 @@
                                                             data-gia="{{ $nhactop10->gia }}"><i
                                                                 class="bi bi-phone-vibrate"></i>Cài nhạc chờ
                                                         </div>
-                                                        <div class="sendchat" data-sendchat="{{ $nhactop10->id }}"><i class="bi bi-chat-dots"></i>Share chat
-                                                        </div>
+                                                        <div class="sendchat" data-sendchat="{{ $nhactop10->id }}"><i
+                                                                class="bi bi-chat-dots"></i>Share chat</div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -269,6 +272,7 @@
                                     @endif
                                 @endforeach
                             @endforeach
+
 
                         </div>
                     </div>

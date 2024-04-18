@@ -339,7 +339,7 @@
     <div class="song-search-click" style="display:none">
         <div class="table-music">
             <div class="toptable">
-                <div class="discover">
+                <div class="baihatall">
                   
                     <p>Bài hát</p>
                     <i class="bi bi-caret-right-fill"></i>
@@ -350,11 +350,11 @@
                     @php
                         $number = str_pad($loop->iteration, 2, '0', STR_PAD_LEFT); // Định dạng số với hai chữ số và thêm số 0 ở đầu nếu cần
                     @endphp
-                    <div class="media">
+                    <div class="media mediaallnhac">
                         <div class="media-left">
                             <span>{{ $number }}</span>
                             <div class="info-media">
-                                <div class="img-media">
+                                <div class="img-media ">
                                     <img src="../../images/{{ $nhactop10->imagemusic }}" alt="">
                                     <div class="load-nghe"data-song="{{ $nhactop10->id }}"><i class="bi bi-caret-right-fill"></i></div>
                                 </div>

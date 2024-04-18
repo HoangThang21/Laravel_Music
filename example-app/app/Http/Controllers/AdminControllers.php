@@ -335,6 +335,11 @@ class AdminControllers extends Controller
         $user->email = $request->input('txtemail');
         $user->image = $generatedimage;
         $user->quyen = $request->input('optloaind');
+        if ($request->input('optloaind') == 4) {
+            $user->vip = 1;
+        } else {
+            $user->vip = 0;
+        }
         $user->trangthai = 1;
         $user->quyenchat = 1;
         $user->save();
@@ -578,6 +583,7 @@ class AdminControllers extends Controller
                         ->update([
                             'password' => Hash::make($request->input('txtmatkhaumoi')),
                             'vip' => $request->input('optloaindvip'),
+                            'name' => $request->input('txtten'),
                             'quyen' => $request->input('optloaind'),
                             'quyenchat' => $request->input('txtquyenchat'),
                         ]);
@@ -590,6 +596,7 @@ class AdminControllers extends Controller
                             'vip' => $request->input('optloaindvip'),
                             'quyen' => $request->input('optloaind'),
                             'quyenchat' => $request->input('txtquyenchat'),
+                            'name' => $request->input('txtten'),
                         ]);
                     return redirect()->intended('/Administrator');
                 }
@@ -597,7 +604,7 @@ class AdminControllers extends Controller
                 if ($request->input('idnguoidungselect') == 'userbt') {
                     $user = User::where('id', $request->input('idnguoidung'))
                         ->update([
-
+                            'name' => $request->input('txtten'),
                             'vip' => $request->input('optloaindvip'),
                             'quyen' => $request->input('optloaind'),
                             'quyenchat' => $request->input('txtquyenchat'),
@@ -607,7 +614,7 @@ class AdminControllers extends Controller
                 if ($request->input('idnguoidungselect') == 'usergg') {
                     $user = UserAPI::where('id', $request->input('idnguoidung'))
                         ->update([
-
+                            'name' => $request->input('txtten'),
                             'vip' => $request->input('optloaindvip'),
                             'quyen' => $request->input('optloaind'),
                             'quyenchat' => $request->input('txtquyenchat'),

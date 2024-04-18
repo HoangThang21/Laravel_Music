@@ -33,7 +33,6 @@
 * {
     margin: 0;
     padding: 0;
-    
 }
 a {
     text-decoration: none;
@@ -291,7 +290,13 @@ li {
     /* padding: 2px 8px; */
     border-radius: 8px;
 }
-
+.motanghesi {
+    width: 440px;
+}
+.motanghesi textarea {
+    width: 100%;
+    height: 200px;
+}
 .infofilter .optionFilter ul a:hover {
     background-color: #f1f0f0;
 }
@@ -730,5 +735,5 @@ p {
     line-height: 0;
     padding-top: 2px;
     font-size: 24px;
-    animation:  all 1s linear ;
+    animation: all 1s linear;
 }

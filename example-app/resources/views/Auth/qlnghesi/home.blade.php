@@ -61,8 +61,9 @@
                             </td>
                             <td>{{ $nd['tennghesi'] }}</td>
                             <td>{{ $us['email'] }}</td>
-                            <td>
-                                {{ $nd['mota'] }}</td>
+                            <td class="motanghesi">
+                                <textarea draggable="false" name="" id="" readonly> {{ $nd['mota'] }}</textarea>
+                            </td>
                             <td><a href="/Administrator/qlnghesi/xoanghesi&{{ $nd['id'] }}-ns"
                                     class="text-danger delete-link">Xóa</a>
                                 <span> | </span>

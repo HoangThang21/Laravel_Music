@@ -310,6 +310,7 @@ class ClientControllers extends Controller
             'email' => $user->email,
             'quyen' => 3,
             'trangthai' => 1,
+            'vip' => 0,
         ]);
         Auth::guard('google')->login(UserAPI::where('email', $userxacthuc->email)->first());
         UserAPI::where('email', $userxacthuc->email)->update(['online' => 1]);
@@ -517,74 +518,154 @@ class ClientControllers extends Controller
     public function loadlivechatsendchat(string $name)
     {
         if (Auth::guard('web')->check()) {
-            if (Auth::guard('web')->user()->vip == 1) {
-                return view('frontend.menu.livechat', [
+            if (Auth::guard('web')->user()->quyenchat == 1) {
+                if (Auth::guard('web')->user()->vip == 1) {
+                    return view('frontend.menu.livechat', [
+                        'ttnguoidung' => Auth::guard('web')->user(),
+                        'chat' => Mess::all(),
+                        'nhac' => Nhac::where('vip', 0)->get(),
+                        'Nhactopluotnghe' => Nhac::where('vip', 0)->where('xetduyet', 1)->where('luotnghe', "desc")->latest()->take(10)->get(),
+                        'Nhactopvip' => Nhac::where('vip', 1)->where('xetduyet', 1)->latest()->take(2)->get(),
+                        'namemusic' => Nhac::where('xetduyet', 1)->where('id', $name)->first(),
+                        'activerity' => 2,
+                        'loi' => '',
+                        'baidau' => Nhac::where('vip', 0)->where('xetduyet', 1)->where('luotnghe', 'desc')->first(),
+                        'loingoai' => '',
+                        'chatonline' => [User::where('online', 1)->get(), UserAPI::where('online', 1)->get()],
+                        'login' => 0,
+                        'rank' => 'null', 'nghesi' => Nghesi::all(),
+                        'album' => Album::all(),
+                        'rightsong' => 0,
+                        'user' => User::select('id', 'image')->get(),
+                        'valuesreach' => '',
+                        'session' => session()->get('myMusic'),
+                        'nhacsesion' => Nhac::where('vip', 0)->where('xetduyet', 1)->get(),
+                    ]);
+                } else {
+                    return view('frontend.menu.livechat', [
+                        'ttnguoidung' => Auth::guard('web')->user(),
+                        'chat' => Mess::all(),
+                        'nhac' => Nhac::where('vip', 0)->get(),
+                        'Nhactopluotnghe' => Nhac::where('vip', 0)->where('xetduyet', 1)->where('luotnghe', "desc")->latest()->take(10)->get(),
+                        'Nhactopvip' => Nhac::where('vip', 1)->where('xetduyet', 1)->latest()->take(2)->get(),
+                        'namemusic' => Nhac::where('vip', 0)->where('xetduyet', 1)->where('id', $name)->first(),
+                        'activerity' => 2,
+                        'loi' => '',
+                        'baidau' => Nhac::where('vip', 0)->where('xetduyet', 1)->where('luotnghe', 'desc')->first(),
+                        'loingoai' => '',
+                        'chatonline' => [User::where('online', 1)->get(), UserAPI::where('online', 1)->get()],
+                        'login' => 0,
+                        'rank' => 'null', 'nghesi' => Nghesi::all(),
+                        'album' => Album::all(),
+                        'rightsong' => 0,
+                        'user' => User::select('id', 'image')->get(),
+                        'valuesreach' => '',
+                        'session' => session()->get('myMusic'),
+                        'nhacsesion' => Nhac::where('vip', 0)->where('xetduyet', 1)->get(),
+                    ]);
+                }
+            }else{
+                return view('frontend.home', [
                     'ttnguoidung' => Auth::guard('web')->user(),
-                    'chat' => Mess::all(),
-                    'nhac' => Nhac::where('vip', 0)->get(),
+                    'activerity' => 0,
+                    'Albumtop3' => Album::latest()->take(3)->get(),
+                    'Chill' => Album::inRandomOrder()->take(3)->get(),
+                    'CanLike' => Album::inRandomOrder()->take(3)->get(),
+                    'Nhactop10' => Nhac::where('vip', 0)->where('xetduyet', 1)->latest()->take(10)->get(),
                     'Nhactopluotnghe' => Nhac::where('vip', 0)->where('xetduyet', 1)->where('luotnghe', "desc")->latest()->take(10)->get(),
                     'Nhactopvip' => Nhac::where('vip', 1)->where('xetduyet', 1)->latest()->take(2)->get(),
-                    'namemusic' => Nhac::where('xetduyet', 1)->where('id', $name)->first(),
-                    'activerity' => 2,
+                    'Nghesitop20' => Nghesi::inRandomOrder()->take(20)->get(),
+                    'nghesi' => Nghesi::all(),
+                    'album' => Album::all(),
+                    'chatonline' => '',
                     'loi' => '',
                     'baidau' => Nhac::where('vip', 0)->where('xetduyet', 1)->where('luotnghe', 'desc')->first(),
-                    'loingoai' => '',
-                    'chatonline' => [User::where('online', 1)->get(), UserAPI::where('online', 1)->get()],
+
+                    'loingoai' => 'Tài khoản đã bị cấm chat vui lòng liên hệ admin qua Email: mobi@gmail.com',
                     'login' => 0,
-                    'rank' => 'null', 'nghesi' => Nghesi::all(),
-                    'album' => Album::all(),
+                    'rank' => 'null', 'valuesreach' => '',
                     'rightsong' => 0,
                     'user' => User::select('id', 'image')->get(),
-                    'valuesreach' => '',
-                    'session' => session()->get('myMusic'),
-                    'nhacsesion' => Nhac::where('vip', 0)->where('xetduyet', 1)->get(),
-                ]);
-            } else {
-                return view('frontend.menu.livechat', [
-                    'ttnguoidung' => Auth::guard('web')->user(),
-                    'chat' => Mess::all(),
-                    'nhac' => Nhac::where('vip', 0)->get(),
-                    'Nhactopluotnghe' => Nhac::where('vip', 0)->where('xetduyet', 1)->where('luotnghe', "desc")->latest()->take(10)->get(),
-                    'Nhactopvip' => Nhac::where('vip', 1)->where('xetduyet', 1)->latest()->take(2)->get(),
-                    'namemusic' => Nhac::where('vip', 0)->where('xetduyet', 1)->where('id', $name)->first(),
-                    'activerity' => 2,
-                    'loi' => '',
-                    'baidau' => Nhac::where('vip', 0)->where('xetduyet', 1)->where('luotnghe', 'desc')->first(),
-                    'loingoai' => '',
-                    'chatonline' => [User::where('online', 1)->get(), UserAPI::where('online', 1)->get()],
-                    'login' => 0,
-                    'rank' => 'null', 'nghesi' => Nghesi::all(),
-                    'album' => Album::all(),
-                    'rightsong' => 0,
-                    'user' => User::select('id', 'image')->get(),
-                    'valuesreach' => '',
                     'session' => session()->get('myMusic'),
                     'nhacsesion' => Nhac::where('vip', 0)->where('xetduyet', 1)->get(),
                 ]);
             }
+          
         }
         if (Auth::guard('google')->check()) {
-            return view('frontend.menu.livechat', [
-                'ttnguoidung' => Auth::guard('google')->user(),
-                'Nhactopluotnghe' => Nhac::where('vip', 0)->where('xetduyet', 1)->where('luotnghe', "desc")->latest()->take(10)->get(),
-                'Nhactopvip' => Nhac::where('vip', 1)->where('xetduyet', 1)->latest()->take(2)->get(),
-                'chat' => Mess::all(),
-                'nhac' => Nhac::where('vip', 0)->get(),
-                'namemusic' => Nhac::where('vip', 0)->where('xetduyet', 1)->where('id', $name)->first(),
-                'activerity' => 2,
-                'loi' => '', 'nghesi' => Nghesi::all(),
-                'album' => Album::all(),
-                'baidau' => Nhac::where('vip', 0)->where('xetduyet', 1)->where('luotnghe', 'desc')->first(),
-                'loingoai' => '',
-                'chatonline' => [User::where('online', 1)->get(), UserAPI::where('online', 1)->get()],
-                'login' => 0,
-                'rank' => 'null',
-                'rightsong' => 0,
-                'user' => User::select('id', 'image')->get(),
-                'valuesreach' => '',
-                'session' => session()->get('myMusic'),
-                'nhacsesion' => Nhac::where('vip', 0)->where('xetduyet', 1)->get(),
-            ]);
+            if (Auth::guard('google')->user()->quyenchat == 1) {
+                if (Auth::guard('google')->user()->vip == 1) {
+                    return view('frontend.menu.livechat', [
+                        'ttnguoidung' => Auth::guard('google')->user(),
+                        'chat' => Mess::all(),
+                        'nhac' => Nhac::where('vip', 0)->get(),
+                        'Nhactopluotnghe' => Nhac::where('vip', 0)->where('xetduyet', 1)->where('luotnghe', "desc")->latest()->take(10)->get(),
+                        'Nhactopvip' => Nhac::where('vip', 1)->where('xetduyet', 1)->latest()->take(2)->get(),
+                        'namemusic' => Nhac::where('xetduyet', 1)->where('id', $name)->first(),
+                        'activerity' => 2,
+                        'loi' => '',
+                        'baidau' => Nhac::where('vip', 0)->where('xetduyet', 1)->where('luotnghe', 'desc')->first(),
+                        'loingoai' => '',
+                        'chatonline' => [User::where('online', 1)->get(), UserAPI::where('online', 1)->get()],
+                        'login' => 0,
+                        'rank' => 'null', 'nghesi' => Nghesi::all(),
+                        'album' => Album::all(),
+                        'rightsong' => 0,
+                        'user' => User::select('id', 'image')->get(),
+                        'valuesreach' => '',
+                        'session' => session()->get('myMusic'),
+                        'nhacsesion' => Nhac::where('vip', 0)->where('xetduyet', 1)->get(),
+                    ]);
+                } else {
+                    return view('frontend.menu.livechat', [
+                        'ttnguoidung' => Auth::guard('google')->user(),
+                        'chat' => Mess::all(),
+                        'nhac' => Nhac::where('vip', 0)->get(),
+                        'Nhactopluotnghe' => Nhac::where('vip', 0)->where('xetduyet', 1)->where('luotnghe', "desc")->latest()->take(10)->get(),
+                        'Nhactopvip' => Nhac::where('vip', 1)->where('xetduyet', 1)->latest()->take(2)->get(),
+                        'namemusic' => Nhac::where('vip', 0)->where('xetduyet', 1)->where('id', $name)->first(),
+                        'activerity' => 2,
+                        'loi' => '',
+                        'baidau' => Nhac::where('vip', 0)->where('xetduyet', 1)->where('luotnghe', 'desc')->first(),
+                        'loingoai' => '',
+                        'chatonline' => [User::where('online', 1)->get(), UserAPI::where('online', 1)->get()],
+                        'login' => 0,
+                        'rank' => 'null', 'nghesi' => Nghesi::all(),
+                        'album' => Album::all(),
+                        'rightsong' => 0,
+                        'user' => User::select('id', 'image')->get(),
+                        'valuesreach' => '',
+                        'session' => session()->get('myMusic'),
+                        'nhacsesion' => Nhac::where('vip', 0)->where('xetduyet', 1)->get(),
+                    ]);
+                }
+            }else{
+                return view('frontend.home', [
+                    'ttnguoidung' => Auth::guard('google')->user(),
+                    'activerity' => 0,
+                    'Albumtop3' => Album::latest()->take(3)->get(),
+                    'Chill' => Album::inRandomOrder()->take(3)->get(),
+                    'CanLike' => Album::inRandomOrder()->take(3)->get(),
+                    'Nhactop10' => Nhac::where('vip', 0)->where('xetduyet', 1)->latest()->take(10)->get(),
+                    'Nhactopluotnghe' => Nhac::where('vip', 0)->where('xetduyet', 1)->where('luotnghe', "desc")->latest()->take(10)->get(),
+                    'Nhactopvip' => Nhac::where('vip', 1)->where('xetduyet', 1)->latest()->take(2)->get(),
+                    'Nghesitop20' => Nghesi::inRandomOrder()->take(20)->get(),
+                    'nghesi' => Nghesi::all(),
+                    'album' => Album::all(),
+                    'chatonline' => '',
+                    'loi' => '',
+                    'baidau' => Nhac::where('vip', 0)->where('xetduyet', 1)->where('luotnghe', 'desc')->first(),
+
+                    'loingoai' => 'Tài khoản đã bị cấm chat vui lòng liên hệ admin qua Email: mobi@gmail.com',
+                    'login' => 0,
+                    'rank' => 'null', 'valuesreach' => '',
+                    'rightsong' => 0,
+                    'user' => User::select('id', 'image')->get(),
+                    'session' => session()->get('myMusic'),
+                    'nhacsesion' => Nhac::where('vip', 0)->where('xetduyet', 1)->get(),
+                ]);
+            }
+            
         }
         return view('frontend.home', [
             'activerity' => 0,
@@ -1472,7 +1553,7 @@ class ClientControllers extends Controller
     {
         // dd($name);
         $nghesi = Nghesi::where('id', $name)->first();
-        $album = Album::where('nghesi_idalbum',  $nghesi->id)->get();
+        $album = Album::where('nghesi_idalbum',$nghesi->id)->get();
         $nhac = Nhac::where('vip', 0)->where('xetduyet', 1)->get();
 
         $usernghesi = User::where('id', $nghesi->id_nghesi_user)->first();
@@ -1583,6 +1664,7 @@ class ClientControllers extends Controller
             ]);
             return response()->json(['success' => $parts[0]]);
         }
+        return response()->json(['success' => 'no']);
     }
     public function addmusic(string $id, string $name)
     {
@@ -1683,11 +1765,11 @@ class ClientControllers extends Controller
                 'user' => User::select('id', 'image')->get(),
                 'session' => session()->get('myMusic'),
                 'nhacsesion' => Nhac::where('vip', 0)->where('xetduyet', 1)->get(),
-                'Chill' => Album::inRandomOrder()->where('tenalbum', 'like', '%' . $request->input('searchbar_input') . '%')->take(3)->get(),
+                'Chill' => Album::where('tenalbum', 'like', '%' . $request->input('searchbar_input') . '%')->take(3)->get(),
                 'Nhactopluotnghe' => Nhac::where('vip', 0)->where('xetduyet', 1)->where('luotnghe', "desc")->latest()->take(10)->get(),
                 'Nhactopvip' => Nhac::where('vip', 1)->where('xetduyet', 1)->latest()->take(2)->get(),
                 'Nhactop10' => Nhac::where('vip', 0)->where('xetduyet', 1)->where('tennhac', 'like', '%' . $request->input('searchbar_input') . '%')->latest()->take(5)->get(),
-                'Nghesitop20' => Nghesi::inRandomOrder()->take(20)->where('tennghesi', 'like', '%' . $request->input('searchbar_input') . '%')->get(),
+                'Nghesitop20' => Nghesi::take(20)->where('tennghesi', 'like', '%' . $request->input('searchbar_input') . '%')->get(),
                 'nghesi' => Nghesi::all(),
                 'album' => Album::all(),
                 'login' => 0,
@@ -1711,11 +1793,11 @@ class ClientControllers extends Controller
                 'user' => User::select('id', 'image')->get(),
                 'session' => session()->get('myMusic'),
                 'nhacsesion' => Nhac::where('vip', 0)->where('xetduyet', 1)->get(),
-                'Chill' => Album::inRandomOrder()->where('tenalbum', 'like', '%' . $request->input('searchbar_input') . '%')->take(3)->get(),
+                'Chill' => Album::where('tenalbum', 'like', '%' . $request->input('searchbar_input') . '%')->take(3)->get(),
                 'Nhactopluotnghe' => Nhac::where('vip', 0)->where('xetduyet', 1)->where('luotnghe', "desc")->latest()->take(10)->get(),
                 'Nhactopvip' => Nhac::where('vip', 1)->where('xetduyet', 1)->latest()->take(2)->get(),
                 'Nhactop10' => Nhac::where('vip', 0)->where('xetduyet', 1)->where('tennhac', 'like', '%' . $request->input('searchbar_input') . '%')->latest()->take(5)->get(),
-                'Nghesitop20' => Nghesi::inRandomOrder()->take(20)->where('tennghesi', 'like', '%' . $request->input('searchbar_input') . '%')->get(),
+                'Nghesitop20' => Nghesi::take(20)->where('tennghesi', 'like', '%' . $request->input('searchbar_input') . '%')->get(),
                 'nghesi' => Nghesi::all(),
                 'album' => Album::all(),
                 'login' => 0,
@@ -1736,11 +1818,11 @@ class ClientControllers extends Controller
             'user' => User::select('id', 'image')->get(),
             'session' => session()->get('myMusic'),
             'nhacsesion' => Nhac::where('vip', 0)->where('xetduyet', 1)->get(),
-            'Chill' => Album::inRandomOrder()->where('tenalbum', 'like', '%' . $request->input('searchbar_input') . '%')->take(3)->get(),
+            'Chill' => Album::where('tenalbum', 'like', '%' . $request->input('searchbar_input') . '%')->take(3)->get(),
             'Nhactopluotnghe' => Nhac::where('vip', 0)->where('xetduyet', 1)->where('luotnghe', "desc")->latest()->take(10)->get(),
             'Nhactopvip' => Nhac::where('vip', 1)->where('xetduyet', 1)->latest()->take(2)->get(),
             'Nhactop10' => Nhac::where('vip', 0)->where('xetduyet', 1)->where('tennhac', 'like', '%' . $request->input('searchbar_input') . '%')->latest()->take(5)->get(),
-            'Nghesitop20' => Nghesi::inRandomOrder()->take(20)->where('tennghesi', 'like', '%' . $request->input('searchbar_input') . '%')->get(),
+            'Nghesitop20' => Nghesi::take(20)->where('tennghesi', 'like', '%' . $request->input('searchbar_input') . '%')->get(),
             'nghesi' => Nghesi::all(),
             'album' => Album::all(),
             'login' => 0,
@@ -1755,19 +1837,20 @@ class ClientControllers extends Controller
     public function trangtl(string $name)
     {
         $tl= Theloai::where('id',$name)->first();
-        $album = Album::where('theloai_idalbum', $tl->id)->get();
+        $album = Album::where('theloai_idalbum', $tl->id)->distinct()->get();
         if (Auth::guard('web')->check()) {
             return view('frontend.List.Theloai', [
                 'ttnguoidung' => Auth::guard('web')->user(),
                 'activerity' => 5,
                 'chatonline' => '',
                 'loi' => '',
+                'tentl'=>$tl->tentheloai,
                 'baidau' => Nhac::where('vip', 0)->where('xetduyet', 1)->where('luotnghe', 'desc')->first(),
                 'loingoai' => '',
                 'user' => User::select('id', 'image')->get(),
                 'session' => session()->get('myMusic'),
                 'nhacsesion' => Nhac::where('vip', 0)->where('xetduyet', 1)->get(),
-                'Chill' => Album::inRandomOrder()->take(3)->get(),
+                'Chill' => Album::where('theloai_idalbum', $tl->id)->take(3)->get(),
                 'Nhactopluotnghe' => Nhac::where('vip', 0)->where('xetduyet', 1)->where('luotnghe', "desc")->latest()->take(10)->get(),
                 'Nhactopvip' => Nhac::where('vip', 1)->where('xetduyet', 1)->latest()->take(2)->get(),
                 'Nhactop10' => Nhac::where('vip', 0)->where('xetduyet', 1)->latest()->take(5)->get(),
@@ -1788,13 +1871,13 @@ class ClientControllers extends Controller
                 'ttnguoidung' => Auth::guard('google')->user(),
                 'activerity' => 5,
                 'chatonline' => '',
-                'loi' => '',
+                'loi' => '', 'tentl'=>$tl->tentheloai,
                 'baidau' => Nhac::where('vip', 0)->where('xetduyet', 1)->where('luotnghe', 'desc')->first(),
                 'loingoai' => '',
                 'user' => User::select('id', 'image')->get(),
                 'session' => session()->get('myMusic'),
                 'nhacsesion' => Nhac::where('vip', 0)->where('xetduyet', 1)->get(),
-                'Chill' => Album::inRandomOrder()->take(3)->get(),
+                'Chill' => Album::where('theloai_idalbum', $tl->id)->take(3)->get(),
                 'Nhactopluotnghe' => Nhac::where('vip', 0)->where('xetduyet', 1)->where('luotnghe', "desc")->latest()->take(10)->get(),
                 'Nhactopvip' => Nhac::where('vip', 1)->where('xetduyet', 1)->latest()->take(2)->get(),
                 'Nhactop10' => Nhac::where('vip', 0)->where('xetduyet', 1)->latest()->take(5)->get(),
@@ -1812,14 +1895,14 @@ class ClientControllers extends Controller
         return view('frontend.List.Theloai', [
             'activerity' => 5,
                 'chatonline' => '',
-                'loi' => '',
+                'loi' => '', 'tentl'=>$tl->tentheloai,
                 'nhacsearch'=>Nhac::all(),
                 'baidau' => Nhac::where('vip', 0)->where('xetduyet', 1)->where('luotnghe', 'desc')->first(),
                 'loingoai' => '',
                 'user' => User::select('id', 'image')->get(),
                 'session' => session()->get('myMusic'),
                 'nhacsesion' => Nhac::where('vip', 0)->where('xetduyet', 1)->get(),
-                'Chill' => Album::inRandomOrder()->take(3)->get(),
+                'Chill' => Album::where('theloai_idalbum', $tl->id)->take(3)->get(),
                 'Nhactopluotnghe' => Nhac::where('vip', 0)->where('xetduyet', 1)->where('luotnghe', "desc")->latest()->take(10)->get(),
                 'Nhactopvip' => Nhac::where('vip', 1)->where('xetduyet', 1)->latest()->take(2)->get(),
                 'Nhactop10' => Nhac::where('vip', 0)->where('xetduyet', 1)->latest()->take(5)->get(),

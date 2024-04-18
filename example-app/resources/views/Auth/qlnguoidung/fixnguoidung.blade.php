@@ -1,13 +1,16 @@
 @include('layoutsAdmin.top')
 @if (Auth::guard('api')->check())
     <div>
-        <h3>Sửa tài khoản người dùng</h3>
+        <h3>Sửa tài khoản người dùng {{ $user->email }}</h3>
         <div>
             <form method="post" action="/Administrator/suanguoidungbt" enctype="multipart/form-data">
                 @csrf
                 {{-- @method('POST') --}}
                 <input type="hidden" name="idnguoidung" value="{{ $user->id }}" readonly>
                 <input type="hidden" name="idnguoidungselect" value="{{ $userbt ? 'userbt' : 'usergg' }}" readonly>
+                <div class="my-3"><input class="form-control" type="text" name="txtten" placeholder="Tên"
+                        value="{{ $user->name }}">
+                </div>
                 <div class="my-3"><input class="form-control" type="text" name="txtmatkhau" placeholder="Mật khẩu">
                 </div>
                 <div class="my-3">

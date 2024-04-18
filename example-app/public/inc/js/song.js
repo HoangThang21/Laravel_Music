@@ -989,9 +989,16 @@ if (discoveri) {
             masterPlay.classList.add("bi-pause-fill");
             discoveri.classList.remove("bi-play-fill");
             discoveri.classList.add("bi-pause-fill");
+            if (baihatall) {
+                baihatall.classList.add("bi-play-fill");
+                baihatall.classList.remove("bi-pause-fill");
+               
+            }
+            demloadlistnhacall=0;
             wave.classList.add("active2");
             music.play();
         }
+        
         media.forEach(function (mediaitem, indexmedia) {
             mediaitem.classList.remove("active");
         });
@@ -1000,9 +1007,15 @@ if (discoveri) {
             media.forEach(function (mediaitem, indexmedia) {
                 var mediaParent = mediaitem.querySelector(".media .load-nghe");
                 if (mediaParent) {
-                    myMusic.push(
-                        parseInt(mediaParent.getAttribute("data-song"))
-                    );
+                    if (
+                        !myMusic.includes(
+                            parseInt(mediaParent.getAttribute("data-song"))
+                        )
+                    ) {
+                        myMusic.push(
+                            parseInt(mediaParent.getAttribute("data-song"))
+                        );
+                    }
                 }
             });
             $.ajax({
@@ -1070,23 +1083,35 @@ if (baihatall) {
             music.pause();
         } else {
             masterPlay.classList.remove("bi-play-fill");
+            discoveri.classList.add("bi-play-fill");
+            discoveri.classList.remove("bi-pause-fill");
             masterPlay.classList.add("bi-pause-fill");
             baihatall.classList.remove("bi-play-fill");
             baihatall.classList.add("bi-pause-fill");
             wave.classList.add("active2");
+            demloadlistnhac=0;
             music.play();
         }
+       
         media.forEach(function (mediaitem, indexmedia) {
             mediaitem.classList.remove("active");
         });
         if (demloadlistnhacall == 0) {
             myMusic = [];
             media.forEach(function (mediaitem, indexmedia) {
-                var mediaParent = mediaitem.querySelector(".mediaallnhac .load-nghe");
+                var mediaParent = mediaitem.querySelector(
+                    ".mediaallnhac .load-nghe"
+                );
                 if (mediaParent) {
-                    myMusic.push(
-                        parseInt(mediaParent.getAttribute("data-song"))
-                    );
+                    if (
+                        !myMusic.includes(
+                            parseInt(mediaParent.getAttribute("data-song"))
+                        )
+                    ) {
+                        myMusic.push(
+                            parseInt(mediaParent.getAttribute("data-song"))
+                        );
+                    }
                 }
             });
             $.ajax({

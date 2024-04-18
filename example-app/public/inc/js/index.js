@@ -369,7 +369,16 @@ document.addEventListener("DOMContentLoaded", () => {
                         menuFilter1.getAttribute("data-quantam") +
                         "-addQuantam",
                     success: function (data) {
-                        window.location.href = currentUrl;
+                        if(data.success=='no'){
+                            var loi = document.querySelector(".loi");
+                            loi.classList.add("active");
+                            loi.style.display = "flex";
+                            loi.querySelector(".tieude").textContent =
+                                "Vui lòng đăng nhập để yêu thích nghệ sĩ";
+                        }else{
+                            window.location.href = currentUrl;
+                        }
+                        
                     },
 
                     error: function (error) {
