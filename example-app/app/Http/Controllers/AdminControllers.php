@@ -773,14 +773,13 @@ class AdminControllers extends Controller
     public function themmusic(Request $request)
     {
         $request->validate([
-            'txttennhac' => ['required'],
-            'txtmanhac' => ['required'],
-            'txtgia' => ['required'],
-            'txtmotalyric' => ['required'],
+            'txttennhac' => 'required',
+            'txtmanhac' => 'required',
+            'txtgia' => 'required',
             'fnhac' => 'required|mimes:mp3',
             'fhinh' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'optloains' => ['required'],
-            'optloaiphi' => ['required'],
+            'optloains' => 'required',
+            'optloaiphi' => 'required',
 
         ]);
         if ($request->input('txtgia') <= 0) {
@@ -805,7 +804,12 @@ class AdminControllers extends Controller
         $ns->album_idnhac   = $request->input('optloains');
         $ns->maNhac = $request->input('txtmanhac');
         $ns->gia = $request->input('txtgia');
-        $ns->lyric = $request->input('txtmotalyric');
+        if($request->input('txtmotalyric')){
+            $ns->lyric = $request->input('txtmotalyric');
+        }else{
+            $ns->lyric ='';
+        }
+        
         $ns->vip = $request->input('optloaiphi');
         $ns->save();
         return redirect()->intended('/Administrator/qlnhac');
@@ -1457,7 +1461,7 @@ class AdminControllers extends Controller
             'fnhac' => 'mimes:mp3',
             'txtmanhac' => ['required'],
             'txtgia' => ['required'],
-            'txtmotalyric' => ['required'],
+           
             'fhinh' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'optloains' => ['required'],
             'optloaiphi' => ['required'],
@@ -1476,6 +1480,11 @@ class AdminControllers extends Controller
                 'contentFilter' => '-1',
             ]);
         }
+        if($request->input('txtmotalyric')){
+            $lyri = $request->input('txtmotalyric');
+        }else{
+            $lyri ='';
+        }
         if ($request->file('fnhac') != null) {
             $generatedmusic = 'music' . time() . '-' . $request->file('fnhac')->getClientOriginalName();
             $request->file('fnhac')->move(public_path('music'), $generatedmusic);
@@ -1490,7 +1499,7 @@ class AdminControllers extends Controller
                         'album_idnhac'   => $request->input('optloains'),
                         'maNhac' => $request->input('txtmanhac'),
                         'gia' => $request->input('txtgia'),
-                        'lyric' => $request->input('txtmotalyric'),
+                        'lyric' => $lyri,
                         'vip' => $request->input('optloaiphi'),
 
                     ]);
@@ -1503,7 +1512,7 @@ class AdminControllers extends Controller
                         'album_idnhac'   => $request->input('optloains'),
                         'maNhac' => $request->input('txtmanhac'),
                         'gia' => $request->input('txtgia'),
-                        'lyric' => $request->input('txtmotalyric'),
+                        'lyric' => $lyri,
                         'vip' => $request->input('optloaiphi'),
                     ]);
             }
@@ -1518,7 +1527,7 @@ class AdminControllers extends Controller
                         'album_idnhac'   => $request->input('optloains'),
                         'maNhac' => $request->input('txtmanhac'),
                         'gia' => $request->input('txtgia'),
-                        'lyric' => $request->input('txtmotalyric'),
+                        'lyric' => $lyri,
                         'vip' => $request->input('optloaiphi'),
                     ]);
             } else {
@@ -1528,7 +1537,7 @@ class AdminControllers extends Controller
                         'album_idnhac'   => $request->input('optloains'),
                         'maNhac' => $request->input('txtmanhac'),
                         'gia' => $request->input('txtgia'),
-                        'lyric' => $request->input('txtmotalyric'),
+                        'lyric' => $lyri,
                         'vip' => $request->input('optloaiphi'),
                     ]);
             }

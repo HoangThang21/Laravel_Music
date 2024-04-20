@@ -513,6 +513,7 @@ class ClientControllers extends Controller
             'user' => User::select('id', 'image')->get(),
             'session' => session()->get('myMusic'),
             'nhacsesion' => Nhac::where('vip', 0)->where('xetduyet', 1)->get(),
+            'baidau' => Nhac::where('vip', 0)->where('xetduyet', 1)->where('luotnghe', 'desc')->first(),
         ]);
     }
     public function loadlivechatsendchat(string $name)
@@ -1175,7 +1176,7 @@ class ClientControllers extends Controller
                 'chatonline' => '',
                 'Nhactopluotnghe' => Nhac::where('vip', 0)->where('xetduyet', 1)->where('luotnghe', "desc")->latest()->take(10)->get(),
                 'Nhactopvip' => Nhac::where('vip', 1)->where('xetduyet', 1)->latest()->take(2)->get(),
-                'Nhactop10' => Nhac::where('vip', 0)->orderBy('luotnghe', 'desc')->get(),
+                'Nhactop10' => Nhac::where('vip', 0)->where('xetduyet', 1)->orderBy('luotnghe', 'desc')->get(),
                 'nghesi' => Nghesi::all(),
                 'album' => Album::all(),
                 'login' => 0, 'valuesreach' => '',
@@ -1196,7 +1197,7 @@ class ClientControllers extends Controller
                 'chatonline' => '',
                 'Nhactopluotnghe' => Nhac::where('vip', 0)->where('xetduyet', 1)->where('luotnghe', "desc")->latest()->take(10)->get(),
                 'Nhactopvip' => Nhac::where('vip', 1)->where('xetduyet', 1)->latest()->take(2)->get(),
-                'Nhactop10' => Nhac::where('vip', 0)->orderBy('luotnghe', 'desc')->get(),
+                'Nhactop10' => Nhac::where('vip', 0)->where('xetduyet', 1)->orderBy('luotnghe', 'desc')->get(),
                 'nghesi' => Nghesi::all(),
                 'album' => Album::all(),
                 'login' => 0,
@@ -1216,7 +1217,7 @@ class ClientControllers extends Controller
             'chatonline' => '',
             'Nhactopluotnghe' => Nhac::where('vip', 0)->where('xetduyet', 1)->where('luotnghe', "desc")->latest()->take(10)->get(),
             'Nhactopvip' => Nhac::where('vip', 1)->where('xetduyet', 1)->latest()->take(2)->get(),
-            'Nhactop10' => Nhac::where('vip', 0)->orderBy('luotnghe', 'desc')->get(),
+            'Nhactop10' => Nhac::where('vip', 0)->where('xetduyet', 1)->orderBy('luotnghe', 'desc')->get(),
             'nghesi' => Nghesi::all(),
             'album' => Album::all(),
             'login' => 0,
@@ -1285,7 +1286,7 @@ class ClientControllers extends Controller
                 'baidau' => Nhac::where('vip', 0)->where('xetduyet', 1)->where('luotnghe', 'desc')->first(), 'loingoai' => '',
                 'session' => session()->get('myMusic'),
                 'nhacsesion' => Nhac::where('vip', 0)->where('xetduyet', 1)->get(),
-                'Nhactop10' => Nhac::where('vip', 0)->orderBy('id', 'desc')->get(),
+                'Nhactop10' => Nhac::where('vip', 0)->where('xetduyet', 1)->orderBy('id', 'desc')->get(),
                 'nghesi' => Nghesi::all(),
                 'Nhactopluotnghe' => Nhac::where('vip', 0)->where('xetduyet', 1)->where('luotnghe', "desc")->latest()->take(10)->get(),
                 'Nhactopvip' => Nhac::where('vip', 1)->where('xetduyet', 1)->latest()->take(2)->get(),
@@ -1305,7 +1306,7 @@ class ClientControllers extends Controller
                 'baidau' => Nhac::where('vip', 0)->where('xetduyet', 1)->where('luotnghe', 'desc')->first(), 'loingoai' => '',
                 'session' => session()->get('myMusic'),
                 'nhacsesion' => Nhac::where('vip', 0)->where('xetduyet', 1)->get(),
-                'Nhactop10' => Nhac::where('vip', 0)->orderBy('id', 'desc')->get(),
+                'Nhactop10' => Nhac::where('vip', 0)->where('xetduyet', 1)->orderBy('id', 'desc')->get(),
                 'nghesi' => Nghesi::all(),
                 'Nhactopluotnghe' => Nhac::where('vip', 0)->where('xetduyet', 1)->where('luotnghe', "desc")->latest()->take(10)->get(),
                 'Nhactopvip' => Nhac::where('vip', 1)->where('xetduyet', 1)->latest()->take(2)->get(),
@@ -1325,7 +1326,7 @@ class ClientControllers extends Controller
             'nhacsesion' => Nhac::where('vip', 0)->where('xetduyet', 1)->get(),
             'Nhactopluotnghe' => Nhac::where('vip', 0)->where('xetduyet', 1)->where('luotnghe', "desc")->latest()->take(10)->get(),
             'Nhactopvip' => Nhac::where('vip', 1)->where('xetduyet', 1)->latest()->take(2)->get(),
-            'Nhactop10' => Nhac::where('vip', 0)->orderBy('id', 'desc')->get(),
+            'Nhactop10' => Nhac::where('vip', 0)->where('xetduyet', 1)->orderBy('id', 'desc')->get(),
             'nghesi' => Nghesi::all(),
             'album' => Album::all(),
             'login' => 0,
@@ -1837,6 +1838,7 @@ class ClientControllers extends Controller
     public function trangtl(string $name)
     {
         $tl= Theloai::where('id',$name)->first();
+        
         $album = Album::where('theloai_idalbum', $tl->id)->distinct()->get();
         if (Auth::guard('web')->check()) {
             return view('frontend.List.Theloai', [

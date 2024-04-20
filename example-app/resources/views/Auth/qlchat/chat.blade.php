@@ -71,7 +71,7 @@
                                     <i class="bi bi-three-dots-vertical"></i>
                                 </div>
                                 <div class="item-list-dot">
-                                    <a href="/Administrator/xoachat&{{ $ch->id }}"><i
+                                    <a href="/Administrator/xoachat&{{ $ch->id }}" class="btn btn-outline-danger"><i
                                             class="bi bi-trash-fill delete-link"></i>Xóa</a>
                                 </div>
                             </div>

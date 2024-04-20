@@ -4,7 +4,7 @@
         <h3>Album</h3>
         <div class="infofilter">
             <div><a class="btn btn-primary" href="/Administrator/qlalbum/themalbum"><span
-                        class="glyphicon glyphicon-plus"></span> Thêm album</a></div>
+                        class="glyphicon glyphicon-plus"><i class="bi bi-plus-circle"></i></span> Thêm album</a></div>
             <form action="/Administrator/qlalbum/searchal?=" method="post" id="searchForm">
                 @csrf
                 <div class="searchbar">
@@ -66,11 +66,11 @@
                     <td>{{ $tl['tentheloai'] }}</td>
                     <?php } endforeach; ?>
 
-                    <td><a href="/Administrator/qlalbum/xoaalbum&{{ $nd['id'] }}-alb" class="text-danger delete-link">Xóa</a>
+                    <td><a href="/Administrator/qlalbum/xoaalbum&{{ $nd['id'] }}-alb" class="btn btn-outline-danger delete-link">Xóa</a>
                         <span> | </span>
-                        <a href="/Administrator/qlalbum/suaalbum&{{ $nd['id'] }}-alb" class="text-warning">Sửa</a>
+                        <a href="/Administrator/qlalbum/suaalbum&{{ $nd['id'] }}-alb" class="btn btn-outline-warning">Sửa</a>
                         <span> | </span>
-                        <a href="/Administrator/qlalbum/xemalbum&{{ $nd['id'] }}-alb" class="text-info">Xem</a>
+                        <a href="/Administrator/qlalbum/xemalbum&{{ $nd['id'] }}-alb" class="btn btn-outline-info">Xem</a>
                     </td>
 
                 </tr>

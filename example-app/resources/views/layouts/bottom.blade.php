@@ -428,9 +428,9 @@
             </div>
 
         </form>
-        <button title="Sign In" type="submit" class="sign-in_ggl">
+        <div title="Sign In"  class="sign-in_ggl">
             <a href="/logingg"><img src="../../images/google.png" alt="">Đăng nhập với Google</a>
-        </button>
+        </div>
     </div>
 </div>
 

@@ -3,7 +3,7 @@
     <div>
         <h3>Thể loại</h3>
         <div><a class="btn btn-primary" href="/Administrator/qltheloai/themtheloai"><span
-                    class="glyphicon glyphicon-plus"></span> Thêm thể loại</a></div>
+                    class="glyphicon glyphicon-plus"><i class="bi bi-plus-circle"></i></span> Thêm thể loại</a></div>
 
         <br>
 
@@ -22,9 +22,9 @@
                 @endphp {{ $number }}</td>
                 <td>{{ $nd['tentheloai'] }}</td>
                 <td><a href="/Administrator/qltheloai/xoatheloai&{{ $nd['id'] }}-tl"
-                        class="text-danger delete-link" >Xóa</a>
+                        class="btn btn-outline-danger delete-link" >Xóa</a>
                     <span> | </span>
-                    <a href="/Administrator/qltheloai/suatheloai&{{ $nd['id'] }}-tl" class="text-warning ">Sửa</a>
+                    <a href="/Administrator/qltheloai/suatheloai&{{ $nd['id'] }}-tl" class="btn btn-outline-warning ">Sửa</a>
                 </td>
             </tr>
             @endforeach

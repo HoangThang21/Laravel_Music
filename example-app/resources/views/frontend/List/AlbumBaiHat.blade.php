@@ -41,7 +41,122 @@
                                             <div class="name-music" data-nhacredict="{{ $Nhacalbumbaihat->id }}">
                                                 {{ $Nhacalbumbaihat->tennhac }}
                                             </div>
-
+                                            <div class="nametacgia">
+                                                @foreach ($album as $alb)
+                                                    @if ($alb->id == $Nhacalbumbaihat->album_idnhac)
+                                                        @foreach ($nghesi as $ns)
+                                                            @if ($ns->id == $alb->nghesi_idalbum)
+                                                                <a href="/nghe-si/{{ $ns->id }}"
+                                                                    class="name-tacgia">{{ $ns->tennghesi }}</a>
+                                                                <div class="info-name-tacgia-top ">
+                                                                    <div class="top-info-tacgia">
+                                                                        <div class="topleft-tacgia">
+                                                                            @php
+                                                                                $userimg = DB::table('user')
+                                                                                    ->where('id', $ns->id_nghesi_user)
+                                                                                    ->pluck('image')
+                                                                                    ->first();
+                                                                            @endphp
+                                                                            <img src="../../images/{{ $userimg }}"
+                                                                                alt="">
+                                                                            <div class="iftacgia">
+                                                                                <a href="/nghe-si/{{ $ns->id }}"
+                                                                                    class="nametacgia-info">{{ $ns->tennghesi }}</a>
+                                                                                    @php
+                                                                                    $inputString = $ns->quantam;
+                                                                                    $parts = explode('-', $inputString);
+                                                                                    $check = 0;
+                                                                                @endphp
+                                                                                @foreach ($parts as $index => $part)
+                                                                                    @if ($part)
+                                                                                        @php
+                                                                                            $check += 1;
+                                                                                        @endphp
+                                                                                    @endif
+                                                                                @endforeach
+                                                                                @if ($check >= 0)
+                                                                                    <div class="luotquantam-info">
+                                                                                        {{ $check }}
+                                                                                        quan tâm</div>
+                                                                                        @endif
+            
+                                                                            </div>
+                                                                        </div>
+                                                                        {{-- -------------------------------- --}}
+                                                                        @if (Auth::guard('web')->check())
+                                                                            @php
+                                                                                $isInterested =
+                                                                                    strpos($ns->quantam, $ttnguoidung->id) !==
+                                                                                    false;
+                                                                            @endphp
+                                                                            <div class="topright-tacgia"
+                                                                                data-quantam="{{ $ns->id }}"
+                                                                                @if ($isInterested) {{ 'style=background:blue;color:#fff' }}
+                                                                                @else
+                                                                                    {{ '' }} @endif>
+                                                                                <i class="bi bi-person-plus-fill"></i>
+                                                                                @if ($isInterested)
+                                                                                    {{ 'Đã quan tâm' }}
+                                                                                @else
+                                                                                    {{ 'Quan tâm' }}
+                                                                                @endif
+                                                                            </div>
+                                                                        @else
+                                                                            @if (Auth::guard('google')->check())
+                                                                            @php
+                                                                            $isInterested =
+                                                                                strpos($ns->quantam, $ttnguoidung->id) !==
+                                                                                false;
+                                                                        @endphp
+                                                                        <div class="topright-tacgia"
+                                                                            data-quantam="{{ $ns->id }}"
+                                                                            @if ($isInterested) {{ 'style=background:blue;color:#fff' }}
+                                                                    @else
+                                                                        {{ '' }} @endif>
+                                                                            <i class="bi bi-person-plus-fill"></i>
+                                                                            @if ($isInterested)
+                                                                                {{ 'Đã quan tâm' }}
+                                                                            @else
+                                                                                {{ 'Quan tâm' }}
+                                                                            @endif
+                                                                        </div>
+                                                                            @else
+                                                                                <div class="topright-tacgia"
+                                                                                    data-quantam="{{ $ns->id }}"><i
+                                                                                        class="bi bi-person-plus-fill"></i>
+                                                                                    Quan tâm</div>
+                                                                            @endif
+                                                                        @endif
+            
+                                                                    </div>
+                                                                    <div class="bottom-info-tacgia">
+                                                                        <p>Mới</p>
+                                                                        <div class="bottom-menu">
+                                                                            @php
+                                                                                $items = DB::table('album')
+                                                                                    ->where('nghesi_idalbum', $ns->id)
+                                                                                    ->take(3)
+                                                                                    ->get();
+                                                                            @endphp
+                                                                            @foreach ($items as $item)
+                                                                                <div class="list-album-tacgia">
+                                                                                    <div class="item-album-tacgia">
+                                                                                        <img src="../../images/{{ $item->hinhalbum }}"
+                                                                                            alt="">
+                                                                                        <a
+                                                                                            href="/album-nghesi/{{ $item->id }}">{{ $item->tenalbum }}</a>
+                                                                                        <p>{{ $item->namphathanh }}</p>
+                                                                                    </div>
+                                                                                </div>
+                                                                            @endforeach
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            @endif
+                                                        @endforeach
+                                                    @endif
+                                                @endforeach
+                                            </div>
                                         </div>
                                     </div>
                                 </div>

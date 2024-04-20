@@ -1786,6 +1786,7 @@ header .master_play .bar input {
     font-size: 18px;
     font-weight: 500;
     border: none;
+    margin-bottom: 20px;
 }
 
 .sign-in_ggl a {

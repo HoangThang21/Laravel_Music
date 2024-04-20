@@ -5,7 +5,7 @@
         <div class="infofilter">
 
             <div><a class="btn btn-primary" href="/Administrator/qlnghesi/themnghesi"><span
-                        class="glyphicon glyphicon-plus"></span> Thêm nghệ sĩ</a></div>
+                        class="glyphicon glyphicon-plus"><i class="bi bi-plus-circle"></i></span> Thêm nghệ sĩ</a></div>
             <div class="fillter">
 
 
@@ -65,10 +65,10 @@
                                 <textarea draggable="false" name="" id="" readonly> {{ $nd['mota'] }}</textarea>
                             </td>
                             <td><a href="/Administrator/qlnghesi/xoanghesi&{{ $nd['id'] }}-ns"
-                                    class="text-danger delete-link">Xóa</a>
+                                    class="btn btn-outline-danger delete-link">Xóa</a>
                                 <span> | </span>
                                 <a href="/Administrator/qlnghesi/suanghesi&{{ $nd['id'] }}-ns"
-                                    class="text-warning">Sửa</a>
+                                    class="btn btn-outline-warning">Sửa</a>
                             </td>
                         </tr>
                     @endif

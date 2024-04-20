@@ -311,7 +311,7 @@
     </div>
     <div class="contener">
         <div class="Top-Contener">
-            <h3>Chill</h3> <a href="#">Tất cả <i class="bi bi-chevron-right"></i></a>
+            <h3>Chill</h3> <a href="/search">Tất cả <i class="bi bi-chevron-right"></i></a>
         </div>
         <div class="list-menu-contenter">
             @foreach ($Chill as $item)
@@ -329,7 +329,7 @@
     </div>
     <div class="contener">
         <div class="Top-Contener">
-            <h3>Có thể bạn thích</h3> <a href="#">Tất cả <i class="bi bi-chevron-right"></i></a>
+            <h3>Có thể bạn thích</h3> <a href="/search">Tất cả <i class="bi bi-chevron-right"></i></a>
         </div>
         <div class="list-menu-contenter">
             @foreach ($CanLike as $item)
@@ -348,7 +348,7 @@
     <div class="contener">
         <div class="Top-Contener">
             <h3>Nghệ sĩ </h3>
-            <a href="#">Tất cả <i class="bi bi-chevron-right"></i></a>
+            <a href="/search">Tất cả <i class="bi bi-chevron-right"></i></a>
         </div>
         <div class="list-menu-contenter_ns">
             @foreach ($Nghesitop20 as $nstop20)

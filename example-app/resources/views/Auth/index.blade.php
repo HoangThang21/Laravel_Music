@@ -73,7 +73,7 @@
 
         <div>
             <a class="btn btn-primary" href="/Administrator/themnguoidung"><span
-                    class="glyphicon glyphicon-plus"></span> Thêm người dùng</a>
+                    class="glyphicon glyphicon-plus"><i class="bi bi-plus-circle"></i></span> Thêm người dùng</a>
         </div>
     </div>
     <br>
