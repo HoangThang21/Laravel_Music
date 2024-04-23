@@ -1019,6 +1019,53 @@ header .master_play .bar input {
     align-items: center;
     gap: 10px;
 }
+/* .menuyeuthich {
+    position: absolute;
+    top: 0%;
+    left: 100%;
+    width: max-content;
+} */
+.bodyhome .discover .topdis {
+    width: 300px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.bodyhome .discover .yeuthich,
+.bodyhome .discover .nghesiyeuthich,
+.bodyhome .discover .danhsachnghenhac {
+    background: var(--background-music);
+    color: #fff;
+    padding: 10px;
+    border-radius: 10px;
+    position: relative;
+}
+.bodyhome .discover .yeuthich:hover::before,
+.bodyhome .discover .nghesiyeuthich:hover::before,
+.bodyhome .discover .danhsachnghenhac:hover::before {
+    position: absolute;
+    left: 0;
+    content: "";
+    bottom: 0;
+    width: 100%;
+    height: 3px;
+    border-radius: 3px;
+    background: var(--text_music_gradient-2);
+}
+.bodyhome .discover .yeuthich.active::before,
+.bodyhome .discover .nghesiyeuthich.active::before,
+.bodyhome .discover .danhsachnghenhac.active::before {
+    position: absolute;
+    left: 0;
+    content: "";
+    bottom: 0;
+    width: 100%;
+    height: 3px;
+    border-radius: 3px;
+    background: var(--text_music_gradient-2);
+}
+.bodyhome .discover .nghesiyeuthich {
+}
 .bodyhome .discover i {
     font-size: 19px;
     cursor: pointer;
@@ -1146,9 +1193,16 @@ header .master_play .bar input {
 .table-music {
 }
 .toptable {
+    position: sticky;
+    top: 0;
+    z-index: 999;
+    height: 46px;
+    background-color: #00000042;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    gap: 20px;
+    width: fit-content;
 }
 .toptable a {
     text-decoration: none;
@@ -2084,7 +2138,7 @@ header .master_play .bar input {
 .musicform {
     position: absolute;
     bottom: 80px;
-   
+
     left: 30px;
     z-index: 999;
     display: flex;
@@ -2370,7 +2424,7 @@ p {
 }
 
 .menu-topic .item:nth-child(1) {
-    background-color: #da752d;
+    background-color: #a56f48ee;
 }
 .menu-topic .item:nth-child(2) {
     background-color: #4f75c5;
@@ -2379,10 +2433,10 @@ p {
     background-color: #be504e;
 }
 .menu-topic .item:nth-child(4) {
-    background-color: #56d763;
+    background-color: #4fa358;
 }
 .menu-topic .item:nth-child(5) {
-    background-color: #56d7d5;
+    background-color: #4d9897;
 }
 .menu-topic .bottom-topic {
     position: absolute;

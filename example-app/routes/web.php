@@ -112,6 +112,7 @@ use Illuminate\Support\Facades\Route;
     ]);
     Route::post('/Administrator/qlnhac/searchs', [AdminControllers::class, 'searchs']);
     //----------------------------------------------------------------
+    Route::get('/Administrator/hinh', [AdminControllers::class, 'hinh']);
     Route::get('/Administrator/{id}', [AdminControllers::class, 'edit']);
         //----------------------------------------------------------------
     Route::get('/', [ClientControllers::class, 'index']);

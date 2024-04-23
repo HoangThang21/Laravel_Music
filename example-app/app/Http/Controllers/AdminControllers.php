@@ -24,6 +24,7 @@ use Illuminate\View\View;
 use PhpParser\Node\Stmt\TryCatch;
 use Pusher\Pusher;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\File;
 
 class AdminControllers extends Controller
 {
@@ -355,6 +356,7 @@ class AdminControllers extends Controller
             $users = User::where("email", $request->input('email'))->first();
             if ($credentials) {
                 if ($users->trangthai != 0) {
+                  if($users->quyen==1||$users->quyen==2){
                     if (Hash::check($request->password, $users->password)) {
                         Auth::guard('api')->login($users);
                         if (Auth::guard('api')->check()) {
@@ -364,6 +366,9 @@ class AdminControllers extends Controller
                     } else {
                         return view('Auth.login', ['loi' => 'Tài khoản hoặc mật khẩu không đúng. Vui lòng nhập lại']);
                     }
+                  }else {
+                    return view('Auth.login', ['loi' => 'Bạn không có quyền đăng nhập']);
+                }
                 } else {
                     return view('Auth.login', ['loi' => 'Tài khoản của bạn đã bị khóa vui lòng liên hệ Admin']);
                 }
@@ -576,7 +581,14 @@ class AdminControllers extends Controller
                 'optloaind' => ['required'],
                 'txtquyenchat' => ['required'],
             ]);
-
+            $usera = User::where('id', $request->input('idnguoidung'))
+            ->first();
+            if(Auth::guard('api')->user()->quyen==2&&$usera->quyen==2){
+                return redirect()->intended('/Administrator');
+            }
+            if(Auth::guard('api')->user()->quyen==2&&$usera->quyen==1){
+                return redirect()->intended('/Administrator');
+            }
             if ($request->input('txtmatkhau') != null) {
                 if ($request->input('idnguoidungselect') == 'userbt') {
                     $user = User::where('id', $request->input('idnguoidung'))
@@ -1036,6 +1048,18 @@ class AdminControllers extends Controller
             }
         }
     }
+    public function hinh(){
+        return view(
+            'Auth.hinh',
+            [
+                'ttnguoidung' =>   Auth::guard('api')->user(),
+                'files'=>File::allFiles(public_path('images')),
+                'contentFilter' => '-1',
+                'active' => '',
+                'loi' => '',
+            ]
+        );
+    }
     public function edit(string $id)
     {
 
@@ -1065,9 +1089,15 @@ class AdminControllers extends Controller
 
 
                 if ($parts[1] == 'userde') {
-
+                
                     $user = User::where('id', $parts[0])
                         ->first();
+                        if(Auth::guard('api')->user()->quyen==2&&$user->quyen==2){
+                            return redirect()->intended('/Administrator');
+                        }
+                        if(Auth::guard('api')->user()->quyen==2&&$user->quyen==1){
+                            return redirect()->intended('/Administrator');
+                        }
                     $nghesi = Nghesi::where('id_nghesi_user', $user->id)->first();
                     if ($nghesi) {
                         $album = Album::where('nghesi_idalbum',  $nghesi->id)->get();
@@ -1093,7 +1123,13 @@ class AdminControllers extends Controller
                 if ($parts[1] == 'userfix') {
                     $user = User::where('id', $parts[0])
                         ->first();
-
+                      
+                        if(Auth::guard('api')->user()->quyen==2&&$user->quyen==2){
+                            return redirect()->intended('/Administrator');
+                        }
+                        if(Auth::guard('api')->user()->quyen==2&&$user->quyen==1){
+                            return redirect()->intended('/Administrator');
+                        }
                     return view(
                         'Auth.qlnguoidung.fixnguoidung',
                         [

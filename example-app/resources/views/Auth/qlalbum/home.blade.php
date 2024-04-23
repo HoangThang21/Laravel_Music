@@ -66,11 +66,11 @@
                     <td>{{ $tl['tentheloai'] }}</td>
                     <?php } endforeach; ?>
 
-                    <td><a href="/Administrator/qlalbum/xoaalbum&{{ $nd['id'] }}-alb" class="btn btn-outline-danger delete-link">Xóa</a>
+                    <td><a href="/Administrator/qlalbum/xoaalbum&{{ $nd['id'] }}-alb" class="btn btn-outline-danger delete-link"> <i class="bi bi-trash3"></i> Xóa</a>
                         <span> | </span>
-                        <a href="/Administrator/qlalbum/suaalbum&{{ $nd['id'] }}-alb" class="btn btn-outline-warning">Sửa</a>
+                        <a href="/Administrator/qlalbum/suaalbum&{{ $nd['id'] }}-alb" class="btn btn-outline-warning"><i class="bi bi-arrow-repeat"></i>Sửa</a>
                         <span> | </span>
-                        <a href="/Administrator/qlalbum/xemalbum&{{ $nd['id'] }}-alb" class="btn btn-outline-info">Xem</a>
+                        <a href="/Administrator/qlalbum/xemalbum&{{ $nd['id'] }}-alb" class="btn btn-outline-info"><i class="bi bi-eye-fill"></i>Xem</a>
                     </td>
 
                 </tr>

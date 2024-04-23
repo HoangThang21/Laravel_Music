@@ -22,8 +22,8 @@
     <div class="wrapper">
         <nav id="sidebar" class="sidebar js-sidebar">
             <div class="sidebar-content js-simplebar">
-                <a class="sidebar-brand" href="">
-                    <span class="align-middle">Admin Music Diablu </span>
+                <a class="sidebar-brand" href="/Administrator">
+                    <span class="align-middle"><img src="../../images/logo_funring.png" alt="" sizes="28"></span>
                 </a>
 
                 <ul class="sidebar-nav">
@@ -96,7 +96,7 @@
                     </li>
 
                     <li class="sidebar-item">
-                        <a class="sidebar-link" href="">
+                        <a class="sidebar-link" href="/Administrator/hinh">
                             <i class="align-middle" data-feather="image"></i> <span class="align-middle">Hình ảnh</span>
                         </a>
                     </li>

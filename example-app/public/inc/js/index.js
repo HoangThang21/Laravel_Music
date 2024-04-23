@@ -295,6 +295,52 @@ document.addEventListener("DOMContentLoaded", () => {
                 "Vui lòng liên hệ admin qua Email: mobifone@gmail.com.";
         });
     }
+    const yeuthich = document.querySelector(".yeuthich");
+    const nghesiyeuthich = document.querySelector(".nghesiyeuthich");
+    const nhacyeuthich = document.querySelector(".nhacyeuthich");
+    const nghesiyeuthichmenu = document.querySelector(".nghesiyeuthichmenu");
+    const danhsachnghenhac = document.querySelector(".danhsachnghenhac");
+    const danhsachnghenhacmenu = document.querySelector(
+        ".danhsachnghenhacmenu"
+    );
+    const topdis = document.querySelector(".topdis");
+    const topdisi = document.querySelector(".topdis i");
+    if (yeuthich) {
+        yeuthich.addEventListener("click", function () {
+            nghesiyeuthich.classList.remove("active");
+            danhsachnghenhac.classList.remove("active");
+            yeuthich.classList.add("active");
+            nghesiyeuthichmenu.style.display = "none";
+            danhsachnghenhacmenu.style.display = "none";
+            nhacyeuthich.style.display = "block";
+            topdis.style.opacity  = "1";
+            topdisi.style.display = "flex";
+        });
+    }
+    if (nghesiyeuthich) {
+        nghesiyeuthich.addEventListener("click", function () {
+            yeuthich.classList.remove("active");
+            danhsachnghenhac.classList.remove("active");
+            nghesiyeuthich.classList.add("active");
+            nghesiyeuthichmenu.style.display = "block";
+            nhacyeuthich.style.display = "none";
+            danhsachnghenhacmenu.style.display = "none";
+            topdis.style.opacity  = "0";
+            topdisi.style.display = "none";
+        });
+    }
+    if (danhsachnghenhac) {
+        danhsachnghenhac.addEventListener("click", function () {
+            yeuthich.classList.remove("active");
+            nghesiyeuthich.classList.remove("active");
+            danhsachnghenhac.classList.add("active");
+            danhsachnghenhacmenu.style.display = "block";
+            nhacyeuthich.style.display = "none";
+            nghesiyeuthichmenu.style.display = "none";
+            topdis.style.opacity  = "0";
+            topdisi.style.display = "none";
+        });
+    }
     var DivSubmitCommentBtn = document.querySelector(".DivSubmitCommentBtn");
     var NhPBNhLuNCABN = document.querySelector(".NhPBNhLuNCABN");
     if (DivSubmitCommentBtn) {
@@ -333,11 +379,8 @@ document.addEventListener("DOMContentLoaded", () => {
             tlnhac1.addEventListener("click", function () {
                 window.location.href =
                     "/the-loai/" + tlnhac1.getAttribute("data-tl");
-                
-                
             });
         });
-        
     }
     var item_body_content = document.querySelectorAll(".item-body-content");
     if (item_body_content) {
@@ -369,16 +412,15 @@ document.addEventListener("DOMContentLoaded", () => {
                         menuFilter1.getAttribute("data-quantam") +
                         "-addQuantam",
                     success: function (data) {
-                        if(data.success=='no'){
+                        if (data.success == "no") {
                             var loi = document.querySelector(".loi");
                             loi.classList.add("active");
                             loi.style.display = "flex";
                             loi.querySelector(".tieude").textContent =
                                 "Vui lòng đăng nhập để yêu thích nghệ sĩ";
-                        }else{
+                        } else {
                             window.location.href = currentUrl;
                         }
-                        
                     },
 
                     error: function (error) {

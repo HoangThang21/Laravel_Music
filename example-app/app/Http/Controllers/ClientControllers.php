@@ -319,6 +319,7 @@ class ClientControllers extends Controller
     }
     public function loadyeuthich()
     {
+       
         if (Auth::guard('web')->check()) {
             return view('frontend.menu.yeuthich', [
                 'ttnguoidung' => Auth::guard('web')->user(),
@@ -327,7 +328,7 @@ class ClientControllers extends Controller
                 'loi' => '',
                 'baidau' => Nhac::where('vip', 0)->where('xetduyet', 1)->where('luotnghe', 'desc')->first(),
                 'loingoai' => '',
-
+            
                 'Nhactopluotnghe' => Nhac::where('vip', 0)->where('xetduyet', 1)->where('luotnghe', "desc")->latest()->take(10)->get(),
                 'Nhactopvip' => Nhac::where('vip', 1)->where('xetduyet', 1)->latest()->take(2)->get(),
                 'nghesi' => Nghesi::all(),
@@ -349,7 +350,7 @@ class ClientControllers extends Controller
                 'ttnguoidung' => Auth::guard('google')->user(),
                 'activerity' => 1,
                 'chatonline' => '',
-                'loi' => '',
+                'loi' => '', 
                 'baidau' => Nhac::where('vip', 0)->where('xetduyet', 1)->where('luotnghe', 'desc')->first(),
                 'loingoai' => '',
                 'Nhactopluotnghe' => Nhac::where('vip', 0)->where('xetduyet', 1)->where('luotnghe', "desc")->latest()->take(10)->get(),
@@ -379,7 +380,7 @@ class ClientControllers extends Controller
             'nghesi' => Nghesi::all(),
             'album' => Album::all(),
             'valuesreach' => '',
-            'loingoai' => '',
+            'loingoai' => '', 
             'loi' => 'Vui lòng đăng nhập để xem nhạc đã yêu thích.',
             'login' => 1,
             'rank' => 'null',
@@ -716,7 +717,7 @@ class ClientControllers extends Controller
                 $mess->idnhac = $request->input('linknhac');
             }
             $mess->noidung = $arr;
-            $mess->time = Carbon::now();;
+            $mess->time = Carbon::now();
             $mess->save();
             event(new CallLoad('Success'));
             return  redirect()->intended('/livechat');
@@ -2043,6 +2044,7 @@ class ClientControllers extends Controller
                 $comment->ten = Auth::guard('web')->user()->email;
                 $comment->hinh = Auth::guard('web')->user()->image;
                 $comment->noidung = $request->input('query');
+                    $comment->time = Carbon::now();
                 $comment->save();
                 return response()->json(['response' => "ok"]);
             }
@@ -2052,6 +2054,7 @@ class ClientControllers extends Controller
                 $comment->ten = Auth::guard('google')->user()->email;
                 $comment->hinh = Auth::guard('google')->user()->image;
                 $comment->noidung = $request->input('query');
+                $comment->time = Carbon::now();
                 $comment->save();
                 return response()->json(['response' => "ok"]);
             }

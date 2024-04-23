@@ -6,10 +6,19 @@
             <form method="post" action="/Administrator/sendmail" enctype="multipart/form-data">
                 @csrf
                 {{-- @method('POST') --}}
-
-                <div class="my-3">
-                    <input class="form-control" type="text" name="txtemail" value="{{ $user->email }}" readonly>
-                </div>
+                <?php 
+                if (is_numeric($user->email)) {
+            ?>
+            <div class="my-3">
+                <input class="form-control" type="text" name="txtemail" value="{{ $user->sdt }}" readonly>
+            </div>
+            <?php }else{
+                    ?>
+           <div class="my-3">
+            <input class="form-control" type="text" name="txtemail" value="{{ $user->email }}" readonly>
+        </div>
+            <?php   };?>
+                
                 <div class="my-3 ">
                     
                     <textarea id="default" name="txtmota" class="editor" cols="30" rows="10">

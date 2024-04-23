@@ -14,7 +14,7 @@
 
     <div class="infofilter">
         <div class="fillter">
-            <div class="Componentfilter" onclick="toggleMenu('optionFilter')">
+            <div class="Componentfilter" style="cursor: pointer;"  onclick="toggleMenu('optionFilter')">
                 <div class="LayerFilter">
                     <i class="bi bi-funnel"></i>
                 </div>
@@ -72,8 +72,8 @@
         </form>
 
         <div>
-            <a class="btn btn-primary" href="/Administrator/themnguoidung"><span
-                    class="glyphicon glyphicon-plus"><i class="bi bi-plus-circle"></i></span> Thêm người dùng</a>
+            <a class="btn btn-primary" href="/Administrator/themnguoidung"><span class="glyphicon glyphicon-plus"><i
+                        class="bi bi-plus-circle"></i></span> Thêm người dùng</a>
         </div>
     </div>
     <br>
@@ -127,6 +127,13 @@
                                                                 </a>
                                                             @endif
                                                         @endif
+                                                        <a href="/Administrator/{{ $us['id'] }}&userfix">
+                                                            <li><i class="bi bi-arrow-repeat"></i>Sửa</li>
+                                                        </a>
+                                                        <a
+                                                            href="/Administrator/{{ $us['id'] }}&userde"class="delete-link">
+                                                            <li><i class="bi bi-trash-fill"></i> Xóa</li>
+                                                        </a>
                                                         <a href="/Administrator/{{ $us['id'] }}&sendmail">
                                                             <li><i class="bi bi-envelope-at"></i> Gửi Mail</li>
                                                         </a>
@@ -302,6 +309,10 @@
                                                                 </a>
                                                             @endif
                                                         @endif
+                                                        <a href="/Administrator/{{ $us['id'] }}&userfix">
+                                                            <li><i class="bi bi-arrow-repeat"></i>Sửa</li>
+                                                        </a>
+
                                                         <a
                                                             href="/Administrator/{{ $us['id'] }}&userdegg"class="delete-link">
                                                             <li><i class="bi bi-trash-fill"></i> Xóa</li>

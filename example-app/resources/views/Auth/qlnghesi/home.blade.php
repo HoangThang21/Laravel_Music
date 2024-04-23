@@ -65,10 +65,10 @@
                                 <textarea draggable="false" name="" id="" readonly> {{ $nd['mota'] }}</textarea>
                             </td>
                             <td><a href="/Administrator/qlnghesi/xoanghesi&{{ $nd['id'] }}-ns"
-                                    class="btn btn-outline-danger delete-link">Xóa</a>
+                                    class="btn btn-outline-danger delete-link"> <i class="bi bi-trash3"></i> Xóa</a>
                                 <span> | </span>
                                 <a href="/Administrator/qlnghesi/suanghesi&{{ $nd['id'] }}-ns"
-                                    class="btn btn-outline-warning">Sửa</a>
+                                    class="btn btn-outline-warning"><i class="bi bi-arrow-repeat"></i>Sửa</a>
                             </td>
                         </tr>
                     @endif

@@ -6,8 +6,6 @@
             @foreach ($theloai as $item)
                 <div class="item" data-tl="{{ $item->id }}">{{ $item->tentheloai }}</div>
             @endforeach
-
-
         </div>
         <div class="bottom-topic">
             <div class="item-xthem">

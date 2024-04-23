@@ -20,6 +20,7 @@
 
                 <div class="itemmenu">Chính sách bảo mật</div>
                 <div class="itemmenu">Chính sách bảo vệ dữ liệu cá nhân</div>
+                <div class="itemmenu">Tính năng Funring</div>
             </div>
         </div>
         <div class="right">
@@ -876,6 +877,195 @@
                         to&agrave;n bộ nội dung của bản Ch&iacute;nh s&aacute;ch bảo vệ dữ liệu c&aacute; nh&acirc;n
                         n&agrave;y.</li>
                 </ol>
+            </div>
+            <div class="content" style="display:none">
+                <div class="title"
+                    style="color: #222222; font-size: 25px; font-family: Arial; font-weight: 700; text-transform: uppercase; line-height: 37.50px; word-wrap: break-word">
+                    T&Iacute;NH NĂNG FUNRING ME</div>
+                <div class="content-body ck ck-content">
+                    <h3>&nbsp;<img src="../../images/FunringMe.jpg" alt=""></h3>
+                    <p><strong>1. Giới thiệu</strong></p>
+                    <p>FunRing Me l&agrave; t&iacute;nh năng gi&uacute;p thu&ecirc; bao sử dụng dịch vụ FunRing
+                        c&oacute; thể nghe được những b&agrave;i h&aacute;t y&ecirc;u th&iacute;ch hoặc hiệu ứng
+                        &acirc;m thanh do ch&iacute;nh m&igrave;nh lựa chọn thay cho những bản nhạc chờ do người
+                        kh&aacute;c lựa chọn hoặc t&iacute;n hiệu chờ th&ocirc;ng thường khi gọi điện đến một thu&ecirc;
+                        bao MobiFone kh&aacute;c.</p>
+                    <p><strong>&nbsp;2. T&iacute;nh năng</strong></p>
+                    <p>Khi sử dụng t&iacute;nh năng FunRing Me, bạn c&oacute; thể:</p>
+                    <ul>
+                        <li>Nghe được những bản nhạc chờ y&ecirc;u th&iacute;ch do ch&iacute;nh bạn lựa chọn.</li>
+                        <li>Bạn c&oacute; thể chủ động bật/tắt/thay đổi c&agrave;i đặt ưu ti&ecirc;n cho t&iacute;nh
+                            năng FunRing Me v&agrave; nhạc chờ FunRing.</li>
+                        <li>C&agrave;i đặt bản nhạc chờ cho ri&ecirc;ng FunRing, cho t&iacute;nh năng FunRing Me hoặc
+                            cho cả hai.<strong>&nbsp;</strong></li>
+                    </ul>
+                    <p><strong>&nbsp;3. Gi&aacute; cước:</strong></p>
+                    <table border="1">
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <p><strong>STT</strong></p>
+                                </td>
+                                <td>
+                                    <p><strong>Nội dung</strong></p>
+                                </td>
+                                <td>
+                                    <p><strong>Gi&aacute; cước</strong></p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p>1</p>
+                                </td>
+                                <td>
+                                    <p>Cước thu&ecirc; bao t&iacute;nh năng</p>
+                                </td>
+                                <td>
+                                    <p><strong>Miễn ph&iacute;</strong></p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p>2</p>
+                                </td>
+                                <td>
+                                    <p>Cước mua/tải/tặng/gia hạn bản nhạc chờ</p>
+                                </td>
+                                <td>Theo cước của nhạc chờ tương ứng</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p>3</p>
+                                </td>
+                                <td>
+                                    <p>Cước gọi điện tới đầu số 9224</p>
+                                </td>
+                                <td>
+                                    <p>Miễn ph&iacute;</p>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <p><strong>4. Hướng dẫn</strong></p>
+                    <p><strong>4.1.</strong>&nbsp;<strong>K&ecirc;nh cung cấp:</strong>&nbsp;SMS, Website,
+                        Wapsite,&nbsp;Tổng đ&agrave;i dịch vụ (IVR)</p>
+                    <ul>
+                        <li>Đầu số SMS: 9224</li>
+                        <li>Website dịch vụ:&nbsp;<a href="#">http://funring.vn</a></li>
+                        <li>Wapsite dịch vụ:&nbsp;<a href="#">http://m.funring.vn</a></li>
+                        <li>Tổng đ&agrave;i IVR:&nbsp;9224</li>
+                    </ul>
+                    <p><strong>4.2. Sử dụng qua SMS</strong></p>
+                    <p>Để sử dụng qua SMS, bạn thực hiện theo hướng dẫn sau:</p>
+                    <table border="1">
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <p><strong>STT</strong></p>
+                                </td>
+                                <td>
+                                    <p><strong>Nội dung</strong></p>
+                                </td>
+                                <td>
+                                    <p><strong>Nội dung nhắn tin&nbsp;gửi&nbsp;9224</strong></p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td rowspan="2"><strong>1</strong></td>
+                                <td>
+                                    <p><strong>Đăng k&yacute; t&iacute;nh năng FunRing Me&nbsp;(</strong>khi thu&ecirc;
+                                        bao đ&atilde; đăng k&yacute; dịch vụ FunRing)</p>
+                                </td>
+                                <td>
+                                    <p><strong>DKF</strong></p>
+                                    <p>hoặc&nbsp;<strong>DKC</strong></p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p><strong>Đăng k&yacute; t&iacute;nh năng FunRing Me&nbsp;</strong>(khi thu&ecirc;
+                                        bao chưa đăng k&yacute; dịch vụ FunRing)</p>
+                                </td>
+                                <td>
+                                    <p><strong>DKF</strong></p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p><strong>2</strong></p>
+                                </td>
+                                <td>
+                                    <p><strong>Hủy</strong></p>
+                                </td>
+                                <td>
+                                    <p><strong>HUYC</strong></p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p><strong>3</strong></p>
+                                </td>
+                                <td>
+                                    <p><strong>Đặt&nbsp;ưu ti&ecirc;n FunRing Me</strong></p>
+                                </td>
+                                <td>
+                                    <p><strong>C</strong></p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p><strong>4</strong></p>
+                                </td>
+                                <td>
+                                    <p><strong>Đặt&nbsp;ưu ti&ecirc;n FunRing</strong></p>
+                                </td>
+                                <td>
+                                    <p><strong>F</strong></p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p><strong>5</strong></p>
+                                </td>
+                                <td>
+                                    <p><strong>Mua b&agrave;i h&aacute;t</strong></p>
+                                </td>
+                                <td>
+                                    <p><strong>BH M&atilde;B&agrave;iH&aacute;t</strong></p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p><strong>6</strong></p>
+                                </td>
+                                <td>
+                                    <p><strong>C&agrave;i mặc định b&agrave;i h&aacute;t</strong>&nbsp;cho ri&ecirc;ng
+                                        t&iacute;nh năng FunRing Me</p>
+                                </td>
+                                <td>
+                                    <p><strong>CAI&nbsp;M&atilde;B&agrave;iH&aacute;t</strong></p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p><strong>7</strong></p>
+                                </td>
+                                <td>
+                                    <p><strong>C&agrave;i mặc định b&agrave;i h&aacute;t</strong>&nbsp;FunRing Me cho
+                                        ri&ecirc;ng một thu&ecirc; bao</p>
+                                </td>
+                                <td>
+                                    <p><strong>CAI&nbsp;M&atilde;B&agrave;iH&aacute;t SốĐiệnThoại</strong></p>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <p><strong>5. Quy định</strong></p>
+                    <p><strong>5.1.</strong>&nbsp;<strong>Đối tượng sử dụng:</strong>&nbsp;L&agrave; thu&ecirc; bao đang
+                        hoạt động hai chiều tr&ecirc;n mạng.MobiFone</p>
+                    <p><strong>5.2.</strong>&nbsp;<strong>Điều kiện sử dụng:&nbsp;</strong>Thu&ecirc; bao sử dụng dịch
+                        vụ FunRing v&agrave; đăng k&yacute; th&agrave;nh c&ocirc;ng t&iacute;nh năng FunRing Me.</p>
+                </div>
             </div>
         </div>
 

@@ -22,9 +22,9 @@
                 @endphp {{ $number }}</td>
                 <td>{{ $nd['tentheloai'] }}</td>
                 <td><a href="/Administrator/qltheloai/xoatheloai&{{ $nd['id'] }}-tl"
-                        class="btn btn-outline-danger delete-link" >Xóa</a>
+                        class="btn btn-outline-danger delete-link" > <i class="bi bi-trash3"></i> Xóa</a>
                     <span> | </span>
-                    <a href="/Administrator/qltheloai/suatheloai&{{ $nd['id'] }}-tl" class="btn btn-outline-warning ">Sửa</a>
+                    <a href="/Administrator/qltheloai/suatheloai&{{ $nd['id'] }}-tl" class="btn btn-outline-warning "><i class="bi bi-arrow-repeat"></i>Sửa</a>
                 </td>
             </tr>
             @endforeach

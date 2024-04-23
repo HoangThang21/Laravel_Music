@@ -737,3 +737,10 @@ p {
     font-size: 24px;
     animation: all 1s linear;
 }
+.img_menu {
+    display: flexbox;
+}
+.img_menu img{
+    width: 100px;
+    height: 100px;
+}
