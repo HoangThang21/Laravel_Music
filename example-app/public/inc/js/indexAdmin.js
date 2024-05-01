@@ -341,7 +341,48 @@ document.addEventListener("DOMContentLoaded", () => {
             500
         );
     });
-    
+    var delete_comment = document.querySelector(".delete_comment");
+    if (delete_comment) {
+        delete_comment.addEventListener("click", function () {
+            $.ajax({
+                type: "get",
+                url:
+                    "/Administrator/deletecommentAdmin/" +
+                    delete_comment.getAttribute("data-comment"),
+                success: function (data) {
+                    window.location.href = currentUrl;
+                },
+
+                error: function (error) {
+                    console.error("Đã xảy ra lỗi: ", error);
+                },
+            });
+        });
+    }
+    var DivSubmitCommentBtn = document.querySelector(".DivSubmitCommentBtn");
+    var NhPBNhLuNCABN = document.querySelector(".NhPBNhLuNCABN");
+    if (DivSubmitCommentBtn) {
+        DivSubmitCommentBtn.addEventListener("click", function () {
+            if (NhPBNhLuNCABN.value != "") {
+                $.ajax({
+                    type: "get",
+                    url:
+                        "/Administrator/commentmusicAdmin/" +
+                        DivSubmitCommentBtn.getAttribute("data-songcomment"),
+                    data: {
+                        query: NhPBNhLuNCABN.value,
+                    },
+                    success: function (data) {
+                        window.location.href = "/Administrator/qlnhac";
+                    },
+
+                    error: function (error) {
+                        console.error("Đã xảy ra lỗi: ", error);
+                    },
+                });
+            }
+        });
+    }
 });
 function toggleMenu(name) {
     var menuFilter = document.querySelector("." + name);

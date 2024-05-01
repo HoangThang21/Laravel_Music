@@ -1202,7 +1202,7 @@ header .master_play .bar input {
     justify-content: space-between;
     align-items: center;
     gap: 20px;
-    width: fit-content;
+    /* width: fit-content; */
 }
 .toptable a {
     text-decoration: none;
@@ -2736,6 +2736,14 @@ p {
     color: var(--text-color-light);
     width: fit-content;
     font-size: 13px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 19.5px; /* 150% */
+}
+.itemcomment-ten span{
+    color: var(--text-color-B);
+    width: fit-content;
+    font-size: 11px;
     font-style: normal;
     font-weight: 700;
     line-height: 19.5px; /* 150% */

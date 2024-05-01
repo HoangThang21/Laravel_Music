@@ -2,7 +2,7 @@
 
 <div class="bodyhome">
     <div class="table-music">
-        <div class="toptable">
+        <div class="toptable"  style="width: fit-content; ">
             <div class="discover ">
                 <div class="topdis">
                     <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 25 25" fill="none">
@@ -345,7 +345,7 @@
         </div>
         <div class="song-search-click danhsachnghenhacmenu" style="display:none">
             <div class="table-music">
-                <div class="toptable">
+                <div class="toptable"  style="width: fit-content; ">
                     <div class="baihatall">
                       
                         <p>Bài hát</p>

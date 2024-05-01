@@ -10,6 +10,7 @@ use App\Models\Nhac;
 use App\Models\Theloai;
 use App\Models\User;
 use App\Models\UserAPI;
+use App\Models\Comment;
 use Exception;
 
 use Illuminate\Support\Collection;
@@ -1385,6 +1386,44 @@ class AdminControllers extends Controller
                 ]);
             }
             return redirect()->intended('/Administrator/qlnhac');
+        }
+        if($name=="xemcomment"){
+            return view('Auth.qlnhac.xemcomment', [
+                'ttnguoidung' =>  Auth::guard('api')->user(),
+                'album' => Album::all(),
+                'comment'=>Comment::where("idnhac",$number)->get(),
+                'countComment'=>Comment::where("idnhac",$number)->count(),
+                'Nhacalbumbaihat'=>$number,
+                'active' => '',
+                'loi' => '',
+                'contentFilter' => '-1',
+            ]);
+        }
+    }
+    public function deletecommentAdmin(string $name)
+    {
+        if (Auth::guard('api')->check()) {
+            $tl = Comment::where('id', $name)->delete();
+            return response()->json(['response' => "ok"]);
+        }
+       
+        return response()->json(['response' => "loi"]);
+    }
+    public function commentmusicAdmin(Request $request, string $name)
+    {
+        if ($request->input('query')) {
+            if (Auth::guard('api')->check()) {
+                $comment = new Comment;
+                $comment->idnhac = $name;
+                $comment->ten = Auth::guard('api')->user()->email;
+                $comment->hinh = Auth::guard('api')->user()->image;
+                $comment->noidung = $request->input('query');
+                $comment->time = Carbon::now();
+                $comment->save();
+                return response()->json(['response' => "ok"]);
+            }
+            
+            return response()->json(['response' => "no"]);
         }
     }
     public function suanghesi(Request $request)

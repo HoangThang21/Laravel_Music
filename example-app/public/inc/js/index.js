@@ -251,8 +251,27 @@ document.addEventListener("DOMContentLoaded", () => {
             });
         });
     }
+    var delete_comment = document.querySelector(".delete_comment");
+    if (delete_comment) {
+       
+            delete_comment.addEventListener("click", function () {
+                $.ajax({
+                    type: "get",
+                    url:
+                        "/deletecomment/" +
+                        delete_comment.getAttribute("data-comment"),
+                    success: function (data) {
+                        window.location.href = currentUrl;
+                    },
 
-    const all = document.getElementById("all");
+                    error: function (error) {
+                        console.error("Đã xảy ra lỗi: ", error);
+                    },
+                });
+            });
+        
+    }
+    const all = document.getElementById("nextBtn");
     if (all) {
         all.addEventListener("click", function () {
             history.forward();

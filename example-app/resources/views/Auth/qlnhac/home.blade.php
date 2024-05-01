@@ -70,6 +70,8 @@
                         <span> | </span>
                         <a href="/Administrator/qlnhac/suanhac&{{ $nd['id'] }}-music"
                             class="btn btn-outline-warning"><i class="bi bi-arrow-repeat"></i>Sửa</a>
+                            <span> | </span>
+                        <a href="/Administrator/qlnhac/xemcomment&{{ $nd['id'] }}-comment" class="btn btn-outline-info"><i class="bi bi-eye-fill"></i>Xem bình luận</a>
                     </td>
                     <td>
                         @if ($nd->xetduyet == 0)

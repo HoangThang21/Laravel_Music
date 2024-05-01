@@ -30,6 +30,7 @@
     <script>
         var csrfToken = ` {{ csrf_token() }}`;
         var contentFilter = {{ $contentFilter }};
+        var currentUrl = "{{ request()->url() }}";
     </script>
 @endif
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
