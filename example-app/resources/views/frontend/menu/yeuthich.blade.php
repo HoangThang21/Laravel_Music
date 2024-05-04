@@ -236,6 +236,7 @@
                                                             </div>
                                                             <div class="sendchat" data-sendchat="{{ $n->id }}"><i class="bi bi-chat-dots"></i>Share
                                                                 chat</div>
+                                                            <div class="luuvaodsnhac" onclick="ListMusic({{ $n->id }})"><i class="bi bi-file-earmark-music"></i>Lưu vào danh sách phát</div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -522,7 +523,25 @@
                                         @endphp
                                         <div class="time-curent-media"data-song="{{ $n->id }}"><span>{{ $duration }}</span><i
                                                 class="loadmusic-dot bi bi-caret-right-fill"></i></div>
-                                        <div class="yeuthich-music" data-yeutich="{{ $n->id}}" title="Đã yêu thích"><i class="bi bi-heart-fill"></i></div>
+                                                @php
+                                                    $inputString1 = $ttnguoidung->thuvien;
+                                                    $parts1 = explode('-', $inputString1);
+                                                    $check1 = 0;
+                                                @endphp
+                                                @foreach ($parts1 as $index => $part)
+                                                    @if ($part==$n->id)
+                                                    <div class="">1</div>
+                                                        @php
+                                                            $check1 += 1;
+                                                        @endphp
+                                                    @endif
+                                                @endforeach
+                                                @if ($check1 >= 0)
+                                                    <div class="yeuthich-music" data-yeutich="{{ $n->id}}" title="Đã yêu thích"><i class="bi bi-heart-fill"></i></div>
+                                                @else
+                                                <div class="yeuthich-music" data-yeutich="{{ $n->id}}" title="Thêm vào yêu thích"><i class="bi bi-heart"></i></div>
+                                                @endif
+                                       
                                         <div class="option">
                                             <div class="dot-3"><i class="bi bi-three-dots"></i></div>
                                             <div class="menu-right-media ">
@@ -536,6 +555,7 @@
                                                 </div>
                                                 <div class="sendchat" data-sendchat="{{ $n->id }}"><i class="bi bi-chat-dots"></i>Share
                                                     chat</div>
+                                                    <div class="luuvaodsnhac" onclick="DeleteListMusic({{ $n->id }})"><i class="bi bi-file-earmark-music"></i>Xóa khỏi danh sách phát</div>
                                             </div>
                                         </div>
                                     </div>

@@ -992,13 +992,12 @@ if (discoveri) {
             if (baihatall) {
                 baihatall.classList.add("bi-play-fill");
                 baihatall.classList.remove("bi-pause-fill");
-               
             }
-            demloadlistnhacall=0;
+            demloadlistnhacall = 0;
             wave.classList.add("active2");
             music.play();
         }
-        
+
         media.forEach(function (mediaitem, indexmedia) {
             mediaitem.classList.remove("active");
         });
@@ -1089,10 +1088,10 @@ if (baihatall) {
             baihatall.classList.remove("bi-play-fill");
             baihatall.classList.add("bi-pause-fill");
             wave.classList.add("active2");
-            demloadlistnhac=0;
+            demloadlistnhac = 0;
             music.play();
         }
-       
+
         media.forEach(function (mediaitem, indexmedia) {
             mediaitem.classList.remove("active");
         });
@@ -1250,6 +1249,55 @@ if (phatdshaynghe) {
         }
 
         console.log(myMusic);
+    });
+}
+function ListMusic(name) {
+    $.ajax({
+        url: "/save-my-music",
+        method: "POST",
+        data: {
+            myMusic: name,
+            type: "up",
+            _token: csrfToken,
+        },
+        success: function (response) {
+            var loi = document.querySelector(".loi");
+            loi.classList.add("active");
+            loi.style.display = "flex";
+            loi.querySelector(".tieude").textContent =
+                "Đã thêm vào danh sách nghe nhạc.";
+                setTimeout(function(){
+                    window.location.href = currentUrl;
+                },2000);
+               
+        },
+        error: function (xhr, status, error) {
+            console.error("Đã xảy ra lỗi: ", error);
+        },
+    });
+}
+function DeleteListMusic(name) {
+    $.ajax({
+        url: "/delete-my-music",
+        method: "POST",
+        data: {
+            myMusic: name,
+            type: "up",
+            _token: csrfToken,
+        },
+        success: function (response) {
+            var loi = document.querySelector(".loi");
+            loi.classList.add("active");
+            loi.style.display = "flex";
+            loi.querySelector(".tieude").textContent =
+                "Đã xóa nhạc khỏi danh sách.";
+                setTimeout(function(){
+                    window.location.href = currentUrl;
+                },2000);
+        },
+        error: function (xhr, status, error) {
+            console.error("Đã xảy ra lỗi: ", error);
+        },
     });
 }
 setInterval(function () {

@@ -2186,6 +2186,51 @@ class ClientControllers extends Controller
 
         return response()->json(['response' => [$nhac]]);
     }
+    public function deleteMyMusic(Request $request)
+    {
+        $id = $request->input('myMusic');
+        if (Auth::guard('web')->check()) {
+            $user = User::where('id', Auth::guard('web')->user()->id)->first();
+            if ($user != null) {
+                if (Str::contains($user->danhsachphat, $id . '-')) {
+                    // Nếu có, thay thế '3-' bằng ''
+                    $string = Str::replaceFirst($id . '-', '', $user->danhsachphat);
+                } else {
+                    // Nếu không, thêm '3-' vào cuối chuỗi
+                    $string = $user->danhsachphat . $id . '-';
+                }
+                User::where('id', $user->id)
+                    ->update([
+                        'danhsachphat' => $string,
+                    ]);
+            }
+        }
+        if (Auth::guard('google')->check()) {
+            $user = UserAPI::where('id', Auth::guard('google')->user()->id)->first();
+            if ($user != null) {
+                if (Str::contains($user->danhsachphat, $id . '-')) {
+                    // Nếu có, thay thế '3-' bằng ''
+                    $string = Str::replaceFirst($id . '-', '', $user->danhsachphat);
+                } else {
+                    // Nếu không, thêm '3-' vào cuối chuỗi
+                    $string = $user->danhsachphat . $id . '-';
+                }
+
+                UserAPI::where('id', $user->id)
+                    ->update([
+                        'danhsachphat' => $string,
+                    ]);
+            }
+        }
+
+        Session::put('myMusic', $request->input('myMusic'));
+        //  session(['myMusic' =>$request->input('myMusic') ]);
+
+        $nhac = Nhac::where('id', $request->input('myMusic'))->first();
+        // Lấy người dùng hiện tại đã xác thực thông qua API
+
+        return response()->json(['response' => [$nhac]]);
+    }
     public function gioithieu()
     {
         return view('frontend.gioithieu.home');

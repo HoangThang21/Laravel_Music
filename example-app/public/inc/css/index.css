@@ -1518,12 +1518,14 @@ header .master_play .bar input {
 .option .menu-right-media .download:hover,
 .option .menu-right-media .nhaccho:hover,
 .option .menu-right-media .sendchat:hover,
+.option .menu-right-media .luuvaodsnhac:hover,
 .option .menu-right-media .Xoa:hover {
     background-color: #ffffff7d;
 }
 .option .menu-right-media .download,
 .option .menu-right-media .nhaccho,
 .option .menu-right-media .sendchat,
+.option .menu-right-media .luuvaodsnhac,
 .option .menu-right-media .Xoa {
     cursor: pointer;
     display: flex;
