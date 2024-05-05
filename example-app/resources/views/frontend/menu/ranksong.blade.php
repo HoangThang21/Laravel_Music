@@ -249,6 +249,8 @@
                                     data-gia="{{ $nhactop10->gia }}"><i class="bi bi-phone-vibrate"></i>Cài nhạc chờ
                                 </div>
                                 <div class="sendchat" data-sendchat="{{ $nhactop10->id }}"><i class="bi bi-chat-dots"></i>Share chat</div>
+                                <div class="luuvaodsnhac" onclick="ListMusic({{ $nhactop10->id }})"><i class="bi bi-file-earmark-music"></i>Lưu vào danh sách phát</div>
+
                             </div>
                         </div>
                     </div>

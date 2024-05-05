@@ -530,13 +530,14 @@
                                                 @endphp
                                                 @foreach ($parts1 as $index => $part)
                                                     @if ($part==$n->id)
-                                                    <div class="">1</div>
+                                                  
                                                         @php
+                                                        
                                                             $check1 += 1;
                                                         @endphp
                                                     @endif
                                                 @endforeach
-                                                @if ($check1 >= 0)
+                                                @if ($check1 > 0)
                                                     <div class="yeuthich-music" data-yeutich="{{ $n->id}}" title="Đã yêu thích"><i class="bi bi-heart-fill"></i></div>
                                                 @else
                                                 <div class="yeuthich-music" data-yeutich="{{ $n->id}}" title="Thêm vào yêu thích"><i class="bi bi-heart"></i></div>

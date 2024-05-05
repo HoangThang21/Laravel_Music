@@ -270,28 +270,7 @@ class ClientControllers extends Controller
                 }
             }
         } catch (Exception $e) {
-            return view('frontend.home', [
-                'login' => 1,
-                'activerity' => 0, 'chatonline' => '',
-                'Albumtop3' => Album::latest()->take(3)->get(),
-                'Chill' => Album::inRandomOrder()->take(3)->get(),
-                'CanLike' => Album::inRandomOrder()->take(3)->get(),
-                'Nhactopluotnghe' => Nhac::where('vip', 0)->where('xetduyet', 1)->where('luotnghe', "desc")->latest()->take(10)->get(),
-                'Nhactopvip' => Nhac::where('vip', 1)->where('xetduyet', 1)->latest()->take(2)->get(),
-                'Nhactop10' => Nhac::where('vip', 0)->where('xetduyet', 1)->latest()->take(10)->get(),
-                'Nghesitop20' => Nghesi::inRandomOrder()->take(20)->get(),
-                'nghesi' => Nghesi::all(),
-                'album' => Album::all(),
-                'valuesreach' => '',
-                'baidau' => Nhac::where('vip', 0)->where('xetduyet', 1)->where('luotnghe', 'desc')->first(),
-                'loingoai' => '',
-                'loi' => 'Nhập không đúng. Vui lòng nhập lại',
-                'rank' => 'null',
-                'rightsong' => 0,
-                'user' => User::select('id', 'image')->get(),
-                'session' => session()->get('myMusic'),
-                'nhacsesion' => Nhac::where('vip', 0)->where('xetduyet', 1)->get(),
-            ]);
+            
         }
         return redirect()->intended('/');
     }

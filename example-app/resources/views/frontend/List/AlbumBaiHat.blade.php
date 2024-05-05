@@ -246,6 +246,8 @@
                                             </div>
                                             <div class="sendchat" data-sendchat="{{ $Nhacalbumbaihat->id }}"><i
                                                     class="bi bi-chat-dots"></i>Share chat</div>
+                                        <div class="luuvaodsnhac" onclick="ListMusic({{ $Nhacalbumbaihat->id }})"><i class="bi bi-file-earmark-music"></i>Lưu vào danh sách phát</div>
+
                                         </div>
                                     </div>
                                 </div>
