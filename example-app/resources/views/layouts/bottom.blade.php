@@ -360,7 +360,7 @@
         </div>
         <div class="input_container">
             <label class="input_label">Khi bạn đăng ký bạn đã đồng ý mọi giao dịch mua bán theo
-                <a href="">điều kiện sử dụng và chính sách của MobiSong</a></label>
+                <a href="/gioithieu">điều kiện sử dụng và chính sách của Funring</a></label>
         </div>
         <button title="Đăng ký" type="submit" class="regis-in_btn">
             <span>Đăng ký</span>

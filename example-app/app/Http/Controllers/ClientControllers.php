@@ -378,7 +378,7 @@ class ClientControllers extends Controller
                 return view('frontend.menu.livechat', [
                     'ttnguoidung' => Auth::guard('web')->user(),
                     'chat' => Mess::all(),
-                    'nhac' => Nhac::where('vip', 0)->get(),
+                    'nhac' => Nhac::all(),
                     'Nhactopluotnghe' => Nhac::where('vip', 0)->where('xetduyet', 1)->where('luotnghe', "desc")->latest()->take(10)->get(),
                     'Nhactopvip' => Nhac::where('vip', 1)->where('xetduyet', 1)->latest()->take(2)->get(),
                     'namemusic' => '',
@@ -430,7 +430,7 @@ class ClientControllers extends Controller
                     'Nhactopluotnghe' => Nhac::where('vip', 0)->where('xetduyet', 1)->where('luotnghe', "desc")->latest()->take(10)->get(),
                     'Nhactopvip' => Nhac::where('vip', 1)->where('xetduyet', 1)->latest()->take(2)->get(),
                     'chat' => Mess::all(),
-                    'nhac' => Nhac::where('vip', 0)->get(),
+                    'nhac' => Nhac::all(),
                     'namemusic' => '',
                     'activerity' => 2,
                     'loi' => '',
@@ -1442,7 +1442,7 @@ class ClientControllers extends Controller
     public function albumbaihat(string $name)
     {
         // dd($name);
-        $nhac = Nhac::where('vip', 0)->where('xetduyet', 1)->where('id', $name)->first();
+        $nhac = Nhac::where('xetduyet', 1)->where('id', $name)->first();
         $album = Album::where('id', $nhac->album_idnhac)->first();
         $nghesi = Nghesi::where('id', $album->nghesi_idalbum)->first();
         $comment = Comment::where("idnhac", $name)->get();

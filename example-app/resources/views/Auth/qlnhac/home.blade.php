@@ -66,20 +66,20 @@
 
 
                     <td><a href="/Administrator/qlnhac/xoanhac&{{ $nd['id'] }}-music"
-                            class="btn btn-outline-danger delete-link"> <i class="bi bi-trash3"></i> Xóa</a>
+                            class="btn btn-outline-danger delete-link mb-2"> <i class="bi bi-trash3"></i> Xóa</a>
                         <span> | </span>
                         <a href="/Administrator/qlnhac/suanhac&{{ $nd['id'] }}-music"
-                            class="btn btn-outline-warning"><i class="bi bi-arrow-repeat"></i>Sửa</a>
+                            class="btn btn-outline-warning mb-2"><i class="bi bi-arrow-repeat"></i>Sửa</a>
                             <span> | </span>
                         <a href="/Administrator/qlnhac/xemcomment&{{ $nd['id'] }}-comment" class="btn btn-outline-info"><i class="bi bi-eye-fill"></i>Xem bình luận</a>
                     </td>
                     <td>
                         @if ($nd->xetduyet == 0)
                             <a href="/Administrator/qlalbum/duyetmusic&{{ $nd['id'] }}-albc"
-                                class="btn btn-outline-dange">Chưa duyệt</a>
+                                class="btn btn-outline-danger mb-2">Chưa duyệt</a>
                         @else
                             <a href="/Administrator/qlalbum/duyetmusic&{{ $nd['id'] }}-albd"
-                                class="btn btn-outline-success">Đã duyệt</a>
+                                class="btn btn-outline-success mb-2">Đã duyệt</a>
                             <a href="/Administrator/loadchat&{{ $nd['id'] }}-albd"
                                 class="btn btn-outline-info">Send chat</a>
                         @endif

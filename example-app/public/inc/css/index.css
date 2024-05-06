@@ -1496,7 +1496,7 @@ header .master_play .bar input {
 .option .menu-right-media {
     position: absolute;
 
-    left: -4px;
+    left: -80px;
     display: none;
     flex-direction: column;
     /* gap: 20px; */
@@ -2742,7 +2742,7 @@ p {
     font-weight: 700;
     line-height: 19.5px; /* 150% */
 }
-.itemcomment-ten span{
+.itemcomment-ten span {
     color: var(--text-color-B);
     width: fit-content;
     font-size: 11px;

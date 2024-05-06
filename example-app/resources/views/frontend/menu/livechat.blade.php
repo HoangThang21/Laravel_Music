@@ -13,6 +13,7 @@
                             <div class="middlemessage">
                                 <div class="noidung">{!! $ch->noidung !!}</div>
                             </div>
+                            
                             @if ($ch->idnhac)
                                 @foreach ($nhac as $nh)
                                     @if ($ch->idnhac == $nh->id)
@@ -86,7 +87,7 @@
                             </div>
                             <div class="middlemessage">
                                 <div class="noidung">{!! $ch->noidung !!}</div>
-                            </div>
+                            </div> 
                             @if ($ch->idnhac)
                                 @foreach ($nhac as $nh)
                                     @if ($ch->idnhac == $nh->id)

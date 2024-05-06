@@ -14,6 +14,7 @@ class Kernel extends ConsoleKernel
     {
         // $schedule->call('App\Http\Controllers\RankingController@updateWeeklyRankings')->weekly();
         $schedule->call('App\Http\Controllers\RankingController@updateWeeklyRankings')->everyMinute();
+        // $schedule->command('schedule:run')->everyMinute();
     }
 
     /**

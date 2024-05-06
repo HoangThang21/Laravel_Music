@@ -697,12 +697,63 @@ function formatTimer(time) {
 var prniumlisti = document.querySelectorAll(".viprenium i");
 prniumlisti.forEach(function (prniumlistitem, indexi1) {
     prniumlistitem.addEventListener("click", () => {
-        if (prenium == 0) {
+        if (!prenium) {
             var loi = document.querySelector(".loi");
             loi.classList.add("active");
             loi.style.display = "flex";
             loi.querySelector(".tieude").textContent =
                 "Vui lòng nâng vip để nghe.";
+        }
+        else{
+            if(prenium==0){
+                var loi = document.querySelector(".loi");
+            loi.classList.add("active");
+            loi.style.display = "flex";
+            loi.querySelector(".tieude").textContent =
+                "Vui lòng nâng vip để nghe.";
+            }
+            else{
+                var id = prniumlistitem.getAttribute("data-song");
+                $.ajax({
+                    type: "POST",
+                    url: "/loadmusic/" + id,
+                    dataType: "json",
+                    data: { _token: csrfToken },
+                    success: function (data) {
+                        hinhnghenhac.src = "../../images/" + data.success.imagemusic;
+                        tenbaihat.innerText = data.success.tennhac;
+                        nghesi.innerText = data.successns.tennghesi;
+        
+                        if (!myMusic.includes(data.success.id)) {
+                            myMusic.push(data.success.id);
+                        }
+                        list = data.success.id;
+        
+                        setsavemusic = true;
+                        music.src = "../../music/" + data.success.nhaclink;
+                        music.play();
+                        indexstartsong = indexi1;
+                        let indexArray = myMusic
+                            .map((element, index) => (element === list ? index : -1))
+                            .filter((index) => index !== -1);
+        
+                        if (indexArray.length > 0) {
+                            let vi_tri = indexArray[0];
+                            demnext = vi_tri;
+                            console.log(
+                                `Vị trí của số ${list} trong mảng là: ${demnext}`
+                            );
+                        } else {
+                            console.log(`Số ${list} không tồn tại trong mảng.`);
+                        }
+                        // music.play();
+                    },
+                    error: function (error) {
+                        console.error("Đã xảy ra lỗi: ", error);
+                    },
+                });
+            }
+           
         }
     });
 });
@@ -1303,21 +1354,33 @@ function DeleteListMusic(name) {
 setInterval(function () {
     if (setsavemusic) {
         if (list != -1) {
-            $.ajax({
-                url: "/save-my-music",
-                method: "POST",
-                data: {
-                    myMusic: list,
-                    type: "up",
-                    _token: csrfToken,
+              $.ajax({
+                type: "POST",
+                url: "/ln/" + list,
+                dataType: "json",
+                data: { _token: csrfToken },
+                success: function (data) {
+                    console.log("wellcome to music");
                 },
-                success: function (response) {
-                    console.log("succes");
-                },
-                error: function (xhr, status, error) {
+                error: function (error) {
                     console.error("Đã xảy ra lỗi: ", error);
                 },
             });
+            // $.ajax({
+            //     url: "/save-my-music",
+            //     method: "POST",
+            //     data: {
+            //         myMusic: list,
+            //         type: "up",
+            //         _token: csrfToken,
+            //     },
+            //     success: function (response) {
+            //         console.log("succes");
+            //     },
+            //     error: function (xhr, status, error) {
+            //         console.error("Đã xảy ra lỗi: ", error);
+            //     },
+            // });
         }
 
         setsavemusic = false;

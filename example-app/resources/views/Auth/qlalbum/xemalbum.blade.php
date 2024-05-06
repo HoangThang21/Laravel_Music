@@ -27,7 +27,7 @@
                 <th>Hình</th>
                 <th>Lượt nghe</th>
                 <th>Lượt Download</th>
-
+                <th>Chức năng</th>
 
 
             </tr>
@@ -41,7 +41,17 @@
                     <td><img src="../../images/{{ $nd['imagemusic'] }}" width="80" class="img-thumbnail"></td>
                     <td>{{ number_format($nd['luotnghe']) }}</td>
                     <td>{{ number_format($nd['luotdownload']) }}</td>
-                    <td> <a href="/Administrator/qlnhac/xemcomment&{{ $nd['id'] }}-comment" class="btn btn-outline-info"><i class="bi bi-eye-fill"></i>Xem bình luận</a></td>
+                    <td > <a href="/Administrator/qlnhac/xemcomment&{{ $nd['id'] }}-comment"
+                            class="btn btn-outline-info mb-2"><i class="bi bi-eye-fill"></i>Xem bình luận</a>
+                            @if ($nd->xetduyet == 0)
+                            <div class=""></div>
+                        @else
+                            
+                            <a href="/Administrator/loadchat&{{ $nd['id'] }}-albd"
+                                class="btn btn-outline-info">Send chat</a>
+                        @endif
+                        </td>
+                   
                     {{-- <td>
                     <input type="range" name="inputrangemusic" id="inputrangemusic" max="100" min="0" value="0">
 
