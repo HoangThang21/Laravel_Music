@@ -246,7 +246,9 @@
                                             </div>
                                             <div class="sendchat" data-sendchat="{{ $Nhacalbumbaihat->id }}"><i
                                                     class="bi bi-chat-dots"></i>Share chat</div>
-                                        <div class="luuvaodsnhac" onclick="ListMusic({{ $Nhacalbumbaihat->id }})"><i class="bi bi-file-earmark-music"></i>Lưu vào danh sách phát</div>
+                                            <div class="luuvaodsnhac" onclick="ListMusic({{ $Nhacalbumbaihat->id }})">
+                                                <i class="bi bi-file-earmark-music"></i>Lưu vào danh sách phát
+                                            </div>
 
                                         </div>
                                     </div>
@@ -308,26 +310,16 @@
             <div class="commetus">
                 @foreach ($comment as $item)
                     @if (Auth::guard('web')->check())
-                        <div class="itemcomment">
-                            <div class="itemcomment-img"><img src="../../images/{{ $item->hinh }}" alt="">
-                            </div>
-                            <div class="itemcomment-info">
-                                <div class="itemcomment-ten">{{ $item->ten }} <span>{{ $item->time }}</span>
-                                    <span style="cursor: pointer;" class="delete_comment" data-comment="{{ $item->id }}"><i class="bi bi-trash"></i>
-                                        Xóa</span>
-                                </div>
-                                <p class="itemcomment-comment">{{ $item->noidung }} </p>
-                            </div>
-                        </div>
-                    @else
-                        @if (Auth::guard('google')->check())
+                        @if (Auth::guard('web')->user()->email == $item->ten)
                             <div class="itemcomment">
                                 <div class="itemcomment-img"><img src="../../images/{{ $item->hinh }}"
-                                        alt=""></div>
+                                        alt="">
+                                </div>
                                 <div class="itemcomment-info">
                                     <div class="itemcomment-ten">{{ $item->ten }} <span>{{ $item->time }}</span>
-                                        <span style="cursor: pointer;" class="delete_comment" data-comment="{{ $item->id }}"><i
-                                                class="bi bi-trash"></i> Xóa</span>
+                                        <span style="cursor: pointer;" class="delete_comment"
+                                            data-comment="{{ $item->id }}"><i class="bi bi-trash"></i>
+                                            Xóa</span>
                                     </div>
                                     <p class="itemcomment-comment">{{ $item->noidung }} </p>
                                 </div>
@@ -337,15 +329,44 @@
                                 <div class="itemcomment-img"><img src="../../images/{{ $item->hinh }}"
                                         alt=""></div>
                                 <div class="itemcomment-info">
-                                    <div class="itemcomment-ten">{{ $item->ten }}  <span>{{ $item->time }}</span></div>
+                                    <div class="itemcomment-ten">{{ $item->ten }}
+                                        <span>{{ $item->time }}</span>
+                                    </div>
                                     <p class="itemcomment-comment">{{ $item->noidung }} </p>
                                 </div>
                             </div>
                         @endif
+                    @else
+                        @if (Auth::guard('google')->check())
+                            @if (Auth::guard('google')->user()->email == $item->ten)
+                                <div class="itemcomment">
+                                    <div class="itemcomment-img"><img src="../../images/{{ $item->hinh }}"
+                                            alt=""></div>
+                                    <div class="itemcomment-info">
+                                        <div class="itemcomment-ten">{{ $item->ten }}
+                                            <span>{{ $item->time }}</span>
+                                            <span style="cursor: pointer;" class="delete_comment"
+                                                data-comment="{{ $item->id }}"><i class="bi bi-trash"></i>
+                                                Xóa</span>
+                                        </div>
+                                        <p class="itemcomment-comment">{{ $item->noidung }} </p>
+                                    </div>
+                                </div>
+                            @else
+                                <div class="itemcomment">
+                                    <div class="itemcomment-img"><img src="../../images/{{ $item->hinh }}"
+                                            alt=""></div>
+                                    <div class="itemcomment-info">
+                                        <div class="itemcomment-ten">{{ $item->ten }}
+                                            <span>{{ $item->time }}</span>
+                                        </div>
+                                        <p class="itemcomment-comment">{{ $item->noidung }} </p>
+                                    </div>
+                                </div>
+                            @endif
+                        @endif
                     @endif
                 @endforeach
-
-
             </div>
         </div>
         <div class="lyric">

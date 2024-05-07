@@ -19,7 +19,7 @@ document.addEventListener("DOMContentLoaded", () => {
         $("#Noidung p").remove();
     }
     var thongbao = document.querySelector(".thongbao");
-    var tieudeDiv = document.querySelector(".tieude");
+    var tieudeDiv = document.querySelector(".thongbao .tieude");
     var nhaccholist = document.querySelectorAll(".nhaccho");
     var sendchat = document.querySelectorAll(".sendchat");
     nhaccholist.forEach(function (nhaccholistitem, index) {
@@ -32,6 +32,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 style: "currency",
                 currency: "VND",
             });
+            console.log(dataChoValue,giaFormatted);
             thongbao.style.display = "block";
             tieudeDiv.textContent =
                 "Soạn: CHON " +
@@ -47,24 +48,27 @@ document.addEventListener("DOMContentLoaded", () => {
             window.location.href = "/livechat/" + dataChoValue;
         });
     });
-    var downloadButton = document.querySelector(".menu-right-media .download");
+    var downloadButton = document.querySelectorAll(".menu-right-media .download");
     if (downloadButton) {
-        downloadButton.addEventListener("click", function () {
-            if (prenium == 1) {
-                var musicUrl = this.getAttribute("data-downloadmusic");
-                var downloadLink = document.createElement("a");
-                downloadLink.href = "../../music/" + musicUrl;
-                downloadLink.download = musicUrl;
-                downloadLink.click();
-            } else {
-                var loi = document.querySelector(".loi");
-                loi.classList.add("active");
-                loi.style.display = "flex";
-                loi.querySelector(".tieude").textContent =
-                    "Vui lòng nâng vip để tải.";
-            
-            }
+        downloadButton.forEach(function (downloadButton1, index) {
+            downloadButton1.addEventListener("click", function () {
+                if (prenium == 1) {
+                    var musicUrl = this.getAttribute("data-downloadmusic");
+                    var downloadLink = document.createElement("a");
+                    downloadLink.href = "../../music/" + musicUrl;
+                    downloadLink.download = musicUrl;
+                    downloadLink.click();
+                } else {
+                    var loi = document.querySelector(".loi");
+                    loi.classList.add("active");
+                    loi.style.display = "flex";
+                    loi.querySelector(".tieude").textContent =
+                        "Vui lòng nâng vip để tải.";
+                
+                }
+            });
         });
+        
     }
    
     function menuAll(itemcha, itemcon) {

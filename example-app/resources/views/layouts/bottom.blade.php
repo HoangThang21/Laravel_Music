@@ -188,58 +188,62 @@
             @endif
 
             @if (Auth::guard('google')->check())
-                @php
-                    $inputString = $ttnguoidung->danhsachphat;
-                    $parts = explode('-', $inputString);
-                @endphp
-                <div class="menu-list-right-setup">
-                    <i class="bi bi-music-note-list" id="list-memu" title="Danh sách phát"></i>
-                    <div class="right-menu-setup">
-                        <h3>Danh sách phát</h3>
-                        <div class="menu-right-setup-list">
-                            @foreach ($parts as $index => $part)
-                                @php
-                                    $currentNumber = (int) $part;
-                                @endphp
-                                @foreach ($nhacsesion as $nss)
-                                    @if ($nss->id == $currentNumber)
-                                        <div class="info-media-bottom">
-                                            <div class="img-media">
-                                                <img src="../../images/{{ $nss->imagemusic }}" alt="">
-                                                <div class="load-nghe-bottom" data-song="{{ $nss->id }}">
-                                                    <i class="bi bi-play-fill">
-                                                    </i>
-                                                </div>
-                                            </div>
-                                            <div class="name-media">
-                                                <div class="name-music-bottom">{{ $nss->tennhac }}</div>
-                                                <a href="" class="name-tacgia">
-                                                    @foreach ($album as $alb)
-                                                        @if ($alb->id == $nss->album_idnhac)
-                                                            @foreach ($nghesi as $ns)
-                                                                @if ($ns->id == $alb->nghesi_idalbum)
-                                                                    {{ $ns->tennghesi }}
-                                                                @endif
-                                                            @endforeach
+            @php
+            $inputString = $ttnguoidung->danhsachphat;
+            $parts = explode('-', $inputString);
+        @endphp
+        <div class="menu-list-right-setup">
+            <i class="bi bi-music-note-list" id="list-memu" title="Danh sách phát"></i>
+            <div class="right-menu-setup">
+                <h3>Danh sách phát<i class="phatdshaynghe bi bi-play-fill">
+                    </i> </h3>
+                <div class="menu-right-setup-list">
+                    @foreach ($parts as $index => $part)
+                        @php
+                            $currentNumber = (int) $part;
+                        @endphp
+                        @foreach ($nhacsesion as $nss)
+                            @if ($nss->id == $currentNumber)
+                                <div class="info-media-bottom">
+                                    <div class="img-media">
+                                        <img src="../../images/{{ $nss->imagemusic }}" alt="">
+                                        <div class="load-nghe-bottom" data-song="{{ $nss->id }}">
+                                            <i class="bi bi-play-fill">
+
+                                            </i>
+                                        </div>
+                                    </div>
+                                    <div class="name-media">
+                                        <div class="name-music-bottom">{{ $nss->tennhac }}</div>
+                                        <a href="/nghe-si/ {{ $ns->id }}" class="name-tacgia">
+                                            @foreach ($album as $alb)
+                                                @if ($alb->id == $nss->album_idnhac)
+                                                    @foreach ($nghesi as $ns)
+                                                        @if ($ns->id == $alb->nghesi_idalbum)
+                                                            {{ $ns->tennghesi }}
                                                         @endif
                                                     @endforeach
-                                                </a>
-                                            </div>
-                                            <i style="cursor: pointer;" data-song="{{ $nss->id }}"class="menuhaynghe bi
-                                                bi-play-fill"></i>
-                                            <div class="option">
-                                                <div class="dot-3"><i class="bi bi-three-dots"></i></div>
-                                                <div class="menu-right-media bottom-listmmusic">
-                                                    <div class="Xoa"><i class="bi bi-trash"></i>Xóa</div>
-                                                </div>
-                                            </div>
+                                                @endif
+                                            @endforeach
+                                        </a>
+                                    </div>
+                                    <i style="cursor: pointer;" data-song="{{ $nss->id }}"
+                                        class="menuhaynghe bi
+                                        bi-play-fill"></i>
+                                    <div class="option">
+                                        <div class="dot-3"><i class="bi bi-three-dots"></i></div>
+                                        <div class="menu-right-media bottom-listmmusic">
+                                            <div class="Xoa"><i class="bi bi-trash"></i>Xóa</div>
                                         </div>
-                                    @endif
-                                @endforeach
-                            @endforeach
-                        </div>
-                    </div>
+                                    </div>
+                                </div>
+                            @endif
+                        @endforeach
+                    @endforeach
                 </div>
+            </div>
+        </div>
+
 
             @endif
         </div>

@@ -1538,7 +1538,7 @@ class ClientControllers extends Controller
             ]);
         }
         if (Auth::guard('google')->check()) {
-
+           
             return view('frontend.List.AlbumBaiHat', [
                 'ttnguoidung' => Auth::guard('google')->user(),
                 'activerity' => 0,

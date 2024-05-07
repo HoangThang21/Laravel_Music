@@ -106,11 +106,11 @@
                                     <div class="nametexttop">
                                         <div class="nametop">
                                             {{ $ttnguoidung->name }}
-                                            
+
                                             @if (Auth::guard('web')->user()->vip == 1)
                                                 👑
                                             @endif
-                                       
+
                                         </div>
                                         <div class="online">
                                             online
@@ -124,12 +124,12 @@
                                         <div class="nametexttop">
                                             <div class="nametop">
                                                 {{ $ttnguoidung->name }}
-                                               
-                                               
-                                                    @if (Auth::guard('web')->user()->vip == 1)
-                                                        👑
-                                                    @endif
-                                              
+
+
+                                                @if (Auth::guard('google')->user()->vip == 1)
+                                                    👑
+                                                @endif
+
                                             </div>
                                             <div class="online">
                                                 online
@@ -158,11 +158,7 @@
                                                     👑
                                                 @endif
                                             @endif
-                                            @if (Auth::guard('google')->check())
-                                                @if (Auth::guard('web')->user()->vip == 1)
-                                                    👑
-                                                @endif
-                                            @endif
+
 
                                         </div>
                                     </div>
@@ -181,7 +177,8 @@
                                             <input type="hidden" name="email"
                                                 value="{{ Auth::guard('web')->user()->email }}">
                                             <input type="hidden" name="quantity" value="1">
-                                            <button type="submit" class="musicvip" style="cursor: pointer">Nạp vip 👑</button>
+                                            <button type="submit" class="musicvip" style="cursor: pointer">Nạp vip
+                                                👑</button>
                                         </form>
 
                                     </div>
@@ -198,7 +195,8 @@
                                                 value="{{ Auth::guard('web')->user()->email }}">
                                             <input type="hidden" name="product_name" value="Tháng">
                                             <input type="hidden" name="quantity" value="1">
-                                            <button type="submit" class="musicvip" style="cursor: pointer">Nạp vip 👑</button>
+                                            <button type="submit" class="musicvip" style="cursor: pointer">Nạp vip
+                                                👑</button>
                                         </form>
                                     </div>
                                 </div>
@@ -219,6 +217,11 @@
                                     <div class="nametext">
                                         <div class="name">
                                             {{ $ttnguoidung->name }}
+                                            
+                                                @if (Auth::guard('google')->user()->vip == 1)
+                                                    👑
+                                                @endif
+                                        
                                         </div>
                                     </div>
                                 </div>
@@ -236,7 +239,8 @@
                                             <input type="hidden" name="email"
                                                 value="{{ Auth::guard('google')->user()->email }}">
                                             <input type="hidden" name="quantity" value="1">
-                                            <button type="submit" class="musicvip" style="cursor: pointer">Nạp vip 👑</button>
+                                            <button type="submit" class="musicvip" style="cursor: pointer">Nạp vip
+                                                👑</button>
                                         </form>
                                     </div>
                                     <div class="qcao2">
@@ -253,7 +257,8 @@
                                                 value="{{ Auth::guard('google')->user()->email }}">
                                             <input type="hidden" name="product_name" value="Tháng">
                                             <input type="hidden" name="quantity" value="1">
-                                            <button type="submit" class="musicvip" style="cursor: pointer">Nạp vip 👑</button>
+                                            <button type="submit" class="musicvip" style="cursor: pointer">Nạp vip
+                                                👑</button>
                                         </form>
 
 
