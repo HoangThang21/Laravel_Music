@@ -35,5 +35,8 @@ return [
         'client_secret' => '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',
         'redirect' => '/logingg/callback',
     ],
+    'stripe'=>[
+        'secret'=>env('STRIPE_SECRET')
+    ]
 
 ];

@@ -106,6 +106,11 @@
                                     <div class="nametexttop">
                                         <div class="nametop">
                                             {{ $ttnguoidung->name }}
+                                            
+                                            @if (Auth::guard('web')->user()->vip == 1)
+                                                👑
+                                            @endif
+                                       
                                         </div>
                                         <div class="online">
                                             online
@@ -119,6 +124,12 @@
                                         <div class="nametexttop">
                                             <div class="nametop">
                                                 {{ $ttnguoidung->name }}
+                                               
+                                               
+                                                    @if (Auth::guard('web')->user()->vip == 1)
+                                                        👑
+                                                    @endif
+                                              
                                             </div>
                                             <div class="online">
                                                 online
@@ -142,6 +153,17 @@
                                     <div class="nametext">
                                         <div class="name">
                                             {{ $ttnguoidung->name }}
+                                            @if (Auth::guard('web')->check())
+                                                @if (Auth::guard('web')->user()->vip == 1)
+                                                    👑
+                                                @endif
+                                            @endif
+                                            @if (Auth::guard('google')->check())
+                                                @if (Auth::guard('web')->user()->vip == 1)
+                                                    👑
+                                                @endif
+                                            @endif
+
                                         </div>
                                     </div>
                                 </div>
@@ -152,6 +174,16 @@
                                         <div class="subtitle-qcao">Nghe nhạc với chất lượng cao nhất, Toàn bộ đặc quyền
                                             Vip với kho nhạc</div>
                                         <a href="/gioithieu" target="_blank">Xem chi tiết</a>
+                                        <form action="{{ route('stripe') }}" method="post">
+                                            @csrf
+                                            <input type="hidden" name="price" value="20000">
+                                            <input type="hidden" name="product_name" value="Tuần">
+                                            <input type="hidden" name="email"
+                                                value="{{ Auth::guard('web')->user()->email }}">
+                                            <input type="hidden" name="quantity" value="1">
+                                            <button type="submit" class="musicvip" style="cursor: pointer">Nạp vip 👑</button>
+                                        </form>
+
                                     </div>
                                     <div class="qcao2">
                                         <div class="name-qcao">MobiSong <span>Vip</span></div>
@@ -159,6 +191,15 @@
                                         <div class="subtitle-qcao">Nghe nhạc với chất lượng cao nhất, Toàn bộ đặc quyền
                                             Vip với kho nhạc</div>
                                         <a href="/gioithieu" target="_blank">Xem chi tiết</a>
+                                        <form action="{{ route('stripe') }}" method="post">
+                                            @csrf
+                                            <input type="hidden" name="price" value="60000">
+                                            <input type="hidden" name="email"
+                                                value="{{ Auth::guard('web')->user()->email }}">
+                                            <input type="hidden" name="product_name" value="Tháng">
+                                            <input type="hidden" name="quantity" value="1">
+                                            <button type="submit" class="musicvip" style="cursor: pointer">Nạp vip 👑</button>
+                                        </form>
                                     </div>
                                 </div>
                                 <div class="menu-toggle_infouser">
@@ -188,13 +229,34 @@
                                         <div class="subtitle-qcao">Nghe nhạc với chất lượng cao nhất, Toàn bộ đặc quyền
                                             Vip với kho nhạc</div>
                                         <a href="">Xem chi tiết</a>
+                                        <form action="{{ route('stripe') }}" method="post">
+                                            @csrf
+                                            <input type="hidden" name="price" value="20000">
+                                            <input type="hidden" name="product_name" value="Tuần">
+                                            <input type="hidden" name="email"
+                                                value="{{ Auth::guard('google')->user()->email }}">
+                                            <input type="hidden" name="quantity" value="1">
+                                            <button type="submit" class="musicvip" style="cursor: pointer">Nạp vip 👑</button>
+                                        </form>
                                     </div>
                                     <div class="qcao2">
                                         <div class="name-qcao">MobiSong <span>Vip</span></div>
                                         <div class="title-qcao">Chỉ với 10.000 đ/tháng</div>
                                         <div class="subtitle-qcao">Nghe nhạc với chất lượng cao nhất, Toàn bộ đặc quyền
                                             Vip với kho nhạc</div>
-                                        <a href="">Xem chi tiết</a>
+                                        <a href="/gioithieu">Xem chi tiết</a>
+
+                                        <form action="{{ route('stripe') }}" method="post">
+                                            @csrf
+                                            <input type="hidden" name="price" value="60000">
+                                            <input type="hidden" name="email"
+                                                value="{{ Auth::guard('google')->user()->email }}">
+                                            <input type="hidden" name="product_name" value="Tháng">
+                                            <input type="hidden" name="quantity" value="1">
+                                            <button type="submit" class="musicvip" style="cursor: pointer">Nạp vip 👑</button>
+                                        </form>
+
+
                                     </div>
                                 </div>
                                 <div class="menu-toggle_infouser">

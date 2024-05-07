@@ -58,12 +58,12 @@
                     <tr>
                         <td>1</td>
                         <td>Gói VIP tuần</td>
-                        <td>3.000đ/ 07 ngày</td>
+                        <td>20.000đ/ 07 ngày</td>
                     </tr>
                     <tr>
                         <td>2</td>
                         <td>Gói VIP tháng</td>
-                        <td>10.000đ/30 ngày</td>
+                        <td>60.000đ/30 ngày</td>
                     </tr>
 
                 </table>
@@ -79,7 +79,7 @@
                     như khi đăng ký mới.</div>
                 <div class="m-10">Trường hợp tài khoản chính thuê bao không đủ tiền, thuê bao đăng ký gói VIP Funring,
                     hệ thống ghi nhận đăng ký dịch vụ cho TB sử dụng miễn phí trong 1 ngày, sang ngày tiếp theo sẽ bắt
-                    đầu trừ cước lại với mức cước là 3.000đ/07 ngày và 10.000đ/30 ngày.</div>
+                    đầu trừ cước lại với mức cước là 20.000đ/07 ngày và 60.000đ/30 ngày.</div>
                 <div class="m-10"
                     style="color: #585858; font-size: 16px; font-family: Arial; font-weight: 700; line-height: 24px; word-wrap: break-word">
                     5. Hướng dẫn sử dụng dịch vụ:</div>
@@ -183,9 +183,9 @@
                 <p>- Bước 1: Đăng k&yacute; dịch vụ bằng c&aacute;ch soạn tin nhắn DK gửi 9224 (cước ph&iacute;
                     12.000đ/30 ng&agrave;y)</p>
                 <p>- Bước 2: soạn tin nhắn CHON [m&atilde; b&agrave;i h&aacute;t Doanh nghiệp] gửi 9224 (cước ph&iacute;
-                    3.000đ/30 ng&agrave;y)</p>
+                    20.000đ/30 ng&agrave;y)</p>
                 <p><strong>4.2</strong>. Nếu thu&ecirc; bao đ&atilde; c&oacute; dịch vụ nhạc chờ Funring th&igrave; chỉ
-                    cần soạn CHON [M&atilde; b&agrave;i h&aacute;t của Doanh nghiệp] gửi 9224 (cước ph&iacute; 3.000đ/30
+                    cần soạn CHON [M&atilde; b&agrave;i h&aacute;t của Doanh nghiệp] gửi 9224 (cước ph&iacute; 20.000đ/30
                     ng&agrave;y)</p>
             </div>
             <div class="content"style="display:none">

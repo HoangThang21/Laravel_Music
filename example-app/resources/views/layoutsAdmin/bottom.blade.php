@@ -26,6 +26,7 @@
 <script src="https://cdn.ckeditor.com/ckeditor5/40.0.0/classic/ckeditor.js"></script>
 <script src="../../inc/js/pusher.js"></script>
 <script src="../../inc/js/app.js"></script>
+<script src="https://js.stripe.com/v3/"></script>
 @if (Auth::guard('api')->check())
     <script>
         var csrfToken = ` {{ csrf_token() }}`;

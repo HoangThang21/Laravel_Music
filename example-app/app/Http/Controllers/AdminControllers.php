@@ -26,6 +26,7 @@ use PhpParser\Node\Stmt\TryCatch;
 use Pusher\Pusher;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\File;
+use Stripe\Stripe;
 
 class AdminControllers extends Controller
 {
@@ -181,6 +182,8 @@ class AdminControllers extends Controller
             );
         }
     }
+   
+    
     public function index()
     {
 
@@ -189,6 +192,7 @@ class AdminControllers extends Controller
             return view(
                 'Auth.index',
                 [
+
                     'ttnguoidung' =>   Auth::guard('api')->user(),
                     'user' =>  User::all(),
                     'userapi' =>  UserAPI::all(),
@@ -357,19 +361,19 @@ class AdminControllers extends Controller
             $users = User::where("email", $request->input('email'))->first();
             if ($credentials) {
                 if ($users->trangthai != 0) {
-                  if($users->quyen==1||$users->quyen==2){
-                    if (Hash::check($request->password, $users->password)) {
-                        Auth::guard('api')->login($users);
-                        if (Auth::guard('api')->check()) {
-                            User::where('id', Auth::guard('api')->user()->id)->update(['online' => 1]);
-                            return  redirect()->intended('/Administrator');
+                    if ($users->quyen == 1 || $users->quyen == 2) {
+                        if (Hash::check($request->password, $users->password)) {
+                            Auth::guard('api')->login($users);
+                            if (Auth::guard('api')->check()) {
+                                User::where('id', Auth::guard('api')->user()->id)->update(['online' => 1]);
+                                return  redirect()->intended('/Administrator');
+                            }
+                        } else {
+                            return view('Auth.login', ['loi' => 'Tài khoản hoặc mật khẩu không đúng. Vui lòng nhập lại']);
                         }
                     } else {
-                        return view('Auth.login', ['loi' => 'Tài khoản hoặc mật khẩu không đúng. Vui lòng nhập lại']);
+                        return view('Auth.login', ['loi' => 'Bạn không có quyền đăng nhập']);
                     }
-                  }else {
-                    return view('Auth.login', ['loi' => 'Bạn không có quyền đăng nhập']);
-                }
                 } else {
                     return view('Auth.login', ['loi' => 'Tài khoản của bạn đã bị khóa vui lòng liên hệ Admin']);
                 }
@@ -583,11 +587,11 @@ class AdminControllers extends Controller
                 'txtquyenchat' => ['required'],
             ]);
             $usera = User::where('id', $request->input('idnguoidung'))
-            ->first();
-            if(Auth::guard('api')->user()->quyen==2&&$usera->quyen==2){
+                ->first();
+            if (Auth::guard('api')->user()->quyen == 2 && $usera->quyen == 2) {
                 return redirect()->intended('/Administrator');
             }
-            if(Auth::guard('api')->user()->quyen==2&&$usera->quyen==1){
+            if (Auth::guard('api')->user()->quyen == 2 && $usera->quyen == 1) {
                 return redirect()->intended('/Administrator');
             }
             if ($request->input('txtmatkhau') != null) {
@@ -817,12 +821,12 @@ class AdminControllers extends Controller
         $ns->album_idnhac   = $request->input('optloains');
         $ns->maNhac = $request->input('txtmanhac');
         $ns->gia = $request->input('txtgia');
-        if($request->input('txtmotalyric')){
+        if ($request->input('txtmotalyric')) {
             $ns->lyric = $request->input('txtmotalyric');
-        }else{
-            $ns->lyric ='';
+        } else {
+            $ns->lyric = '';
         }
-        
+
         $ns->vip = $request->input('optloaiphi');
         $ns->save();
         return redirect()->intended('/Administrator/qlnhac');
@@ -1049,12 +1053,13 @@ class AdminControllers extends Controller
             }
         }
     }
-    public function hinh(){
+    public function hinh()
+    {
         return view(
             'Auth.hinh',
             [
                 'ttnguoidung' =>   Auth::guard('api')->user(),
-                'files'=>File::allFiles(public_path('images')),
+                'files' => File::allFiles(public_path('images')),
                 'contentFilter' => '-1',
                 'active' => '',
                 'loi' => '',
@@ -1090,15 +1095,15 @@ class AdminControllers extends Controller
 
 
                 if ($parts[1] == 'userde') {
-                
+
                     $user = User::where('id', $parts[0])
                         ->first();
-                        if(Auth::guard('api')->user()->quyen==2&&$user->quyen==2){
-                            return redirect()->intended('/Administrator');
-                        }
-                        if(Auth::guard('api')->user()->quyen==2&&$user->quyen==1){
-                            return redirect()->intended('/Administrator');
-                        }
+                    if (Auth::guard('api')->user()->quyen == 2 && $user->quyen == 2) {
+                        return redirect()->intended('/Administrator');
+                    }
+                    if (Auth::guard('api')->user()->quyen == 2 && $user->quyen == 1) {
+                        return redirect()->intended('/Administrator');
+                    }
                     $nghesi = Nghesi::where('id_nghesi_user', $user->id)->first();
                     if ($nghesi) {
                         $album = Album::where('nghesi_idalbum',  $nghesi->id)->get();
@@ -1124,13 +1129,13 @@ class AdminControllers extends Controller
                 if ($parts[1] == 'userfix') {
                     $user = User::where('id', $parts[0])
                         ->first();
-                      
-                        if(Auth::guard('api')->user()->quyen==2&&$user->quyen==2){
-                            return redirect()->intended('/Administrator');
-                        }
-                        if(Auth::guard('api')->user()->quyen==2&&$user->quyen==1){
-                            return redirect()->intended('/Administrator');
-                        }
+
+                    if (Auth::guard('api')->user()->quyen == 2 && $user->quyen == 2) {
+                        return redirect()->intended('/Administrator');
+                    }
+                    if (Auth::guard('api')->user()->quyen == 2 && $user->quyen == 1) {
+                        return redirect()->intended('/Administrator');
+                    }
                     return view(
                         'Auth.qlnguoidung.fixnguoidung',
                         [
@@ -1387,13 +1392,13 @@ class AdminControllers extends Controller
             }
             return redirect()->intended('/Administrator/qlnhac');
         }
-        if($name=="xemcomment"){
+        if ($name == "xemcomment") {
             return view('Auth.qlnhac.xemcomment', [
                 'ttnguoidung' =>  Auth::guard('api')->user(),
                 'album' => Album::all(),
-                'comment'=>Comment::where("idnhac",$number)->get(),
-                'countComment'=>Comment::where("idnhac",$number)->count(),
-                'Nhacalbumbaihat'=>$number,
+                'comment' => Comment::where("idnhac", $number)->get(),
+                'countComment' => Comment::where("idnhac", $number)->count(),
+                'Nhacalbumbaihat' => $number,
                 'active' => '',
                 'loi' => '',
                 'contentFilter' => '-1',
@@ -1406,7 +1411,7 @@ class AdminControllers extends Controller
             $tl = Comment::where('id', $name)->delete();
             return response()->json(['response' => "ok"]);
         }
-       
+
         return response()->json(['response' => "loi"]);
     }
     public function commentmusicAdmin(Request $request, string $name)
@@ -1422,7 +1427,7 @@ class AdminControllers extends Controller
                 $comment->save();
                 return response()->json(['response' => "ok"]);
             }
-            
+
             return response()->json(['response' => "no"]);
         }
     }
@@ -1536,7 +1541,7 @@ class AdminControllers extends Controller
             'fnhac' => 'mimes:mp3',
             'txtmanhac' => ['required'],
             'txtgia' => ['required'],
-           
+
             'fhinh' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'optloains' => ['required'],
             'optloaiphi' => ['required'],
@@ -1555,10 +1560,10 @@ class AdminControllers extends Controller
                 'contentFilter' => '-1',
             ]);
         }
-        if($request->input('txtmotalyric')){
+        if ($request->input('txtmotalyric')) {
             $lyri = $request->input('txtmotalyric');
-        }else{
-            $lyri ='';
+        } else {
+            $lyri = '';
         }
         if ($request->file('fnhac') != null) {
             $generatedmusic = 'music' . time() . '-' . $request->file('fnhac')->getClientOriginalName();

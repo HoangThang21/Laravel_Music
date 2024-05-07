@@ -113,6 +113,7 @@ use Illuminate\Support\Facades\Route;
     Route::post('/Administrator/qlnhac/searchs', [AdminControllers::class, 'searchs']);
     //----------------------------------------------------------------
     Route::get('/Administrator/hinh', [AdminControllers::class, 'hinh']);
+ 
     Route::get('/Administrator/deletecommentAdmin/{name}', [AdminControllers::class, 'deletecommentAdmin']);
     Route::post('/Administrator/commentmusicAdmin/{name}', [AdminControllers::class, 'commentmusicAdmin']);
     Route::get('/Administrator/commentmusicAdmin/{name}', [AdminControllers::class, 'commentmusicAdmin']);
@@ -153,3 +154,8 @@ use Illuminate\Support\Facades\Route;
     Route::get('/gioithieu', [ClientControllers::class, 'gioithieu']);
     Route::get('/the-loai/{name}', [ClientControllers::class, 'trangtl']);
     Route::get('/deletecomment/{name}', [ClientControllers::class, 'deletecomment']);
+
+    // checkout pay
+    Route::post('stripe', [ClientControllers::class, 'stripe'])->name('stripe');
+    Route::get('success', [ClientControllers::class, 'success'])->name('success');
+    Route::get('cancel', [ClientControllers::class, 'cancel'])->name('cancel');

@@ -30,6 +30,72 @@ class ClientControllers extends Controller
      * Display a listing of the resource.
      */
 
+    public function stripe(Request $request)
+    {
+        $stripe = new \Stripe\StripeClient(config('stripe.stripe_sk'));
+        $response = $stripe->checkout->sessions->create([
+            'line_items' => [
+                [
+                    'price_data' => [
+                        'currency' => 'vnd',
+                        'product_data' => [
+                            'name' => $request->product_name,
+                        ],
+                        'unit_amount' => ($request->price),
+                    ],
+                    'quantity' => $request->quantity,
+                ],
+            ],
+            'mode' => 'payment',
+            'success_url' => route('success') . '?session_id={CHECKOUT_SESSION_ID}',
+            'cancel_url' => route('cancel'),
+        ]);
+        //dd($response);
+        if (isset($response->id) && $response->id != '') {
+            session()->put('product_name', $request->product_name);
+            session()->put('quantity', $request->quantity);
+            session()->put('price', $request->price);
+            return redirect($response->url);
+        } else {
+            return redirect()->route('cancel');
+        }
+    }
+
+    public function success(Request $request)
+    {
+        if (isset($request->session_id)) {
+
+            $stripe = new \Stripe\StripeClient(config('stripe.stripe_sk'));
+            $response = $stripe->checkout->sessions->retrieve($request->session_id);
+            // dd($request);
+            if (Auth::guard('web')->check()) {
+                $user = User::where('id',Auth::guard('web')->user()->id)->update([
+                    'vip'=>1,
+                ]);
+            }
+            if (Auth::guard('google')->check()) {
+                $user = UserAPI::where('id',Auth::guard('google')->user()->id)->update([
+                    'vip'=>1,
+                ]);
+            }
+           
+
+
+            
+
+            session()->forget('product_name');
+            session()->forget('quantity');
+            session()->forget('price');
+            return redirect('/');
+        } else {
+            return redirect()->route('cancel');
+        }
+    }
+
+    public function cancel()
+    {
+        return "Payment is canceled.";
+    }
     public function index()
     {
         // Auth::guard('web')->logout();
@@ -270,7 +336,6 @@ class ClientControllers extends Controller
                 }
             }
         } catch (Exception $e) {
-            
         }
         return redirect()->intended('/');
     }

@@ -383,6 +383,8 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         });
     }
+   
+    
 });
 function toggleMenu(name) {
     var menuFilter = document.querySelector("." + name);

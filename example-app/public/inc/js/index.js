@@ -566,6 +566,7 @@ document.addEventListener("DOMContentLoaded", () => {
             nghesi_search_click.style.display = "block";
         });
     }
+   
 });
 function toggleMenu(name) {
     var menuFilter = document.querySelector("." + name);
