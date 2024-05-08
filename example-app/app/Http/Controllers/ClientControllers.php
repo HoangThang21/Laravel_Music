@@ -69,24 +69,76 @@ class ClientControllers extends Controller
             $response = $stripe->checkout->sessions->retrieve($request->session_id);
             // dd($request);
             if (Auth::guard('web')->check()) {
-                $user = User::where('id',Auth::guard('web')->user()->id)->update([
-                    'vip'=>1,
+                $user = User::where('id', Auth::guard('web')->user()->id)->update([
+                    'vip' => 1,
                 ]);
             }
             if (Auth::guard('google')->check()) {
-                $user = UserAPI::where('id',Auth::guard('google')->user()->id)->update([
-                    'vip'=>1,
+                $user = UserAPI::where('id', Auth::guard('google')->user()->id)->update([
+                    'vip' => 1,
                 ]);
             }
-           
 
 
-            
+
+
 
             session()->forget('product_name');
             session()->forget('quantity');
             session()->forget('price');
-            return redirect('/');
+            if (Auth::guard('web')->check()) {
+                return view('frontend.home', [
+                    'ttnguoidung' => Auth::guard('web')->user(),
+                    'activerity' => 0,
+                    'chatonline' => '',
+                    'loi' => '',
+                    'baidau' => Nhac::where('vip', 0)->where('xetduyet', 1)->where('luotnghe', 'desc')->first(),
+                    'loingoai' => 'Thanh toán thành công',
+                    'Albumtop3' => Album::latest()->take(3)->get(),
+                    'Chill' => Album::inRandomOrder()->take(3)->get(),
+                    'CanLike' => Album::inRandomOrder()->take(3)->get(),
+                    'Nhactopluotnghe' => Nhac::where('vip', 0)->where('xetduyet', 1)->where('luotnghe', "desc")->latest()->take(10)->get(),
+                    'Nhactopvip' => Nhac::where('vip', 1)->where('xetduyet', 1)->latest()->take(2)->get(),
+                    'Nhactop10' => Nhac::where('vip', 0)->where('xetduyet', 1)->latest()->take(10)->get(),
+                    'Nghesitop20' => Nghesi::inRandomOrder()->take(20)->get(),
+                    'nghesi' => Nghesi::all(),
+                    'album' => Album::all(),
+                    'login' => 0,
+                    'session' => session()->get('myMusic'),
+                    'user' => User::select('id', 'image')->get(),
+
+                    'nhacsesion' => Nhac::where('vip', 0)->where('xetduyet', 1)->get(),
+                    'rank' => 'null', 'valuesreach' => '',
+                    'rightsong' => 0,
+                ]);
+            }
+            if (Auth::guard('google')->check()) {
+
+                return view('frontend.home', [
+                    'ttnguoidung' => Auth::guard('google')->user(),
+                    'activerity' => 0,
+                    'chatonline' => '',
+                    'loi' => '',
+                    'baidau' => Nhac::where('vip', 0)->where('xetduyet', 1)->where('luotnghe', 'desc')->first(),
+                    'loingoai' => 'Thanh toán thành công',
+                    'Albumtop3' => Album::latest()->take(3)->get(),
+                    'Chill' => Album::inRandomOrder()->take(3)->get(),
+                    'CanLike' => Album::inRandomOrder()->take(3)->get(),
+                    'Nhactopluotnghe' => Nhac::where('vip', 0)->where('xetduyet', 1)->where('luotnghe', "desc")->latest()->take(10)->get(),
+                    'Nhactopvip' => Nhac::where('vip', 1)->where('xetduyet', 1)->latest()->take(2)->get(),
+                    'Nhactop10' => Nhac::where('vip', 0)->where('xetduyet', 1)->latest()->take(10)->get(),
+                    'Nghesitop20' => Nghesi::inRandomOrder()->take(20)->get(),
+                    'nghesi' => Nghesi::all(),
+                    'album' => Album::all(),
+                    'login' => 0,
+                    'session' => session()->get('myMusic'),
+                    'user' => User::select('id', 'image')->get(),
+
+                    'nhacsesion' => Nhac::where('vip', 0)->where('xetduyet', 1)->get(),
+                    'rank' => 'null', 'valuesreach' => '',
+                    'rightsong' => 0,
+                ]);
+            }
         } else {
             return redirect()->route('cancel');
         }
@@ -94,7 +146,59 @@ class ClientControllers extends Controller
 
     public function cancel()
     {
-        return "Payment is canceled.";
+        if (Auth::guard('web')->check()) {
+            return view('frontend.home', [
+                'ttnguoidung' => Auth::guard('web')->user(),
+                'activerity' => 0,
+                'chatonline' => '',
+                'loi' => '',
+                'baidau' => Nhac::where('vip', 0)->where('xetduyet', 1)->where('luotnghe', 'desc')->first(),
+                'loingoai' => 'Thanh toán thất bại',
+                'Albumtop3' => Album::latest()->take(3)->get(),
+                'Chill' => Album::inRandomOrder()->take(3)->get(),
+                'CanLike' => Album::inRandomOrder()->take(3)->get(),
+                'Nhactopluotnghe' => Nhac::where('vip', 0)->where('xetduyet', 1)->where('luotnghe', "desc")->latest()->take(10)->get(),
+                'Nhactopvip' => Nhac::where('vip', 1)->where('xetduyet', 1)->latest()->take(2)->get(),
+                'Nhactop10' => Nhac::where('vip', 0)->where('xetduyet', 1)->latest()->take(10)->get(),
+                'Nghesitop20' => Nghesi::inRandomOrder()->take(20)->get(),
+                'nghesi' => Nghesi::all(),
+                'album' => Album::all(),
+                'login' => 0,
+                'session' => session()->get('myMusic'),
+                'user' => User::select('id', 'image')->get(),
+
+                'nhacsesion' => Nhac::where('vip', 0)->where('xetduyet', 1)->get(),
+                'rank' => 'null', 'valuesreach' => '',
+                'rightsong' => 0,
+            ]);
+        }
+        if (Auth::guard('google')->check()) {
+
+            return view('frontend.home', [
+                'ttnguoidung' => Auth::guard('google')->user(),
+                'activerity' => 0,
+                'chatonline' => '',
+                'loi' => '',
+                'baidau' => Nhac::where('vip', 0)->where('xetduyet', 1)->where('luotnghe', 'desc')->first(),
+                'loingoai' => 'Thanh toán thất bại',
+                'Albumtop3' => Album::latest()->take(3)->get(),
+                'Chill' => Album::inRandomOrder()->take(3)->get(),
+                'CanLike' => Album::inRandomOrder()->take(3)->get(),
+                'Nhactopluotnghe' => Nhac::where('vip', 0)->where('xetduyet', 1)->where('luotnghe', "desc")->latest()->take(10)->get(),
+                'Nhactopvip' => Nhac::where('vip', 1)->where('xetduyet', 1)->latest()->take(2)->get(),
+                'Nhactop10' => Nhac::where('vip', 0)->where('xetduyet', 1)->latest()->take(10)->get(),
+                'Nghesitop20' => Nghesi::inRandomOrder()->take(20)->get(),
+                'nghesi' => Nghesi::all(),
+                'album' => Album::all(),
+                'login' => 0,
+                'session' => session()->get('myMusic'),
+                'user' => User::select('id', 'image')->get(),
+
+                'nhacsesion' => Nhac::where('vip', 0)->where('xetduyet', 1)->get(),
+                'rank' => 'null', 'valuesreach' => '',
+                'rightsong' => 0,
+            ]);
+        }
     }
     public function index()
     {
@@ -1538,7 +1642,7 @@ class ClientControllers extends Controller
             ]);
         }
         if (Auth::guard('google')->check()) {
-           
+
             return view('frontend.List.AlbumBaiHat', [
                 'ttnguoidung' => Auth::guard('google')->user(),
                 'activerity' => 0,
