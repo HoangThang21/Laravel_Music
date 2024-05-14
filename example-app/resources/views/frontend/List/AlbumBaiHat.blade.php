@@ -364,8 +364,20 @@
                                     </div>
                                 </div>
                             @endif
-                        @endif
+                        @else
+                            <div class="itemcomment">
+                                <div class="itemcomment-img"><img src="../../images/{{ $item->hinh }}"
+                                        alt=""></div>
+                                <div class="itemcomment-info">
+                                    <div class="itemcomment-ten">{{ $item->ten }}
+                                        <span>{{ $item->time }}</span>
+                                    </div>
+                                    <p class="itemcomment-comment">{{ $item->noidung }} </p>
+                                </div>
+                            </div>
+                        
                     @endif
+                @endif
                 @endforeach
             </div>
         </div>
